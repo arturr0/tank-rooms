@@ -78,9 +78,7 @@ body {
     color: #fff;
     text-decoration: none;
     font-size: 3em; /* Adjust size as needed */
-    width: 60px; /* Adjust width as needed */
-    height: 60px; /* Adjust height as needed */
-    padding: 10px;
+    
     text-align: center;
     z-index: 1000; /* Ensure buttons are above other content */
 }
@@ -90,6 +88,8 @@ body {
     top: 10px; /* Position at the top */
     color: #38D2D2;
     transform: translateX(-50%); /* Center the button */
+    
+    
 }
 
 .arrow__btn.right-arrow {
@@ -97,6 +97,7 @@ body {
     bottom: 10px; /* Position at the bottom */
     color: #38D2D2;
     transform: translateX(-50%); /* Center the button */
+  
 }
 
   
