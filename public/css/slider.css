@@ -74,7 +74,7 @@ body {
   }
   
   .arrow__btn {
-    position: abso;
+    
     color: #fff;
     text-decoration: none;
     font-size: 2em; /* Adjust size as needed */
@@ -86,5 +86,20 @@ body {
     z-index: 1000; /* Ensure buttons are above other content */
   }
   
+  .arrow__btn.left-arrow {
+    position: absolute;
+    left: 50%; /* Center horizontally */
+    top: 10px; /* Position at the top */
+    
+    color: #38D2D2;
+    
+  }
   
+  .arrow__btn.right-arrow {
+    position: absolute;
+    left: 250px; /* Center horizontally */
+    bottom: 10px; /* Position at the bottom */
+    
+    color: #38D2D2;
+  }
   
