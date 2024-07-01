@@ -169,7 +169,7 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
     imageMode(CENTER);
 
         // Draw the rectangle image at the pawn's position
-    image(this.rectangleImage, this.pos.x, this.pos.y, 50 ,50);
+    //image(this.rectangleImage, this.pos.x, this.pos.y, 50 ,50);
     // Set fill color based on conditions
     // if (this.queen && !this.kill1Killed2 && !this.killed && !this.killer) {
     //     fill(this.isRed ? 'red' : 'green'); // Fill color for regular queens
@@ -423,7 +423,7 @@ function setup() {
   const myCanvas = createCanvas(576, 576);
   myCanvas.style('border-radius', '15px');
   myCanvas.parent('game');
-  background(bgImage);
+  //background(bgImage);
   turn = select('#turn');
   let PlayerInfo = select('#player');
   
@@ -478,7 +478,7 @@ function preload() {
 function draw() {
   turn.value(Greenturn);
   let PlayerInfo = select('#player');
-  
+  background(bgImage);
   
   if (Player == 2) {document.getElementById("player").style.color = "green"; PlayerInfo.value("PLAYER GREEN");}
   else if (Player == 1) {document.getElementById("player").style.color = "red"; PlayerInfo.value("PLAYER RED");}
