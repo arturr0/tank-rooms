@@ -471,10 +471,10 @@ function setup() {
   //generateQueensAreas();
 }
 function preload() {
-  // img = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/rough-checked-texture-collage1.jpg?v=1719865746153');
-  bgImage = loadImage('https://cdn.glitch.me/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/close-up-black-paint-wall-background.jpg?v=1719867561889');// Load the image from a URL
-  rectangleRedImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20black.png?v=1719870486749');
-  rectangleGreenImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20green.png?v=1719870463859');
+  img = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/board%20s.png?v=1719875467902');
+  bgImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/background%20s.jpg?v=1719875628156');// Load the image from a URL
+  rectangleRedImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20black%20s.png?v=1719875433184');
+  rectangleGreenImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20green%20s.png?v=1719875451383');
 }
 function draw() {
   turn.value(Greenturn);
