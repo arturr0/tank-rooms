@@ -74,7 +74,7 @@ body {
   }
   
   .arrow__btn {
-    
+    position: relative;
     color: #fff;
     text-decoration: none;
     font-size: 2em; /* Adjust size as needed */
@@ -88,20 +88,20 @@ body {
   
   .arrow__btn.left-arrow {
     position: absolute;
-    left: 250px; /* Center horizontally */
+    left: 50%; /* Center horizontally */
     top: 10px; /* Position at the top */
-    transform: translateX(-50%) rotate(90deg);
+    
     font-size: 70px;
     color: #38D2D2;
     
   }
   
-  .arrow__btn.right-arrow {
+  .arrow__btn.icon-down-ope {
     position: absolute;
-    left: 250px; /* Center horizontally */
+    left: 50%; /* Center horizontally */
     bottom: 10px; /* Position at the bottom */
     
-    transform: translateX(-50%) rotate(90deg);
+    
     font-size: 70px;
     color: #38D2D2;
   }
