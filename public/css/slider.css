@@ -77,7 +77,7 @@ body {
     position: absolute;
     color: #fff;
     text-decoration: none;
-    font-size: 3em; /* Adjust size as needed */
+    font-size: 5em; /* Adjust size as needed */
     
     text-align: center;
     z-index: 1000; /* Ensure buttons are above other content */
@@ -85,7 +85,7 @@ body {
 
 .arrow__btn.left-arrow {
     left: 50%; /* Center horizontally */
-    top: 10px; /* Position at the top */
+    top: -20px; /* Position at the top */
     color: #38D2D2;
     transform: translateX(-50%); /* Center the button */
     
@@ -94,7 +94,7 @@ body {
 
 .arrow__btn.right-arrow {
     left: 50%; /* Center horizontally */
-    bottom: 10px; /* Position at the bottom */
+    bottom: -25px; /* Position at the bottom */
     color: #38D2D2;
     transform: translateX(-50%); /* Center the button */
   
