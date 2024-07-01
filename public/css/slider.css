@@ -74,35 +74,24 @@ body {
   }
   
   .arrow__btn {
-    
-    color: #fff;
-    text-decoration: none;
-    font-size: 2em; /* Adjust size as needed */
-    
-    width: 60px; /* Adjust width as needed */
-    height: 60px; /* Adjust height as needed */
-    padding: 10px;
-    text-align: center;
-    z-index: 1000; /* Ensure buttons are above other content */
-  }
-  
-  .arrow__btn.left-arrow {
-    position: fixed;
+    position: absolute; /* Position the arrows absolutely inside the relative parent */
     left: 50%; /* Center horizontally */
+    transform: translateX(-50%);
+    color: #38D2D2;
+    text-decoration: none; /* Remove underline from links */
+    z-index: 1000;
+    display: inline-flex;
+}
+  
+  .left-arrow {
     top: 10px; /* Position at the top */
-    transform: translateX(-50%);
-    
-    color: #38D2D2;
-    
-  }
-  
-  .arrow__btn.right-arrow {
-    position: fixed;
-    left: 50%; /* Center horizontally */
+}
+
+.right-arrow {
     bottom: 10px; /* Position at the bottom */
-    transform: translateX(-50%);
-    
-    
-    color: #38D2D2;
-  }
+}
+
+.icon-up-open, .icon-down-open {
+  font-size: 100px;
+}
   
