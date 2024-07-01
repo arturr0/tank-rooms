@@ -59,7 +59,7 @@ $(document).ready(function() {
                         <td class="server">SERVER ${data.index + 1}</td>
                         <td class="button_spin" data-index="${data.index}" data-players="${data.players}">
                             <button class="join button visible">JOIN</button>
-                            <i class="icon-spin5 hidden"></i>
+                            <i class="icon-spin4 hidden"></i>
                         </td>
                         <td class="players">${data.user1}</td>
                         <td class="players">${data.user2}</td>
@@ -94,7 +94,7 @@ $(document).ready(function() {
                             <td class="server">SERVER ${index + 1}</td>
                             <td class="button_spin" data-index="${index}" data-players="${server.players}">
                                 ${joinButton}
-                                <i class="icon-spin5 hidden"></i>
+                                <i class="icon-spin4 hidden"></i>
                             </td>
                             <td class="players">${server.user1}</td>
                             <td class="players">${server.user2}</td>
@@ -175,7 +175,7 @@ $(document).ready(function() {
                             });
                     } else {
                         $joinButton.prop('disabled', false);
-                        const $spinIcon = $joinButton.parent('.button_spin').find('.icon-spin5');
+                        const $spinIcon = $joinButton.parent('.button_spin').find('.icon-spin4');
                         $joinButton.removeClass('visible');
                         $joinButton.addClass('hidden');
                         $spinIcon.removeClass('hidden');
