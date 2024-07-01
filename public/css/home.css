@@ -149,6 +149,8 @@ tfoot th {
   flex-direction: column;
   height: 100%;
   overflow-y: auto;
+  margin-left: auto;
+  
 }
 
 header {
@@ -191,8 +193,10 @@ footer::before {
   flex: 1;
   overflow: auto;
   visibility: hidden;
-  margin: 20px;
+/*   margin: 20px; */
   width: 60vw;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 table {
