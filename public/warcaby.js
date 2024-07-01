@@ -169,7 +169,7 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
     imageMode(CENTER);
 
         // Draw the rectangle image at the pawn's position
-    image(this.rectangleImage, this.pos.x, this.pos.y);
+    image(this.rectangleImage, this.pos.x, this.pos.y, 50 ,50);
     // Set fill color based on conditions
     // if (this.queen && !this.kill1Killed2 && !this.killed && !this.killer) {
     //     fill(this.isRed ? 'red' : 'green'); // Fill color for regular queens
@@ -196,7 +196,7 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
     }
     
     // Draw the main circle for queens
-    circle(this.pos.x, this.pos.y, 50);
+    //circle(this.pos.x, this.pos.y, 50);
     
     // Additional circles for specific queen conditions
     if (this.queen) {
