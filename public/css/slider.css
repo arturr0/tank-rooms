@@ -74,24 +74,35 @@ body {
   }
   
   .arrow__btn {
-    position: absolute; /* Position the arrows absolutely inside the relative parent */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%);
-    color: #38D2D2;
-    text-decoration: none; /* Remove underline from links */
-    z-index: 1000;
-    display: inline-flex;
-}
+    
+    color: #fff;
+    text-decoration: none;
+    font-size: 2em; /* Adjust size as needed */
+    
+    width: 60px; /* Adjust width as needed */
+    height: 60px; /* Adjust height as needed */
+    padding: 10px;
+    text-align: center;
+    z-index: 1000; /* Ensure buttons are above other content */
+  }
   
-  .left-arrow {
+  .arrow__btn.left-arrow {
+    position: absolute;
+    left: 250px; /* Center horizontally */
     top: 10px; /* Position at the top */
-}
-
-.right-arrow {
+    transform: translateX(-50%) rotate(90deg);
+    font-size: 70px;
+    color: #38D2D2;
+    
+  }
+  
+  .arrow__btn.right-arrow {
+    position: absolute;
+    left: 250px; /* Center horizontally */
     bottom: 10px; /* Position at the bottom */
-}
-
-.icon-up-open, .icon-down-open {
-  font-size: 100px;
-}
+    
+    transform: translateX(-50%) rotate(90deg);
+    font-size: 70px;
+    color: #38D2D2;
+  }
   
