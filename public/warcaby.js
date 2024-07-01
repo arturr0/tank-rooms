@@ -460,7 +460,9 @@ function setup() {
   Pawns[14].queen = true;
   //generateQueensAreas();
 }
-
+function preload() {
+  img = loadImage('https://www.example.com/path/to/your/image.jpg'); // Load the image from a URL
+}
 function draw() {
   turn.value(Greenturn);
   let PlayerInfo = select('#player');
@@ -475,7 +477,7 @@ function draw() {
   for (let i = 0; i < Board.length; i++) {
     let color = Board[i].isBlack ? 0 : 255;
     noStroke();
-    fill(color);
+    noFill();
     rect(Board[i].rectCenter, Board[i].rectCenterY, 64, 64);
     fill(255);
     textSize(10);
