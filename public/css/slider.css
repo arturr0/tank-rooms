@@ -1,0 +1,108 @@
+/* Global styles */
+body {
+    margin: 0;
+    padding: 0;
+    background: #38D2D2;
+    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,105,121,1) 52%, rgba(0,212,255,1) 100%);
+    scroll-behavior: smooth;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  
+  
+  /* Wrapper styles */
+  .wrapper {
+  display: grid;
+  grid-template-columns: 100%;
+  overflow: hidden;
+  width: 410px;
+  position: relative;
+  margin: 20px;
+    
+  margin-left: auto;
+  margin-right: auto;
+}
+  .content {
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.wrapper section {
+  width: 100%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 100%;
+}
+.wrapper section .item {
+  position: relative;
+  padding: 0 2px;
+  transition: all 250ms;
+  margin-left: auto;
+  margin-right: auto;
+}
+ .wrapper section .item {
+  position: relative;
+  padding: 0 2px;
+  transition: all 250ms;
+  margin-left: auto;
+  margin-right: auto;
+}
+  
+  .wrapper section .item:hover {
+    
+    transform: scale(1.2);
+  }
+  
+  .wrapper section .item .heading {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+  }
+  
+  .wrapper section .item .duration {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    color: #fff;
+  }
+  
+  .arrow__btn {
+    
+    color: #fff;
+    text-decoration: none;
+    font-size: 2em; /* Adjust size as needed */
+    
+    width: 60px; /* Adjust width as needed */
+    height: 60px; /* Adjust height as needed */
+    padding: 10px;
+    text-align: center;
+    z-index: 1000; /* Ensure buttons are above other content */
+  }
+  
+  .arrow__btn.left-arrow {
+    position: absolute;
+    left: 250px; /* Center horizontally */
+    top: 10px; /* Position at the top */
+    transform: translateX(-50%) rotate(90deg);
+    font-size: 170px;
+    color: #38D2D2;
+    
+  }
+  
+  .arrow__btn.right-arrow {
+    position: absolute;
+    left: 250px; /* Center horizontally */
+    bottom: 10px; /* Position at the bottom */
+    
+    transform: translateX(-50%) rotate(90deg);
+    font-size: 170px;
+    color: #38D2D2;
+  }
+  
