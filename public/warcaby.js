@@ -167,9 +167,9 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
 
   this.show = function() {
     imageMode(CENTER);
-
+    
         // Draw the rectangle image at the pawn's position
-    //image(this.rectangleImage, this.pos.x, this.pos.y, 50 ,50);
+    image(this.rectangleImage, this.pos.x, this.pos.y, 50 ,50);
     // Set fill color based on conditions
     // if (this.queen && !this.kill1Killed2 && !this.killed && !this.killer) {
     //     fill(this.isRed ? 'red' : 'green'); // Fill color for regular queens
@@ -486,10 +486,10 @@ function draw() {
   if (Greenturn) document.getElementById("turn").style.color = "green";
   else document.getElementById("turn").style.color = "red";
   //background(0);
-  image(img, 32, 32, 256, 256);
-  // image(img, 288, 32, 256, 256);
-  // image(img, 32, 288, 256, 256);
-  // image(img, 288, 288, 256, 256);
+  image(img, 160, 160, 256, 256);
+  image(img, 416, 160, 256, 256);
+  image(img, 160, 416, 256, 256);
+  image(img, 416, 416, 256, 256);
   for (let i = 0; i < Board.length; i++) {
     let color = Board[i].isBlack ? 0 : 255;
     noStroke();
