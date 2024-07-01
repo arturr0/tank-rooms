@@ -159,30 +159,21 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
       }
     }
   };
-   if (isRed) {
-        this.rectangleImage = rectangleRedImage;
-    } else {
-        this.rectangleImage = rectangleGreenImage;
-    }
 
   this.show = function() {
-    imageMode(CENTER);
-    
-        // Draw the rectangle image at the pawn's position
-    image(this.rectangleImage, this.pos.x, this.pos.y, 50 ,50);
     // Set fill color based on conditions
-    // if (this.queen && !this.kill1Killed2 && !this.killed && !this.killer) {
-    //     fill(this.isRed ? 'red' : 'green'); // Fill color for regular queens
-    // } else if (this.queen && this.killer && !this.isRed && Player == 2) {
-    //     fill('green'); // Fill color for killer queens (Player 2)
-    // } else if (this.queen && this.killer && this.isRed && Player == 1) {
-    //     fill('red'); // Fill color for killer queens (Player 1)
-    // } else if (this.queen && (this.killed || this.kill1Killed2)) {
-    //     fill(this.isRed ? 'red' : 'green'); // Fill color for killed or onekiller2killed queens
-    // } else {
-    //     // Default fill for non-queen pieces
-    //     fill(this.isRed ? 'red' : 'green');
-    // }
+    if (this.queen && !this.kill1Killed2 && !this.killed && !this.killer) {
+        fill(this.isRed ? 'red' : 'green'); // Fill color for regular queens
+    } else if (this.queen && this.killer && !this.isRed && Player == 2) {
+        fill('green'); // Fill color for killer queens (Player 2)
+    } else if (this.queen && this.killer && this.isRed && Player == 1) {
+        fill('red'); // Fill color for killer queens (Player 1)
+    } else if (this.queen && (this.killed || this.kill1Killed2)) {
+        fill(this.isRed ? 'red' : 'green'); // Fill color for killed or onekiller2killed queens
+    } else {
+        // Default fill for non-queen pieces
+        fill(this.isRed ? 'red' : 'green');
+    }
     
     // Set stroke properties
     if (this.queen) {
@@ -196,7 +187,7 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
     }
     
     // Draw the main circle for queens
-    //circle(this.pos.x, this.pos.y, 50);
+    circle(this.pos.x, this.pos.y, 50);
     
     // Additional circles for specific queen conditions
     if (this.queen) {
@@ -423,13 +414,7 @@ function setup() {
   const myCanvas = createCanvas(576, 576);
   myCanvas.style('border-radius', '15px');
   myCanvas.parent('game');
-  //img = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/rough-checked-texture-collage1.jpg?v=1719865746153');
   
-  img = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/board%20s.png?v=1719875467902');
-  bgImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/background%20s.jpg?v=1719875628156');// Load the image from a URL
-  rectangleRedImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20black%20s.png?v=1719875433184');
-  rectangleGreenImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20green%20s.png?v=1719875451383');
-  background(bgImage);
   turn = select('#turn');
   let PlayerInfo = select('#player');
   
@@ -475,30 +460,22 @@ function setup() {
   Pawns[14].queen = true;
   //generateQueensAreas();
 }
-// function preload() {
-//   img = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/board%20s.png?v=1719875467902');
-//   bgImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/background%20s.jpg?v=1719875628156');// Load the image from a URL
-//   rectangleRedImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20black%20s.png?v=1719875433184');
-//   rectangleGreenImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20green%20s.png?v=1719875451383');
-// }
+
 function draw() {
   turn.value(Greenturn);
   let PlayerInfo = select('#player');
-  //background(bgImage);
+  
   
   if (Player == 2) {document.getElementById("player").style.color = "green"; PlayerInfo.value("PLAYER GREEN");}
   else if (Player == 1) {document.getElementById("player").style.color = "red"; PlayerInfo.value("PLAYER RED");}
   if (Greenturn) document.getElementById("turn").style.color = "green";
   else document.getElementById("turn").style.color = "red";
-  //background(0);
-  image(img, 160, 160, 256, 256);
-  image(img, 416, 160, 256, 256);
-  image(img, 160, 416, 256, 256);
-  image(img, 416, 416, 256, 256);
+  background(0);
+  
   for (let i = 0; i < Board.length; i++) {
     let color = Board[i].isBlack ? 0 : 255;
     noStroke();
-    noFill();
+    fill(color);
     rect(Board[i].rectCenter, Board[i].rectCenterY, 64, 64);
     fill(255);
     textSize(10);
