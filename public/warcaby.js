@@ -423,6 +423,7 @@ function setup() {
   const myCanvas = createCanvas(576, 576);
   myCanvas.style('border-radius', '15px');
   myCanvas.parent('game');
+  img = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/rough-checked-texture-collage1.jpg?v=1719865746153');
   //background(bgImage);
   turn = select('#turn');
   let PlayerInfo = select('#player');
@@ -470,7 +471,7 @@ function setup() {
   //generateQueensAreas();
 }
 function preload() {
-  img = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/rough-checked-texture-collage1.jpg?v=1719865746153');
+  // img = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/rough-checked-texture-collage1.jpg?v=1719865746153');
   bgImage = loadImage('https://cdn.glitch.me/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/close-up-black-paint-wall-background.jpg?v=1719867561889');// Load the image from a URL
   rectangleRedImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20black.png?v=1719870486749');
   rectangleGreenImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20green.png?v=1719870463859');
@@ -486,9 +487,9 @@ function draw() {
   else document.getElementById("turn").style.color = "red";
   //background(0);
   image(img, 32, 32, 256, 256);
-  image(img, 288, 32, 256, 256);
-  image(img, 32, 288, 256, 256);
-  image(img, 288, 288, 256, 256);
+  // image(img, 288, 32, 256, 256);
+  // image(img, 32, 288, 256, 256);
+  // image(img, 288, 288, 256, 256);
   for (let i = 0; i < Board.length; i++) {
     let color = Board[i].isBlack ? 0 : 255;
     noStroke();
