@@ -414,7 +414,7 @@ function setup() {
   const myCanvas = createCanvas(576, 576);
   myCanvas.style('border-radius', '15px');
   myCanvas.parent('game');
-  
+  background(bgImage);
   turn = select('#turn');
   let PlayerInfo = select('#player');
   
@@ -461,7 +461,8 @@ function setup() {
   //generateQueensAreas();
 }
 function preload() {
-  img = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/rough-checked-texture-collage1.jpg?v=1719865746153'); // Load the image from a URL
+  img = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/rough-checked-texture-collage1.jpg?v=1719865746153');
+  bgImage = loadImage('https://cdn.glitch.me/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/close-up-black-paint-wall-background.jpg?v=1719867561889');// Load the image from a URL
 }
 function draw() {
   turn.value(Greenturn);
@@ -472,7 +473,7 @@ function draw() {
   else if (Player == 1) {document.getElementById("player").style.color = "red"; PlayerInfo.value("PLAYER RED");}
   if (Greenturn) document.getElementById("turn").style.color = "green";
   else document.getElementById("turn").style.color = "red";
-  background(0);
+  //background(0);
   image(img, 32, 32, 256, 256);
   image(img, 288, 32, 256, 256);
   image(img, 32, 288, 256, 256);
