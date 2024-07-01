@@ -461,7 +461,7 @@ function setup() {
   //generateQueensAreas();
 }
 function preload() {
-  img = loadImage('https://www.example.com/path/to/your/image.jpg'); // Load the image from a URL
+  img = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/rough-checked-texture-collage1.jpg?v=1719865746153'); // Load the image from a URL
 }
 function draw() {
   turn.value(Greenturn);
@@ -473,7 +473,10 @@ function draw() {
   if (Greenturn) document.getElementById("turn").style.color = "green";
   else document.getElementById("turn").style.color = "red";
   background(0);
-  
+  image(img, 32, 32, 256, 256);
+  image(img, 288, 32, 256, 256);
+  image(img, 32, 288, 256, 256);
+  image(img, 288, 288, 256, 256);
   for (let i = 0; i < Board.length; i++) {
     let color = Board[i].isBlack ? 0 : 255;
     noStroke();
