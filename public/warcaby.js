@@ -1,5 +1,5 @@
 // Connect to the /warcaby namespace
-const socket = io.connect('https://onyx-ember-balloon.glitch.me/warcaby');
+const socket = io.connect('https://wiggly-chill-shirt.glitch.me/warcaby');
 ////////////////////////////////////////////////console.log("warcaby");
 let Player;
 let room = "";

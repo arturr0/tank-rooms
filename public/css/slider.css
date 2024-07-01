@@ -88,9 +88,9 @@ body {
   
   .arrow__btn.left-arrow {
     position: absolute;
-    left: 250px; /* Center horizontally */
+    left: 50%; /* Center horizontally */
     top: 10px; /* Position at the top */
-    transform: translateX(-50%) rotate(90deg);
+    
     font-size: 170px;
     color: #38D2D2;
     
@@ -98,10 +98,10 @@ body {
   
   .arrow__btn.right-arrow {
     position: absolute;
-    left: 250px; /* Center horizontally */
+    left: 50%; /* Center horizontally */
     bottom: 10px; /* Position at the bottom */
     
-    transform: translateX(-50%) rotate(90deg);
+    
     font-size: 170px;
     color: #38D2D2;
   }
