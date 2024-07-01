@@ -88,7 +88,6 @@ body {
     top: -20px; /* Position at the top */
     color: #38D2D2;
     transform: translateX(-50%);
-    transform-origin: center;
 }
 
 .arrow__btn.right-arrow {
@@ -96,10 +95,8 @@ body {
     bottom: -25px; /* Position at the bottom */
     color: #38D2D2;
     transform: translateX(-50%);
-    transform-origin: center;
 }
 
 .arrow__btn:hover {
-    transform: scale(1.2) translateX(-50%);
-    transform-origin: center;
+    transform: translateX(-50%) scale(1.6); /* Ensure consistent centering */
 }
