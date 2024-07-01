@@ -159,21 +159,30 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
       }
     }
   };
+   if (isRed) {
+        this.rectangleImage = rectangleRedImage;
+    } else {
+        this.rectangleImage = rectangleGreenImage;
+    }
 
   this.show = function() {
+    imageMode(CENTER);
+
+        // Draw the rectangle image at the pawn's position
+    image(this.rectangleImage, this.pos.x, this.pos.y);
     // Set fill color based on conditions
-    if (this.queen && !this.kill1Killed2 && !this.killed && !this.killer) {
-        fill(this.isRed ? 'red' : 'green'); // Fill color for regular queens
-    } else if (this.queen && this.killer && !this.isRed && Player == 2) {
-        fill('green'); // Fill color for killer queens (Player 2)
-    } else if (this.queen && this.killer && this.isRed && Player == 1) {
-        fill('red'); // Fill color for killer queens (Player 1)
-    } else if (this.queen && (this.killed || this.kill1Killed2)) {
-        fill(this.isRed ? 'red' : 'green'); // Fill color for killed or onekiller2killed queens
-    } else {
-        // Default fill for non-queen pieces
-        fill(this.isRed ? 'red' : 'green');
-    }
+    // if (this.queen && !this.kill1Killed2 && !this.killed && !this.killer) {
+    //     fill(this.isRed ? 'red' : 'green'); // Fill color for regular queens
+    // } else if (this.queen && this.killer && !this.isRed && Player == 2) {
+    //     fill('green'); // Fill color for killer queens (Player 2)
+    // } else if (this.queen && this.killer && this.isRed && Player == 1) {
+    //     fill('red'); // Fill color for killer queens (Player 1)
+    // } else if (this.queen && (this.killed || this.kill1Killed2)) {
+    //     fill(this.isRed ? 'red' : 'green'); // Fill color for killed or onekiller2killed queens
+    // } else {
+    //     // Default fill for non-queen pieces
+    //     fill(this.isRed ? 'red' : 'green');
+    // }
     
     // Set stroke properties
     if (this.queen) {
@@ -463,6 +472,8 @@ function setup() {
 function preload() {
   img = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/rough-checked-texture-collage1.jpg?v=1719865746153');
   bgImage = loadImage('https://cdn.glitch.me/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/close-up-black-paint-wall-background.jpg?v=1719867561889');// Load the image from a URL
+  rectangleRedImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20black.png?v=1719870486749');
+  rectangleGreenImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20green.png?v=1719870463859');
 }
 function draw() {
   turn.value(Greenturn);
