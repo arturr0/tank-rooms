@@ -74,32 +74,28 @@ body {
   }
   
   .arrow__btn {
-    
+    position: absolute;
     color: #fff;
     text-decoration: none;
     font-size: 2em; /* Adjust size as needed */
-    
     width: 60px; /* Adjust width as needed */
     height: 60px; /* Adjust height as needed */
     padding: 10px;
     text-align: center;
     z-index: 1000; /* Ensure buttons are above other content */
-  }
-  
-  .arrow__btn.left-arrow {
-    position: absolute;
+}
+
+.arrow__btn.left-arrow {
     left: 50%; /* Center horizontally */
     top: 10px; /* Position at the top */
-    
     color: #38D2D2;
-    
-  }
-  
-  .arrow__btn.right-arrow {
-    position: absolute;
-    left: 250px; /* Center horizontally */
+    transform: translateX(-50%); /* Center the button */
+}
+
+.arrow__btn.right-arrow {
+    left: 50%; /* Center horizontally */
     bottom: 10px; /* Position at the bottom */
-    
     color: #38D2D2;
-  }
+    transform: translateX(-50%); /* Center the button */
+}
   
