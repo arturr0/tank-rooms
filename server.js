@@ -130,10 +130,10 @@ warcabyNamespace.on('connection', (socket) => {
         //console.log('check', check);
         warcabyNamespace.to(room).emit('new turn', TURN);
     });
-    socket.on('state', function(Board, Greenturn, check, current, room) {
+    socket.on('state', function(Board, serializedPawns, Greenturn, check, current, room) {
 
         BOARD = Board;
-        //PAWNS = Pawns;
+        PAWNS = serializedPawns;
         ////////////console.log(check);
         // if (!check) TURN = !Greenturn;
         // else TURN = Greenturn;

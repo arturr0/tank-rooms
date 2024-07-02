@@ -647,7 +647,8 @@ function mouseClicked() {
         current = pawnPlayed;
         checkQueen();
         //generateQueensAreas(pawnPlayed);
-        socket.emit('state', Board, Greenturn, check, current, room); // Send the move to the server
+        let serializedPawns = serializePawns(Pawns);
+        socket.emit('state', Board, serializedPawns, Greenturn, check, current, room); // Send the move to the server
         socket.emit('move', { 
           x: targetPos.x, 
           y: targetPos.y, 
@@ -1561,7 +1562,8 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
   killmode.splice(i, 1);
   //generateQueensAreas();
   //socket.emit('killed mode', killedOptMode, Pawns, room);
-  socket.emit('state', Board, Pawns, Greenturn, check, current, room);
+  let serializedPawns = serializePawns(Pawns);
+  socket.emit('state', Board, serializedPawns, Greenturn, check, current, room);
   socket.emit('move', { 
     x: targetPos.x, 
     y: targetPos.y, 
@@ -1781,6 +1783,24 @@ function generateQueensAreas() {
 
 // Call the function to generate queen areas
 
-
+function serializePawns(pawns) {
+  return pawns.map(pawn => ({
+    rectCenter: pawn.rectCenter,
+    rectCenterY: pawn.rectCenterY,
+    row: pawn.row,
+    column: pawn.column,
+    isRed: pawn.isRed,
+    queen: pawn.queen,
+    live: pawn.live,
+    killer: pawn.killer,
+    killed: pawn.killed,
+    kill1Killed2: pawn.kill1Killed2,
+    letter: pawn.letter,
+    number: pawn.number,
+    pos: { x: pawn.pos.x, y: pawn.pos.y }, // Assuming createVector produces an object with x and y
+    targetPos: pawn.targetPos ? { x: pawn.targetPos.x, y: pawn.targetPos.y } : null,
+    queensAreas: pawn.queensAreas // If this is an array, it will be copied as well
+  }));
+}
 // Output the result
 ////console.log(Pawns[9]);
