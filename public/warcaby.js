@@ -127,86 +127,92 @@ let message;
 // let pawnLetter;
 // let pawnNumber;
 
-function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, kill1Killed2, letter, number, queensAreas) {
-  this.rectCenter = rectCenter;
-  this.rectCenterY = rectCenterY;
-  this.row = row;
-  this.column = column;
-  this.isRed = isRed;
-  this.queen = queen;
-  this.live = true;
-  this.killer = false;
-  this.killed = false;
-  this.kill1Killed2 = false;
-  this.letter = letter;
-  this.number = number;
-  this.pos = createVector(rectCenter, rectCenterY);
-  this.targetPos = null;
-  this.queensAreas = [];
-  
-  this.update = function() {
-    if (this.targetPos) {
-      let vel = p5.Vector.sub(this.targetPos, this.pos);
-      if (vel.mag() > 1 && this.live) {
-        vel.setMag(1);
-        this.pos.add(vel);
-        pawnCompletedMove = false;
-      } else {
-        this.pos = this.targetPos.copy();
-        this.targetPos = null;
-        this.rectCenter = this.pos.x;
-        this.rectCenterY = this.pos.y;
-        pawnCompletedMove = true; // Mark the move as completed
+function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, kill1Killed2, letter, number, queensAreas, index) {
+    this.rectCenter = rectCenter;
+    this.rectCenterY = rectCenterY;
+    this.row = row;
+    this.column = column;
+    this.isRed = isRed;
+    this.queen = queen;
+    this.live = true;
+    this.killer = false;
+    this.killed = false;
+    this.kill1Killed2 = false;
+    this.letter = letter;
+    this.number = number;
+    this.pos = createVector(rectCenter, rectCenterY);
+    this.targetPos = null;
+    this.queensAreas = [];
+    this.index = index;
+    
+    this.update = function() {
+      if (this.targetPos) {
+        let vel = p5.Vector.sub(this.targetPos, this.pos);
+        if (vel.mag() > 1 && this.live) {
+          vel.setMag(1);
+          this.pos.add(vel);
+          pawnCompletedMove = false;
+        } else {
+          this.pos = this.targetPos.copy();
+          this.targetPos = null;
+          this.rectCenter = this.pos.x;
+          this.rectCenterY = this.pos.y;
+          pawnCompletedMove = true; // Mark the move as completed
+        }
       }
+    };
+  
+    if (this.isRed) {
+      this.rectangleImage = rectangleRedImage;
+    } else {
+      this.rectangleImage = rectangleGreenImage;
     }
-  };
-
-  if (this.isRed) {
-    this.rectangleImage = rectangleRedImage;
-  } else {
-    this.rectangleImage = rectangleGreenImage;
-  }
-
-  this.show = function() {
-    // Draw the pawn image centered on its position
-    image(this.rectangleImage, this.pos.x - 25, this.pos.y - 25, 50, 50);
-
-    if (this.queen) {
-      textFont(fontello);
-      textSize(30);
+  
+    this.show = function() {
+      // Draw the pawn image centered on its position
+      image(this.rectangleImage, this.pos.x - 25, this.pos.y - 25, 50, 50);
+      
+      // Draw the Fontello icon if the pawn is a queen
+      if (this.queen) {
+        textFont(fontello);
+        textSize(30);
+        textAlign(CENTER, CENTER);
+        fill(255);
+        text('\ue844', this.pos.x, this.pos.y);
+      }
+      
+      // Draw the index text on top of the pawn image
+      textFont('Arial');
+      textSize(15);
       textAlign(CENTER, CENTER);
       fill(255);
-      // Draw the Fontello icon at the center of the pawn
-      text('\ue844', this.pos.x, this.pos.y);
-    }
-
-    if (this.queen) {
-      noFill();
-      strokeWeight(10);
-      stroke(255, 223, 0);
-    } else if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (this.killer || this.killed || this.kill1Killed2)) {
-      noFill();
-      strokeWeight(10);
-      stroke(this.killer ? 'blue' : 'gray');
-    } else {
-      noFill();
-      noStroke();
-    }
-
-    circle(this.pos.x, this.pos.y, 50);
-
-    if (this.queen) {
-      noFill();
-      strokeWeight(6);
-      if (this.killer) {
-        stroke(0, 0, 255);
-      } else if (this.killed || this.kill1Killed2) {
-        stroke(128, 128, 128);
+      text(this.index, this.pos.x, this.pos.y + 20); // Slightly offset the index text to avoid overlapping with the icon
+  
+      if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (this.killer || this.killed || this.kill1Killed2)) {
+        noFill();
+        strokeWeight(10);
+        stroke(this.killer ? 'blue' : 'gray');
+      } else {
+        noFill();
+        noStroke();
       }
-      circle(this.pos.x, this.pos.y, 54);
-    }
-  };
-}
+  
+      circle(this.pos.x, this.pos.y, 50);
+  
+      // if (this.queen) {
+      //   noFill();
+      //   strokeWeight(6);
+      //   if (this.killer) {
+      //     stroke(0, 0, 255);
+      //   } else if (this.killed || this.kill1Killed2) {
+      //     stroke(128, 128, 128);
+      //   }
+      //   circle(this.pos.x, this.pos.y, 54);
+      // }
+    };
+  }
+  
+  
 
 
 let X;
@@ -453,7 +459,7 @@ function setup() {
       isBlack = !isBlack;
     }
   }
-
+  
   for (let j = 0; j < Board.length; j++) {
     if (Board[j].isBlack && Board[j].row < 4) {
       Board[j].free = false;
@@ -465,7 +471,7 @@ function setup() {
       Pawns.push(pawn);
     }
   }
-
+  for (let i = 0; i < Pawns.length; i++) Pawns[i].index = i;
   Pawns[8].queen = true;
   Pawns[11].queen = true;
   Pawns[14].queen = true;
@@ -519,16 +525,16 @@ function draw() {
   textFont('Arial'); // or any other font you prefer
 
   // Drawing other text and shapes
-  for (let i = 0; i < Pawns.length; i++) {
-    if (Pawns[i].live) {
-      Pawns[i].show();
-      fill(0);
-      noStroke();
-      textSize(32);
-      textAlign(CENTER, CENTER);
-      text(i, Pawns[i].rectCenter, Pawns[i].rectCenterY);
-    }
-  }
+//   for (let i = 0; i < Pawns.length; i++) {
+//     if (Pawns[i].live) {
+//       Pawns[i].show();
+//       fill(0);
+//       noStroke();
+//       textSize(32);
+//       textAlign(CENTER, CENTER);
+//       text(i, Pawns[i].rectCenter, Pawns[i].rectCenterY);
+//     }
+//   }
 
   for (let i = 0; i < Letters.length; i++) {
     noStroke();
