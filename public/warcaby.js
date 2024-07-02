@@ -190,16 +190,16 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
       fill(0); // Set to black to ensure visibility
       text(this.index, this.pos.x, this.pos.y + (this.queen ? 20 : 0)); // Slightly offset the index text to avoid overlapping with the icon if queen
   
-      if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (this.killer || this.killed || this.kill1Killed2)) {
-        noFill();
-        strokeWeight(10);
-        stroke(this.killer ? 'blue' : 'gray');
-      } else {
-        noFill();
-        noStroke();
-      }
+      // if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (this.killer || this.killed || this.kill1Killed2)) {
+      //   noFill();
+      //   strokeWeight(10);
+      //   stroke(this.killer ? 'blue' : 'gray');
+      // } else {
+      //   noFill();
+      //   noStroke();
+      // }
   
-      circle(this.pos.x, this.pos.y, 50);
+      // circle(this.pos.x, this.pos.y, 50);
   
       // if (this.queen) {
       //   noFill();
