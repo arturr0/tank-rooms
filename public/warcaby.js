@@ -488,7 +488,7 @@ function draw() {
   }
   if (Greenturn) document.getElementById("turn").style.color = "green";
   else document.getElementById("turn").style.color = "red";
-  background(bgImage);
+  //background(bgImage);
   image(img, 32, 32, 256, 256);
   image(img, 288, 32, 256, 256);
   image(img, 32, 288, 256, 256);
