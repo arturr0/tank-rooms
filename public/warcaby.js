@@ -1171,7 +1171,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 let rows = [];
                 for (let i = 0; i < downLeftArray.length; i++)
                   rows.push(Pawns[downLeftArray[i][1].row])
-                let nearest = Math.max(...rows); 
+                let nearest = Math.min(...rows); 
                 killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, nearest]);
                 killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
               }
