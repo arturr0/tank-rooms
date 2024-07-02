@@ -476,8 +476,6 @@ function setup() {
 }
 
 function draw() {
-  console.log('draw function called');  // Debug log
-
   // Update player info
   turn.value(Greenturn);
   let PlayerInfo = select('#player');
@@ -492,14 +490,37 @@ function draw() {
   if (Greenturn) document.getElementById("turn").style.color = "green";
   else document.getElementById("turn").style.color = "red";
 
-  // Set background (temporarily use a plain color to check for issues)
-  background(200); // Use a plain color for debugging
+  // Set background
+  background(bgImage);
 
   // Draw four instances of the image
   image(img, 32, 32, 256, 256);
   image(img, 288, 32, 256, 256);
   image(img, 32, 288, 256, 256);
   image(img, 288, 288, 256, 256);
+
+  // Draw the board
+  for (let i = 0; i < Board.length; i++) {
+    let color = Board[i].isBlack ? 0 : 255;
+    noStroke();
+    fill(color);
+    rect(Board[i].rectCenter, Board[i].rectCenterY, 64, 64);
+    fill(255);
+    textSize(10);
+    text(i, Board[i].rectCenter - 25, Board[i].rectCenterY - 25);
+  }
+
+  // Draw pawns
+  for (let i = 0; i < Pawns.length; i++) {
+    if (Pawns[i].live) {
+      Pawns[i].show();
+      fill(0);
+      noStroke();
+      textSize(32);
+      textAlign(CENTER, CENTER);
+      text(i, Pawns[i].rectCenter, Pawns[i].rectCenterY);
+    }
+  }
 
   // Draw borders
   stroke(255);
@@ -509,6 +530,8 @@ function draw() {
   line(30, 546, 546, 546);
   line(546, 30, 546, 546);
 }
+
+
 function mouseClicked() {
   X = mouseX;
   Y = mouseY;
