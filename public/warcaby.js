@@ -148,8 +148,8 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
     this.update = function() {
       if (this.targetPos) {
         let vel = p5.Vector.sub(this.targetPos, this.pos);
-        if (vel.mag() > 1 && this.live) {
-          vel.setMag(1);
+        if (vel.mag() > 10 && this.live) {
+          vel.setMag(10);
           this.pos.add(vel);
           pawnCompletedMove = false;
         } else {
@@ -565,7 +565,7 @@ function draw() {
   }
   if (killedOptMode || oneKiller2Killed) {
     for (let i = 0; i < Pawns.length; i++) {
-      if (Pawns[i].killer || Pawns[i].kill1Killed2) {
+      if (Pawns[i].killed || Pawns[i].kill1Killed2) {
         push(); // Save current transformation state
         translate(Pawns[i].rectCenter, Pawns[i].rectCenterY);
         rotate(angle);
