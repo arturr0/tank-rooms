@@ -475,9 +475,9 @@ function setup() {
     }
   }
   for (let i = 0; i < Pawns.length; i++) Pawns[i].index = i;
-  Pawns[8].queen = true;
-  Pawns[11].queen = true;
-  Pawns[14].queen = true;
+  // Pawns[8].queen = true;
+  // Pawns[11].queen = true;
+  // Pawns[14].queen = true;
 }
 let angle = 0;
 
@@ -1400,8 +1400,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
               Pawns[killConditionsUnique[i][1]].live && Pawns[killConditionsUnique[j][1]].live &&
               (((!killConditionsUnique[j][9] && killConditionsUnique[i][10] != null) ||
               (killConditionsUnique[j][10] != null && !killConditionsUnique[i][9])) ||
-              ((!killConditionsUnique[j][9] && killConditionsUnique[i][10] == null) ||
-              (killConditionsUnique[j][10] == null && !killConditionsUnique[i][9])))
+              ((killConditionsUnique[j][9] && killConditionsUnique[i][10] == null) ||
+              (killConditionsUnique[j][10] == null && killConditionsUnique[i][9])))
               
               
             ) {
