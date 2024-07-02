@@ -537,6 +537,7 @@ function draw() {
     //fill(255);
     noStroke();
     textSize(20);
+    textStyle(BOLD);
     textAlign(CENTER, CENTER);
     fill("red");
     text(Letters[i], 64 + i * 64, 16);
@@ -544,11 +545,14 @@ function draw() {
     text(Letters[i], 64 + i * 64, 562);
   }
   for (let i = 0; i < Numbers.length; i++) {
-    fill(255);
+    //fill(255);
     noStroke();
     textSize(20);
+    textStyle(BOLD);
     textAlign(CENTER, CENTER);
+    fill("red");
     text(Numbers[i], 14, 64 + i * 64);
+    fill("green");
     text(Numbers[i], 562, 64 + i * 64);
   }
 
