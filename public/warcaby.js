@@ -468,12 +468,12 @@ function draw() {
   }
   document.getElementById("turn").style.color = Greenturn ? "green" : "red";
 
-  background(bgImage);
+  
   image(img, 32, 32, 256, 256);
   image(img, 288, 32, 256, 256);
   image(img, 32, 288, 256, 256);
   image(img, 288, 288, 256, 256);
-
+  background(bgImage);
   stroke(255);
   strokeWeight(3);
   line(30, 30, 546, 30);
