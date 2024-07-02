@@ -92,10 +92,10 @@
   },
   {
     "index": 13,
-    "players": 0,
-    "user1": "",
-    "user2": "",
-    "block": 1
+    "players": 2,
+    "user1": "k",
+    "user2": "kk",
+    "block": 0
   },
   {
     "index": 14,
@@ -169,9 +169,9 @@
   },
   {
     "index": 24,
-    "players": 1,
-    "user1": "l",
+    "players": 0,
+    "user1": "",
     "user2": "",
-    "block": 0
+    "block": 1
   }
 ]
