@@ -474,7 +474,6 @@ function setup() {
 }
 
 function draw() {
-  
   turn.value(Greenturn);
   let PlayerInfo = select('#player');
 
@@ -485,49 +484,43 @@ function draw() {
     document.getElementById("player").style.color = "red";
     PlayerInfo.value("PLAYER RED");
   }
-  if (Greenturn) document.getElementById("turn").style.color = "green";
-  else document.getElementById("turn").style.color = "red";
-  //background(0);
+
+  if (Greenturn) {
+    document.getElementById("turn").style.color = "green";
+  } else {
+    document.getElementById("turn").style.color = "red";
+  }
+
   background(bgImage);
   image(img, 32, 32, 256, 256);
   image(img, 288, 32, 256, 256);
   image(img, 32, 288, 256, 256);
   image(img, 288, 288, 256, 256);
 
-  //up
+  // Up
   image(img, 32, -224, 256, 256);
   image(img, 288, -224, 256, 256);
-  //down
+  // Down
   image(img, 32, 544, 256, 256);
   image(img, 288, 544, 256, 256);
-  //left
+  // Left
   image(img, -224, 32, 256, 256);
   image(img, -224, 288, 256, 256);
-  //right
+  // Right
   image(img, 544, 32, 256, 256);
   image(img, 544, 288, 256, 256);
-  textFont(fontello); // Set the Fontello font
-  textSize(100); // Set the text size
-  textAlign(CENTER, CENTER); // Center the text
-  fill(255);
-  text('\xe844', 100, 100);
-  // for (let i = 0; i < Board.length; i++) {
-  //   let color = Board[i].isBlack ? 0 : 255;
-  //   noStroke();
-  //   fill(color);
-  //   rect(Board[i].rectCenter, Board[i].rectCenterY, 64, 64);
-  //   fill(255);
-  //   textSize(10);
-  //   text(i, Board[i].rectCenter - 25, Board[i].rectCenterY - 25);
-  // }
-  // stroke(255);
-  // strokeWeight(3);
-  // line(30, 30, 546, 30);
-  // line(30, 30, 546, 30);
-  // line(30, 30, 30, 546);
-  // line(30, 546, 546, 546);
-  // line(546, 30, 546, 546);
 
+  // Draw the Fontello icon
+  textFont(fontello);
+  textSize(100);
+  textAlign(CENTER, CENTER);
+  fill(255);
+  text('\ue844', 100, 100);
+
+  // Switch back to the default font or another appropriate font
+  textFont('Arial'); // or any other font you prefer
+
+  // Drawing other text and shapes
   for (let i = 0; i < Pawns.length; i++) {
     if (Pawns[i].live) {
       Pawns[i].show();
@@ -540,7 +533,6 @@ function draw() {
   }
 
   for (let i = 0; i < Letters.length; i++) {
-    //fill(255);
     noStroke();
     textSize(20);
     textStyle(BOLD);
@@ -552,8 +544,8 @@ function draw() {
     else fill(255);
     text(Letters[i], 64 + i * 64, 562);
   }
+
   for (let i = 0; i < Numbers.length; i++) {
-    //fill(255);
     noStroke();
     textSize(20);
     textStyle(BOLD);
@@ -601,6 +593,7 @@ function draw() {
     }
   }
 }
+
 
 function mouseClicked() {
   X = mouseX;
