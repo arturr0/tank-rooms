@@ -1,5 +1,5 @@
 // Connect to the /warcaby namespace
-const socket = io.connect('https://wiggly-chill-shirt.glitch.me/warcaby');
+const socket = io.connect('https://shelled-equinox-viola.glitch.me/warcaby');
 ////////////////////////////////////////////////console.log("warcaby");
 let Player;
 let room = "";
@@ -143,6 +143,11 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
   this.pos = createVector(rectCenter, rectCenterY);
   this.targetPos = null;
   this.queensAreas = [];
+  // if (this.isRed) {
+  //   this.rectangleImage = rectangleRedImage;
+  // } else {
+  //   this.rectangleImage = rectangleGreenImage;
+  // }
   this.update = function() {
     if (this.targetPos) {
       let vel = p5.Vector.sub(this.targetPos, this.pos);
@@ -387,7 +392,6 @@ socket.on('new state', function(BOARD, PAWNS, PLAY) {
     Pawns[i].live = PAWNS[i].live;
     Pawns[i].isRed = PAWNS[i].isRed;
     Pawns[i].killer = PAWNS[i].killer;
-    Pawns[i].queen = PAWNS[i].queen;
     
   }
   //kill(blockKilledPawn, blockKillersPawn);
@@ -409,6 +413,12 @@ socket.on('update blockKill false', function(BLOCK_KILL, BLOCK_KILL_PAWN, RELEAS
   killmode = KILL_MODE;
   
 });
+function preload() {
+  img = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/board%20s.png?v=1719875467902');
+  bgImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/background%20s.jpg?v=1719875628156');// Load the image from a URL
+  rectangleRedImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20black%20s.png?v=1719875433184');
+  rectangleGreenImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20green%20s.png?v=1719875451383');
+}
 
 function setup() {
   const myCanvas = createCanvas(576, 576);
@@ -1161,7 +1171,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 let rows = [];
                 for (let i = 0; i < downLeftArray.length; i++)
                   rows.push(Pawns[downLeftArray[i][1].row])
-                let nearest = Math.max(...rows); 
+                let nearest = Math.min(...rows); 
                 killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, nearest]);
                 killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
               }
