@@ -171,25 +171,28 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
     imageMode(CENTER);
     image(this.rectangleImage, this.pos.x, this.pos.y, 50, 50);
 
-    if (this.queen && !this.kill1Killed2 && !this.killed && !this.killer) {
-      fill(this.isRed ? 'red' : 'green');
-    } else if (this.queen && this.killer && !this.isRed && Player == 2) {
-      fill('green');
-    } else if (this.queen && this.killer && this.isRed && Player == 1) {
-      fill('red');
-    } else if (this.queen && (this.killed || this.kill1Killed2)) {
-      fill(this.isRed ? 'red' : 'green');
-    } else {
-      fill(this.isRed ? 'red' : 'green');
-    }
+    // if (this.queen && !this.kill1Killed2 && !this.killed && !this.killer) {
+    //   fill(this.isRed ? 'red' : 'green');
+    // } else if (this.queen && this.killer && !this.isRed && Player == 2) {
+    //   fill('green');
+    // } else if (this.queen && this.killer && this.isRed && Player == 1) {
+    //   fill('red');
+    // } else if (this.queen && (this.killed || this.kill1Killed2)) {
+    //   fill(this.isRed ? 'red' : 'green');
+    // } else {
+    //   fill(this.isRed ? 'red' : 'green');
+    // }
 
     if (this.queen) {
+      noFill()
       strokeWeight(10);
       stroke(255, 223, 0);
     } else if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (this.killer || this.killed || this.kill1Killed2)) {
+      noFill()
       strokeWeight(10);
       stroke(this.killer ? 'blue' : 'gray');
     } else {
+      noFill()
       noStroke();
     }
 
@@ -418,7 +421,11 @@ function setup() {
   const myCanvas = createCanvas(576, 576);
   myCanvas.style('border-radius', '15px');
   myCanvas.parent('game');
-
+  background(bgImage);
+  image(img, 160, 160, 256, 256);
+  image(img, 416, 160, 256, 256);
+  image(img, 160, 416, 256, 256);
+  image(img, 416, 416, 256, 256);
   turn = select('#turn');
   let PlayerInfo = select('#player');
 
@@ -481,7 +488,7 @@ function draw() {
   }
   if (Greenturn) document.getElementById("turn").style.color = "green";
   else document.getElementById("turn").style.color = "red";
-  background(0);
+  //background(0);
 
   for (let i = 0; i < Board.length; i++) {
     let color = Board[i].isBlack ? 0 : 255;
