@@ -27,11 +27,11 @@ body {
     font-style: normal;
 }
 
-#main {
+#mainWarcaby {
     display: flex;
     background-color: rgb(65, 105, 225);
-    flex-direction: column; /* Adjusted to column for the sticky header and footer */
-    height: 100vh; /* Full viewport height */
+    flex-direction: row; /* Adjusted to column for the sticky header and footer */
+    height: calc(100vh - 31px); /* Full viewport height */
     overflow: hidden; /* Hide overflow to prevent double scrollbars */
 }
 

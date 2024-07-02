@@ -31,14 +31,14 @@ body
     input#turn(type='text' value='Initial Value' style='height: 25px;font-size: 20px;')
     //- input#kill(type='text' value='Initial Value' style='height: 25px;font-size: 20px;')
     input#room(type='text' value='Initial Value' style='height: 25px;font-size: 20px;')
-  div#main
+  div#mainWarcaby
     //- #chatContainer
     //-   #chat
     //-     #messages
     //-     textarea#text(autoresize='' style='margin: 0; max-width: 100vw;min-height:80px')
     #game
-    div#historyContainer
-      div#history
+    #historyContainer
+      #history
     script.
       $('textarea').on('input', function() {
       $(this).outerHeight(38).outerHeight(this.scrollHeight);

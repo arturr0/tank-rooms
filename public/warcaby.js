@@ -534,11 +534,13 @@ function draw() {
   }
 
   for (let i = 0; i < Letters.length; i++) {
-    fill(255);
+    //fill(255);
     noStroke();
     textSize(20);
     textAlign(CENTER, CENTER);
+    fill("red");
     text(Letters[i], 64 + i * 64, 16);
+    fill("green");
     text(Letters[i], 64 + i * 64, 562);
   }
   for (let i = 0; i < Numbers.length; i++) {
