@@ -475,9 +475,9 @@ function setup() {
     }
   }
   for (let i = 0; i < Pawns.length; i++) Pawns[i].index = i;
-  Pawns[8].queen = true;
-  Pawns[11].queen = true;
-  Pawns[14].queen = true;
+  // Pawns[8].queen = true;
+  // Pawns[11].queen = true;
+  // Pawns[14].queen = true;
 }
 let angle = 0;
 
@@ -557,7 +557,20 @@ function draw() {
         translate(Pawns[i].rectCenter, Pawns[i].rectCenterY);
         rotate(angle);
         // Draw the rotated gradient circle stroke
-        drawGradientCircle(0, 0, 25);
+        drawGradientCircle(0, 0, 25, "killer");
+        pop(); // Restore original transformation state
+      }
+    }
+    angle += 0.5;
+  }
+  if (killedOptMode || oneKiller2Killed) {
+    for (let i = 0; i < Pawns.length; i++) {
+      if (Pawns[i].killer || Pawns[i].kill1Killed2) {
+        push(); // Save current transformation state
+        translate(Pawns[i].rectCenter, Pawns[i].rectCenterY);
+        rotate(angle);
+        // Draw the rotated gradient circle stroke
+        drawGradientCircle(0, 0, 25, "killed");
         pop(); // Restore original transformation state
       }
     }
@@ -1837,7 +1850,7 @@ function serializePawns(pawns) {
 }
 // Output the result
 ////console.log(Pawns[9]);
-function drawGradientCircle(x, y, r) {
+function drawGradientCircle(x, y, r, mode) {
   let numSegments = 100;
   let angleStep = TWO_PI / numSegments;
 
@@ -1852,7 +1865,9 @@ function drawGradientCircle(x, y, r) {
     let y2 = sin(endAngle) * r;
 
     let lerpAmt = i / numSegments;
-    let colorStart = lerpColor(color(255, 0, 0), color(0, 0, 255), lerpAmt);
+    let colorStart;
+    if (mode = "killer") colorStart = lerpColor(color(255, 0, 0), color(0, 0, 255), lerpAmt);
+    else colorStart = lerpColor(color(0, 0, 255), color(255, 0, 0), lerpAmt);
     let colorEnd = lerpColor(color(255, 0, 0), color(0, 0, 255), (i + 1) / numSegments);
 
     strokeWeight(5);
