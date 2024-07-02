@@ -491,6 +491,20 @@ function draw() {
   image(img, 288, 32, 256, 256);
   image(img, 32, 288, 256, 256);
   image(img, 288, 288, 256, 256);
+
+  //up
+  image(img, 32, -224, 256, 256);
+  image(img, 288, -224, 256, 256);
+  //down
+  image(img, 32, 544, 256, 256);
+  image(img, 288, 544, 256, 256);
+  //left
+  image(img, -224, 32, 256, 256);
+  image(img, -224, 288, 256, 256);
+  //right
+  image(img, 544, 32, 256, 256);
+  image(img, 544, 288, 256, 256);
+
   // for (let i = 0; i < Board.length; i++) {
   //   let color = Board[i].isBlack ? 0 : 255;
   //   noStroke();
@@ -500,13 +514,13 @@ function draw() {
   //   textSize(10);
   //   text(i, Board[i].rectCenter - 25, Board[i].rectCenterY - 25);
   // }
-  stroke(255);
-  strokeWeight(3);
-  line(30, 30, 546, 30);
-  line(30, 30, 546, 30);
-  line(30, 30, 30, 546);
-  line(30, 546, 546, 546);
-  line(546, 30, 546, 546);
+  // stroke(255);
+  // strokeWeight(3);
+  // line(30, 30, 546, 30);
+  // line(30, 30, 546, 30);
+  // line(30, 30, 30, 546);
+  // line(30, 546, 546, 546);
+  // line(546, 30, 546, 546);
 
   for (let i = 0; i < Pawns.length; i++) {
     if (Pawns[i].live) {
