@@ -422,10 +422,10 @@ function setup() {
   myCanvas.style('border-radius', '15px');
   myCanvas.parent('game');
   background(bgImage);
-  image(img, 160, 160, 256, 256);
-  image(img, 416, 160, 256, 256);
-  image(img, 160, 416, 256, 256);
-  image(img, 416, 416, 256, 256);
+  image(img, 100, 32, 256, 256);
+//   image(img, 356, 32, 256, 256);
+//   image(img, 100, 416, 256, 256);
+//   image(img, 416, 416, 256, 256);
   turn = select('#turn');
   let PlayerInfo = select('#player');
 
