@@ -422,10 +422,10 @@ function setup() {
   myCanvas.style('border-radius', '15px');
   myCanvas.parent('game');
   background(bgImage);
-  image(img, 100, 32, 256, 256);
-//   image(img, 356, 32, 256, 256);
-//   image(img, 100, 416, 256, 256);
-//   image(img, 416, 416, 256, 256);
+  image(img, 96, 32, 256, 256);
+  image(img, 352, 32, 256, 256);
+  image(img, 96, 288, 256, 256);
+  image(img, 352, 288, 256, 256);
   turn = select('#turn');
   let PlayerInfo = select('#player');
 
@@ -490,15 +490,15 @@ function draw() {
   else document.getElementById("turn").style.color = "red";
   //background(0);
 
-  for (let i = 0; i < Board.length; i++) {
-    let color = Board[i].isBlack ? 0 : 255;
-    noStroke();
-    fill(color);
-    rect(Board[i].rectCenter, Board[i].rectCenterY, 64, 64);
-    fill(255);
-    textSize(10);
-    text(i, Board[i].rectCenter - 25, Board[i].rectCenterY - 25);
-  }
+  // for (let i = 0; i < Board.length; i++) {
+  //   let color = Board[i].isBlack ? 0 : 255;
+  //   noStroke();
+  //   fill(color);
+  //   rect(Board[i].rectCenter, Board[i].rectCenterY, 64, 64);
+  //   fill(255);
+  //   textSize(10);
+  //   text(i, Board[i].rectCenter - 25, Board[i].rectCenterY - 25);
+  // }
   stroke(255);
   strokeWeight(3);
   line(30, 30, 546, 30);
