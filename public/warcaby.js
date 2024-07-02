@@ -473,10 +473,15 @@ function setup() {
 
 function draw() {
   background(bgImage);
-  image(img, 32, 32, 256, 256);
-  image(img, 288, 32, 256, 256);
-  image(img, 32, 288, 256, 256);
-  image(img, 288, 288, 256, 256);
+  image(img, 32, 32);
+  image(img, 288, 32);
+  image(img, 32, 288);
+  image(img, 288, 288);
+  fill("red");
+  circle(32, 32, 10);
+  circle(288, 32, 10);
+  circle(32, 288, 10);
+  circle(288, 288, 10);
   turn.value(Greenturn);
   let PlayerInfo = select('#player');
 
@@ -491,15 +496,15 @@ function draw() {
   else document.getElementById("turn").style.color = "red";
   //background(0);
 
-  for (let i = 0; i < Board.length; i++) {
-    let color = Board[i].isBlack ? 0 : 255;
-    noStroke();
-    fill(color);
-    rect(Board[i].rectCenter, Board[i].rectCenterY, 64, 64);
-    fill(255);
-    textSize(10);
-    text(i, Board[i].rectCenter - 25, Board[i].rectCenterY - 25);
-  }
+  // for (let i = 0; i < Board.length; i++) {
+  //   let color = Board[i].isBlack ? 0 : 255;
+  //   noStroke();
+  //   fill(color);
+  //   rect(Board[i].rectCenter, Board[i].rectCenterY, 64, 64);
+  //   fill(255);
+  //   textSize(10);
+  //   text(i, Board[i].rectCenter - 25, Board[i].rectCenterY - 25);
+  // }
   stroke(255);
   strokeWeight(3);
   line(30, 30, 546, 30);
@@ -536,10 +541,10 @@ function draw() {
     text(Numbers[i], 562, 64 + i * 64);
   }
 
-  if (movingPawn) {
-    movingPawn.update();
-    movingPawn.show();
-  }
+  // if (movingPawn) {
+  //   movingPawn.update();
+  //   movingPawn.show();
+  // }
 
   if (bothCompleted) {
     if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) {
