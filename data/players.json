@@ -1,10 +1,10 @@
 [
   {
     "index": 0,
-    "players": 0,
-    "user1": "",
-    "user2": "",
-    "block": 1
+    "players": 2,
+    "user1": "d",
+    "user2": "ssd",
+    "block": 0
   },
   {
     "index": 1,
@@ -92,10 +92,10 @@
   },
   {
     "index": 13,
-    "players": 2,
-    "user1": "k",
-    "user2": "g",
-    "block": 0
+    "players": 0,
+    "user1": "",
+    "user2": "",
+    "block": 1
   },
   {
     "index": 14,
