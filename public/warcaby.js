@@ -174,7 +174,6 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
       
       // Draw the Fontello icon if the pawn is a queen
       if (this.queen) {
-        noStroke();
         textFont(fontello);
         textSize(30);
         textAlign(CENTER, CENTER);
@@ -183,88 +182,22 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
       }
       
       // Draw the index text on top of the pawn image
-      noStroke();
       textFont('Arial');
-      textSize(30);
+      textSize(15);
       textAlign(CENTER, CENTER);
       fill(0); // Set to black to ensure visibility
-      text(this.index, this.pos.x, this.pos.y); // Slightly offset the index text to avoid overlapping with the icon if queen
+      text(this.index, this.pos.x, this.pos.y + (this.queen ? 20 : 0)); // Slightly offset the index text to avoid overlapping with the icon if queen
   
       if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (this.killer || this.killed || this.kill1Killed2)) {
-        // noFill();
-        // strokeWeight(10);
-        let angle = 0;
-
-
-
-  
-//   let centerX = width / 2;
-//   let centerY = height / 2;
-  let radius = 100;
-
-  // Move to the center of the canvas
-  translate(this.pos.x, this.pos.x);
-  // Rotate by the current angle
-  rotate(angle);
-  
-  // Draw the gradient circle stroke
-  let numSegments = 100;
-    let angleStep = TWO_PI / numSegments;
-    
-    // Loop to draw each segment of the circle
-    for (let i = 0; i < numSegments; i++) {
-      let startAngle = i * angleStep;
-      let endAngle = startAngle + angleStep;
-      
-      let x1 = 0 + cos(startAngle) * radius;
-      let y1 = 0 + sin(startAngle) * radius;
-      let x2 = 0 + cos(endAngle) * radius;
-      let y2 = 0 + sin(endAngle) * radius;
-      
-      let lerpAmt = i / numSegments;
-      let colorStart = lerpColor(color(255, 0, 0), color(0, 0, 255), lerpAmt);
-      let colorStart1 = lerpColor(color(0, 0, 255), color(255, 0, 0), lerpAmt);
-      let colorEnd = lerpColor(color(0, 0, 255), color(255, 0, 0), (i + 1) / numSegments);
-      
-      strokeWeight(5);
-      stroke(this.killer ? colorStart : colorStart1);
-      line(x1, y1, x2, y2);
-    }
-  
-  // Increment the angle for rotation
-  angle += 0.01;
-
-
-// function drawGradientCircle(x, y, r) {
-//   let numSegments = 100;
-//   let angleStep = TWO_PI / numSegments;
-  
-//   // Loop to draw each segment of the circle
-//   for (let i = 0; i < numSegments; i++) {
-//     let startAngle = i * angleStep;
-//     let endAngle = startAngle + angleStep;
-    
-//     let x1 = x + cos(startAngle) * r;
-//     let y1 = y + sin(startAngle) * r;
-//     let x2 = x + cos(endAngle) * r;
-//     let y2 = y + sin(endAngle) * r;
-    
-//     let lerpAmt = i / numSegments;
-//     let colorStart = lerpColor(color(255, 0, 0), color(0, 0, 255), lerpAmt);
-//     let colorEnd = lerpColor(color(255, 0, 0), color(0, 0, 255), (i + 1) / numSegments);
-    
-//     strokeWeight(5);
-//     stroke(colorStart);
-//     line(x1, y1, x2, y2);
-//   }
-// }
-        // stroke(this.killer ? 'blue' : 'gray');
+        noFill();
+        strokeWeight(10);
+        stroke(this.killer ? 'blue' : 'gray');
       } else {
         noFill();
         noStroke();
       }
   
-      //circle(this.pos.x, this.pos.y, 50);
+      circle(this.pos.x, this.pos.y, 50);
   
       // if (this.queen) {
       //   noFill();
@@ -544,7 +477,7 @@ function setup() {
   Pawns[11].queen = true;
   Pawns[14].queen = true;
 }
-
+let angle = 0;
 function draw() {
     turn.value(Greenturn);
     let PlayerInfo = select('#player');
@@ -613,7 +546,22 @@ function draw() {
       movingPawn.update();
       movingPawn.show();
     }
-  
+    if (killersOptMode) {
+      //let radius = 100;
+      //let centers = [];
+      for (let i = 0; i < Pawns.length; i++)
+        if (Pawns[i].killer) {
+          //centers.push([Pawns[i].rectCenter,Pawns[i].rectCenterY]);
+          translate(Pawns[i].rectCenter, Pawns[i].rectCenterY);
+          // Rotate by the current angle
+          rotate(angle);
+          
+          // Draw the gradient circle stroke
+          drawGradientCircle(0, 0, 50);
+        }
+      angle += 0.01;
+
+    }
     if (bothCompleted) {
       if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) {
         socket.emit('turn', Greenturn, check, room);
@@ -1887,3 +1835,26 @@ function serializePawns(pawns) {
 }
 // Output the result
 ////console.log(Pawns[9]);
+function drawGradientCircle(x, y, r) {
+  let numSegments = 100;
+  let angleStep = TWO_PI / numSegments;
+  
+  // Loop to draw each segment of the circle
+  for (let i = 0; i < numSegments; i++) {
+    let startAngle = i * angleStep;
+    let endAngle = startAngle + angleStep;
+    
+    let x1 = x + cos(startAngle) * r;
+    let y1 = y + sin(startAngle) * r;
+    let x2 = x + cos(endAngle) * r;
+    let y2 = y + sin(endAngle) * r;
+    
+    let lerpAmt = i / numSegments;
+    let colorStart = lerpColor(color(255, 0, 0), color(0, 0, 255), lerpAmt);
+    let colorEnd = lerpColor(color(255, 0, 0), color(0, 0, 255), (i + 1) / numSegments);
+    
+    strokeWeight(5);
+    stroke(colorStart);
+    line(x1, y1, x2, y2);
+  }
+}
