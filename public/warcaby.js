@@ -134,16 +134,16 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
   this.column = column;
   this.isRed = isRed;
   this.queen = queen;
-  this.live = true;
-  this.killer = false;
-  this.killed = false;
-  this.kill1Killed2 = false;
+  this.live = live;
+  this.killer = killer;
+  this.killed = killed;
+  this.kill1Killed2 = kill1Killed2;
   this.letter = letter;
   this.number = number;
   this.pos = createVector(rectCenter, rectCenterY);
   this.targetPos = null;
-  this.queensAreas = [];
-  
+  this.queensAreas = queensAreas;
+
   this.update = function() {
     if (this.targetPos) {
       let vel = p5.Vector.sub(this.targetPos, this.pos);
@@ -161,42 +161,26 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
     }
   };
 
-  if (this.isRed) {
-    this.rectangleImage = rectangleRedImage;
-  } else {
-    this.rectangleImage = rectangleGreenImage;
-  }
+  this.rectangleImage = isRed ? rectangleRedImage : rectangleGreenImage;
 
   this.show = function() {
     imageMode(CENTER);
     image(this.rectangleImage, this.pos.x, this.pos.y, 50, 50);
 
-    // if (this.queen && !this.kill1Killed2 && !this.killed && !this.killer) {
-    //   fill(this.isRed ? 'red' : 'green');
-    // } else if (this.queen && this.killer && !this.isRed && Player == 2) {
-    //   fill('green');
-    // } else if (this.queen && this.killer && this.isRed && Player == 1) {
-    //   fill('red');
-    // } else if (this.queen && (this.killed || this.kill1Killed2)) {
-    //   fill(this.isRed ? 'red' : 'green');
-    // } else {
-    //   fill(this.isRed ? 'red' : 'green');
-    // }
-
     if (this.queen) {
-      noFill()
+      noFill();
       strokeWeight(10);
       stroke(255, 223, 0);
     } else if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (this.killer || this.killed || this.kill1Killed2)) {
-      noFill()
+      noFill();
       strokeWeight(10);
       stroke(this.killer ? 'blue' : 'gray');
     } else {
-      noFill()
+      noFill();
       noStroke();
     }
 
-    circle(this.pos.x, this.pos.y, 50);
+    ellipse(this.pos.x, this.pos.y, 50, 50);
 
     if (this.queen) {
       noFill();
@@ -206,7 +190,7 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
       } else if (this.killed || this.kill1Killed2) {
         stroke(128, 128, 128);
       }
-      circle(this.pos.x, this.pos.y, 54);
+      ellipse(this.pos.x, this.pos.y, 54, 54);
     }
   };
 }
@@ -472,16 +456,6 @@ function setup() {
 }
 
 function draw() {
-  background(bgImage);
-  image(img, 32, 32);
-  image(img, 288, 32);
-  image(img, 32, 288);
-  image(img, 288, 288);
-  fill("red");
-  circle(32, 32, 10);
-  circle(288, 32, 10);
-  circle(32, 288, 10);
-  circle(288, 288, 10);
   turn.value(Greenturn);
   let PlayerInfo = select('#player');
 
@@ -492,22 +466,16 @@ function draw() {
     document.getElementById("player").style.color = "red";
     PlayerInfo.value("PLAYER RED");
   }
-  if (Greenturn) document.getElementById("turn").style.color = "green";
-  else document.getElementById("turn").style.color = "red";
-  //background(0);
+  document.getElementById("turn").style.color = Greenturn ? "green" : "red";
 
-  // for (let i = 0; i < Board.length; i++) {
-  //   let color = Board[i].isBlack ? 0 : 255;
-  //   noStroke();
-  //   fill(color);
-  //   rect(Board[i].rectCenter, Board[i].rectCenterY, 64, 64);
-  //   fill(255);
-  //   textSize(10);
-  //   text(i, Board[i].rectCenter - 25, Board[i].rectCenterY - 25);
-  // }
+  background(bgImage);
+  image(img, 32, 32, 256, 256);
+  image(img, 288, 32, 256, 256);
+  image(img, 32, 288, 256, 256);
+  image(img, 288, 288, 256, 256);
+
   stroke(255);
   strokeWeight(3);
-  line(30, 30, 546, 30);
   line(30, 30, 546, 30);
   line(30, 30, 30, 546);
   line(30, 546, 546, 546);
@@ -541,10 +509,10 @@ function draw() {
     text(Numbers[i], 562, 64 + i * 64);
   }
 
-  // if (movingPawn) {
-  //   movingPawn.update();
-  //   movingPawn.show();
-  // }
+  if (movingPawn) {
+    movingPawn.update();
+    movingPawn.show();
+  }
 
   if (bothCompleted) {
     if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) {
