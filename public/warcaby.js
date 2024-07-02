@@ -143,7 +143,7 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
   this.pos = createVector(rectCenter, rectCenterY);
   this.targetPos = null;
   this.queensAreas = [];
-
+  
   this.update = function() {
     if (this.targetPos) {
       let vel = p5.Vector.sub(this.targetPos, this.pos);
@@ -168,40 +168,48 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
   }
 
   this.show = function() {
-    // Save current drawing style
-    push();
+    //imageMode(CENTER);
+    image(this.rectangleImage, this.pos.x - 25, this.pos.y - 25, 50, 50);
 
-    // Stroke properties
+    // if (this.queen && !this.kill1Killed2 && !this.killed && !this.killer) {
+    //   fill(this.isRed ? 'red' : 'green');
+    // } else if (this.queen && this.killer && !this.isRed && Player == 2) {
+    //   fill('green');
+    // } else if (this.queen && this.killer && this.isRed && Player == 1) {
+    //   fill('red');
+    // } else if (this.queen && (this.killed || this.kill1Killed2)) {
+    //   fill(this.isRed ? 'red' : 'green');
+    // } else {
+    //   fill(this.isRed ? 'red' : 'green');
+    // }
+
     if (this.queen) {
+      noFill()
       strokeWeight(10);
       stroke(255, 223, 0);
     } else if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (this.killer || this.killed || this.kill1Killed2)) {
+      noFill()
       strokeWeight(10);
       stroke(this.killer ? 'blue' : 'gray');
     } else {
+      noFill()
       noStroke();
     }
 
-    // Draw the circle centered on the pawn's position
-    ellipseMode(CENTER);
+    circle(this.pos.x, this.pos.y, 50);
+
     if (this.queen) {
       noFill();
-      ellipse(this.pos.x, this.pos.y, 54);
-    } else {
-      fill(this.isRed ? 'red' : 'green');
-      ellipse(this.pos.x, this.pos.y, 50);
+      strokeWeight(6);
+      if (this.killer) {
+        stroke(0, 0, 255);
+      } else if (this.killed || this.kill1Killed2) {
+        stroke(128, 128, 128);
+      }
+      circle(this.pos.x, this.pos.y, 54);
     }
-
-    // Restore previous drawing style
-    pop();
-
-    // Draw the pawn image centered on its position
-    imageMode(CENTER);
-    image(this.rectangleImage, this.pos.x, this.pos.y, 50, 50);
   };
 }
-
-
 
 let X;
 let Y;
@@ -464,12 +472,7 @@ function setup() {
 }
 
 function draw() {
-  background(bgImage);
-  image(img, 32, 32, 256, 256);
-  image(img, 288, 32, 256, 256);
-  image(img, 32, 288, 256, 256);
-  image(img, 288, 288, 256, 256);
-  fill("red");
+  
   turn.value(Greenturn);
   let PlayerInfo = select('#player');
 
@@ -483,7 +486,11 @@ function draw() {
   if (Greenturn) document.getElementById("turn").style.color = "green";
   else document.getElementById("turn").style.color = "red";
   //background(0);
-
+  background(bgImage);
+  image(img, 32, 32, 256, 256);
+  image(img, 288, 32, 256, 256);
+  image(img, 32, 288, 256, 256);
+  image(img, 288, 288, 256, 256);
   // for (let i = 0; i < Board.length; i++) {
   //   let color = Board[i].isBlack ? 0 : 255;
   //   noStroke();
@@ -530,7 +537,6 @@ function draw() {
   }
 
   if (movingPawn) {
-    
     movingPawn.update();
     movingPawn.show();
   }
