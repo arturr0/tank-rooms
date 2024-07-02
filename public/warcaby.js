@@ -421,11 +421,7 @@ function setup() {
   const myCanvas = createCanvas(576, 576);
   myCanvas.style('border-radius', '15px');
   myCanvas.parent('game');
-  //background(bgImage);
-  // image(img, 32, 32, 256, 256);
-  // image(img, 288, 32, 256, 256);
-  // image(img, 32, 288, 256, 256);
-  // image(img, 288, 288, 256, 256);
+
   turn = select('#turn');
   let PlayerInfo = select('#player');
 
@@ -476,7 +472,11 @@ function setup() {
 }
 
 function draw() {
-  // Update player info
+  background(bgImage);
+  image(img, 32, 32, 256, 256);
+  image(img, 288, 32, 256, 256);
+  image(img, 32, 288, 256, 256);
+  image(img, 288, 288, 256, 256);
   turn.value(Greenturn);
   let PlayerInfo = select('#player');
 
@@ -489,17 +489,8 @@ function draw() {
   }
   if (Greenturn) document.getElementById("turn").style.color = "green";
   else document.getElementById("turn").style.color = "red";
+  //background(0);
 
-  // Set background
-  background(bgImage);
-
-  // Draw four instances of the image
-  image(img, 32, 32, 256, 256);
-  image(img, 288, 32, 256, 256);
-  image(img, 32, 288, 256, 256);
-  image(img, 288, 288, 256, 256);
-
-  // Draw the board
   for (let i = 0; i < Board.length; i++) {
     let color = Board[i].isBlack ? 0 : 255;
     noStroke();
@@ -509,8 +500,14 @@ function draw() {
     textSize(10);
     text(i, Board[i].rectCenter - 25, Board[i].rectCenterY - 25);
   }
+  stroke(255);
+  strokeWeight(3);
+  line(30, 30, 546, 30);
+  line(30, 30, 546, 30);
+  line(30, 30, 30, 546);
+  line(30, 546, 546, 546);
+  line(546, 30, 546, 546);
 
-  // Draw pawns
   for (let i = 0; i < Pawns.length; i++) {
     if (Pawns[i].live) {
       Pawns[i].show();
@@ -522,15 +519,58 @@ function draw() {
     }
   }
 
-  // Draw borders
-  stroke(255);
-  strokeWeight(3);
-  line(30, 30, 546, 30);
-  line(30, 30, 30, 546);
-  line(30, 546, 546, 546);
-  line(546, 30, 546, 546);
-}
+  for (let i = 0; i < Letters.length; i++) {
+    fill(255);
+    noStroke();
+    textSize(20);
+    textAlign(CENTER, CENTER);
+    text(Letters[i], 64 + i * 64, 16);
+    text(Letters[i], 64 + i * 64, 562);
+  }
+  for (let i = 0; i < Numbers.length; i++) {
+    fill(255);
+    noStroke();
+    textSize(20);
+    textAlign(CENTER, CENTER);
+    text(Numbers[i], 14, 64 + i * 64);
+    text(Numbers[i], 562, 64 + i * 64);
+  }
 
+  if (movingPawn) {
+    movingPawn.update();
+    movingPawn.show();
+  }
+
+  if (bothCompleted) {
+    if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) {
+      socket.emit('turn', Greenturn, check, room);
+    }
+    bothCompleted = false;
+  }
+
+  if (pawnCompletedMove) {
+    movingPawn = null;
+    pawnCompletedMove = false;
+    isPawnMoving = false;
+    socket.emit('complete', Player, room);
+    return;
+  }
+
+  for (let i = 0; i < Board.length; i++) {
+    if (Board[i].free && Board[i].isBlack) {
+      strokeWeight(1);
+      stroke(255);
+      noFill();
+      rect(Board[i].rectCenter, Board[i].rectCenterY, 55, 55);
+    }
+    if (Board[i].check) {
+      strokeWeight(1);
+      stroke(255, 0, 0);
+      noFill();
+      rect(Board[i].rectCenter, Board[i].rectCenterY, 70, 70);
+    }
+  }
+}
 
 function mouseClicked() {
   X = mouseX;
