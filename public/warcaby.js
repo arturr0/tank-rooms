@@ -174,6 +174,7 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
       
       // Draw the Fontello icon if the pawn is a queen
       if (this.queen) {
+        noStroke();
         textFont(fontello);
         textSize(30);
         textAlign(CENTER, CENTER);
@@ -182,11 +183,12 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
       }
       
       // Draw the index text on top of the pawn image
+      noStroke();
       textFont('Arial');
-      textSize(15);
+      textSize(30);
       textAlign(CENTER, CENTER);
-      fill(255);
-      text(this.index, this.pos.x, this.pos.y + 20); // Slightly offset the index text to avoid overlapping with the icon
+      fill(0); // Set to black to ensure visibility
+      text(this.index, this.pos.x, this.pos.y); // Slightly offset the index text to avoid overlapping with the icon if queen
   
       if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (this.killer || this.killed || this.kill1Killed2)) {
         noFill();
@@ -211,6 +213,7 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
       // }
     };
   }
+  
   
   
 
@@ -478,125 +481,105 @@ function setup() {
 }
 
 function draw() {
-  turn.value(Greenturn);
-  let PlayerInfo = select('#player');
-
-  if (Player == 2) {
-    document.getElementById("player").style.color = "green";
-    PlayerInfo.value("PLAYER GREEN");
-  } else if (Player == 1) {
-    document.getElementById("player").style.color = "red";
-    PlayerInfo.value("PLAYER RED");
-  }
-
-  if (Greenturn) {
-    document.getElementById("turn").style.color = "green";
-  } else {
-    document.getElementById("turn").style.color = "red";
-  }
-
-  background(bgImage);
-  image(img, 32, 32, 256, 256);
-  image(img, 288, 32, 256, 256);
-  image(img, 32, 288, 256, 256);
-  image(img, 288, 288, 256, 256);
-
-  // Up
-  image(img, 32, -224, 256, 256);
-  image(img, 288, -224, 256, 256);
-  // Down
-  image(img, 32, 544, 256, 256);
-  image(img, 288, 544, 256, 256);
-  // Left
-  image(img, -224, 32, 256, 256);
-  image(img, -224, 288, 256, 256);
-  // Right
-  image(img, 544, 32, 256, 256);
-  image(img, 544, 288, 256, 256);
-
-  // Draw the Fontello icon
-  // textFont(fontello);
-  // textSize(100);
-  // textAlign(CENTER, CENTER);
-  // fill(255);
-  // text('\ue844', 100, 100);
-
-  // Switch back to the default font or another appropriate font
-  textFont('Arial'); // or any other font you prefer
-
-  // Drawing other text and shapes
-//   for (let i = 0; i < Pawns.length; i++) {
-//     if (Pawns[i].live) {
-//       Pawns[i].show();
-//       fill(0);
-//       noStroke();
-//       textSize(32);
-//       textAlign(CENTER, CENTER);
-//       text(i, Pawns[i].rectCenter, Pawns[i].rectCenterY);
-//     }
-//   }
-
-  for (let i = 0; i < Letters.length; i++) {
-    noStroke();
-    textSize(20);
-    textStyle(BOLD);
-    textAlign(CENTER, CENTER);
-    if (i % 2 == 0) fill(255);
-    else fill(0);
-    text(Letters[i], 64 + i * 64, 16);
-    if (i % 2 == 0) fill(0);
-    else fill(255);
-    text(Letters[i], 64 + i * 64, 562);
-  }
-
-  for (let i = 0; i < Numbers.length; i++) {
-    noStroke();
-    textSize(20);
-    textStyle(BOLD);
-    textAlign(CENTER, CENTER);
-    if (i % 2 == 0) fill(255);
-    else fill(0);
-    text(Numbers[i], 14, 64 + i * 64);
-    if (i % 2 == 0) fill(0);
-    else fill(255);
-    text(Numbers[i], 562, 64 + i * 64);
-  }
-
-  if (movingPawn) {
-    movingPawn.update();
-    movingPawn.show();
-  }
-
-  if (bothCompleted) {
-    if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) {
-      socket.emit('turn', Greenturn, check, room);
+    turn.value(Greenturn);
+    let PlayerInfo = select('#player');
+  
+    if (Player == 2) {
+      document.getElementById("player").style.color = "green";
+      PlayerInfo.value("PLAYER GREEN");
+    } else if (Player == 1) {
+      document.getElementById("player").style.color = "red";
+      PlayerInfo.value("PLAYER RED");
     }
-    bothCompleted = false;
-  }
-
-  if (pawnCompletedMove) {
-    movingPawn = null;
-    pawnCompletedMove = false;
-    isPawnMoving = false;
-    socket.emit('complete', Player, room);
-    return;
-  }
-
-  for (let i = 0; i < Board.length; i++) {
-    if (Board[i].free && Board[i].isBlack) {
-      strokeWeight(1);
-      stroke(255);
-      noFill();
-      rect(Board[i].rectCenter, Board[i].rectCenterY, 55, 55);
+  
+    if (Greenturn) document.getElementById("turn").style.color = "green";
+    else document.getElementById("turn").style.color = "red";
+  
+    background(bgImage);
+  
+    // Draw additional images on the canvas
+    image(img, 32, 32, 256, 256);
+    image(img, 288, 32, 256, 256);
+    image(img, 32, 288, 256, 256);
+    image(img, 288, 288, 256, 256);
+  
+    image(img, 32, -224, 256, 256);
+    image(img, 288, -224, 256, 256);
+    image(img, 32, 544, 256, 256);
+    image(img, 288, 544, 256, 256);
+    image(img, -224, 32, 256, 256);
+    image(img, -224, 288, 256, 256);
+    image(img, 544, 32, 256, 256);
+    image(img, 544, 288, 256, 256);
+  
+    for (let i = 0; i < Pawns.length; i++) {
+      if (Pawns[i].live) {
+        Pawns[i].show();
+      }
     }
-    if (Board[i].check) {
-      strokeWeight(1);
-      stroke(255, 0, 0);
-      noFill();
-      rect(Board[i].rectCenter, Board[i].rectCenterY, 70, 70);
+  
+    for (let i = 0; i < Letters.length; i++) {
+      noStroke();
+      textSize(20);
+      textStyle(BOLD);
+      textAlign(CENTER, CENTER);
+      if (i % 2 == 0) fill(255);
+      else fill(0);
+      text(Letters[i], 64 + i * 64, 16);
+      if (i % 2 == 0) fill(0);
+      else fill(255);
+      text(Letters[i], 64 + i * 64, 562);
+    }
+  
+    for (let i = 0; i < Numbers.length; i++) {
+      noStroke();
+      textSize(20);
+      textStyle(BOLD);
+      textAlign(CENTER, CENTER);
+      if (i % 2 == 0) fill(255);
+      else fill(0);
+      text(Numbers[i], 14, 64 + i * 64);
+      if (i % 2 == 0) fill(0);
+      else fill(255);
+      text(Numbers[i], 562, 64 + i * 64);
+    }
+  
+    if (movingPawn) {
+      movingPawn.update();
+      movingPawn.show();
+    }
+  
+    if (bothCompleted) {
+      if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) {
+        socket.emit('turn', Greenturn, check, room);
+      }
+      bothCompleted = false;
+    }
+  
+    if (pawnCompletedMove) {
+      movingPawn = null;
+      pawnCompletedMove = false;
+      isPawnMoving = false;
+      socket.emit('complete', Player, room);
+      return;
+    }
+  
+    for (let i = 0; i < Board.length; i++) {
+      if (Board[i].free && Board[i].isBlack) {
+        strokeWeight(1);
+        stroke(255);
+        noFill();
+        rect(Board[i].rectCenter, Board[i].rectCenterY, 55, 55);
+      }
+      if (Board[i].check) {
+        strokeWeight(1);
+        stroke(255, 0, 0);
+        noFill();
+        rect(Board[i].rectCenter, Board[i].rectCenterY, 70, 70);
+      }
     }
   }
-}
+  
 
 
 function mouseClicked() {
