@@ -43,9 +43,9 @@
   },
   {
     "index": 6,
-    "players": 1,
-    "user1": "h",
-    "user2": "",
+    "players": 2,
+    "user1": "f",
+    "user2": "ff",
     "block": 0
   }
 ]
