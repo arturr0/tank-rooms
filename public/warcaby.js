@@ -143,6 +143,7 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
   this.pos = createVector(rectCenter, rectCenterY);
   this.targetPos = null;
   this.queensAreas = [];
+  
   this.update = function() {
     if (this.targetPos) {
       let vel = p5.Vector.sub(this.targetPos, this.pos);
@@ -159,62 +160,52 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
       }
     }
   };
+
   if (this.isRed) {
     this.rectangleImage = rectangleRedImage;
   } else {
-      this.rectangleImage = rectangleGreenImage;
+    this.rectangleImage = rectangleGreenImage;
   }
+
   this.show = function() {
     imageMode(CENTER);
-    
-    // Draw the rectangle image at the pawn's position
-    image(this.rectangleImage, this.pos.x, this.pos.y, 50 ,50);
-    // Set fill color based on conditions
+    image(this.rectangleImage, this.pos.x, this.pos.y, 50, 50);
+
     if (this.queen && !this.kill1Killed2 && !this.killed && !this.killer) {
-        fill(this.isRed ? 'red' : 'green'); // Fill color for regular queens
+      fill(this.isRed ? 'red' : 'green');
     } else if (this.queen && this.killer && !this.isRed && Player == 2) {
-        fill('green'); // Fill color for killer queens (Player 2)
+      fill('green');
     } else if (this.queen && this.killer && this.isRed && Player == 1) {
-        fill('red'); // Fill color for killer queens (Player 1)
+      fill('red');
     } else if (this.queen && (this.killed || this.kill1Killed2)) {
-        fill(this.isRed ? 'red' : 'green'); // Fill color for killed or onekiller2killed queens
+      fill(this.isRed ? 'red' : 'green');
     } else {
-        // Default fill for non-queen pieces
-        fill(this.isRed ? 'red' : 'green');
+      fill(this.isRed ? 'red' : 'green');
     }
-    
-    // Set stroke properties
+
     if (this.queen) {
-        strokeWeight(10);
-        stroke(255, 223, 0); // Stroke color for queens
+      strokeWeight(10);
+      stroke(255, 223, 0);
     } else if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (this.killer || this.killed || this.kill1Killed2)) {
-        strokeWeight(10);
-        stroke(this.killer ? 'blue' : 'gray'); // Stroke color for ordinary pawns
+      strokeWeight(10);
+      stroke(this.killer ? 'blue' : 'gray');
     } else {
-        noStroke(); // No stroke for other pieces
+      noStroke();
     }
-    
-    // Draw the main circle for queens
+
     circle(this.pos.x, this.pos.y, 50);
-    
-    // Additional circles for specific queen conditions
+
     if (this.queen) {
-        noFill(); // No fill for additional circles
-        strokeWeight(6); // Set stroke weight for additional circles
-        
-        if (this.killer) {
-            stroke(0, 0, 255); // Stroke color for additional circle of killer queens
-        } else if (this.killed || this.kill1Killed2) {
-            stroke(128, 128, 128); // Stroke color for additional circle of killed or onekiller2killed queens
-        }
-        
-        // Draw additional circle
-        circle(this.pos.x, this.pos.y, 54);
+      noFill();
+      strokeWeight(6);
+      if (this.killer) {
+        stroke(0, 0, 255);
+      } else if (this.killed || this.kill1Killed2) {
+        stroke(128, 128, 128);
+      }
+      circle(this.pos.x, this.pos.y, 54);
     }
-};
-
-
-
+  };
 }
 
 let X;
@@ -427,15 +418,19 @@ function setup() {
   const myCanvas = createCanvas(576, 576);
   myCanvas.style('border-radius', '15px');
   myCanvas.parent('game');
-  
+
   turn = select('#turn');
   let PlayerInfo = select('#player');
-  
-  if (Player == 2) {document.getElementById("player").style.color = "green"; PlayerInfo.value("GREEN");}
-  else if (Player == 1) {document.getElementById("player").style.color = "red"; PlayerInfo.value("RED");}
+
+  if (Player == 2) {
+    document.getElementById("player").style.color = "green";
+    PlayerInfo.value("GREEN");
+  } else if (Player == 1) {
+    document.getElementById("player").style.color = "red";
+    PlayerInfo.value("RED");
+  }
   killer = select('#kill');
   rectMode(CENTER);
-  
 
   let isBlack = true;
   for (let i = 0; i < 8; i++)
@@ -451,11 +446,11 @@ function setup() {
       column++;
       let area = new Area(rectCenter, (row * 64 - 32) + 32, row, column, isBlack, true, Letters[j], Numbers[i]);
       Board.push(area);
-      
+
       isBlack = !isBlack;
     }
   }
-  //f(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, letter, number)
+
   for (let j = 0; j < Board.length; j++) {
     if (Board[j].isBlack && Board[j].row < 4) {
       Board[j].free = false;
@@ -467,24 +462,27 @@ function setup() {
       Pawns.push(pawn);
     }
   }
-  // Board[58].free = true;
+
   Pawns[8].queen = true;
   Pawns[11].queen = true;
   Pawns[14].queen = true;
-  //generateQueensAreas();
 }
 
 function draw() {
   turn.value(Greenturn);
   let PlayerInfo = select('#player');
-  
-  
-  if (Player == 2) {document.getElementById("player").style.color = "green"; PlayerInfo.value("PLAYER GREEN");}
-  else if (Player == 1) {document.getElementById("player").style.color = "red"; PlayerInfo.value("PLAYER RED");}
+
+  if (Player == 2) {
+    document.getElementById("player").style.color = "green";
+    PlayerInfo.value("PLAYER GREEN");
+  } else if (Player == 1) {
+    document.getElementById("player").style.color = "red";
+    PlayerInfo.value("PLAYER RED");
+  }
   if (Greenturn) document.getElementById("turn").style.color = "green";
   else document.getElementById("turn").style.color = "red";
   background(0);
-  
+
   for (let i = 0; i < Board.length; i++) {
     let color = Board[i].isBlack ? 0 : 255;
     noStroke();
@@ -495,109 +493,61 @@ function draw() {
     text(i, Board[i].rectCenter - 25, Board[i].rectCenterY - 25);
   }
   stroke(255);
-  strokeWeight(3); // Set the thickness of the line to 4 pixels
+  strokeWeight(3);
   line(30, 30, 546, 30);
   line(30, 30, 546, 30);
   line(30, 30, 30, 546);
   line(30, 546, 546, 546);
   line(546, 30, 546, 546);
+
   for (let i = 0; i < Pawns.length; i++) {
     if (Pawns[i].live) {
-      //Pawns[i].update();
       Pawns[i].show();
-      fill(0); // Set the fill color for the text
+      fill(0);
       noStroke();
-      textSize(32); // Set the size of the text
-      textAlign(CENTER, CENTER); // Align the text to the center both horizontally and vertically
+      textSize(32);
+      textAlign(CENTER, CENTER);
       text(i, Pawns[i].rectCenter, Pawns[i].rectCenterY);
     }
   }
 
   for (let i = 0; i < Letters.length; i++) {
-    
-      
-      fill(255); // Set the fill color for the text
-      noStroke();
-      textSize(20); // Set the size of the text
-      textAlign(CENTER, CENTER); // Align the text to the center both horizontally and vertically
-      text(Letters[i], 64 + i*64, 16);
-      text(Letters[i], 64 + i*64, 562);
-    
+    fill(255);
+    noStroke();
+    textSize(20);
+    textAlign(CENTER, CENTER);
+    text(Letters[i], 64 + i * 64, 16);
+    text(Letters[i], 64 + i * 64, 562);
   }
   for (let i = 0; i < Numbers.length; i++) {
-    
-      
-    fill(255); // Set the fill color for the text
+    fill(255);
     noStroke();
-    textSize(20); // Set the size of the text
-    textAlign(CENTER, CENTER); // Align the text to the center both horizontally and vertically
-    text(Numbers[i], 14, 64 + i*64);
-    text(Numbers[i], 562, 64 + i*64);
-  
-}
+    textSize(20);
+    textAlign(CENTER, CENTER);
+    text(Numbers[i], 14, 64 + i * 64);
+    text(Numbers[i], 562, 64 + i * 64);
+  }
 
   if (movingPawn) {
-    
     movingPawn.update();
     movingPawn.show();
-    
   }
-  //kill(blockKilledPawn, blockKillersPawn);
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////console.log("OUT " + pawnCompletedMove);
-   ////////////////////////////////////////////////console.log(killersOptMode);
-  //  if (pawnCompletedMove && !killersOptMode) {
-  //   kill(blockKilledPawn, blockKillersPawn);
-  //   killOpt();
-  //   stepKill();
-    
-  //   }
-   ////////////////console.log(bothCompleted);
-   if (bothCompleted) {
-    
-    //////////////////console.log('completed out player condition', killConditionsUnique)
-    
-    //////////////console.log('check in completed', check);
-        ////////////////console.log('turn in completed', Greenturn);
-    ////////console.log('completed after condition', killConditionsUnique.length);
+
+  if (bothCompleted) {
     if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) {
-      ////////console.log('completed in condition', killConditionsUnique.length);
       socket.emit('turn', Greenturn, check, room);
     }
-    
-
-    // kill(blockKilledPawn, blockKillersPawn);
-    // killOpt(killConditionsUnique);
-    // stepKill(killConditionsUnique);
-    
     bothCompleted = false;
-    
-    ////////////////////////////////////console.log('both') 
-   }
-   if (pawnCompletedMove) {
-    ////////////////////////////////////console.log('pawnCompletedMove');
-    // kill(blockKilledPawn, blockKillersPawn);
-    // killOpt();
-    // stepKill();
-    
-    movingPawn = null; // Reset movingPawn after completing the move
+  }
+
+  if (pawnCompletedMove) {
+    movingPawn = null;
     pawnCompletedMove = false;
-    
-    //Greenturn = !Greenturn;
-    ////////////////////////////////////////////////////////////////////for (let z = 0; z < killConditionsUnique.length; z++)
-                ////////////console.log(killConditionsUnique[z]);
-    
-    
-    
     isPawnMoving = false;
-    // socket.emit('state', Board, Pawns, Greenturn, check, current); // Send the move to the server
-    // socket.emit('move', { x: targetPos.x, y: targetPos.y, oldX: movingPawnOldPos.x, oldY: movingPawnOldPos.y });
     socket.emit('complete', Player, room);
     return;
   }
-  
 
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////console.log(kill(blockKilledPawn, blockKillersPawn));
-  
   for (let i = 0; i < Board.length; i++) {
     if (Board[i].free && Board[i].isBlack) {
       strokeWeight(1);
@@ -697,7 +647,7 @@ function mouseClicked() {
         current = pawnPlayed;
         checkQueen();
         //generateQueensAreas(pawnPlayed);
-        socket.emit('state', Board, Pawns, Greenturn, check, current, room); // Send the move to the server
+        socket.emit('state', Board, Greenturn, check, current, room); // Send the move to the server
         socket.emit('move', { 
           x: targetPos.x, 
           y: targetPos.y, 
