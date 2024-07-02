@@ -411,11 +411,13 @@ socket.on('update blockKill false', function(BLOCK_KILL, BLOCK_KILL_PAWN, RELEAS
   killmode = KILL_MODE;
   
 });
+let fontello;
 function preload() {
   img = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/board%20s.png?v=1719875467902');
   bgImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/background%20s.jpg?v=1719875628156');// Load the image from a URL
   rectangleRedImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20red.png?v=1719924039026');
   rectangleGreenImage = loadImage('https://cdn.glitch.global/fff0ab6e-ad98-4f3d-b97f-dbb6110b1226/pawn%20green1.png?v=1719924025057');
+  fontello = loadFont('public/font/fontello.ttf');
 }
 function setup() {
   const myCanvas = createCanvas(576, 576);
@@ -504,7 +506,11 @@ function draw() {
   //right
   image(img, 544, 32, 256, 256);
   image(img, 544, 288, 256, 256);
-
+  textFont(fontello); // Set the Fontello font
+  textSize(100); // Set the text size
+  textAlign(CENTER, CENTER); // Center the text
+  fill(255);
+  text('\xe844', 100, 100);
   // for (let i = 0; i < Board.length; i++) {
   //   let color = Board[i].isBlack ? 0 : 255;
   //   noStroke();
