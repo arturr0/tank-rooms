@@ -421,11 +421,11 @@ function setup() {
   const myCanvas = createCanvas(576, 576);
   myCanvas.style('border-radius', '15px');
   myCanvas.parent('game');
-  background(bgImage);
-  image(img, 96, 32, 256, 256);
-  image(img, 352, 32, 256, 256);
-  image(img, 96, 288, 256, 256);
-  image(img, 352, 288, 256, 256);
+  //background(bgImage);
+  // image(img, 32, 32, 256, 256);
+  // image(img, 288, 32, 256, 256);
+  // image(img, 32, 288, 256, 256);
+  // image(img, 288, 288, 256, 256);
   turn = select('#turn');
   let PlayerInfo = select('#player');
 
@@ -488,8 +488,11 @@ function draw() {
   }
   if (Greenturn) document.getElementById("turn").style.color = "green";
   else document.getElementById("turn").style.color = "red";
-  //background(0);
-
+  background(bgImage);
+  image(img, 32, 32, 256, 256);
+  image(img, 288, 32, 256, 256);
+  image(img, 32, 288, 256, 256);
+  image(img, 288, 288, 256, 256);
   // for (let i = 0; i < Board.length; i++) {
   //   let color = Board[i].isBlack ? 0 : 255;
   //   noStroke();
