@@ -174,6 +174,7 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
       
       // Draw the Fontello icon if the pawn is a queen
       if (this.queen) {
+        noStroke()
         textFont(fontello);
         textSize(30);
         textAlign(CENTER, CENTER);
@@ -182,6 +183,7 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
       }
       
       // Draw the index text on top of the pawn image
+      noStroke();
       textFont('Arial');
       textSize(15);
       textAlign(CENTER, CENTER);
@@ -478,120 +480,120 @@ function setup() {
   Pawns[14].queen = true;
 }
 let angle = 0;
-function draw() {
-    turn.value(Greenturn);
-    let PlayerInfo = select('#player');
-  
-    if (Player == 2) {
-      document.getElementById("player").style.color = "green";
-      PlayerInfo.value("PLAYER GREEN");
-    } else if (Player == 1) {
-      document.getElementById("player").style.color = "red";
-      PlayerInfo.value("PLAYER RED");
-    }
-  
-    if (Greenturn) document.getElementById("turn").style.color = "green";
-    else document.getElementById("turn").style.color = "red";
-  
-    background(bgImage);
-  
-    // Draw additional images on the canvas
-    image(img, 32, 32, 256, 256);
-    image(img, 288, 32, 256, 256);
-    image(img, 32, 288, 256, 256);
-    image(img, 288, 288, 256, 256);
-  
-    image(img, 32, -224, 256, 256);
-    image(img, 288, -224, 256, 256);
-    image(img, 32, 544, 256, 256);
-    image(img, 288, 544, 256, 256);
-    image(img, -224, 32, 256, 256);
-    image(img, -224, 288, 256, 256);
-    image(img, 544, 32, 256, 256);
-    image(img, 544, 288, 256, 256);
-  
-    for (let i = 0; i < Pawns.length; i++) {
-      if (Pawns[i].live) {
-        Pawns[i].show();
-      }
-    }
-  
-    for (let i = 0; i < Letters.length; i++) {
-      noStroke();
-      textSize(20);
-      textStyle(BOLD);
-      textAlign(CENTER, CENTER);
-      if (i % 2 == 0) fill(255);
-      else fill(0);
-      text(Letters[i], 64 + i * 64, 16);
-      if (i % 2 == 0) fill(0);
-      else fill(255);
-      text(Letters[i], 64 + i * 64, 562);
-    }
-  
-    for (let i = 0; i < Numbers.length; i++) {
-      noStroke();
-      textSize(20);
-      textStyle(BOLD);
-      textAlign(CENTER, CENTER);
-      if (i % 2 == 0) fill(255);
-      else fill(0);
-      text(Numbers[i], 14, 64 + i * 64);
-      if (i % 2 == 0) fill(0);
-      else fill(255);
-      text(Numbers[i], 562, 64 + i * 64);
-    }
-  
-    if (movingPawn) {
-      movingPawn.update();
-      movingPawn.show();
-    }
-    if (killersOptMode) {
-      //let radius = 100;
-      //let centers = [];
-      for (let i = 0; i < Pawns.length; i++)
-        if (Pawns[i].killer) {
-          //centers.push([Pawns[i].rectCenter,Pawns[i].rectCenterY]);
-          translate(Pawns[i].rectCenter, Pawns[i].rectCenterY);
-          // Rotate by the current angle
-          rotate(angle);
-          
-          // Draw the gradient circle stroke
-          drawGradientCircle(0, 0, 50);
-        }
-      angle += 0.01;
 
-    }
-    if (bothCompleted) {
-      if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) {
-        socket.emit('turn', Greenturn, check, room);
-      }
-      bothCompleted = false;
-    }
-  
-    if (pawnCompletedMove) {
-      movingPawn = null;
-      pawnCompletedMove = false;
-      isPawnMoving = false;
-      socket.emit('complete', Player, room);
-      return;
-    }
-  
-    for (let i = 0; i < Board.length; i++) {
-      if (Board[i].free && Board[i].isBlack) {
-        strokeWeight(1);
-        stroke(255);
-        noFill();
-        rect(Board[i].rectCenter, Board[i].rectCenterY, 55, 55);
-      }
-      if (Board[i].check) {
-        strokeWeight(1);
-        stroke(255, 0, 0);
-        noFill();
-        rect(Board[i].rectCenter, Board[i].rectCenterY, 70, 70);
-      }
+function draw() {
+  turn.value(Greenturn);
+  let PlayerInfo = select('#player');
+
+  if (Player == 2) {
+    document.getElementById("player").style.color = "green";
+    PlayerInfo.value("PLAYER GREEN");
+  } else if (Player == 1) {
+    document.getElementById("player").style.color = "red";
+    PlayerInfo.value("PLAYER RED");
+  }
+
+  if (Greenturn) document.getElementById("turn").style.color = "green";
+  else document.getElementById("turn").style.color = "red";
+
+  background(bgImage);
+
+  // Draw additional images on the canvas
+  image(img, 32, 32, 256, 256);
+  image(img, 288, 32, 256, 256);
+  image(img, 32, 288, 256, 256);
+  image(img, 288, 288, 256, 256);
+
+  image(img, 32, -224, 256, 256);
+  image(img, 288, -224, 256, 256);
+  image(img, 32, 544, 256, 256);
+  image(img, 288, 544, 256, 256);
+  image(img, -224, 32, 256, 256);
+  image(img, -224, 288, 256, 256);
+  image(img, 544, 32, 256, 256);
+  image(img, 544, 288, 256, 256);
+
+  for (let i = 0; i < Pawns.length; i++) {
+    if (Pawns[i].live) {
+      Pawns[i].show();
     }
   }
+
+  for (let i = 0; i < Letters.length; i++) {
+    noStroke();
+    textSize(20);
+    textStyle(BOLD);
+    textAlign(CENTER, CENTER);
+    if (i % 2 == 0) fill(255);
+    else fill(0);
+    text(Letters[i], 64 + i * 64, 16);
+    if (i % 2 == 0) fill(0);
+    else fill(255);
+    text(Letters[i], 64 + i * 64, 562);
+  }
+
+  for (let i = 0; i < Numbers.length; i++) {
+    noStroke();
+    textSize(20);
+    textStyle(BOLD);
+    textAlign(CENTER, CENTER);
+    if (i % 2 == 0) fill(255);
+    else fill(0);
+    text(Numbers[i], 14, 64 + i * 64);
+    if (i % 2 == 0) fill(0);
+    else fill(255);
+    text(Numbers[i], 562, 64 + i * 64);
+  }
+
+  if (movingPawn) {
+    movingPawn.update();
+    movingPawn.show();
+  }
+
+  if (killersOptMode) {
+    for (let i = 0; i < Pawns.length; i++) {
+      if (Pawns[i].killer) {
+        push(); // Save current transformation state
+        translate(Pawns[i].rectCenter, Pawns[i].rectCenterY);
+        rotate(angle);
+        // Draw the rotated gradient circle stroke
+        drawGradientCircle(0, 0, 25);
+        pop(); // Restore original transformation state
+      }
+    }
+    angle += 0.5;
+  }
+
+  if (bothCompleted) {
+    if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) {
+      socket.emit('turn', Greenturn, check, room);
+    }
+    bothCompleted = false;
+  }
+
+  if (pawnCompletedMove) {
+    movingPawn = null;
+    pawnCompletedMove = false;
+    isPawnMoving = false;
+    socket.emit('complete', Player, room);
+    return;
+  }
+
+  for (let i = 0; i < Board.length; i++) {
+    if (Board[i].free && Board[i].isBlack) {
+      strokeWeight(1);
+      stroke(255);
+      noFill();
+      rect(Board[i].rectCenter, Board[i].rectCenterY, 55, 55);
+    }
+    if (Board[i].check) {
+      strokeWeight(1);
+      stroke(255, 0, 0);
+      noFill();
+      rect(Board[i].rectCenter, Board[i].rectCenterY, 70, 70);
+    }
+  }
+}
   
 
 
@@ -1838,21 +1840,21 @@ function serializePawns(pawns) {
 function drawGradientCircle(x, y, r) {
   let numSegments = 100;
   let angleStep = TWO_PI / numSegments;
-  
+
   // Loop to draw each segment of the circle
   for (let i = 0; i < numSegments; i++) {
     let startAngle = i * angleStep;
     let endAngle = startAngle + angleStep;
-    
-    let x1 = x + cos(startAngle) * r;
-    let y1 = y + sin(startAngle) * r;
-    let x2 = x + cos(endAngle) * r;
-    let y2 = y + sin(endAngle) * r;
-    
+
+    let x1 = cos(startAngle) * r;
+    let y1 = sin(startAngle) * r;
+    let x2 = cos(endAngle) * r;
+    let y2 = sin(endAngle) * r;
+
     let lerpAmt = i / numSegments;
     let colorStart = lerpColor(color(255, 0, 0), color(0, 0, 255), lerpAmt);
     let colorEnd = lerpColor(color(255, 0, 0), color(0, 0, 255), (i + 1) / numSegments);
-    
+
     strokeWeight(5);
     stroke(colorStart);
     line(x1, y1, x2, y2);
