@@ -134,16 +134,16 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
   this.column = column;
   this.isRed = isRed;
   this.queen = queen;
-  this.live = true;
-  this.killer = false;
-  this.killed = false;
-  this.kill1Killed2 = false;
+  this.live = live;
+  this.killer = killer;
+  this.killed = killed;
+  this.kill1Killed2 = kill1Killed2;
   this.letter = letter;
   this.number = number;
   this.pos = createVector(rectCenter, rectCenterY);
   this.targetPos = null;
-  this.queensAreas = [];
-  
+  this.queensAreas = queensAreas;
+
   this.update = function() {
     if (this.targetPos) {
       let vel = p5.Vector.sub(this.targetPos, this.pos);
@@ -161,15 +161,11 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
     }
   };
 
-  if (this.isRed) {
-    this.rectangleImage = rectangleRedImage;
-  } else {
-    this.rectangleImage = rectangleGreenImage;
-  }
+  this.rectangleImage = isRed ? rectangleRedImage : rectangleGreenImage;
 
   this.show = function() {
-    push(); // Save the current drawing style
-    translate(this.pos.x, this.pos.y); // Translate to the pawn's position
+    imageMode(CENTER);
+    image(this.rectangleImage, this.pos.x, this.pos.y, 50, 50);
 
     if (this.queen) {
       noFill();
@@ -184,8 +180,7 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
       noStroke();
     }
 
-    // Draw the circle centered on the pawn
-    ellipse(0, 0, 50);
+    ellipse(this.pos.x, this.pos.y, 50, 50);
 
     if (this.queen) {
       noFill();
@@ -195,14 +190,8 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
       } else if (this.killed || this.kill1Killed2) {
         stroke(128, 128, 128);
       }
-      ellipse(0, 0, 54);
+      ellipse(this.pos.x, this.pos.y, 54, 54);
     }
-
-    // Draw the pawn image centered on its position
-    imageMode(CENTER);
-    image(this.rectangleImage, 0, 0, 50, 50);
-
-    pop(); // Restore the previous drawing style
   };
 }
 
@@ -480,6 +469,7 @@ function draw() {
   document.getElementById("turn").style.color = Greenturn ? "green" : "red";
 
   background(bgImage);
+  rectMode(CORNER);
   image(img, 32, 32, 256, 256);
   image(img, 288, 32, 256, 256);
   image(img, 32, 288, 256, 256);
