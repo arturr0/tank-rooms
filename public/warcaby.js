@@ -475,9 +475,9 @@ function setup() {
     }
   }
   for (let i = 0; i < Pawns.length; i++) Pawns[i].index = i;
-  // Pawns[8].queen = true;
-  // Pawns[11].queen = true;
-  // Pawns[14].queen = true;
+  Pawns[8].queen = true;
+  Pawns[11].queen = true;
+  Pawns[14].queen = true;
 }
 let angle = 0;
 
@@ -1412,7 +1412,13 @@ function kill(blockKilledPawn, blockKillersPawn) {
             killConditionsUnique[i][3] == killConditionsUnique[j][3] &&
             killConditionsUnique[i][1] != killConditionsUnique[j][1] &&
             Pawns[killConditionsUnique[i][1]].live && Pawns[killConditionsUnique[j][1]].live &&
-            !killConditionsUnique[i][9]) {
+            (!killConditionsUnique[i][9] || (killConditionsUnique[i][9] &&
+            Pawns[killConditionsUnique[i][0]].queensAreas.filter(area => Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1])
+            .map(killed => killed[2]) != 
+            Pawns[killConditionsUnique[j][0]].queensAreas.filter(area => Pawns[killConditionsUnique[j][1]].row == area[0] && Pawns[killConditionsUnique[j][1]].column == area[1])
+            .map(killed => killed[2])
+            ))
+          ) {
               console.log(`oneKiller2Killed killer1: ${killConditionsUnique[i][0]} killer2: ${killConditionsUnique[j][0]} killed1: ${killConditionsUnique[i][1]} killed2: ${killConditionsUnique[j][1]}`);
               oneKiller2Killed = true;
               blockKill = true;
