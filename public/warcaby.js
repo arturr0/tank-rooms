@@ -464,20 +464,21 @@ function setup() {
   }
   
   for (let j = 0; j < Board.length; j++) {
-    if (Board[j].isBlack && Board[j].row < 4) {
+    if (j == 28) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
+      pawn.queen = true;
       Pawns.push(pawn);
-    } else if (Board[j].isBlack && Board[j].row > 5) {
+    } else if (j == 14 || j == 46 || j == 10 || j == 49) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
       Pawns.push(pawn);
     }
   }
   for (let i = 0; i < Pawns.length; i++) Pawns[i].index = i;
-  Pawns[8].queen = true;
-  Pawns[11].queen = true;
-  Pawns[14].queen = true;
+  // Pawns[8].queen = true;
+  // Pawns[11].queen = true;
+  // Pawns[14].queen = true;
 }
 let angle = 0;
 
@@ -609,6 +610,15 @@ function draw() {
       noFill();
       rect(Board[i].rectCenter, Board[i].rectCenterY, 70, 70);
     }
+  }
+  for (let i = 0; i < Board.length; i++) {
+    let color = Board[i].isBlack ? 255 : 0;
+    noStroke();
+    fill(color);
+    //rect(Board[i].rectCenter, Board[i].rectCenterY, 64, 64);
+    //fill(255);
+    textSize(13);
+    text(i, Board[i].rectCenter - 25, Board[i].rectCenterY - 25);
   }
 }
 
