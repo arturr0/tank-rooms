@@ -561,7 +561,7 @@ function draw() {
         pop(); // Restore original transformation state
       }
     }
-    angle += 0.5;
+    angle += 0.15;
   }
   if (killedOptMode || oneKiller2Killed) {
     for (let i = 0; i < Pawns.length; i++) {
@@ -1853,7 +1853,7 @@ function drawGradientCircle(x, y, r, mode) {
 
     let lerpAmt = i / numSegments;
     let colorStart;
-    if (mode = "killer") colorStart = lerpColor(color(255, 0, 0), color(0, 0, 255), lerpAmt);
+    if (mode == "killer") colorStart = lerpColor(color(255, 0, 0), color(0, 0, 255), lerpAmt);
     else colorStart = lerpColor(color(14, 45, 23), color(78, 160, 0), lerpAmt);
     let colorEnd = lerpColor(color(255, 0, 0), color(0, 0, 255), (i + 1) / numSegments);
 
