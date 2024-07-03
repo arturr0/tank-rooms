@@ -885,7 +885,10 @@ if (killedOptMode) {
             killConditions = [];
             killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
             ////console.log('two killed', killConditionsUnique);
-            firstKill.push(oneKiller2KilledArray[i])
+            firstKill.push(oneKiller2KilledArray[i]);
+            for (let i = 0; i < firstKill.length; i++) {
+              console.log("firstkill", i , firstKill[i])
+            }
             oneKiller2KilledArray = [];
             //console.log('oneKiller2Killed', firstKill)
             killedOptModeArray = [];
@@ -1652,7 +1655,7 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
   break;
 }
     //killmode = [];
-    //////////////console.log(`blockKill ${blockKill} blockKillersPawn ${blockKillersPawn} blockKilledPawn ${blockKilledPawn}`)
+    console.log(`blockKill ${blockKill} blockKillersPawn ${blockKillersPawn} blockKilledPawn ${blockKilledPawn}`)
     
  
     // for (let i = 0; i < killConditionsUnique.length; i++) {
@@ -1674,12 +1677,12 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
     if (killConditionsUnique.length > 0 && !blockKill) {
         check = true;
         
-        ////////console.log('killConditionsUnique.length > 0', check)
+        console.log('killConditionsUnique.length > 0', check)
     }
     else if (killConditionsUnique.length == 0 && !blockKill) {
         check = false;
         killConditions = [];
-        ////////console.log('killConditionsUnique.length == 0', check)
+        console.log('killConditionsUnique.length == 0', check)
     }
     else if ((blockKill && killConditionsUnique.length == 0 && blockKillersPawn != null)) {
         check = false;
@@ -1688,13 +1691,13 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
         blockKillersPawn = null;
         releaseBlock = true;
         killConditions = [];
-        //console.log('releaseBlock stepKill else if (blockKill && killConditionsUnique.length == 0 && blockKillersPawn != null)', releaseBlock)
-        //////////console.log('blockKill false killers empty killConditionsUnique:', killmode)     
+        console.log('releaseBlock stepKill else if (blockKill && killConditionsUnique.length == 0 && blockKillersPawn != null)', releaseBlock)
+        console.log('blockKill false killers empty killConditionsUnique:', killmode)     
     }
     else if (blockKillersPawn != null && blockKillersPawn == blockKilledPawn) {
       blockKillersPawn = null;
       killConditions = [];
-      //console.log('block collision');
+      console.log('block collision');
     }
     else if (blockKill && killConditionsUnique.length == 0 && blockKilledPawn != null) {
         
@@ -1704,9 +1707,9 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
         blockKilledPawn = null;
         releaseBlock = true;
         killConditions = [];
-        //console.log('releaseBlock stepKill else if (blockKill && killConditionsUnique.length == 0 && blockKilledPawn != null)', releaseBlock)
+        console.log('releaseBlock stepKill else if (blockKill && killConditionsUnique.length == 0 && blockKilledPawn != null)', releaseBlock)
 
-        //////////console.log('blockKill false killers empty killConditionsUnique:', killmode)     
+        console.log('blockKill false killers empty killConditionsUnique:', killmode)     
     }
     else if (blockKill && killConditionsUnique.length > 0 && killConditionsUnique.every(kill => kill[0] != blockKilledPawn) && blockKilledPawn != null &&
         ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) ) {
@@ -1716,8 +1719,8 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
         blockKilledPawn = null;
         releaseBlock = true;
         killConditions = [];
-        //console.log('releaseBlock stepKill else if (blockKill && killConditionsUnique.length > 0 && killConditionsUnique.every(kill => kill[0] != blockKilledPawn) && blockKilledPawn != null)', releaseBlock)
-        //////////console.log('blockKill false killed:', killmode) 
+        console.log('releaseBlock stepKill else if (blockKill && killConditionsUnique.length > 0 && killConditionsUnique.every(kill => kill[0] != blockKilledPawn) && blockKilledPawn != null)', releaseBlock)
+        console.log('blockKill false killed:', killmode) 
         //socket.emit('blockKill false', blockKill, blockKilledPawn, releaseBlock, killmode, room);
     }
     else if (blockKill && killConditionsUnique.length > 0 && killConditionsUnique.every(kill => kill[0] != blockKillersPawn) && blockKillersPawn != null &&
@@ -1728,14 +1731,14 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
         blockKillersPawn = null;
         releaseBlock = true;
         killConditions = [];
-        //console.log('releaseBlock stepKill else if (blockKill && killConditionsUnique.length > 0 && killConditionsUnique.every(kill => kill[0] != blockKillersPawn) && blockKillersPawn != null)', releaseBlock)
-        //////////console.log('blockKill false killers other killers:', killmode) 
+        console.log('releaseBlock stepKill else if (blockKill && killConditionsUnique.length > 0 && killConditionsUnique.every(kill => kill[0] != blockKillersPawn) && blockKillersPawn != null)', releaseBlock)
+        console.log('blockKill false killers other killers:', killmode) 
         //socket.emit('blockKill false', blockKill, blockKilledPawn, releaseBlock, killmode, room);
     }
     else if (blockKill) {
         check = true;
         
-        //console.log('else if (blockKill)', check)
+        console.log('else if (blockKill)', check)
     }
     // else {
     //     check = false;
