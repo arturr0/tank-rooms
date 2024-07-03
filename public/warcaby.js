@@ -1136,9 +1136,9 @@ function kill(blockKilledPawn, blockKillersPawn) {
   console.log(`blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
   for (let i = 0; i < Board.length; i++) {
     
-    let upLeftArray = [];
-    let downRightArray = [];
-    let upRightArray = [];
+    // let upLeftArray = [];
+    // let downRightArray = [];
+    // let upRightArray = [];
     for (let j = 0; j < Pawns.length; j++) {
       for (let k = 0; k < Pawns.length; k++) {
         if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
