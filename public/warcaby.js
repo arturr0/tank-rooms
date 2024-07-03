@@ -1170,7 +1170,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 // if (foundQueenNeighbor) queen = foundQueenNeighbor[0];
                 let rows = [];
                 for (let i = 0; i < downLeftArray.length; i++)
-                  rows.push(Pawns[downLeftArray[i][1].row])
+                  rows.push(Pawns[downLeftArray[i][1]].row)
                 console.log("rows", rows)
                 let nearest = Math.min(...rows);
                 console.log("nearest", nearest)
