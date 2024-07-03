@@ -470,7 +470,7 @@ function setup() {
       
       Pawns.push(pawn);
       pawn.queen = true;
-    } else if (j == 49 || j == 19 || j == 46) {
+    } else if (j == 49 || j == 10 || j == 46) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
       Pawns.push(pawn);
