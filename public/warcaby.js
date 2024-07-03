@@ -464,12 +464,12 @@ function setup() {
   }
   
   for (let j = 0; j < Board.length; j++) {
-    if (j == 28) {
+    if (j == 37) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
       pawn.queen = true;
       Pawns.push(pawn);
-    } else if (j == 10 || j == 14 || j == 46 || j == 49) {
+    } else if (j == 28 || j == 19 || j == 51 || j == 46 || j == 35 || j == 30) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
       Pawns.push(pawn);
@@ -2231,4 +2231,14 @@ function arraysEqual(arr1, arr2) {
     if (arr1[i] !== arr2[i]) return false;
   }
   return true;
+}
+
+function keyPressed() {
+    if (key == 't') Greenturn = !Greenturn;
+    if (key == 'k') {
+        generateQueensAreas();
+        kill(blockKilledPawn, blockKillersPawn);
+        killOpt(killConditionsUnique);
+        stepKill(killConditionsUnique);    
+    }
 }
