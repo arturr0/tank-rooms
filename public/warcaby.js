@@ -475,9 +475,9 @@ function setup() {
     }
   }
   for (let i = 0; i < Pawns.length; i++) Pawns[i].index = i;
-  // Pawns[8].queen = true;
-  // Pawns[11].queen = true;
-  // Pawns[14].queen = true;
+  Pawns[8].queen = true;
+  Pawns[11].queen = true;
+  Pawns[14].queen = true;
 }
 let angle = 0;
 
