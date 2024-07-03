@@ -103,7 +103,7 @@ let Pawns = [];
 
 let current;
 
-let Greenturn = false;
+let Greenturn = true;
 let turn;
 
 let killConditions = [];
@@ -475,6 +475,9 @@ function setup() {
       Pawns.push(pawn);
     }
   }
+   checkQueen(); 
+  
+  generateQueensAreas();
   for (let i = 0; i < Pawns.length; i++) Pawns[i].index = i;
 //   Pawns[8].queen = true;
 //   Pawns[11].queen = true;
@@ -1286,7 +1289,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
             &&
             Board.some(board =>
               board.free && board.queen &&
-              Pawns[j].row - board.row == -1 &&
+              Pawns[j].row - board.row == 1 &&
               Pawns[j].column - board.column == 1
             )  
         ) {
@@ -1353,7 +1356,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
             &&
             Board.some(board =>
               board.free && board.queen &&
-              Pawns[j].row - board.row == -1 &&
+              Pawns[j].row - board.row == 1 &&
               Pawns[j].column - board.column == 1
             )  
         ) {
