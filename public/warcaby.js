@@ -464,12 +464,13 @@ function setup() {
   }
   
   for (let j = 0; j < Board.length; j++) {
-    if (j == 28) {
+    if (j == 21) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
-      pawn.queen = true;
+      
       Pawns.push(pawn);
-    } else if (j == 14 || j == 46 || j == 10 || j == 49) {
+      pawn.queen = true;
+    } else if (j == 49 || j == 19 || j == 46) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
       Pawns.push(pawn);
@@ -1242,7 +1243,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           console.log(`up left, k ${k}, j ${j}, i ${i}`);
 
           
-          killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);
+          killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, 2]);
           killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
         }
         else if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
@@ -1287,7 +1288,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
 
           console.log(`down right, k ${k}, j ${j}, i ${i}`);
 
-          killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);
+          killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, 6]);
           killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
         }
         else if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
@@ -1330,7 +1331,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
 
           console.log(`up right, k ${k}, j ${j}, i ${i}`);
 
-          killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);
+          killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, 2]);
           killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
         }
         else if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
