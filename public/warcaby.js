@@ -1344,29 +1344,13 @@ function kill(blockKilledPawn, blockKillersPawn) {
       }
     }
   }
-          
-      
-      
-      //break;
-    
-    
-  
-        
-      
-        
-            
-             
-          
-
-
-//k j i isred
-  
+ 
   
     // //killConditionsUnique = killUnique(killConditions);
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////console.log(killConditionsUnique)
   // for (let i = 0; i < killConditionsUnique.length; i++)
   //   killSwitch(killConditionsUnique[i][0], killConditionsUnique[i][1], killConditionsUnique[i][2], killConditionsUnique[i][3]);
-  // Assuming killConditionsUnique is an array with length > 0
+//opt Assuming killConditionsUnique is an array with length > 0
   for (let i = 0; i < killConditionsUnique.length; i++) {
     console.log("killConditionsUnique out", i, killConditionsUnique[i])
   }
@@ -1398,10 +1382,9 @@ function kill(blockKilledPawn, blockKillersPawn) {
               killConditionsUnique[i][3] == killConditionsUnique[j][3] &&
               killConditionsUnique[i][1] != killConditionsUnique[j][1] &&
               Pawns[killConditionsUnique[i][1]].live && Pawns[killConditionsUnique[j][1]].live &&
-              (((!killConditionsUnique[j][9] && killConditionsUnique[i][10] != null) ||
-              (killConditionsUnique[j][10] != null && !killConditionsUnique[i][9])) ||
-              ((killConditionsUnique[j][9] && killConditionsUnique[i][10] == null) ||
-              (killConditionsUnique[j][10] == null && killConditionsUnique[i][9])))
+              ((killConditionsUnique[i][10] =! null && killConditionsUnique[j][10] != null) ||
+              (killConditionsUnique[i][10] == null && killConditionsUnique[j][10] != null) ||
+              (killConditionsUnique[i][10] =! null && killConditionsUnique[j][10] == null))
               
               
             ) {
@@ -1869,7 +1852,7 @@ function drawGradientCircle(x, y, r, mode) {
     let lerpAmt = i / numSegments;
     let colorStart;
     if (mode = "killer") colorStart = lerpColor(color(255, 0, 0), color(0, 0, 255), lerpAmt);
-    else colorStart = lerpColor(color(0, 0, 255), color(255, 0, 0), lerpAmt);
+    else colorStart = lerpColor(color(14, 45, 23), color(78, 160, 0), lerpAmt);
     let colorEnd = lerpColor(color(255, 0, 0), color(0, 0, 255), (i + 1) / numSegments);
 
     strokeWeight(5);
