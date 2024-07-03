@@ -475,9 +475,9 @@ function setup() {
     }
   }
   for (let i = 0; i < Pawns.length; i++) Pawns[i].index = i;
-  Pawns[8].queen = true;
-  Pawns[11].queen = true;
-  Pawns[14].queen = true;
+  // Pawns[8].queen = true;
+  // Pawns[11].queen = true;
+  // Pawns[14].queen = true;
 }
 let angle = 0;
 
@@ -1171,7 +1171,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 let rows = [];
                 for (let i = 0; i < downLeftArray.length; i++)
                   rows.push(Pawns[downLeftArray[i][1].row])
-                let nearest = Math.min(...rows); 
+                let nearest = Math.min(...rows);
+                console.log("nearest", nearest);
                 killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, nearest]);
                 killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
               }
@@ -1704,7 +1705,7 @@ function killUnique(array) {
     let itemsFound = {};
     for (let i = 0; i < array.length; i++) {
         // Create a copy of the array element excluding indices 5 and 6
-        let modifiedArray = array[i].filter((_, index) => index !== 5 && index !== 6 && index !== 7 && index !== 8);
+        let modifiedArray = array[i].filter((_, index) => index !== 5 && index !== 6 && index !== 7 && index !== 8 && index !== 10);
         let stringified = JSON.stringify(modifiedArray);
         if (itemsFound[stringified]) {
             continue;
