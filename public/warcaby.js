@@ -1365,7 +1365,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
             killConditionsUnique[i][3] == killConditionsUnique[j][3] &&
             killConditionsUnique[i][1] == killConditionsUnique[j][1] &&
             Pawns[killConditionsUnique[i][1]].live && Pawns[killConditionsUnique[j][1]].live &&
-            ((killConditionsUnique[i][9] && !killConditionsUnique[j][9] && Pawns[killConditionsUnique[i][1]].row == killConditionsUnique[i][10]) ||
+            (((killConditionsUnique[i][9] && !killConditionsUnique[j][9] && Pawns[killConditionsUnique[i][1]].row == killConditionsUnique[i][10]) ||
+            (killConditionsUnique[j][9] && !killConditionsUnique[i][9] && Pawns[killConditionsUnique[j][1]].row == killConditionsUnique[j][10])) ||
             (!killConditionsUnique[i][9] && !killConditionsUnique[j][9]) ||
             (killConditionsUnique[i][9] && killConditionsUnique[j][9] && Pawns[killConditionsUnique[i][1]].row == killConditionsUnique[i][10] && Pawns[killConditionsUnique[j][1]].row == killConditionsUnique[j][10])
             )
