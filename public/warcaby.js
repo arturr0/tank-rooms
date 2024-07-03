@@ -475,11 +475,14 @@ function setup() {
     }
   }
   for (let i = 0; i < Pawns.length; i++) Pawns[i].index = i;
-  Pawns[8].queen = true;
-  Pawns[11].queen = true;
-  Pawns[14].queen = true;
+  // Pawns[8].queen = true;
+  // Pawns[11].queen = true;
+  // Pawns[14].queen = true;
 }
 let angle = 0;
+
+let angleKiller = 0;
+let angleKilled = 0;
 
 function draw() {
   turn.value(Greenturn);
@@ -555,26 +558,27 @@ function draw() {
       if (Pawns[i].killer) {
         push(); // Save current transformation state
         translate(Pawns[i].rectCenter, Pawns[i].rectCenterY);
-        rotate(angle);
+        rotate(angleKiller);
         // Draw the rotated gradient circle stroke
         drawGradientCircle(0, 0, 25, "killer");
         pop(); // Restore original transformation state
       }
     }
-    angle += 0.15;
+    angleKiller += 0.05; // Adjust speed here
   }
+  
   if (killedOptMode || oneKiller2Killed) {
     for (let i = 0; i < Pawns.length; i++) {
       if (Pawns[i].killed || Pawns[i].kill1Killed2) {
         push(); // Save current transformation state
         translate(Pawns[i].rectCenter, Pawns[i].rectCenterY);
-        rotate(angle);
+        rotate(angleKilled);
         // Draw the rotated gradient circle stroke
         drawGradientCircle(0, 0, 25, "killed");
         pop(); // Restore original transformation state
       }
     }
-    angle += 0.5;
+    angleKilled += 0.03; // Adjust speed here
   }
 
   if (bothCompleted) {
@@ -607,8 +611,6 @@ function draw() {
     }
   }
 }
-  
-
 
 function mouseClicked() {
   X = mouseX;
