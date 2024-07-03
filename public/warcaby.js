@@ -475,9 +475,9 @@ function setup() {
     }
   }
   for (let i = 0; i < Pawns.length; i++) Pawns[i].index = i;
-  Pawns[8].queen = true;
-  Pawns[11].queen = true;
-  Pawns[14].queen = true;
+  // Pawns[8].queen = true;
+  // Pawns[11].queen = true;
+  // Pawns[14].queen = true;
 }
 let angle = 0;
 
@@ -1406,28 +1406,48 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 killedOptModeArray.push(killConditionsUnique[i]);
                 killedOptModeArray.push(killConditionsUnique[j]);
           } 
-    for (let i = 0; i < killConditionsUnique.length; i++) 
-      for (let j = i + 1; j < killConditionsUnique.length; j++)
-        if (killConditionsUnique[i][0] == killConditionsUnique[j][0] && 
-            killConditionsUnique[i][3] == killConditionsUnique[j][3] &&
-            killConditionsUnique[i][1] != killConditionsUnique[j][1] &&
-            Pawns[killConditionsUnique[i][1]].live && Pawns[killConditionsUnique[j][1]].live &&
-            (!killConditionsUnique[i][9] || (killConditionsUnique[i][9] &&
-            Pawns[killConditionsUnique[i][0]].queensAreas.filter(area => Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1])
-            .map(killed => killed[2]) != 
-            Pawns[killConditionsUnique[j][0]].queensAreas.filter(area => Pawns[killConditionsUnique[j][1]].row == area[0] && Pawns[killConditionsUnique[j][1]].column == area[1])
-            .map(killed => killed[2])
-            ))
-          ) {
-              console.log(`oneKiller2Killed killer1: ${killConditionsUnique[i][0]} killer2: ${killConditionsUnique[j][0]} killed1: ${killConditionsUnique[i][1]} killed2: ${killConditionsUnique[j][1]}`);
-              oneKiller2Killed = true;
-              blockKill = true;
-              Pawns[killConditionsUnique[j][1]].kill1Killed2 = true;
-              Pawns[killConditionsUnique[i][1]].kill1Killed2 = true;
-              oneKiller2KilledArray.push(killConditionsUnique[i]);
-              oneKiller2KilledArray.push(killConditionsUnique[j]);
-              //console.log('multi');
-        }
+          for (let i = 0; i < killConditionsUnique.length; i++) {
+            for (let j = i + 1; j < killConditionsUnique.length; j++) {
+              if (
+                killConditionsUnique[i][0] == killConditionsUnique[j][0] &&
+                killConditionsUnique[i][3] == killConditionsUnique[j][3] &&
+                killConditionsUnique[i][1] != killConditionsUnique[j][1] &&
+                Pawns[killConditionsUnique[i][1]].live &&
+                Pawns[killConditionsUnique[j][1]].live &&
+                (
+                  !killConditionsUnique[i][9] ||
+                  (
+                    killConditionsUnique[i][9] &&
+                    !arraysEqual(
+                      Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
+                        Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1]
+                      ).map(killed => killed[2]),
+                      Pawns[killConditionsUnique[j][0]].queensAreas.filter(area =>
+                        Pawns[killConditionsUnique[j][1]].row == area[0] && Pawns[killConditionsUnique[j][1]].column == area[1]
+                      ).map(killed => killed[2])
+                    )
+                  )
+                )
+              ) { 
+                console.log(
+                  Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
+                    Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1]
+                  ).map(killed => killed[2]),
+                  Pawns[killConditionsUnique[j][0]].queensAreas.filter(area =>
+                    Pawns[killConditionsUnique[j][1]].row == area[0] && Pawns[killConditionsUnique[j][1]].column == area[1]
+                  ).map(killed => killed[2])
+                );
+                console.log(`oneKiller2Killed killer1: ${killConditionsUnique[i][0]} killer2: ${killConditionsUnique[j][0]} killed1: ${killConditionsUnique[i][1]} killed2: ${killConditionsUnique[j][1]}`);
+                
+                oneKiller2Killed = true;
+                blockKill = true;
+                Pawns[killConditionsUnique[j][1]].kill1Killed2 = true;
+                Pawns[killConditionsUnique[i][1]].kill1Killed2 = true;
+                oneKiller2KilledArray.push(killConditionsUnique[i]);
+                oneKiller2KilledArray.push(killConditionsUnique[j]);
+              }
+            }
+          }
  
 
 
@@ -1875,4 +1895,11 @@ function drawGradientCircle(x, y, r, mode) {
     stroke(colorStart);
     line(x1, y1, x2, y2);
   }
+}
+function arraysEqual(arr1, arr2) {
+  if (arr1.length !== arr2.length) return false;
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) return false;
+  }
+  return true;
 }
