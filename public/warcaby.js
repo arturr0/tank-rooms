@@ -1206,7 +1206,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
         }
         else if  (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-            (blockKilledPawn === k || blockKillersPawn === k) && Board[i].queen && Pawns[j].row - Board[i].row <= -1 &&
+            (blockKilledPawn == k || blockKillersPawn == k) && Board[i].queen && Pawns[j].row - Board[i].row <= -1 &&
             Pawns[j].column - Board[i].column >= 1 && Board[i].row > Pawns[j].row &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'down-left' &&
@@ -2084,6 +2084,7 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
         check = false;
         killConditions = [];
         console.log('killConditionsUnique.length == 0', check)
+        console.log('check');
     }
     else if ((blockKill && killConditionsUnique.length == 0 && blockKillersPawn != null)) {
         check = false;
@@ -2094,7 +2095,8 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
         killConditions = [];
         console.log('releaseBlock stepKill else if (blockKill && killConditionsUnique.length == 0 && blockKillersPawn != null)', releaseBlock)
         console.log('blockKill false killers empty killConditionsUnique:', killmode)     
-    }
+        console.log('check');
+      }
     else if (blockKillersPawn != null && blockKillersPawn == blockKilledPawn) {
       blockKillersPawn = null;
       killConditions = [];
@@ -2110,7 +2112,8 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
         killConditions = [];
         console.log('releaseBlock stepKill else if (blockKill && killConditionsUnique.length == 0 && blockKilledPawn != null)', releaseBlock)
 
-        console.log('blockKill false killers empty killConditionsUnique:', killmode)     
+        console.log('blockKill false killers empty killConditionsUnique:', killmode)
+        console.log('check');     
     }
     else if (blockKill && killConditionsUnique.length > 0 && killConditionsUnique.every(kill => kill[0] != blockKilledPawn) && blockKilledPawn != null &&
         ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) ) {
@@ -2123,6 +2126,7 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
         console.log('releaseBlock stepKill else if (blockKill && killConditionsUnique.length > 0 && killConditionsUnique.every(kill => kill[0] != blockKilledPawn) && blockKilledPawn != null)', releaseBlock)
         console.log('blockKill false killed:', killmode) 
         //socket.emit('blockKill false', blockKill, blockKilledPawn, releaseBlock, killmode, room);
+        console.log('check');
     }
     else if (blockKill && killConditionsUnique.length > 0 && killConditionsUnique.every(kill => kill[0] != blockKillersPawn) && blockKillersPawn != null &&
     ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) ) {
@@ -2135,6 +2139,7 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
         console.log('releaseBlock stepKill else if (blockKill && killConditionsUnique.length > 0 && killConditionsUnique.every(kill => kill[0] != blockKillersPawn) && blockKillersPawn != null)', releaseBlock)
         console.log('blockKill false killers other killers:', killmode) 
         //socket.emit('blockKill false', blockKill, blockKilledPawn, releaseBlock, killmode, room);
+        console.log('check');
     }
     // else if (blockKill) {
     //     check = true;
