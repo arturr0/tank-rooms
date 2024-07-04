@@ -1712,27 +1712,27 @@ function kill(blockKilledPawn, blockKillersPawn) {
     //         return 1; // Red comes after green
     //     }
     // });
-    // killConditionsUnique.sort((a, b) => {
-    //   const categoryOrder = {
-    //     'up-left': 1,
-    //     'up-right': 2,
-    //     'down-left': 3,
-    //     'down-right': 4
-    //   };
+    killConditionsUnique.sort((a, b) => {
+      const categoryOrder = {
+        'up-left': 1,
+        'up-right': 2,
+        'down-left': 3,
+        'down-right': 4
+      };
     
-    //   const aCategory = categoryOrder[a[10]] || 0;
-    //   const bCategory = categoryOrder[b[10]] || 0;
+      const aCategory = categoryOrder[a[10]] || 0;
+      const bCategory = categoryOrder[b[10]] || 0;
     
-    //   if (aCategory === bCategory) {
-    //     if (aCategory === 1 || aCategory === 2) {
-    //       return b[2] - a[2]; // Descending order for 'up-left' and 'up-right'
-    //     } else {
-    //       return a[2] - b[2]; // Ascending order for 'down-left' and 'down-right'
-    //     }
-    //   } else {
-    //     return aCategory - bCategory; // Sort by category order
-    //   }
-    // });
+      if (aCategory === bCategory) {
+        if (aCategory === 1 || aCategory === 2) {
+          return b[2] - a[2]; // Descending order for 'up-left' and 'up-right'
+        } else {
+          return a[2] - b[2]; // Ascending order for 'down-left' and 'down-right'
+        }
+      } else {
+        return aCategory - bCategory; // Sort by category order
+      }
+    });
     
     
       
