@@ -464,13 +464,13 @@ function setup() {
   }
   
   for (let j = 0; j < Board.length; j++) {
-    if (j == 14 || j == 19) {
+    if (j == 7 || j == 1) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
       pawn.queen = true;
       Pawns.push(pawn);
       generateQueensAreas();
-    } else if (j == 3 || j == 28 || j == 46) {
+    } else if (j == 42 || j == 28 || j == 46) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
       Pawns.push(pawn);
@@ -1204,9 +1204,9 @@ function kill(blockKilledPawn, blockKillersPawn) {
           }
           
         }
-        else if ((k == blockKilledPawn || k == blockKillersPawn) && Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
+        else if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-            Board[i].queen && Pawns[j].row - Board[i].row <= -1 &&
+            (blockKilledPawn === k || blockKillersPawn === k) && Board[i].queen && Pawns[j].row - Board[i].row <= -1 &&
             Pawns[j].column - Board[i].column >= 1 && Board[i].row > Pawns[j].row &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'down-left' &&
