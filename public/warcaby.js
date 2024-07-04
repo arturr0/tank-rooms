@@ -2136,11 +2136,11 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
         //////////console.log('blockKill false killers other killers:', killmode) 
         //socket.emit('blockKill false', blockKill, blockKilledPawn, releaseBlock, killmode, room);
     }
-    else if (blockKill) {
-        check = true;
+    // else if (blockKill) {
+    //     check = true;
         
-        //console.log('else if (blockKill)', check)
-    }
+    //     //console.log('else if (blockKill)', check)
+    // }
     // else {
     //     check = false;
     //     //////////console.log('else', check)
