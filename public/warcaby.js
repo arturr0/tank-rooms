@@ -1704,17 +1704,17 @@ function kill(blockKilledPawn, blockKillersPawn) {
     //         return 1; // Red comes after green
     //     }
     // });
-    // killConditionsUnique.sort((a, b) => {
-    //     if ((a[10] === 'up-left' || a[10] === 'up-right') && (b[10] === 'up-left' || b[10] === 'up-right')) {
-    //         return a[2] - b[2]; // Ascending order if both are green
-    //     } else if ((a[10] === 'down-left' || a[10] === 'down-right') && (b[10] === 'down-left' || b[10] === 'down-right')) {
-    //         return b[2] - a[2]; // Descending order if both are red
-    //     } else if (((a[10] === 'up-left' || a[10] === 'up-right')) && (b[10] === 'down-left' || b[10] === 'down-right')) {
-    //         return -1; // Green comes before red
-    //     } else if ((a[10] === 'down-left' || a[10] === 'down-right') && (b[10] === 'up-left' || b[10] === 'up-right')) {
-    //         return 1; // Red comes after green
-    //     }
-    // });
+    killConditionsUnique.sort((a, b) => {
+        if ((a[10] === 'up-left' || a[10] === 'up-right') && (b[10] === 'up-left' || b[10] === 'up-right')) {
+            return a[2] - b[2]; // Ascending order if both are green
+        } else if ((a[10] === 'down-left' || a[10] === 'down-right') && (b[10] === 'down-left' || b[10] === 'down-right')) {
+            return b[2] - a[2]; // Descending order if both are red
+        } else if (((a[10] === 'up-left' || a[10] === 'up-right')) && (b[10] === 'down-left' || b[10] === 'down-right')) {
+            return -1; // Green comes before red
+        } else if ((a[10] === 'down-left' || a[10] === 'down-right') && (b[10] === 'up-left' || b[10] === 'up-right')) {
+            return 1; // Red comes after green
+        }
+    });
     killConditionsUnique.sort((a, b) => {
       const categoryOrder = {
         'up-left': 1,
