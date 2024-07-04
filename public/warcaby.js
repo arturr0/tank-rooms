@@ -464,12 +464,12 @@ function setup() {
   }
   
   for (let j = 0; j < Board.length; j++) {
-    if (j == 28) {
+    if (j == 37) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
       pawn.queen = true;
       Pawns.push(pawn);
-    } else if (j == 10 || j == 14 || j == 35 || j == 49 || j == 37) {
+    } else if (j == 28 || j == 10 || j == 51 || j == 46 || j == 30) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
       Pawns.push(pawn);
@@ -1692,7 +1692,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
             (((killConditionsUnique[i][9] && !killConditionsUnique[j][9] && Pawns[killConditionsUnique[i][1]].row == killConditionsUnique[i][10]) ||
             (killConditionsUnique[j][9] && !killConditionsUnique[i][9] && Pawns[killConditionsUnique[j][1]].row == killConditionsUnique[j][10])) ||
             (!killConditionsUnique[i][9] && !killConditionsUnique[j][9]) ||
-            (killConditionsUnique[i][9] && killConditionsUnique[j][9] && Pawns[killConditionsUnique[i][1]].row == killConditionsUnique[i][10] && Pawns[killConditionsUnique[j][1]].row == killConditionsUnique[j][10])
+            (killConditionsUnique[i][9] && killConditionsUnique[j][9] && Pawns[killConditionsUnique[i][1]].row == killConditionsUnique[i][10] && Pawns[killConditionsUnique[j][1]].row == killConditionsUnique[i][10])
             )
           ) {
         
@@ -1717,7 +1717,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
               Pawns[killConditionsUnique[i][1]].live && Pawns[killConditionsUnique[j][1]].live &&
               (((!killConditionsUnique[i][9] && killConditionsUnique[j][9] && Pawns[killConditionsUnique[j][1]].row == killConditionsUnique[j][10]) ||
               (killConditionsUnique[i][9] && !killConditionsUnique[j][9] && Pawns[killConditionsUnique[i][1]].row == killConditionsUnique[i][10])) ||
-              (killConditionsUnique[i][9] && killConditionsUnique[j][9] && Pawns[killConditionsUnique[i][1]].row == killConditionsUnique[i][10] && Pawns[killConditionsUnique[j][1]].row == killConditionsUnique[j][10]) ||
+              (killConditionsUnique[i][9] && killConditionsUnique[j][9] && Pawns[killConditionsUnique[i][1]].row == killConditionsUnique[j][10] && Pawns[killConditionsUnique[j][1]].row == killConditionsUnique[i][10]) ||
               (!killConditionsUnique[i][9] && !killConditionsUnique[j][9]))
               
               
@@ -1741,7 +1741,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 (
                   !killConditionsUnique[i][9] ||
                   (
-                    killConditionsUnique[i][9] && Pawns[killConditionsUnique[j][1]].row == killConditionsUnique[j][10] && Pawns[killConditionsUnique[i][1]].row == killConditionsUnique[i][10] && 
+                    killConditionsUnique[i][9] && Pawns[killConditionsUnique[j][1]].row == killConditionsUnique[i][10] && Pawns[killConditionsUnique[i][1]].row == killConditionsUnique[j][10] && 
                     !arraysEqual( 
                       Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
                         Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1]
