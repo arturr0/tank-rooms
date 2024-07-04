@@ -1792,16 +1792,22 @@ function kill(blockKilledPawn, blockKillersPawn) {
               (killConditionsUnique[j][10] == 'down-right' && Pawns[killConditionsUnique[j][1]].row == minRight)))) ||
               (killConditionsUnique[i][9] && !killConditionsUnique[j][9] && Pawns[killConditionsUnique[i][1]].row == killConditionsUnique[i][10])) ||
               (killConditionsUnique[i][9] && killConditionsUnique[j][9] &&
-              (((killConditionsUnique[j][10] == 'up-left' && Pawns[killConditionsUnique[j][1]].row == maxLeft) ||
+              (((killConditionsUnique[i][10] == 'up-left' && Pawns[killConditionsUnique[i][1]].row == maxLeft) ||
+              (killConditionsUnique[i][10] == 'up-right' && Pawns[killConditionsUnique[i][1]].row == maxRight) ||
+              (killConditionsUnique[i][10] == 'down-left' && Pawns[killConditionsUnique[i][1]].row == minLeft) ||
+              (killConditionsUnique[i][10] == 'down-right' && Pawns[killConditionsUnique[i][1]].row == minRight)) &&
+              ((killConditionsUnique[j][10] == 'up-left' && Pawns[killConditionsUnique[j][1]].row == maxLeft) ||
               (killConditionsUnique[j][10] == 'up-right' && Pawns[killConditionsUnique[j][1]].row == maxRight) ||
               (killConditionsUnique[j][10] == 'down-left' && Pawns[killConditionsUnique[j][1]].row == minLeft) ||
               (killConditionsUnique[j][10] == 'down-right' && Pawns[killConditionsUnique[j][1]].row == minRight)))) ||
-              (!killConditionsUnique[j][9] && !killConditionsUnique[j][9]))
+              (!killConditionsUnique[i][9] && !killConditionsUnique[j][9]))
               
               
             ) {
               console.log(`killedOptMode killer1: ${killConditionsUnique[i][0]} killer2: ${killConditionsUnique[j][0]} killed1: ${killConditionsUnique[i][1]} killed2: ${killConditionsUnique[j][1]}`);
-                killedOptMode = true;
+              console.log('killed i', Pawns[killConditionsUnique[i][1]].row, killConditionsUnique[i][1],  "maxLeft", maxLeft, "maxRight", maxRight, "minLeft", minLeft, "minRight", minRight);
+              console.log('killed j', Pawns[killConditionsUnique[j][1]].row, killConditionsUnique[j][1],  "maxLeft", maxLeft, "maxRight", maxRight, "minLeft", minLeft, "minRight", minRight)    
+              killedOptMode = true;
                 blockKill = true;
                 Pawns[killConditionsUnique[i][1]].killed = true;
                 Pawns[killConditionsUnique[j][1]].killed = true;
