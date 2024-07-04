@@ -1731,11 +1731,24 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 killedOptModeArray.push(killConditionsUnique[j]);
           } 
           for (let i = 0; i < killConditionsUnique.length; i++) {
+            // let maxLeft = Math.max(...killConditionsUnique[i].filter(subarray => subarray[10] == 'up-left').map(subarray => Pawns[subarray[1]].row));
+            // let maxRight = Math.max(...killConditionsUnique[i].filter(subarray => subarray[10] == 'up-right').map(subarray => Pawns[subarray[1]].row));
+            // let minLeft = Math.min(...killConditionsUnique[i].filter(subarray => subarray[10] == 'down-left').map(subarray => Pawns[subarray[1]].row));
+            // let minRight = Math.min(...killConditionsUnique[i].filter(subarray => subarray[10] == 'down-right').map(subarray => Pawns[subarray[1]].row));
             for (let j = i + 1; j < killConditionsUnique.length; j++) {
-              let maxLeft = Math.max(...killConditionsUnique[j].filter(subarray => subarray[10] == 'up-left').map(subarray => Pawns[subarray[1]].row));
-              let maxRight = Math.max(...killConditionsUnique[j].filter(subarray => subarray[10] == 'up-right').map(subarray => Pawns[subarray[1]].row));
-              let minLeft = Math.min(...killConditionsUnique[j].filter(subarray => subarray[10] == 'down-left').map(subarray => Pawns[subarray[1]].row));
-              let minRight = Math.min(...killConditionsUnique[j].filter(subarray => subarray[10] == 'down-right').map(subarray => Pawns[subarray[1]].row));
+                let filteredUpLeft = killConditionsUnique[j].filter(subarray => subarray[10] == 'up-left');
+                let maxLeft = filteredUpLeft.length > 0 ? Math.max(...filteredUpLeft.map(subarray => Pawns[subarray[1]].row)) : null;
+
+                let filteredUpRight = killConditionsUnique[j].filter(subarray => subarray[10] == 'up-right');
+                let maxRight = filteredUpRight.length > 0 ? Math.max(...filteredUpRight.map(subarray => Pawns[subarray[1]].row)) : null;
+
+                let filteredDownLeft = killConditionsUnique[j].filter(subarray => subarray[10] == 'down-left');
+                let minLeft = filteredDownLeft.length > 0 ? Math.min(...filteredDownLeft.map(subarray => Pawns[subarray[1]].row)) : null;
+
+                let filteredDownRight = killConditionsUnique[j].filter(subarray => subarray[10] == 'down-right');
+                let minRight = filteredDownRight.length > 0 ? Math.min(...filteredDownRight.map(subarray => Pawns[subarray[1]].row)) : null;
+
+              
               if (
                 killConditionsUnique[i][0] == killConditionsUnique[j][0] &&
                 killConditionsUnique[i][3] == killConditionsUnique[j][3] &&
@@ -1743,12 +1756,12 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 Pawns[killConditionsUnique[i][1]].live &&
                 Pawns[killConditionsUnique[j][1]].live &&
                 (
-                  !killConditionsUnique[i][9] ||
+                  !killConditionsUnique[i][9] &&
                   (
-                    killConditionsUnique[i][9] && ((killConditionsUnique[j][10] == 'up-left' && Pawns[killConditionsUnique[j][1]].row == maxLeft) || 
-                    (killConditionsUnique[j][10] == 'up-right' && Pawns[killConditionsUnique[j][1]].row == maxRight) ||
-                    (killConditionsUnique[j][10] == 'down-left' && Pawns[killConditionsUnique[j][1]].row == minLeft) ||
-                    (killConditionsUnique[j][10] == 'down-right' && Pawns[killConditionsUnique[j][1]].row == minRight)) && 
+                    ((killConditionsUnique[i][10] == 'up-left' && Pawns[killConditionsUnique[i][1]].row == maxLeft) || 
+                    (killConditionsUnique[i][10] == 'up-right' && Pawns[killConditionsUnique[i][1]].row == maxRight) ||
+                    (killConditionsUnique[i][10] == 'down-left' && Pawns[killConditionsUnique[i][1]].row == minLeft) ||
+                    (killConditionsUnique[i][10] == 'down-right' && Pawns[killConditionsUnique[i][1]].row == minRight)) && 
                     !arraysEqual( 
                       Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
                         Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1]
