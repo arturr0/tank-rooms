@@ -701,7 +701,7 @@ function mouseClicked() {
         Pawns[pawnPlayed].number = Board[j].number;
         Board[j].free = false;
         let animatedPawn = pawnPlayed
-        check = false;
+        //check = false;
         ////////////console.log('pawnSelected', check)
         current = pawnPlayed;
         checkQueen();
@@ -1204,7 +1204,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           }
           
         }
-        else if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
+        else if  (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             (blockKilledPawn === k || blockKillersPawn === k) && Board[i].queen && Pawns[j].row - Board[i].row <= -1 &&
             Pawns[j].column - Board[i].column >= 1 && Board[i].row > Pawns[j].row &&
@@ -1340,7 +1340,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
         }
         else if ((k == blockKilledPawn || k == blockKillersPawn) && Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-            Board[i].queen && Pawns[j].row - Board[i].row >= 1 &&
+            blockKilledPawn === null && blockKillersPawn === null && Board[i].queen && Pawns[j].row - Board[i].row >= 1 &&
             Pawns[j].column - Board[i].column >= 1 && Board[i].row < Pawns[j].row &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'up-left' &&
@@ -1474,7 +1474,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
         }
         else if ((k == blockKilledPawn || k == blockKillersPawn) && Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-            Board[i].queen && Pawns[j].row - Board[i].row <= -1 &&
+            blockKilledPawn === null && blockKillersPawn === null && Board[i].queen && Pawns[j].row - Board[i].row <= -1 &&
             Pawns[j].column - Board[i].column <= -1 && Board[i].row > Pawns[j].row &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'down-right' &&
@@ -1608,7 +1608,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
         }
         else if ((k == blockKilledPawn || k == blockKillersPawn) && Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-            Board[i].queen && Pawns[j].row - Board[i].row >= 1 &&
+            blockKilledPawn === null && blockKillersPawn === null && Board[i].queen && Pawns[j].row - Board[i].row >= 1 &&
             Pawns[j].column - Board[i].column <= -1 && Board[i].row < Pawns[j].row &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'up-right' &&
