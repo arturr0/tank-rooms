@@ -427,60 +427,55 @@ function preload() {
   fontello = loadFont('public/font/fontello.ttf');
 }
 function setup() {
-  const myCanvas = createCanvas(576, 576);
-  myCanvas.style('border-radius', '15px');
-  myCanvas.parent('game');
-
-  turn = select('#turn');
-  let PlayerInfo = select('#player');
-
-  if (Player == 2) {
-    document.getElementById("player").style.color = "green";
-    PlayerInfo.value("GREEN");
-  } else if (Player == 1) {
-    document.getElementById("player").style.color = "red";
-    PlayerInfo.value("RED");
-  }
-  killer = select('#kill');
-  rectMode(CENTER);
-
-  let isBlack = true;
-  for (let i = 0; i < 8; i++)
-    Numbers.push(i + 1);
-
-  for (let i = 0; i < 8; i++) {
-    row++;
-    column = 0;
-    isBlack = !isBlack;
-
-    for (let j = 0; j < 8; j++) {
-      let rectCenter = (column * 64 + 32) + 32;
-      column++;
-      let area = new Area(rectCenter, (row * 64 - 32) + 32, row, column, isBlack, true, Letters[j], Numbers[i]);
-      Board.push(area);
-
-      isBlack = !isBlack;
-    }
-  }
+    const myCanvas = createCanvas(576, 576);
+    myCanvas.style('border-radius', '15px');
+    myCanvas.parent('game');
+    
+    turn = select('#turn');
+    let PlayerInfo = select('#player');
+    
+    if (Player == 2) {document.getElementById("player").style.color = "green"; PlayerInfo.value("GREEN");}
+    else if (Player == 1) {document.getElementById("player").style.color = "red"; PlayerInfo.value("RED");}
+    killer = select('#kill');
+    rectMode(CENTER);
+    
   
-  for (let j = 0; j < Board.length; j++) {
-    if (j == 37) {
-      Board[j].free = false;
-      let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
-      pawn.queen = true;
-      Pawns.push(pawn);
-      generateQueensAreas();
-    } else if (j == 28 || j == 10) {
-      Board[j].free = false;
-      let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
-      Pawns.push(pawn);
+    let isBlack = true;
+    for (let i = 0; i < 8; i++)
+      Numbers.push(i + 1);
+  
+    for (let i = 0; i < 8; i++) {
+      row++;
+      column = 0;
+      isBlack = !isBlack;
+  
+      for (let j = 0; j < 8; j++) {
+        let rectCenter = (column * 64 + 32) + 32;
+        column++;
+        let area = new Area(rectCenter, (row * 64 - 32) + 32, row, column, isBlack, true, Letters[j], Numbers[i]);
+        Board.push(area);
+        
+        isBlack = !isBlack;
+      }
     }
+    //f(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, letter, number)
+    for (let j = 0; j < Board.length; j++) {
+      if (Board[j].isBlack && Board[j].row < 4) {
+        Board[j].free = false;
+        let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
+        Pawns.push(pawn);
+      } else if (Board[j].isBlack && Board[j].row > 5) {
+        Board[j].free = false;
+        let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
+        Pawns.push(pawn);
+      }
+    }
+    // Board[58].free = true;
+    Pawns[8].queen = true;
+    Pawns[11].queen = true;
+    Pawns[14].queen = true;
+    //generateQueensAreas();
   }
-  for (let i = 0; i < Pawns.length; i++) Pawns[i].index = i;
-  Pawns[8].queen = true;
-  Pawns[11].queen = true;
-  Pawns[14].queen = true;
-}
 let angle = 0;
 
 let angleKiller = 0;
