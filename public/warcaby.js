@@ -1208,7 +1208,24 @@ function kill(blockKilledPawn, blockKillersPawn) {
         if  (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             blockKilledPawn == k || blockKillersPawn == k && Board[i].queen && Pawns[j].row - Board[i].row <= -1 &&
-            Pawns[j].column - Board[i].column >= 1 && Board[i].row > Pawns[j].row) {
+            Pawns[j].column - Board[i].column >= 1 && Board[i].row > Pawns[j].row &&
+            Pawns[k].queensAreas.some(area => 
+              area[2] === 'down-left' &&
+              Pawns[j].row === area[0] &&
+              Pawns[j].column === area[1] 
+          ) &&
+            Pawns[k].queensAreas.some(area => 
+              Board[i].free &&
+              Board[i].row == area[0] &&
+              Board[i].column == area[1] 
+            )
+            &&
+            Board.some(board =>
+              board.free && board.queen &&
+              Pawns[j].row - board.row == -1 &&
+              Pawns[j].column - board.column == 1
+            )  
+        ) {
 
           console.log(`down left, k ${k}, j ${j}, i ${i}`);
           downLeftArray.push([k, j, i]);
