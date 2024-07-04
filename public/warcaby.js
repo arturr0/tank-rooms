@@ -1129,13 +1129,15 @@ function kill(blockKilledPawn, blockKillersPawn) {
 //q
   
   generateQueensAreas();
-  console.log(`blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
+  console.log('blockKilledPawn', blockKilledPawn, 'blockKillersPawn', blockKillersPawn);
+  console.log("check after block");
   for (let i = 0; i < Board.length; i++) {
     
     console.log("kill board out")
     for (let j = 0; j < Pawns.length; j++) {
       console.log("kill pawn j out")
       for (let k = 0; k < Pawns.length; k++) {
+        console.log(`pawn k blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
         if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             ((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) && Board[i].queen && Pawns[j].row - Board[i].row <= -1 &&
