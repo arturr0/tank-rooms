@@ -1204,8 +1204,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
           }
           
         }
-        
-        if  (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
+        else if (k == blockKillersPawn) generateQueensAreas();
+        else if  (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             blockKilledPawn == k || blockKillersPawn == k && Board[i].queen && Pawns[j].row - Board[i].row <= -1 &&
             Pawns[j].column - Board[i].column >= 1 && Board[i].row > Pawns[j].row &&
@@ -1272,7 +1272,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           }
           
         }
-        else if (k == blockKillersPawn) console.log('check b', k , Pawns[k].row, Pawns[k].column);
+        
         else if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             blockKilledPawn === null && blockKillersPawn === null && Board[i].queen && Pawns[j].row - Board[i].row >= 1 &&
