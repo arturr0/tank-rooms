@@ -2221,6 +2221,7 @@ function keyPressed() {
     if (key == 't') Greenturn = !Greenturn;
     if (key == 'k') {
         generateQueensAreas();
+        checkQueen();
         kill(blockKilledPawn, blockKillersPawn);
         killOpt(killConditionsUnique);
         stepKill(killConditionsUnique);    
