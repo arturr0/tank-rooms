@@ -1287,7 +1287,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < upLeftArray.length; j++)
-              if (Board[i].row - Pawns[upLeftArray[j][1]].row == -1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1  
+              if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1  
                 && 
                 !Pawns.some(yourPawn => 
                 Pawns[upLeftArray[j][1]].isRed == yourPawn.isRed
@@ -1354,7 +1354,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < upLeftArray.length; j++)
-              if (Board[i].row - Pawns[upLeftArray[j][1]].row == -1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1  
+              if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1  
                 && 
                 !Pawns.some(yourPawn => 
                 Pawns[upLeftArray[j][1]].isRed == yourPawn.isRed
@@ -1421,7 +1421,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downRightArray.length; j++)
-              if (Board[i].row - Pawns[downRightArray[j][1]].row == -1 && Board[i].column - Pawns[downRightArray[j][1]].column == 1  
+              if (Board[i].row - Pawns[downRightArray[j][1]].row == -1 && Board[i].column - Pawns[downRightArray[j][1]].column == -1  
                 && 
                 !Pawns.some(yourPawn => 
                 Pawns[downRightArray[j][1]].isRed == yourPawn.isRed
@@ -1488,7 +1488,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downRightArray.length; j++)
-              if (Board[i].row - Pawns[downRightArray[j][1]].row == -1 && Board[i].column - Pawns[downRightArray[j][1]].column == 1  
+              if (Board[i].row - Pawns[downRightArray[j][1]].row == -1 && Board[i].column - Pawns[downRightArray[j][1]].column == -1  
                 && 
                 !Pawns.some(yourPawn => 
                 Pawns[downRightArray[j][1]].isRed == yourPawn.isRed
@@ -1555,7 +1555,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < upRightArray.length; j++)
-              if (Board[i].row - Pawns[upRightArray[j][1]].row == -1 && Board[i].column - Pawns[upRightArray[j][1]].column == 1  
+              if (Board[i].row - Pawns[upRightArray[j][1]].row == 1 && Board[i].column - Pawns[upRightArray[j][1]].column == -1  
                 && 
                 !Pawns.some(yourPawn => 
                 Pawns[upRightArray[j][1]].isRed == yourPawn.isRed
@@ -1622,7 +1622,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < upRightArray.length; j++)
-              if (Board[i].row - Pawns[upRightArray[j][1]].row == -1 && Board[i].column - Pawns[upRightArray[j][1]].column == 1  
+              if (Board[i].row - Pawns[upRightArray[j][1]].row == 1 && Board[i].column - Pawns[upRightArray[j][1]].column == -1  
                 && 
                 !Pawns.some(yourPawn => 
                 Pawns[upRightArray[j][1]].isRed == yourPawn.isRed
