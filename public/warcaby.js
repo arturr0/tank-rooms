@@ -464,13 +464,13 @@ function setup() {
   }
   
   for (let j = 0; j < Board.length; j++) {
-    if (j == 19) {
+    if (j == 37) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
       pawn.queen = true;
       Pawns.push(pawn);
       generateQueensAreas();
-    } else if (j == 28 || j == 46) {
+    } else if (j == 28 || j == 10) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
       Pawns.push(pawn);
@@ -1688,7 +1688,29 @@ function kill(blockKilledPawn, blockKillersPawn) {
     let minLeft = Math.min(...killConditionsUnique.filter(subarray => subarray[10] == 'down-left').map(subarray => Pawns[subarray[1]].row));
     let minRight = Math.min(...killConditionsUnique.filter(subarray => subarray[10] == 'down-right').map(subarray => Pawns[subarray[1]].row));
     console.log(maxLeft, maxRight, minLeft, minRight); 
-  for (let i = 0; i < killConditionsUnique.length; i++) {
+    // arr.sort((a, b) => {
+    //     if (a[2] === "green" && b[2] === "green") {
+    //         return a[1] - b[1]; // Ascending order if both are green
+    //     } else if (a[2] === "red" && b[2] === "red") {
+    //         return b[1] - a[1]; // Descending order if both are red
+    //     } else if (a[2] === "green" && b[2] === "red") {
+    //         return -1; // Green comes before red
+    //     } else if (a[2] === "red" && b[2] === "green") {
+    //         return 1; // Red comes after green
+    //     }
+    // });
+    killConditionsUnique.sort((a, b) => {
+        if ((a[10] === 'up-left' || a[10] === 'up-right') && (b[10] === 'up-left' || b[10] === 'up-right')) {
+            return a[2] - b[2]; // Ascending order if both are green
+        } else if ((a[10] === 'down-left' || a[10] === 'down-right') && (b[10] === 'down-left' || b[10] === 'down-right')) {
+            return b[2] - a[2]; // Descending order if both are red
+        } else if (((a[10] === 'up-left' || a[10] === 'up-right')) && (b[10] === 'down-left' || b[10] === 'down-right')) {
+            return -1; // Green comes before red
+        } else if ((a[10] === 'down-left' || a[10] === 'down-right') && (b[10] === 'up-left' || b[10] === 'up-right')) {
+            return 1; // Red comes after green
+        }
+    });
+    for (let i = 0; i < killConditionsUnique.length; i++) {
     console.log("killConditionsUnique out", i, killConditionsUnique[i])
   }
   
