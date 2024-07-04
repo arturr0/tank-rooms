@@ -918,215 +918,215 @@ let upRightArray = [];
 function kill(blockKilledPawn, blockKillersPawn) {
 
   
-    
-  for (let j = 0; j < Pawns.length; j++) {
-    for (let k = 0; k < Pawns.length; k++) {
-      if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && !Pawns[k].queen &&
-          ( (((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)))) &&
-          ((Pawns[k].row - Pawns[j].row == 1 && Pawns[k].column - Pawns[j].column == 1))) {
-        for (let i = 0; i < Board.length; i++) {
-          if (blockKilledPawn == null && blockKillersPawn == null && Pawns[j].row - Board[i].row == 1 && Pawns[j].column - Board[i].column == 1 && Board[i].free) {
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('before push 1', killConditions[i]);
-            }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('after push 1', killConditions[i]);
-            }
-            //killSwitch(k, j, i, Pawns[k].isRed);
-            playerHasKill = true;
-            killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-            //killConditionsUnique = killUnique(killConditions);
-            // for (let z = 0; z < killConditionsUnique.length; z++)
-            //   //////////console.log(killConditionsUnique[z]);
-            ////////console.log('push 1', killConditions.length);
-            //for (let i = 0; i < killConditionsUnique.length; i++)
-            //console.log('unique 1', killConditionsUnique[i]);
+  console.log("check kill");
+//   for (let j = 0; j < Pawns.length; j++) {
+//     for (let k = 0; k < Pawns.length; k++) {
+//       if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && !Pawns[k].queen &&
+//           ( (((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)))) &&
+//           ((Pawns[k].row - Pawns[j].row == 1 && Pawns[k].column - Pawns[j].column == 1))) {
+//         for (let i = 0; i < Board.length; i++) {
+//           if (blockKilledPawn == null && blockKillersPawn == null && Pawns[j].row - Board[i].row == 1 && Pawns[j].column - Board[i].column == 1 && Board[i].free) {
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('before push 1', killConditions[i]);
+//             }
+//             killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('after push 1', killConditions[i]);
+//             }
+//             //killSwitch(k, j, i, Pawns[k].isRed);
+//             playerHasKill = true;
+//             killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+//             //killConditionsUnique = killUnique(killConditions);
+//             // for (let z = 0; z < killConditionsUnique.length; z++)
+//             //   //////////console.log(killConditionsUnique[z]);
+//             ////////console.log('push 1', killConditions.length);
+//             //for (let i = 0; i < killConditionsUnique.length; i++)
+//             //console.log('unique 1', killConditionsUnique[i]);
             
               
-          }
-          else if ((k == blockKilledPawn || k == blockKillersPawn) && Pawns[j].row - Board[i].row == 1 && Pawns[j].column - Board[i].column == 1 && Board[i].free) {
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('before push 1 block', killConditions[i]);
-            }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('after push 1 block', killConditions[i]);
-            }
-            //killSwitch(k, j, i, Pawns[k].isRed);
-            playerHasKill = true;
-            killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-            //killConditionsUnique = killUnique(killConditions);
-            // for (let z = 0; z < killConditionsUnique.length; z++)
-            //   //////////console.log(killConditionsUnique[z]);
-            ////////console.log('push 1', killConditions.length);
-            //for (let i = 0; i < killConditionsUnique.length; i++)
-            //console.log('unique 1', killConditionsUnique[i]);
+//           }
+//           else if ((k == blockKilledPawn || k == blockKillersPawn) && Pawns[j].row - Board[i].row == 1 && Pawns[j].column - Board[i].column == 1 && Board[i].free) {
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('before push 1 block', killConditions[i]);
+//             }
+//             killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('after push 1 block', killConditions[i]);
+//             }
+//             //killSwitch(k, j, i, Pawns[k].isRed);
+//             playerHasKill = true;
+//             killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+//             //killConditionsUnique = killUnique(killConditions);
+//             // for (let z = 0; z < killConditionsUnique.length; z++)
+//             //   //////////console.log(killConditionsUnique[z]);
+//             ////////console.log('push 1', killConditions.length);
+//             //for (let i = 0; i < killConditionsUnique.length; i++)
+//             //console.log('unique 1', killConditionsUnique[i]);
             
               
-          }
-        }
-      }
+//           }
+//         }
+//       }
       
-      //break;
-    }
+//       //break;
+//     }
     
       
-  }
-  for (let j = 0; j < Pawns.length; j++) {
-    for (let k = 0; k < Pawns.length; k++) {
-      if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && !Pawns[k].queen &&
-          ( (((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)))) &&
-          ((Pawns[k].row - Pawns[j].row == 1 && Pawns[k].column - Pawns[j].column == -1))) {
-        for (let i = 0; i < Board.length; i++) {
-          if (blockKilledPawn == null && blockKillersPawn == null && Pawns[j].row - Board[i].row == 1 && Pawns[j].column - Board[i].column == -1 && Board[i].free) {
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('before push 2', killConditions[i]);
-            }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('after push 2', killConditions[i]);
-            }
-            //killSwitch(k, j, i, Pawns[k].isRed);
-            playerHasKill = true;
-            killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-            //killConditionsUnique = killUnique(killConditions);
-            ////////console.log('push 2', killConditions.length);
-            //for (let i = 0; i < killConditionsUnique.length; i++)
-            //console.log('unique 2', killConditionsUnique[i]);
+//   }
+//   for (let j = 0; j < Pawns.length; j++) {
+//     for (let k = 0; k < Pawns.length; k++) {
+//       if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && !Pawns[k].queen &&
+//           ( (((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)))) &&
+//           ((Pawns[k].row - Pawns[j].row == 1 && Pawns[k].column - Pawns[j].column == -1))) {
+//         for (let i = 0; i < Board.length; i++) {
+//           if (blockKilledPawn == null && blockKillersPawn == null && Pawns[j].row - Board[i].row == 1 && Pawns[j].column - Board[i].column == -1 && Board[i].free) {
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('before push 2', killConditions[i]);
+//             }
+//             killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('after push 2', killConditions[i]);
+//             }
+//             //killSwitch(k, j, i, Pawns[k].isRed);
+//             playerHasKill = true;
+//             killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+//             //killConditionsUnique = killUnique(killConditions);
+//             ////////console.log('push 2', killConditions.length);
+//             //for (let i = 0; i < killConditionsUnique.length; i++)
+//             //console.log('unique 2', killConditionsUnique[i]);
             
              
-          }
-          else if ((k == blockKilledPawn || k == blockKillersPawn) && Pawns[j].row - Board[i].row == 1 && Pawns[j].column - Board[i].column == -1 && Board[i].free) {
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('before push 2 block', killConditions[i]);
-            }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('after push 2 block', killConditions[i]);
-            }
-            //killSwitch(k, j, i, Pawns[k].isRed);
-            playerHasKill = true;
-            killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-            //killConditionsUnique = killUnique(killConditions);
-            ////////console.log('push 2', killConditions.length);
-            //for (let i = 0; i < killConditionsUnique.length; i++)
-            //console.log('unique 2', killConditionsUnique[i]);
+//           }
+//           else if ((k == blockKilledPawn || k == blockKillersPawn) && Pawns[j].row - Board[i].row == 1 && Pawns[j].column - Board[i].column == -1 && Board[i].free) {
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('before push 2 block', killConditions[i]);
+//             }
+//             killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('after push 2 block', killConditions[i]);
+//             }
+//             //killSwitch(k, j, i, Pawns[k].isRed);
+//             playerHasKill = true;
+//             killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+//             //killConditionsUnique = killUnique(killConditions);
+//             ////////console.log('push 2', killConditions.length);
+//             //for (let i = 0; i < killConditionsUnique.length; i++)
+//             //console.log('unique 2', killConditionsUnique[i]);
             
              
-          }
-        }
-      }
+//           }
+//         }
+//       }
       
-      //break;
-    }
+//       //break;
+//     }
     
     
-  }
-  for (let j = 0; j < Pawns.length; j++) {
-    for (let k = 0; k < Pawns.length; k++) {
-      if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && !Pawns[k].queen &&
-          ( (((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)))) &&
-          ((Pawns[k].row - Pawns[j].row == -1 && Pawns[k].column - Pawns[j].column == 1))) {
-        for (let i = 0; i < Board.length; i++) {
-          if (blockKilledPawn == null && blockKillersPawn == null && Pawns[j].row - Board[i].row == -1 && Pawns[j].column - Board[i].column == 1 && Board[i].free) {
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('before push 3', killConditions[i]);
-            }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('after push 3', killConditions[i]);
-            }
-            //killSwitch(k, j, i, Pawns[k].isRed);
-            playerHasKill = true;
-            killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-            //killConditionsUnique = killUnique(killConditions);
-            ////////console.log('push 3', killConditions.length);
-            //for (let i = 0; i < killConditionsUnique.length; i++)
-            //console.log('unique 3', killConditionsUnique[i]);
+//   }
+//   for (let j = 0; j < Pawns.length; j++) {
+//     for (let k = 0; k < Pawns.length; k++) {
+//       if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && !Pawns[k].queen &&
+//           ( (((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)))) &&
+//           ((Pawns[k].row - Pawns[j].row == -1 && Pawns[k].column - Pawns[j].column == 1))) {
+//         for (let i = 0; i < Board.length; i++) {
+//           if (blockKilledPawn == null && blockKillersPawn == null && Pawns[j].row - Board[i].row == -1 && Pawns[j].column - Board[i].column == 1 && Board[i].free) {
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('before push 3', killConditions[i]);
+//             }
+//             killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('after push 3', killConditions[i]);
+//             }
+//             //killSwitch(k, j, i, Pawns[k].isRed);
+//             playerHasKill = true;
+//             killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+//             //killConditionsUnique = killUnique(killConditions);
+//             ////////console.log('push 3', killConditions.length);
+//             //for (let i = 0; i < killConditionsUnique.length; i++)
+//             //console.log('unique 3', killConditionsUnique[i]);
             
             
             
-          }
-          else if ((k == blockKilledPawn || k == blockKillersPawn) && Pawns[j].row - Board[i].row == -1 && Pawns[j].column - Board[i].column == 1 && Board[i].free) {
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('before push 3 block', killConditions[i]);
-            }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('after push 3 block', killConditions[i]);
-            }
-            //killSwitch(k, j, i, Pawns[k].isRed);
-            playerHasKill = true;
-            killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-            //killConditionsUnique = killUnique(killConditions);
-            ////////console.log('push 3', killConditions.length);
-            //for (let i = 0; i < killConditionsUnique.length; i++)
-            //console.log('unique 3', killConditionsUnique[i]);
+//           }
+//           else if ((k == blockKilledPawn || k == blockKillersPawn) && Pawns[j].row - Board[i].row == -1 && Pawns[j].column - Board[i].column == 1 && Board[i].free) {
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('before push 3 block', killConditions[i]);
+//             }
+//             killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('after push 3 block', killConditions[i]);
+//             }
+//             //killSwitch(k, j, i, Pawns[k].isRed);
+//             playerHasKill = true;
+//             killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+//             //killConditionsUnique = killUnique(killConditions);
+//             ////////console.log('push 3', killConditions.length);
+//             //for (let i = 0; i < killConditionsUnique.length; i++)
+//             //console.log('unique 3', killConditionsUnique[i]);
             
             
             
-          }
-        }
-      }
+//           }
+//         }
+//       }
       
-      //break;
-    }
-  }
-  for (let j = 0; j < Pawns.length; j++) {
-    for (let k = 0; k < Pawns.length; k++) {
-      if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && !Pawns[k].queen &&
-          ( (((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)))) &&
-          ((Pawns[k].row - Pawns[j].row == -1 && Pawns[k].column - Pawns[j].column == -1))) {
-        for (let i = 0; i < Board.length; i++) {
-          if (blockKilledPawn == null && blockKillersPawn == null && Pawns[j].row - Board[i].row == -1 && Pawns[j].column - Board[i].column == -1 && Board[i].free) {
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('before push 4', killConditions[i]);
-            }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
-            //////////console.log(`kill 4, killer ${k}, killed ${j}`);
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('after push 4', killConditions[i]);
-            }
-            //killSwitch(k, j, i, Pawns[k].isRed);
-            killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-            playerHasKill = true;
-            //killConditionsUnique = killUnique(killConditions);
-            ////////console.log('push 4', killConditions.length);
-            //for (let i = 0; i < killConditionsUnique.length; i++)
-            //console.log('unique 4', killConditionsUnique[i]);
+//       //break;
+//     }
+//   }
+//   for (let j = 0; j < Pawns.length; j++) {
+//     for (let k = 0; k < Pawns.length; k++) {
+//       if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && !Pawns[k].queen &&
+//           ( (((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)))) &&
+//           ((Pawns[k].row - Pawns[j].row == -1 && Pawns[k].column - Pawns[j].column == -1))) {
+//         for (let i = 0; i < Board.length; i++) {
+//           if (blockKilledPawn == null && blockKillersPawn == null && Pawns[j].row - Board[i].row == -1 && Pawns[j].column - Board[i].column == -1 && Board[i].free) {
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('before push 4', killConditions[i]);
+//             }
+//             killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+//             //////////console.log(`kill 4, killer ${k}, killed ${j}`);
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('after push 4', killConditions[i]);
+//             }
+//             //killSwitch(k, j, i, Pawns[k].isRed);
+//             killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+//             playerHasKill = true;
+//             //killConditionsUnique = killUnique(killConditions);
+//             ////////console.log('push 4', killConditions.length);
+//             //for (let i = 0; i < killConditionsUnique.length; i++)
+//             //console.log('unique 4', killConditionsUnique[i]);
             
              
-          }
-          else if ((k == blockKilledPawn || k == blockKillersPawn) && Pawns[j].row - Board[i].row == -1 && Pawns[j].column - Board[i].column == -1 && Board[i].free) {
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('before push 4 block', killConditions[i]);
-            }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
-            //////////console.log(`kill 4, killer ${k}, killed ${j}`);
-            for (let i = 0; i < killConditions.length; i++) {
-              console.log('after push 4 block', killConditions[i]);
-            }
-            //killSwitch(k, j, i, Pawns[k].isRed);
-            killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-            playerHasKill = true;
-            //killConditionsUnique = killUnique(killConditions);
-            ////////console.log('push 4', killConditions.length);
-            //for (let i = 0; i < killConditionsUnique.length; i++)
-            //console.log('unique 4', killConditionsUnique[i]);
+//           }
+//           else if ((k == blockKilledPawn || k == blockKillersPawn) && Pawns[j].row - Board[i].row == -1 && Pawns[j].column - Board[i].column == -1 && Board[i].free) {
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('before push 4 block', killConditions[i]);
+//             }
+//             killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+//             //////////console.log(`kill 4, killer ${k}, killed ${j}`);
+//             for (let i = 0; i < killConditions.length; i++) {
+//               console.log('after push 4 block', killConditions[i]);
+//             }
+//             //killSwitch(k, j, i, Pawns[k].isRed);
+//             killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+//             playerHasKill = true;
+//             //killConditionsUnique = killUnique(killConditions);
+//             ////////console.log('push 4', killConditions.length);
+//             //for (let i = 0; i < killConditionsUnique.length; i++)
+//             //console.log('unique 4', killConditionsUnique[i]);
             
              
-          }
-        }
-      }
+//           }
+//         }
+//       }
       
-      //break;
-    }
+//       //break;
+//     }
     
-  }
+//   }
 
   
-//q
+// //q
   
   generateQueensAreas();
   console.log('blockKilledPawn', blockKilledPawn, 'blockKillersPawn', blockKillersPawn);
@@ -2347,7 +2347,7 @@ function keyPressed() {
         generateQueensAreas();
         checkQueen();
         kill(blockKilledPawn, blockKillersPawn);
-        killOpt(killConditionsUnique);
-        stepKill(killConditionsUnique);    
+        // killOpt(killConditionsUnique);
+        // stepKill(killConditionsUnique);    
     }
 }
