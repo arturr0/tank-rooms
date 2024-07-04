@@ -1718,15 +1718,16 @@ function kill(blockKilledPawn, blockKillersPawn) {
     
       if (aCategory === bCategory) {
         if (aCategory === 1 || aCategory === 2) {
+          console.log("sort d");
           return b[2] - a[2]; // Descending order for 'up-left' and 'up-right'
         } else {
+          console.log("sort a");
           return a[2] - b[2]; // Ascending order for 'down-left' and 'down-right'
         }
       } else {
         return aCategory - bCategory; // Sort by category order
       }
     });
-    
     
       
     for (let i = 0; i < killConditionsUnique.length; i++) {
