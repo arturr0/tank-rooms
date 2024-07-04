@@ -2042,6 +2042,8 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
         killConditions.splice(j, 1)
         break;  
       }
+  for (let i = 0; i < downLeftArray.length; i++)
+    if (downLeftArray[i][0] == killer) {downLeftArray.splice(i, 1); console.log('splice')}
   //generateQueensAreas(killmode[i][0]);
   killmode.splice(i, 1);
   //generateQueensAreas();
