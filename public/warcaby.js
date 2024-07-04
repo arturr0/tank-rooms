@@ -464,13 +464,13 @@ function setup() {
   }
   
   for (let j = 0; j < Board.length; j++) {
-    if (j == 37) {
+    if (j == 49) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
       pawn.queen = true;
       Pawns.push(pawn);
       generateQueensAreas();
-    } else if (j == 28 || j == 10) {
+    } else if (j == 42 || j == 51) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
       Pawns.push(pawn);
@@ -1711,28 +1711,28 @@ function kill(blockKilledPawn, blockKillersPawn) {
     //     }
     // });
     killConditionsUnique.sort((a, b) => {
-        const categoryOrder = {
-          'up-left': 2,
-          'up-right': 2,
-          'down-left': 1,
-          'down-right': 1
-        };
-      
-        const aCategory = categoryOrder[a[3]] || 0;
-        const bCategory = categoryOrder[b[3]] || 0;
-      
-        if (aCategory === bCategory) {
-          if (aCategory === 1) {
-            return a[2] - b[2]; // Ascending order if both are in the first category (up-left or up-right)
-          } else if (aCategory === 2) {
-            return b[2] - a[2]; // Descending order if both are in the second category (down-left or down-right)
-          }
+      const categoryOrder = {
+        'up-left': 1,
+        'up-right': 2,
+        'down-left': 3,
+        'down-right': 4
+      };
+    
+      const aCategory = categoryOrder[a[10]] || 0;
+      const bCategory = categoryOrder[b[10]] || 0;
+    
+      if (aCategory === bCategory) {
+        if (aCategory === 1 || aCategory === 2) {
+          return b[2] - a[2]; // Descending order for 'up-left' and 'up-right'
         } else {
-          return aCategory - bCategory; // Sort by category order
+          return a[2] - b[2]; // Ascending order for 'down-left' and 'down-right'
         }
-      
-        return 0; // If neither condition matches, maintain current order
-      });
+      } else {
+        return aCategory - bCategory; // Sort by category order
+      }
+    });
+    
+    
       
     for (let i = 0; i < killConditionsUnique.length; i++) {
     console.log("killConditionsUnique out", i, killConditionsUnique[i])
