@@ -464,13 +464,13 @@ function setup() {
   }
   
   for (let j = 0; j < Board.length; j++) {
-    if (j == 7) {
+    if (j == 37) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
       pawn.queen = true;
       Pawns.push(pawn);
       generateQueensAreas();
-    } else if (j == 49 || j == 42) {
+    } else if (j == 28 || j == 10) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
       Pawns.push(pawn);
@@ -911,6 +911,9 @@ let previousPlayer = null;
 let killCntr = 0;
 
 let downLeftArray = [];
+let upLeftArray = [];
+let downRightArray = [];
+let upRightArray = [];
 //fk
 function kill(blockKilledPawn, blockKillersPawn) {
 
@@ -1129,9 +1132,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
   console.log(`blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
   for (let i = 0; i < Board.length; i++) {
     
-    let upLeftArray = [];
-    let downRightArray = [];
-    let upRightArray = [];
+    
     for (let j = 0; j < Pawns.length; j++) {
       for (let k = 0; k < Pawns.length; k++) {
         if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
