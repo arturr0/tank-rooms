@@ -1,16 +1,16 @@
 [
   {
     "index": 0,
-    "players": 2,
-    "user1": "jj",
-    "user2": "j",
-    "block": 0
-  },
-  {
-    "index": 1,
     "players": 0,
     "user1": "",
     "user2": "",
     "block": 1
+  },
+  {
+    "index": 1,
+    "players": 2,
+    "user1": "jj",
+    "user2": "j",
+    "block": 0
   }
 ]
