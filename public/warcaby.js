@@ -1158,6 +1158,9 @@ function kill(blockKilledPawn, blockKillersPawn) {
         ) {
 
           console.log(`down left, k ${k}, j ${j}, i ${i}`);
+          let killer = i;
+          let killed = j;
+          let board = i;
           downLeftArray.push([k, j, i]);
           for (let i = 0; i < downLeftArray.length; i++) {
             console.log("push downLeftArray", downLeftArray[i]);
@@ -1165,8 +1168,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
           
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downLeftArray.length; j++)
-              if (Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1  
-                && 
+              if (Board[i].row - Pawns[j].row == -1 && Board[i].column - Pawns[j].column == 1  
+                && downLeftArray[j][1] == killed &&
                 !Pawns.some(yourPawn => 
                 Pawns[downLeftArray[j][1]].isRed == yourPawn.isRed
                 && yourPawn.live &&
@@ -1975,6 +1978,7 @@ function stepKill(killmode) {
   //blockKill ${blockKill} blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn} releaseBlock ${releaseBlock}`)
   if (killmode.length == 0) step = 0;
   let killer;
+  let killed;
   if (releaseBlock) {
     killmode = [];
     releaseBlock = false;
@@ -2009,6 +2013,8 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
   let targetPos = createVector(Board[killmode[i][2]].rectCenter, Board[killmode[i][2]].rectCenterY);
   let movingPawnOldPos = { x: Pawns[killmode[i][0]].rectCenter, y: Pawns[killmode[i][0]].rectCenterY };
   killer = killmode[i][0];
+  killed = killmode[i][1]
+
   Pawns[killmode[i][0]].targetPos = targetPos;
   if (Pawns[killmode[i][0]].live) movingPawn = Pawns[killmode[i][0]];
   isPawnMoving = true;
@@ -2043,9 +2049,16 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
         break;  
       }
   for (let i = 0; i < downLeftArray.length; i++)
-    if (downLeftArray[i][0] == killer) {downLeftArray.splice(i, 1); console.log('splice')}
+    if (downLeftArray[i][0] == killer && downLeftArray[i][1] == killed) {
+      console.log("splice dl", downLeftArray[i][0], downLeftArray[i][1], downLeftArray[i][2])
+      downLeftArray.splice(i, 1);
+    }
   //generateQueensAreas(killmode[i][0]);
-  killmode.splice(i, 1);
+  for (let i = 0; i < killmode.length; i++)
+    if (killmode[i][0] == killer) {
+      console.log("splice km", killmode[i][0], killmode[i][1], killmode[i][2])
+      downLeftArray.splice(i, 1);
+    }
   //generateQueensAreas();
   //socket.emit('killed mode', killedOptMode, Pawns, room);
   let serializedPawns = serializePawns(Pawns);
