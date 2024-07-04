@@ -467,6 +467,7 @@ function setup() {
     if (j == 28) {
       Board[j].free = false;
       let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
+      pawn.queen = true;
       Pawns.push(pawn);
     } else if (j == 10 || j == 14 || j == 35 || j == 49 || j == 37) {
       Board[j].free = false;
@@ -610,6 +611,15 @@ function draw() {
       rect(Board[i].rectCenter, Board[i].rectCenterY, 70, 70);
     }
   }
+  for (let i = 0; i < Board.length; i++)
+    if (Board[i].isBlack){
+        noStroke();
+        fill(255);
+        
+        textSize(13);
+        text(i, Board[i].rectCenter - 25, Board[i].rectCenterY - 25);
+    }
+  
 }
 
 function mouseClicked() {
