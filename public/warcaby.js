@@ -1159,7 +1159,10 @@ function kill(blockKilledPawn, blockKillersPawn) {
         ) {
 
           console.log(`down left, k ${k}, j ${j}, i ${i}`);
-          downLeftArray.push([k, j, i]);
+          let killer = k;
+          let killed = j;
+          let board = i;
+          downLeftArray.push([killer, killed, board]);
           // for (let i = 0; i < downLeftArray.length; i++) {
           //   console.log("push downLeftArray", downLeftArray[i]);
           // }
@@ -1167,7 +1170,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downLeftArray.length; j++)
               if (Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1  
-                && 
+                && downLeftArray[j][1] == killed  &&  downLeftArray[j][0] == killer &&
                 !Pawns.some(yourPawn => 
                 Pawns[downLeftArray[j][1]].isRed == yourPawn.isRed
                 && yourPawn.live &&
@@ -1229,7 +1232,10 @@ function kill(blockKilledPawn, blockKillersPawn) {
         ) {
         
           console.log(`up left, k ${k}, j ${j}, i ${i}`);
-          upLeftArray.push([k, j, i]);
+          let killer = k;
+          let killed = j;
+          let board = i;
+          upLeftArray.push([killer, killed, board]);
           // for (let i = 0; i < upLeftArray.length; i++) {
           //   console.log("push upLeftArray", upLeftArray[i]);
           // }
@@ -1237,7 +1243,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < upLeftArray.length; j++)
               if (Board[i].row - Pawns[upLeftArray[j][1]].row == -1 && Board[i].column - Pawns[upLeftArray[j][1]].column == -1  
-                && 
+                && upLeftArray[j][1] == killed  &&  upLeftArray[j][0] == killer && 
                 !Pawns.some(yourPawn => 
                 Pawns[upLeftArray[j][1]].isRed == yourPawn.isRed
                 && yourPawn.live &&
@@ -1297,7 +1303,10 @@ function kill(blockKilledPawn, blockKillersPawn) {
         ) {
         
           console.log(`down right, k ${k}, j ${j}, i ${i}`);
-          downRightArray.push([k, j, i]);
+          let killer = k;
+          let killed = j;
+          let board = i;
+          downRightArray.push([killer, killed, board]);
           // for (let i = 0; i < downRightArray.length; i++) {
           //   console.log("push downRightArray", downRightArray[i]);
           // }
@@ -1305,7 +1314,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downRightArray.length; j++)
               if (Board[i].row - Pawns[downRightArray[j][1]].row == -1 && Board[i].column - Pawns[downRightArray[j][1]].column == -1  
-                && 
+                && downRightArray[j][1] == killed  &&  downRightArray[j][0] == killer &&
                 !Pawns.some(yourPawn => 
                 Pawns[downRightArray[j][1]].isRed == yourPawn.isRed
                 && yourPawn.live &&
@@ -1366,7 +1375,11 @@ function kill(blockKilledPawn, blockKillersPawn) {
         ) {
         
           console.log(`up right, k ${k}, j ${j}, i ${i}`);
-          upRightArray.push([k, j, i]);
+          
+          let killer = k;
+          let killed = j;
+          let board = i;
+          upRightArray.push([killer, killed, board]);
           // for (let i = 0; i < upRightArray.length; i++) {
           //   console.log("push upRightArray", upRightArray[i]);
           // }
@@ -1374,7 +1387,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < upRightArray.length; j++)
               if (Board[i].row - Pawns[upRightArray[j][1]].row == 1 && Board[i].column - Pawns[upRightArray[j][1]].column == -1  
-                && 
+                && upRightArray[j][1] == killed  &&  upRightArray[j][0] == killer && 
                 !Pawns.some(yourPawn => 
                 Pawns[upRightArray[j][1]].isRed == yourPawn.isRed
                 && yourPawn.live &&
