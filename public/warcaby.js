@@ -820,7 +820,7 @@ if (killedOptMode) {
           console.log('killedOptModeArray[i] before push', killedOptModeArray[i]);
           killConditions = [];
           killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-          
+          console.log(killConditionsUnique)
           firstKill.push(killedOptModeArray[i]);
           //console.log('killedOptMode', firstKill);
           killedOptModeArray = [];
@@ -1892,6 +1892,8 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
     else if (blockKill) {
         check = true;
         killConditions = [];
+        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+
         console.log('check else if (blockKill)', check)
     }
     // else {
