@@ -761,7 +761,7 @@ function mouseClicked() {
             let firstKill = [];
             killConditions = [];
             killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-            ////console.log('killersOptMode', killConditionsUnique);
+            console.log('killersOptMode', killConditionsUnique);
             firstKill.push(killersOptModeArray[i])
             killersOptModeArray = [];
             killedOptModeArray = [];
@@ -817,7 +817,7 @@ if (killedOptMode) {
           
           //killedOptModeArray = [];
           let firstKill = [];
-          ////////////////////console.log('killedOptModeArray[i] before push', killedOptModeArray[i]);
+          console.log('killedOptModeArray[i] before push', killedOptModeArray[i]);
           killConditions = [];
           killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
           
@@ -877,7 +877,7 @@ if (killedOptMode) {
             killedOptMode = false;
             killersOptMode = false;
             oneKiller2Killed = false;
-            ////////////////////console.log('killers killConditionsUnique[0] ', killConditionsUnique[0])
+            console.log('1k2k killers killConditionsUnique[0] ', killConditionsUnique[0])
             
             //kill(blockKilledPawn, blockKillersPawn);
             let firstKill = [];
@@ -1805,6 +1805,7 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
     oldY: movingPawnOldPos.y 
   }, room, animatedPawn);
   //generateQueensAreas()
+  
   break;
 }
     //killmode = [];
@@ -1852,18 +1853,18 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
       killConditions = [];
       //console.log('block collision');
     }
-    // else if (blockKill && killConditionsUnique.length == 0 && blockKilledPawn != null) {
+    else if (blockKill && killConditionsUnique.length == 0 && blockKilledPawn != null) {
         
-    //     check = false;
+        check = false;
         
-    //     blockKill = false;
-    //     blockKilledPawn = null;
-    //     releaseBlock = true;
-    //     killConditions = [];
-    //     console.log('check releaseBlock stepKill else if (blockKill && killConditionsUnique.length == 0 && blockKilledPawn != null)', releaseBlock)
+        blockKill = false;
+        blockKilledPawn = null;
+        releaseBlock = true;
+        killConditions = [];
+        console.log('check releaseBlock stepKill else if (blockKill && killConditionsUnique.length == 0 && blockKilledPawn != null)', releaseBlock)
 
-    //     //////////console.log('blockKill false killers empty killConditionsUnique:', killmode)     
-    // }
+        //////////console.log('blockKill false killers empty killConditionsUnique:', killmode)     
+    }
     else if (blockKill && killConditionsUnique.length > 0 && killConditionsUnique.every(kill => kill[0] != blockKilledPawn) && blockKilledPawn != null &&
         ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) ) {
         check = false;
