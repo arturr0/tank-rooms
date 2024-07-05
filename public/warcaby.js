@@ -1853,7 +1853,7 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
       killConditions = [];
       //console.log('block collision');
     }
-    else if (blockKill && killConditionsUnique.length == 0 && blockKilledPawn != null) {
+    else if (blockKill && killConditionsUnique.length == 0 && blockKilledPawn != null && blockKillersPawn != null) {
         
         check = false;
         
