@@ -264,10 +264,10 @@ socket.on('update message move', function(MES, PLAYED, LETTER, NUMBER, LETTER_BO
 
 socket.on('both completed', function() {
   bothCompleted = true;
-  //////////////console.log('socket on both completed', bothCompleted);
+  console.log('socket on both completed', bothCompleted);
 });
 socket.on('new turn', function(TURN) {
-    //////console.log('new turn condition', killConditions.length);
+  console.log('new turn condition', killConditions.length);
     //////console.log('new turn unique', killConditionsUnique.length)
   Greenturn = TURN;
   generateQueensAreas()
@@ -1711,7 +1711,7 @@ function killSwitch(winner, looser, newBoard, player) {
   
   current = winner;
  
-  //kill(blockKilledPawn, blockKillersPawn);
+  kill(blockKilledPawn, blockKillersPawn);
   
   
   }
