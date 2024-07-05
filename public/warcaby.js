@@ -1199,7 +1199,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 // console.log(maxLeft)
                 break;
             }
-
+            break;
           //killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);      
           // for (let j = 0; j < killConditions.length; j++) {
           //   console.log('killConditions', j, killConditions[j])
@@ -1270,7 +1270,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
                 break;
               }
-        
+              break;
           //killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);      
           // for (let j = 0; j < killConditions.length; j++) {
           //   console.log('killConditions', j, killConditions[j])
@@ -1341,7 +1341,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
                 break;
               }
-        
+              break;
           //killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);      
           // for (let j = 0; j < killConditions.length; j++) {
           //   console.log('killConditions', j, killConditions[j])
@@ -1414,7 +1414,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
                 break;
               }
-          
+              break;
           //killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);      
           for (let j = 0; j < killConditions.length; j++) {
             console.log('killConditions', j, killConditions[j])
@@ -1425,9 +1425,9 @@ function kill(blockKilledPawn, blockKillersPawn) {
           }
           break;
         }
-       
+        
       }
-      
+      break;
   }
  
   console.log("after break");
@@ -1627,7 +1627,7 @@ uniqueIndex0Values.forEach(value => {
               }
               break;  
             }
-            
+              break;
           }
  
 
