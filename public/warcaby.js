@@ -1160,9 +1160,9 @@ function kill(blockKilledPawn, blockKillersPawn) {
 
           console.log(`down left, k ${k}, j ${j}, i ${i}`);
           downLeftArray.push([k, j, i]);
-          for (let i = 0; i < downLeftArray.length; i++) {
-            console.log("push downLeftArray", downLeftArray[i]);
-          }
+          // for (let i = 0; i < downLeftArray.length; i++) {
+          //   console.log("push downLeftArray", downLeftArray[i]);
+          // }
           
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downLeftArray.length; j++)
@@ -1197,13 +1197,13 @@ function kill(blockKilledPawn, blockKillersPawn) {
             }
 
           //killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);      
-          for (let j = 0; j < killConditions.length; j++) {
-            console.log('killConditions', j, killConditions[j])
-          }
+          // for (let j = 0; j < killConditions.length; j++) {
+          //   console.log('killConditions', j, killConditions[j])
+          // }
           //killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-          for (let j = 0; j < killConditionsUnique.length; j++) {
-            console.log('killConditionsUnique', j, killConditionsUnique[j]);
-          }
+          // for (let j = 0; j < killConditionsUnique.length; j++) {
+          //   console.log('killConditionsUnique', j, killConditionsUnique[j]);
+          // }
           
         }
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) && Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
@@ -1230,9 +1230,9 @@ function kill(blockKilledPawn, blockKillersPawn) {
         
           console.log(`up left, k ${k}, j ${j}, i ${i}`);
           upLeftArray.push([k, j, i]);
-          for (let i = 0; i < upLeftArray.length; i++) {
-            console.log("push upLeftArray", upLeftArray[i]);
-          }
+          // for (let i = 0; i < upLeftArray.length; i++) {
+          //   console.log("push upLeftArray", upLeftArray[i]);
+          // }
           
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < upLeftArray.length; j++)
@@ -1298,9 +1298,9 @@ function kill(blockKilledPawn, blockKillersPawn) {
         
           console.log(`down right, k ${k}, j ${j}, i ${i}`);
           downRightArray.push([k, j, i]);
-          for (let i = 0; i < downRightArray.length; i++) {
-            console.log("push downRightArray", downRightArray[i]);
-          }
+          // for (let i = 0; i < downRightArray.length; i++) {
+          //   console.log("push downRightArray", downRightArray[i]);
+          // }
           
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downRightArray.length; j++)
@@ -1367,9 +1367,9 @@ function kill(blockKilledPawn, blockKillersPawn) {
         
           console.log(`up right, k ${k}, j ${j}, i ${i}`);
           upRightArray.push([k, j, i]);
-          for (let i = 0; i < upRightArray.length; i++) {
-            console.log("push upRightArray", upRightArray[i]);
-          }
+          // for (let i = 0; i < upRightArray.length; i++) {
+          //   console.log("push upRightArray", upRightArray[i]);
+          // }
           
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < upRightArray.length; j++)
@@ -1891,7 +1891,7 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
     }
     else if (blockKill) {
         check = true;
-        
+        killConditions = [];
         console.log('check else if (blockKill)', check)
     }
     // else {
