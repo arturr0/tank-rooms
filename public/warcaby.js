@@ -1132,9 +1132,9 @@ function kill(blockKilledPawn, blockKillersPawn) {
   for (let i = 0; i < Board.length; i++) {
     
     
-    for (let j = 0; j < Pawns.length; j++) {
-      for (let k = 0; k < Pawns.length; k++) {
-        console.log(` in blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
+    for (let j = 0; j < Pawns.length; j++) 
+      for (let k = 0; k < Pawns.length; k++) 
+        //console.log(` in blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
             Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
@@ -1674,10 +1674,10 @@ function kill(blockKilledPawn, blockKillersPawn) {
           }
           
         }
-      }
-    }
+      
+    
   }
- 
+ //endq
   
     // //killConditionsUnique = killUnique(killConditions);
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////console.log(killConditionsUnique)
