@@ -917,7 +917,8 @@ let upRightArray = [];
 function kill(blockKilledPawn, blockKillersPawn) {
 
   
-    
+  console.log("start kill");
+  console.log(killConditions); 
   for (let j = 0; j < Pawns.length; j++) {
     for (let k = 0; k < Pawns.length; k++) {
       if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && !Pawns[k].queen &&
