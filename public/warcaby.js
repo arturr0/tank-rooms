@@ -430,7 +430,7 @@ function setup() {
     const myCanvas = createCanvas(576, 576);
     myCanvas.style('border-radius', '15px');
     myCanvas.parent('game');
-    
+    generateQueensAreas();
     turn = select('#turn');
     let PlayerInfo = select('#player');
     
@@ -461,13 +461,13 @@ function setup() {
     //f(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, letter, number)
     for (let j = 0; j < Board.length; j++) {
       // if (Board[j].isBlack && Board[j].row < 4) {
-      if ([1, 3, 5].includes(j)) {
+      if ([35].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
         pawn.queen = true;
         Pawns.push(pawn);
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([10, 14, 26, 30, 28].includes(j)) {
+      } else if ([28, 42, 44].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
