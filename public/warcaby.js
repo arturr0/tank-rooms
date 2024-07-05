@@ -1171,7 +1171,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downLeftArray.length; j++)
               if (Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1  
-                && downLeftArray[j][1] == killed &&  downLeftArray[j][0] == killer && downLeftArray[j][0] == killer &&  downLeftArray[j][2] == board &&
+                && downLeftArray[j][1] == killed  &&  downLeftArray[j][0] == killer &&
                 !Pawns.some(yourPawn => 
                 Pawns[downLeftArray[j][1]].isRed == yourPawn.isRed
                 && yourPawn.live &&
@@ -1244,7 +1244,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < upLeftArray.length; j++)
               if (Board[i].row - Pawns[upLeftArray[j][1]].row == -1 && Board[i].column - Pawns[upLeftArray[j][1]].column == -1  
-                && upLeftArray[j][1] == killed && upLeftArray[j][0] == killer && upLeftArray[j][2] == board && 
+                && upLeftArray[j][1] == killed  &&  upLeftArray[j][0] == killer && 
                 !Pawns.some(yourPawn => 
                 Pawns[upLeftArray[j][1]].isRed == yourPawn.isRed
                 && yourPawn.live &&
@@ -1315,7 +1315,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downRightArray.length; j++)
               if (Board[i].row - Pawns[downRightArray[j][1]].row == -1 && Board[i].column - Pawns[downRightArray[j][1]].column == -1  
-                && downRightArray[j][1] == killed && downRightArray[j][0] == killer && downRightArray[j][2] == board &&
+                && downRightArray[j][1] == killed  &&  downRightArray[j][0] == killer &&
                 !Pawns.some(yourPawn => 
                 Pawns[downRightArray[j][1]].isRed == yourPawn.isRed
                 && yourPawn.live &&
@@ -1388,7 +1388,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < upRightArray.length; j++)
               if (Board[i].row - Pawns[upRightArray[j][1]].row == 1 && Board[i].column - Pawns[upRightArray[j][1]].column == -1  
-                && upRightArray[j][1] == killed && upRightArray[j][0] == killer && upRightArray[j][2] == board && 
+                && upRightArray[j][1] == killed  &&  upRightArray[j][0] == killer && 
                 !Pawns.some(yourPawn => 
                 Pawns[upRightArray[j][1]].isRed == yourPawn.isRed
                 && yourPawn.live &&
@@ -1469,27 +1469,27 @@ uniqueIndex0Values.forEach(value => {
     if (filteredDownRight.length > 0) minRight.push(Math.min(...filteredDownRight));
 }); 
     
-    killConditionsUnique.sort((a, b) => {
-      const categoryOrder = {
-        'up-left': 1,
-        'up-right': 2,
-        'down-left': 3,
-        'down-right': 4
-      };
+    // killConditionsUnique.sort((a, b) => {
+    //   const categoryOrder = {
+    //     'up-left': 1,
+    //     'up-right': 2,
+    //     'down-left': 3,
+    //     'down-right': 4
+    //   };
     
-      const aCategory = categoryOrder[a[10]] || 0;
-      const bCategory = categoryOrder[b[10]] || 0;
+    //   const aCategory = categoryOrder[a[10]] || 0;
+    //   const bCategory = categoryOrder[b[10]] || 0;
     
-      if (aCategory === bCategory) {
-        if (aCategory === 3 || aCategory === 4) {
-          return b[2] - a[2]; // Descending order for 'up-left' and 'up-right'
-        } else {
-          return a[2] - b[2]; // Ascending order for 'down-left' and 'down-right'
-        }
-      } else {
-        return aCategory - bCategory; // Sort by category order
-      }
-    });
+    //   if (aCategory === bCategory) {
+    //     if (aCategory === 3 || aCategory === 4) {
+    //       return b[2] - a[2]; // Descending order for 'up-left' and 'up-right'
+    //     } else {
+    //       return a[2] - b[2]; // Ascending order for 'down-left' and 'down-right'
+    //     }
+    //   } else {
+    //     return aCategory - bCategory; // Sort by category order
+    //   }
+    // });
     
     
       
