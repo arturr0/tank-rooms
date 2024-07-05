@@ -1188,8 +1188,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 // );
                 // if (foundQueenNeighbor) queen = foundQueenNeighbor[0];
                 let rows = [];
-                for (let i = 0; i < downLeftArray.length; i++)
-                  rows.push(Pawns[downLeftArray[i][1]].row)
+                //for (let i = 0; i < downLeftArray.length; i++)
+                //rows.push(Pawns[downLeftArray[i][1]].row)
                 console.log("rows", rows)
                 let nearest = Math.min(...rows);
                 console.log("nearest", nearest)
@@ -1261,8 +1261,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 // );
                 // if (foundQueenNeighbor) queen = foundQueenNeighbor[0];
                 let rows = [];
-                for (let i = 0; i < upLeftArray.length; i++)
-                  rows.push(Pawns[upLeftArray[i][1]].row)
+                //for (let i = 0; i < upLeftArray.length; i++)
+                //rows.push(Pawns[upLeftArray[i][1]].row)
                 console.log("rows", rows)
                 let nearest = Math.max(...rows);
                 console.log("nearest", nearest)
@@ -1332,8 +1332,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 // );
                 // if (foundQueenNeighbor) queen = foundQueenNeighbor[0];
                 let rows = [];
-                for (let i = 0; i < downRightArray.length; i++)
-                  rows.push(Pawns[downRightArray[i][1]].row)
+                //for (let i = 0; i < downRightArray.length; i++)
+                //rows.push(Pawns[downRightArray[i][1]].row)
                 console.log("rows", rows)
                 let nearest = Math.min(...rows);
                 console.log("nearest", nearest)
@@ -1384,7 +1384,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           // for (let i = 0; i < upRightArray.length; i++) {
           //   console.log("push upRightArray", upRightArray[i]);
           // }
-          
+        
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < upRightArray.length; j++)
               if (Board[i].row - Pawns[upRightArray[j][1]].row == 1 && Board[i].column - Pawns[upRightArray[j][1]].column == -1  
@@ -1405,8 +1405,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 // );
                 // if (foundQueenNeighbor) queen = foundQueenNeighbor[0];
                 let rows = [];
-                for (let i = 0; i < upRightArray.length; i++)
-                  rows.push(Pawns[upRightArray[i][1]].row)
+                //for (let i = 0; i < upRightArray.length; i++)
+                //rows.push(Pawns[upRightArray[i][1]].row)
                 console.log("rows", rows)
                 let nearest = Math.max(...rows);
                 console.log("nearest", nearest)
@@ -1425,9 +1425,10 @@ function kill(blockKilledPawn, blockKillersPawn) {
           }
           break;
         }
-        
+        console.log("loop", i, j , k);
+        break;  
       }
-      break;
+      
   }
  
   console.log("after break");
