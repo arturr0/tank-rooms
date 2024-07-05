@@ -461,13 +461,13 @@ function setup() {
     //f(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, letter, number)
     for (let j = 0; j < Board.length; j++) {
       // if (Board[j].isBlack && Board[j].row < 4) {
-      if ([56].includes(j)) {
+      if ([1, 3, 4].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
         pawn.queen = true;
         Pawns.push(pawn);
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([49, 35, 21].includes(j)) {
+      } else if ([10, 12, 14, 26, 30].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1266,7 +1266,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 console.log("rows", rows)
                 let nearest = Math.max(...rows);
                 console.log("nearest", nearest)
-                killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
+                killConditions.push([upLeftArray[upLeftArray.length - 1][0], upLeftArray[upLeftArray.length - 1][1], upLeftArray[upLeftArray.length - 1][2], Pawns[upLeftArray[upLeftArray.length - 1][0]].isRed, Greenturn, Pawns[upLeftArray[upLeftArray.length - 1][0]].rectCenter, Pawns[upLeftArray[upLeftArray.length - 1][0]].rectCenterY, Pawns[upLeftArray[upLeftArray.length - 1][1]].rectCenter, Pawns[upLeftArray[upLeftArray.length - 1][1]].rectCenterY, true, 'up-left']);
                 killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
                 break;
               }
@@ -1410,7 +1410,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 console.log("rows", rows)
                 let nearest = Math.max(...rows);
                 console.log("nearest", nearest)
-                killConditions.push([upRightArray[j][0], upRightArray[j][1], upRightArray[j][2], Pawns[upRightArray[j][0]].isRed, Greenturn, Pawns[upRightArray[j][0]].rectCenter, Pawns[upRightArray[j][0]].rectCenterY, Pawns[upRightArray[j][1]].rectCenter, Pawns[upRightArray[j][1]].rectCenterY, true, 'up-right']);
+                killConditions.push([upRightArray[upRightArray.length - 1][0], upRightArray[upRightArray.length - 1][1], upRightArray[upRightArray.length - 1][2], Pawns[upRightArray[upRightArray.length - 1][0]].isRed, Greenturn, Pawns[upRightArray[upRightArray.length - 1][0]].rectCenter, Pawns[upRightArray[upRightArray.length - 1][0]].rectCenterY, Pawns[upRightArray[upRightArray.length - 1][1]].rectCenter, Pawns[upRightArray[upRightArray.length - 1][1]].rectCenterY, true, 'up-right']);
                 killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
                 break;
               }
