@@ -1425,8 +1425,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           }
           break;
         }
-        console.log("loop", i, j , k);
-        break;  
+        console.log("loop", i, j , k);  
       }
       
   }
