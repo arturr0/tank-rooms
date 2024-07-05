@@ -1265,13 +1265,13 @@ function kill(blockKilledPawn, blockKillersPawn) {
               }
         
           //killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);      
-          for (let j = 0; j < killConditions.length; j++) {
-            console.log('killConditions', j, killConditions[j])
-          }
-          //killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-          for (let j = 0; j < killConditionsUnique.length; j++) {
-            console.log('killConditionsUnique', j, killConditionsUnique[j]);
-          }
+          // for (let j = 0; j < killConditions.length; j++) {
+          //   console.log('killConditions', j, killConditions[j])
+          // }
+          // //killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+          // for (let j = 0; j < killConditionsUnique.length; j++) {
+          //   console.log('killConditionsUnique', j, killConditionsUnique[j]);
+          // }
           
         }
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) && Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
@@ -1333,13 +1333,13 @@ function kill(blockKilledPawn, blockKillersPawn) {
               }
         
           //killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);      
-          for (let j = 0; j < killConditions.length; j++) {
-            console.log('killConditions', j, killConditions[j])
-          }
-          //killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-          for (let j = 0; j < killConditionsUnique.length; j++) {
-            console.log('killConditionsUnique', j, killConditionsUnique[j]);
-          }
+          // for (let j = 0; j < killConditions.length; j++) {
+          //   console.log('killConditions', j, killConditions[j])
+          // }
+          // //killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+          // for (let j = 0; j < killConditionsUnique.length; j++) {
+          //   console.log('killConditionsUnique', j, killConditionsUnique[j]);
+          // }
           
         }
         
@@ -1831,7 +1831,7 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
     if (killConditionsUnique.length > 0 && !blockKill) {
         check = true;
         
-        ////////console.log('killConditionsUnique.length > 0', check)
+        console.log('check killConditionsUnique.length > 0', check)
     }
     else if (killConditionsUnique.length == 0 && !blockKill) {
         check = false;
@@ -1851,7 +1851,7 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
     else if (blockKillersPawn != null && blockKillersPawn == blockKilledPawn) {
       blockKillersPawn = null;
       killConditions = [];
-      //console.log('block collision');
+      console.log('check block collision');
     }
     else if (blockKill && killConditionsUnique.length == 0 && blockKilledPawn != null && blockKillersPawn != null) {
         
@@ -1892,7 +1892,7 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
     else if (blockKill) {
         check = true;
         
-        //console.log('else if (blockKill)', check)
+        console.log('check else if (blockKill)', check)
     }
     // else {
     //     check = false;
