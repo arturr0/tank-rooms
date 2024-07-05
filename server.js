@@ -142,7 +142,7 @@ warcabyNamespace.on('connection', (socket) => {
         PLAY = current;
         //KILL = killConditionsUnique;
         ////////////////console.log("state " + TURN);
-        warcabyNamespace.to(room).emit('new state', BOARD, PAWNS, PLAY);
+        socket.broadcast.to(room).emit('new state', BOARD, PAWNS, PLAY);
 
       });
     

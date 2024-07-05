@@ -15,16 +15,23 @@
   },
   {
     "index": 2,
-    "players": 0,
-    "user1": "",
-    "user2": "",
-    "block": 1
+    "players": 2,
+    "user1": "k",
+    "user2": "kk",
+    "block": 0
   },
   {
     "index": 3,
     "players": 2,
     "user1": "oo",
     "user2": "oj",
+    "block": 0
+  },
+  {
+    "index": 4,
+    "players": 2,
+    "user1": "gg",
+    "user2": "g",
     "block": 0
   }
 ]

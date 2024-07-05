@@ -1135,7 +1135,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
     for (let j = 0; j < Pawns.length; j++) 
       for (let k = 0; k < Pawns.length; k++) {
         //console.log(` in blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
-        if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
+        if (
             Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             Board[i].queen && Pawns[j].row - Board[i].row <= -1 &&
@@ -1205,7 +1205,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           }
           
         }
-        if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) && Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
+        if ( Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             Board[i].queen && Pawns[j].row - Board[i].row >= 1 &&
             Pawns[j].column - Board[i].column >= 1 && Board[i].row < Pawns[j].row &&
@@ -1340,7 +1340,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           
         }
         
-        if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) && Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
+        if ( Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             Board[i].queen && Pawns[j].row - Board[i].row >= 1 &&
             Pawns[j].column - Board[i].column <= -1 && Board[i].row < Pawns[j].row &&
@@ -1708,6 +1708,7 @@ function stepKill(killmode) {
   //blockKill ${blockKill} blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn} releaseBlock ${releaseBlock}`)
   if (killmode.length == 0) step = 0;
   let killer;
+  let killed;
   if (releaseBlock) {
     killmode = [];
     releaseBlock = false;
@@ -1742,6 +1743,7 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
   let targetPos = createVector(Board[killmode[i][2]].rectCenter, Board[killmode[i][2]].rectCenterY);
   let movingPawnOldPos = { x: Pawns[killmode[i][0]].rectCenter, y: Pawns[killmode[i][0]].rectCenterY };
   killer = killmode[i][0];
+  killed = killmode[i][1]; 
   Pawns[killmode[i][0]].targetPos = targetPos;
   if (Pawns[killmode[i][0]].live) movingPawn = Pawns[killmode[i][0]];
   isPawnMoving = true;
@@ -1776,7 +1778,11 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && (!killersOptM
         break;  
       }
   //generateQueensAreas(killmode[i][0]);
-  killmode.splice(i, 1);
+  for (let i = 0; i < killmode.length; i++)
+    if(killmode[i][0] == killer && killmode[i][1] == killed) {
+      console.log('killer', killmode[i][0], 'killed', killmode[i][1], 'board', killmode[i][2])
+      killmode.splice(i, 1);
+    }
   //generateQueensAreas();
   //socket.emit('killed mode', killedOptMode, Pawns, room);
   let serializedPawns = serializePawns(Pawns);
