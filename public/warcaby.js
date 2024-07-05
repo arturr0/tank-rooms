@@ -1425,11 +1425,11 @@ function kill(blockKilledPawn, blockKillersPawn) {
           }
           break;
         }
-        if(killConditionsUnique.length > 0) break;
+        //if(killConditionsUnique.length > 0) break;
         //console.log("loop", i, j , k);
          
       }
-      if(killConditionsUnique.length > 0) break;
+      console.log("l", killConditionsUnique.length);
   }
  
   console.log("after break");
