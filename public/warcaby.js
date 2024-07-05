@@ -1193,6 +1193,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
                 // let maxLeft = Math.max(...killConditionsUnique.filter(subarray => subarray[10] == 'down-left').map(subarray => Pawns[subarray[1]].row));
                 // console.log(maxLeft)
+                break;
             }
 
           //killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);      
@@ -1260,6 +1261,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 console.log("nearest", nearest)
                 killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
                 killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+                break;
               }
         
           //killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);      
@@ -1327,6 +1329,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 console.log("nearest", nearest)
                 killConditions.push([downRightArray[j][0], downRightArray[j][1], downRightArray[j][2], Pawns[downRightArray[j][0]].isRed, Greenturn, Pawns[downRightArray[j][0]].rectCenter, Pawns[downRightArray[j][0]].rectCenterY, Pawns[downRightArray[j][1]].rectCenter, Pawns[downRightArray[j][1]].rectCenterY, true, 'down-right']);
                 killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+                break;
               }
         
           //killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);      
@@ -1395,6 +1398,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 console.log("nearest", nearest)
                 killConditions.push([upRightArray[j][0], upRightArray[j][1], upRightArray[j][2], Pawns[upRightArray[j][0]].isRed, Greenturn, Pawns[upRightArray[j][0]].rectCenter, Pawns[upRightArray[j][0]].rectCenterY, Pawns[upRightArray[j][1]].rectCenter, Pawns[upRightArray[j][1]].rectCenterY, true, 'up-right']);
                 killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+                break;
               }
         
           //killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);      
@@ -1409,7 +1413,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
         }
         
       }
-    
+      
   }
  
   
@@ -1515,6 +1519,7 @@ uniqueIndex0Values.forEach(value => {
         //Pawns[killConditionsUnique[1][0]].killer = true;
         killersOptModeArray.push(killConditionsUnique[i]);
         killersOptModeArray.push(killConditionsUnique[j]);
+        break;
         //killersOptModeArray.push(killConditionsUnique[1]);
   
   // If you want to break the loop after the first match, uncomment the following line
@@ -1552,6 +1557,7 @@ uniqueIndex0Values.forEach(value => {
                 Pawns[killConditionsUnique[j][1]].killed = true;
                 killedOptModeArray.push(killConditionsUnique[i]);
                 killedOptModeArray.push(killConditionsUnique[j]);
+                break;
           }
           
           for (let i = 0; i < killConditionsUnique.length; i++) {
@@ -1602,6 +1608,7 @@ uniqueIndex0Values.forEach(value => {
                 Pawns[killConditionsUnique[i][1]].kill1Killed2 = true;
                 oneKiller2KilledArray.push(killConditionsUnique[i]);
                 oneKiller2KilledArray.push(killConditionsUnique[j]);
+                break;
                 
               }
             }
