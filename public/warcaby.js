@@ -1208,7 +1208,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           // for (let j = 0; j < killConditionsUnique.length; j++) {
           //   console.log('killConditionsUnique', j, killConditionsUnique[j]);
           // }
-          
+          break;
         }
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) && Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
@@ -1279,7 +1279,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           // for (let j = 0; j < killConditionsUnique.length; j++) {
           //   console.log('killConditionsUnique', j, killConditionsUnique[j]);
           // }
-          
+          break;
         }
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) && Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
@@ -1350,7 +1350,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           // for (let j = 0; j < killConditionsUnique.length; j++) {
           //   console.log('killConditionsUnique', j, killConditionsUnique[j]);
           // }
-          
+          break;
         }
         
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) && Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
@@ -1423,9 +1423,9 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let j = 0; j < killConditionsUnique.length; j++) {
             console.log('killConditionsUnique', j, killConditionsUnique[j]);
           }
-          
+          break;
         }
-        break;
+       
       }
       
   }
@@ -1625,7 +1625,7 @@ uniqueIndex0Values.forEach(value => {
                 break;
                 
               }
-              
+              break;  
             }
             
           }
