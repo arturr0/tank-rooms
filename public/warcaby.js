@@ -461,13 +461,13 @@ function setup() {
     //f(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, letter, number)
     for (let j = 0; j < Board.length; j++) {
       // if (Board[j].isBlack && Board[j].row < 4) {
-      if ([1, 3, 5].includes(j)) {
+      if ([55].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
         pawn.queen = true;
         Pawns.push(pawn);
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([10, 12, 14, 26, 28].includes(j)) {
+      } else if ([46, 28, 10].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1481,7 +1481,7 @@ uniqueIndex0Values.forEach(value => {
       const bCategory = categoryOrder[b[10]] || 0;
     
       if (aCategory === bCategory) {
-        if (aCategory === 1 || aCategory === 2) {
+        if (aCategory === 3 || aCategory === 4) {
           return b[2] - a[2]; // Descending order for 'up-left' and 'up-right'
         } else {
           return a[2] - b[2]; // Ascending order for 'down-left' and 'down-right'
