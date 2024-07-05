@@ -461,13 +461,13 @@ function setup() {
     //f(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, letter, number)
     for (let j = 0; j < Board.length; j++) {
       // if (Board[j].isBlack && Board[j].row < 4) {
-      if ([55].includes(j)) {
+      if ([1, 3, 5].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
         pawn.queen = true;
         Pawns.push(pawn);
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([46, 28, 10].includes(j)) {
+      } else if ([10, 12, 14, 26, 28].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1171,7 +1171,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downLeftArray.length; j++)
               if (Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1  
-                && downLeftArray[j][1] == killed  &&  downLeftArray[j][0] == killer &&
+                && downLeftArray[j][1] == killed &&  downLeftArray[j][0] == killer && downLeftArray[j][0] == killer &&  downLeftArray[j][2] == board &&
                 !Pawns.some(yourPawn => 
                 Pawns[downLeftArray[j][1]].isRed == yourPawn.isRed
                 && yourPawn.live &&
@@ -1244,7 +1244,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < upLeftArray.length; j++)
               if (Board[i].row - Pawns[upLeftArray[j][1]].row == -1 && Board[i].column - Pawns[upLeftArray[j][1]].column == -1  
-                && upLeftArray[j][1] == killed  &&  upLeftArray[j][0] == killer && 
+                && upLeftArray[j][1] == killed && upLeftArray[j][0] == killer && upLeftArray[j][2] == board && 
                 !Pawns.some(yourPawn => 
                 Pawns[upLeftArray[j][1]].isRed == yourPawn.isRed
                 && yourPawn.live &&
@@ -1315,7 +1315,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downRightArray.length; j++)
               if (Board[i].row - Pawns[downRightArray[j][1]].row == -1 && Board[i].column - Pawns[downRightArray[j][1]].column == -1  
-                && downRightArray[j][1] == killed  &&  downRightArray[j][0] == killer &&
+                && downRightArray[j][1] == killed && downRightArray[j][0] == killer && downRightArray[j][2] == board &&
                 !Pawns.some(yourPawn => 
                 Pawns[downRightArray[j][1]].isRed == yourPawn.isRed
                 && yourPawn.live &&
@@ -1388,7 +1388,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < upRightArray.length; j++)
               if (Board[i].row - Pawns[upRightArray[j][1]].row == 1 && Board[i].column - Pawns[upRightArray[j][1]].column == -1  
-                && upRightArray[j][1] == killed  &&  upRightArray[j][0] == killer && 
+                && upRightArray[j][1] == killed && upRightArray[j][0] == killer && upRightArray[j][2] == board && 
                 !Pawns.some(yourPawn => 
                 Pawns[upRightArray[j][1]].isRed == yourPawn.isRed
                 && yourPawn.live &&
