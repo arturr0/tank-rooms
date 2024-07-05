@@ -1129,9 +1129,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
   
   generateQueensAreas();
   console.log(`blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
-  for (let i = 0; i < Board.length; i++) {
-    
-    
+  for (let i = 0; i < Board.length; i++) 
     for (let j = 0; j < Pawns.length; j++) 
       for (let k = 0; k < Pawns.length; k++) 
         //console.log(` in blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
@@ -1675,9 +1673,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           
         }
       
-    
-  }
- //endq
+ 
   
     // //killConditionsUnique = killUnique(killConditions);
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////console.log(killConditionsUnique)
