@@ -468,7 +468,7 @@ function setup() {
         Pawns.push(pawn);
         generateQueensAreas()
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([14,21,35].includes(j)) {
+      } else if ([14, 21, 35].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1174,8 +1174,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downLeftArray.length; j++)
               if (Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1  
-                // && downLeftArray[j][1] == killed  &&  downLeftArray[j][0] == killer &&
-                &&
+                && 
                 !Pawns.every(yourPawn => 
                 Pawns[downLeftArray[j][1]].isRed == yourPawn.isRed
                 && yourPawn.live &&
