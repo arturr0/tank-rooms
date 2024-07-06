@@ -1187,8 +1187,10 @@ function kill(blockKilledPawn, blockKillersPawn) {
               )
               { 
                 Board[i].check = true;
-                console.log
-                console.log(Board.find(board => board.check))
+                
+                let checkedBoard = Board.filter(board => board.check).length;
+                let numberOfKilled = killedUnique(downLeftArray).length;
+                console.log(checkedBoard, numberOfKilled)
                 //console.log("check behind killed postions", downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2]);
                 //Board[i].check = true;
                 // let queen = null;
@@ -1197,12 +1199,12 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 //   Pawns[queenNeighbor[0]].column - Pawns[queenNeighbor[1]].column == 1
                 // );
                 // if (foundQueenNeighbor) queen = foundQueenNeighbor[0];
-                let rows = [];
+                //let rows = [];
                 //for (let i = 0; i < downLeftArray.length; i++)
                 //rows.push(Pawns[downLeftArray[i][1]].row)
-                console.log("rows", rows)
-                let nearest = Math.min(...rows);
-                console.log("nearest", nearest)
+                //console.log("rows", rows)
+                //let nearest = Math.min(...rows);
+                //console.log("nearest", nearest)
                 //killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
                 //killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
                 // let maxLeft = Math.max(...killConditionsUnique.filter(subarray => subarray[10] == 'down-left').map(subarray => Pawns[subarray[1]].row));
@@ -1953,7 +1955,21 @@ function killUnique(array) {
     }
     return uniqueKills;
 }
-
+function killedUnique(array) {
+  let uniqueKills = [];
+  let itemsFound = {};
+  for (let i = 0; i < array.length; i++) {
+      // Create a copy of the array element excluding indices 5 and 6
+      let modifiedArray = array[i].filter((_, index) => index !== 2);
+      let stringified = JSON.stringify(modifiedArray);
+      if (itemsFound[stringified]) {
+          continue;
+      }
+      uniqueKills.push(array[i]);
+      itemsFound[stringified] = true;               //(!array[9] && index !== 5 && index !== 6) || (array[9] && index !== 5 && index !== 6 && index !== 7 && index !== 8));
+  }
+  return uniqueKills;
+}
 function queenUnique(array) {
   let uniqueKills = [];
   let itemsFound = {};
