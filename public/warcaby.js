@@ -1174,14 +1174,14 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downLeftArray.length; j++)
               if (Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1 
-                // &&
-                // !downLeftArray.every(yourPawn => { 
-                // Pawns[downLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed
-                // && Pawns[yourPawn[1]].live &&
-                // Board[i].column == Pawns[yourPawn[1]].column && Board[i].row == Pawns[yourPawn[1]].row
-                // console.log("loop", yourPawn)
-                // }
-                // )
+                &&
+                !downLeftArray.every(yourPawn => { 
+                Pawns[downLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed
+                && Pawns[yourPawn[1]].live &&
+                Board[i].column == Pawns[yourPawn[1]].column && Board[i].row == Pawns[yourPawn[1]].row
+                console.log("loop", yourPawn)
+                }
+                )
               )
               { 
                 Board[i].check = true;
