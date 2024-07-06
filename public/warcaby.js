@@ -1173,13 +1173,14 @@ function kill(blockKilledPawn, blockKillersPawn) {
           
           for (let i = 0; i < Pawns[killer].queensAreas; i++)
             for (let j = 0; j < downLeftArray.length; j++)
-              if (Pawns[killer].queensAreas[i][0] - Pawns[downLeftArray[j][1]].row == -1 && Pawns[killer].queensAreas[i][1] - Pawns[downLeftArray[j][1]].column == 1 &&  
+              if (Pawns[killer].queensAreas[i][0] - Pawns[downLeftArray[j][1]].row == -1 && Pawns[killer].queensAreas[i][1] - Pawns[downLeftArray[j][0]].column == 1 &&  
                 
-                !downLeftArray.every(yourPawn => 
-                Pawns[downLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed
-                && yourPawn.live 
+                downLeftArray.every(yourPawn => { 
+                // Pawns[downLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed
+                // && yourPawn.live 
                 //Board[i].column == yourPawn.column && Board[i].row == yourPawn.row
-                
+                console.log("every", Pawns[downLeftArray[j][1]], yourPawn)
+                }
                 )
               ) {
                 console.log("check behind killed postions", downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2]);
