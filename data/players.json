@@ -71,9 +71,9 @@
   },
   {
     "index": 10,
-    "players": 1,
+    "players": 2,
     "user1": "ff",
-    "user2": "",
+    "user2": "fff",
     "block": 0
   }
 ]
