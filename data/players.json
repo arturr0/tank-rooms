@@ -44,15 +44,15 @@
   {
     "index": 6,
     "players": 1,
-    "user1": "f",
+    "user1": "gg",
     "user2": "",
-    "block": 0
+    "block": 1
   },
   {
     "index": 7,
-    "players": 1,
-    "user1": "gg",
-    "user2": "",
+    "players": 2,
+    "user1": "ff",
+    "user2": "f",
     "block": 0
   },
   {
