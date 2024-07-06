@@ -1631,7 +1631,7 @@ console.log("Min Right:", minRight);
             }
             //break;  
           }
-          break;
+          //break;
         }
  
 
