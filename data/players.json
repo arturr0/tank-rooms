@@ -86,8 +86,15 @@
   {
     "index": 12,
     "players": 1,
-    "user1": "",
-    "user2": "fff",
+    "user1": "ff",
+    "user2": "",
+    "block": 1
+  },
+  {
+    "index": 13,
+    "players": 2,
+    "user1": "ff",
+    "user2": "f",
     "block": 0
   }
 ]
