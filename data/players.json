@@ -43,22 +43,22 @@
   },
   {
     "index": 6,
-    "players": 0,
-    "user1": "",
+    "players": 1,
+    "user1": "kkk",
     "user2": "",
-    "block": 1
+    "block": 0
   },
   {
     "index": 7,
-    "players": 0,
-    "user1": "",
+    "players": 1,
+    "user1": "k",
     "user2": "",
-    "block": 1
+    "block": 0
   },
   {
     "index": 8,
-    "players": 0,
-    "user1": "",
+    "players": 1,
+    "user1": "k",
     "user2": "",
     "block": 1
   }
