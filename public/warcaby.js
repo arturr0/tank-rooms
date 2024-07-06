@@ -1447,10 +1447,7 @@ let minRight = [];
 function getUniqueValues(array, index) {
     return [...new Set(array.map(item => item[index]))];
 }
-console.log("Max Left:", maxLeft);
-console.log("Max Right:", maxRight);
-console.log("Min Left:", minLeft);
-console.log("Min Right:", minRight);
+
 // Get unique values for index 0
 let uniqueIndex0Values = getUniqueValues(killConditionsUnique, 0);
 
@@ -1462,12 +1459,17 @@ uniqueIndex0Values.forEach(value => {
     let filteredDownLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-left').map(subarray => Pawns[subarray[1]].row);
     let filteredDownRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-right').map(subarray => Pawns[subarray[1]].row);
 
-    // Find max and min values for each condition
-    if (filteredUpLeft.length > 0) maxLeft.push(Math.max(...filteredUpLeft));
-    if (filteredUpRight.length > 0) maxRight.push(Math.max(...filteredUpRight));
-    if (filteredDownLeft.length > 0) minLeft.push(Math.min(...filteredDownLeft));
-    if (filteredDownRight.length > 0) minRight.push(Math.min(...filteredDownRight));
-}); 
+    // Find max and min values for each condition and push to corresponding arrays
+    if (filteredUpLeft.length > 0) maxLeft.push([value, Math.max(...filteredUpLeft)]);
+    if (filteredUpRight.length > 0) maxRight.push([value, Math.max(...filteredUpRight)]);
+    if (filteredDownLeft.length > 0) minLeft.push([value, Math.min(...filteredDownLeft)]);
+    if (filteredDownRight.length > 0) minRight.push([value, Math.min(...filteredDownRight)]);
+});
+
+console.log("Max Left:", maxLeft);
+console.log("Max Right:", maxRight);
+console.log("Min Left:", minLeft);
+console.log("Min Right:", minRight);
     
     killConditionsUnique.sort((a, b) => {
       const categoryOrder = {
