@@ -461,13 +461,13 @@ function setup() {
     //f(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, letter, number)
     for (let j = 0; j < Board.length; j++) {
       // if (Board[j].isBlack && Board[j].row < 4) {
-      if ([1, 3, 5].includes(j)) {
+      if ([35].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
         pawn.queen = true;
         Pawns.push(pawn);
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([10, 14, 26, 30, 28].includes(j)) {
+      } else if ([28, 42, 44].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1456,18 +1456,16 @@ let uniqueIndex0Values = getUniqueValues(killConditionsUnique, 0);
 
 // Iterate through unique index 0 values
 uniqueIndex0Values.forEach(value => {
-    // Filter subarrays by index 0 value and condition
-    let filteredUpLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-left').map(subarray => Pawns[subarray[1]].row);
-    let filteredUpRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-right').map(subarray => Pawns[subarray[1]].row);
-    let filteredDownLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-left').map(subarray => Pawns[subarray[1]].row);
-    let filteredDownRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-right').map(subarray => Pawns[subarray[1]].row);
+  let filteredUpLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-left').map(subarray => Pawns[subarray[1]].row);
+  let filteredUpRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-right').map(subarray => Pawns[subarray[1]].row);
+  let filteredDownLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-left').map(subarray => Pawns[subarray[1]].row);
+  let filteredDownRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-right').map(subarray => Pawns[subarray[1]].row);
 
-    // Find max and min values for each condition
-    if (filteredUpLeft.length > 0) maxLeft.push(Math.max(...filteredUpLeft));
-    if (filteredUpRight.length > 0) maxRight.push(Math.max(...filteredUpRight));
-    if (filteredDownLeft.length > 0) minLeft.push(Math.min(...filteredDownLeft));
-    if (filteredDownRight.length > 0) minRight.push(Math.min(...filteredDownRight));
-}); 
+  if (filteredUpLeft.length > 0) maxLeft.push(Math.max(...filteredUpLeft));
+  if (filteredUpRight.length > 0) maxRight.push(Math.max(...filteredUpRight));
+  if (filteredDownLeft.length > 0) minLeft.push(Math.min(...filteredDownLeft));
+  if (filteredDownRight.length > 0) minRight.push(Math.min(...filteredDownRight));
+});
     
     killConditionsUnique.sort((a, b) => {
       const categoryOrder = {
@@ -1541,40 +1539,48 @@ uniqueIndex0Values.forEach(value => {
   // If you want to break the loop after the first match, uncomment the following line
   // break;
     }
-      for (let i = 0; i < killConditionsUnique.length; i++) 
-        for (let j = i + 1; j < killConditionsUnique.length; j++) 
+    for (let i = 0; i < killConditionsUnique.length; i++) {
+      for (let j = i + 1; j < killConditionsUnique.length; j++) {
           if (killConditionsUnique[i][0] != killConditionsUnique[j][0] && 
               killConditionsUnique[i][3] == killConditionsUnique[j][3] &&
               killConditionsUnique[i][1] != killConditionsUnique[j][1] &&
-              Pawns[killConditionsUnique[i][1]].live && Pawns[killConditionsUnique[j][1]].live &&
-              (((!killConditionsUnique[i][9] && killConditionsUnique[j][9] && 
-              (((killConditionsUnique[j][10] == 'up-left' && maxLeft.some(array => array === Pawns[killConditionsUnique[j][1]].row)) ||
-              (killConditionsUnique[j][10] == 'up-right' && maxRight.some(array => array === Pawns[killConditionsUnique[j][1]].row)) ||
-              (killConditionsUnique[j][10] == 'down-left' && minLeft.some(array => array === Pawns[killConditionsUnique[j][1]].row)) ||
-              (killConditionsUnique[j][10] == 'down-right' && minRight.some(array => array === Pawns[killConditionsUnique[j][1]].row))))) ||
-              (killConditionsUnique[i][9] && !killConditionsUnique[j][9] && Pawns[killConditionsUnique[i][1]].row == killConditionsUnique[i][10])) ||
-              (killConditionsUnique[i][9] && killConditionsUnique[j][9] &&
-              (((killConditionsUnique[i][10] == 'up-left' && maxLeft.some(array => array === Pawns[killConditionsUnique[i][1]].row)) ||
-              (killConditionsUnique[i][10] == 'up-right' && maxRight.some(array => array === Pawns[killConditionsUnique[i][1]].row)) ||
-              (killConditionsUnique[i][10] == 'down-left' && minLeft.some(array => array === Pawns[killConditionsUnique[i][1]].row)) ||
-              (killConditionsUnique[i][10] == 'down-right' && minRight.some(array => array === Pawns[killConditionsUnique[i][1]].row))) &&
-              ((killConditionsUnique[j][10] == 'up-left' && maxLeft.some(array => array === Pawns[killConditionsUnique[j][1]].row)) ||
-              (killConditionsUnique[j][10] == 'up-right' && maxRight.some(array => array === Pawns[killConditionsUnique[j][1]].row)) ||
-              (killConditionsUnique[j][10] == 'down-left' && minLeft.some(array => array === Pawns[killConditionsUnique[j][1]].row)) ||
-              (killConditionsUnique[j][10] == 'down-right' && minRight.some(array => array === Pawns[killConditionsUnique[j][1]].row))))) ||
-              (!killConditionsUnique[i][9] && !killConditionsUnique[j][9]))
-                                                            //maxLeft.some(array => array === Pawns[killConditionsUnique[j][1]].row)                                                                                     
+              Pawns[killConditionsUnique[i][1]].live && Pawns[killConditionsUnique[j][1]].live) {
               
-            ) {
-              console.log(`killedOptMode killer1: ${killConditionsUnique[i][0]} killer2: ${killConditionsUnique[j][0]} killed1: ${killConditionsUnique[i][1]} killed2: ${killConditionsUnique[j][1]}`);
-                killedOptMode = true;
-                blockKill = true;
-                Pawns[killConditionsUnique[i][1]].killed = true;
-                Pawns[killConditionsUnique[j][1]].killed = true;
-                killedOptModeArray.push(killConditionsUnique[i]);
-                killedOptModeArray.push(killConditionsUnique[j]);
-                break;
+              let conditionMet = (
+                  (!killConditionsUnique[i][9] && killConditionsUnique[j][9] && 
+                  ((killConditionsUnique[j][10] === 'up-left' && maxLeft.includes(Pawns[killConditionsUnique[j][1]].row)) ||
+                  (killConditionsUnique[j][10] === 'up-right' && maxRight.includes(Pawns[killConditionsUnique[j][1]].row)) ||
+                  (killConditionsUnique[j][10] === 'down-left' && minLeft.includes(Pawns[killConditionsUnique[j][1]].row)) ||
+                  (killConditionsUnique[j][10] === 'down-right' && minRight.includes(Pawns[killConditionsUnique[j][1]].row)))) ||
+  
+                  (killConditionsUnique[i][9] && !killConditionsUnique[j][9] && Pawns[killConditionsUnique[i][1]].row == killConditionsUnique[i][10]) ||
+  
+                  (killConditionsUnique[i][9] && killConditionsUnique[j][9] &&
+                  ((killConditionsUnique[i][10] === 'up-left' && maxLeft.includes(Pawns[killConditionsUnique[i][1]].row)) ||
+                  (killConditionsUnique[i][10] === 'up-right' && maxRight.includes(Pawns[killConditionsUnique[i][1]].row)) ||
+                  (killConditionsUnique[i][10] === 'down-left' && minLeft.includes(Pawns[killConditionsUnique[i][1]].row)) ||
+                  (killConditionsUnique[i][10] === 'down-right' && minRight.includes(Pawns[killConditionsUnique[i][1]].row))) &&
+                  ((killConditionsUnique[j][10] === 'up-left' && maxLeft.includes(Pawns[killConditionsUnique[j][1]].row)) ||
+                  (killConditionsUnique[j][10] === 'up-right' && maxRight.includes(Pawns[killConditionsUnique[j][1]].row)) ||
+                  (killConditionsUnique[j][10] === 'down-left' && minLeft.includes(Pawns[killConditionsUnique[j][1]].row)) ||
+                  (killConditionsUnique[j][10] === 'down-right' && minRight.includes(Pawns[killConditionsUnique[j][1]].row)))) ||
+  
+                  (!killConditionsUnique[i][9] && !killConditionsUnique[j][9])
+              );
+  
+              if (conditionMet) {
+                  console.log(`killedOptMode killer1: ${killConditionsUnique[i][0]} killer2: ${killConditionsUnique[j][0]} killed1: ${killConditionsUnique[i][1]} killed2: ${killConditionsUnique[j][1]}`);
+                  killedOptMode = true;
+                  blockKill = true;
+                  Pawns[killConditionsUnique[i][1]].killed = true;
+                  Pawns[killConditionsUnique[j][1]].killed = true;
+                  killedOptModeArray.push(killConditionsUnique[i]);
+                  killedOptModeArray.push(killConditionsUnique[j]);
+                  break;
+              }
           }
+      }
+  }
           
           for (let i = 0; i < killConditionsUnique.length; i++) {
             for (let j = i + 1; j < killConditionsUnique.length; j++) {
