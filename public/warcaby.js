@@ -1174,15 +1174,17 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downLeftArray.length; j++)
               if (Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1 
-                &&
-                !downLeftArray.every(yourPawn => 
-                Pawns[downLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed
-                && Pawns[yourPawn[1]].live &&
-                Board[i].column == Pawns[yourPawn[1]].column && Board[i].row == Pawns[yourPawn[1]].row
-                
-                )
+                // &&
+                // !downLeftArray.every(yourPawn => { 
+                // Pawns[downLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed
+                // && Pawns[yourPawn[1]].live &&
+                // Board[i].column == Pawns[yourPawn[1]].column && Board[i].row == Pawns[yourPawn[1]].row
+                // console.log("loop", yourPawn)
+                // }
+                // )
               )
               { 
+                Board[i].check = true;
                 console.log("check behind killed postions", downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2]);
                 //Board[i].check = true;
                 // let queen = null;
@@ -1197,8 +1199,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 console.log("rows", rows)
                 let nearest = Math.min(...rows);
                 console.log("nearest", nearest)
-                killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
-                killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+                //killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
+                //killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
                 // let maxLeft = Math.max(...killConditionsUnique.filter(subarray => subarray[10] == 'down-left').map(subarray => Pawns[subarray[1]].row));
                 // console.log(maxLeft)
                 break;
