@@ -461,7 +461,7 @@ function setup() {
     //f(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, letter, number)
     for (let j = 0; j < Board.length; j++) {
       // if (Board[j].isBlack && Board[j].row < 4) {
-      if ([14].includes(j)) {
+      if ([7].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
         pawn.queen = true;
@@ -1172,14 +1172,16 @@ function kill(blockKilledPawn, blockKillersPawn) {
           // }
           
           for (let i = 0; i < Board.length; i++)
-            //for (let j = 0; j < downLeftArray.length; j++)
+            for (let j = 0; j < downLeftArray.length; j++)
               if (Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1  
                 && downLeftArray[j][1] == killed  &&  downLeftArray[j][0] == killer &&
-                !downLeftArray.every(yourPawn => 
-                Pawns[yourPawn[1]].isRed == yourPawn.isRed
-                && yourPawn.live &&
-                //Board[i].column == yourPawn.column && Board[i].row == yourPawn.row &&
-                Board[i].row - Pawns[yourPawn[1]].row == -1 && Board[i].column - Pawns[yourPawn[1]].column == 1
+                Pawns.every(yourPawn =>
+                  Pawns.some(p =>
+                    Pawns[downLeftArray[j][1]].isRed == p.isRed &&
+                    p.live &&
+                    Board[i].column == p.column &&
+                    Board[i].row == p.row
+                  )
                 )
               ) {
                 console.log("check behind killed postions", downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2]);
