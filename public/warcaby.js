@@ -884,7 +884,9 @@ if (killedOptMode) {
             let firstKill = [];
             killConditions = [];
             killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-            console.log('two killed', killConditionsUnique);
+            for (let i = 0; i < killConditionsUnique.length; i++) {
+              console.log('two killed', killConditionsUnique[i]);
+            }
             firstKill.push(oneKiller2KilledArray[i])
             oneKiller2KilledArray = [];
             console.log('oneKiller2Killed', firstKill)
