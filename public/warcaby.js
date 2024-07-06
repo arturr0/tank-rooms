@@ -1590,18 +1590,18 @@ console.log("Min Right:", minRight);
                       !killConditionsUnique[i][9] ||
                       (
                           killConditionsUnique[i][9] && killConditionsUnique[j][9] && 
-                          (
-                              ((killConditionsUnique[i][10] == 'up-left' && maxLeft.some(obj => obj.row === Pawns[killConditionsUnique[i][1]].row && obj.condition === killConditionsUnique[i])) ||
-                              (killConditionsUnique[i][10] == 'up-right' && maxRight.some(obj => obj.row === Pawns[killConditionsUnique[i][1]].row && obj.condition === killConditionsUnique[i])) ||
-                              (killConditionsUnique[i][10] == 'down-left' && minLeft.some(obj => obj.row === Pawns[killConditionsUnique[i][1]].row && obj.condition === killConditionsUnique[i])) ||
-                              (killConditionsUnique[i][10] == 'down-right' && minRight.some(obj => obj.row === Pawns[killConditionsUnique[i][1]].row && obj.condition === killConditionsUnique[i])))
-                          ) &&
-                          (
-                              ((killConditionsUnique[j][10] == 'up-left' && maxLeft.some(obj => obj.row === Pawns[killConditionsUnique[j][1]].row && obj.condition === killConditionsUnique[j])) ||
-                              (killConditionsUnique[j][10] == 'up-right' && maxRight.some(obj => obj.row === Pawns[killConditionsUnique[j][1]].row && obj.condition === killConditionsUnique[j])) ||
-                              (killConditionsUnique[j][10] == 'down-left' && minLeft.some(obj => obj.row === Pawns[killConditionsUnique[j][1]].row && obj.condition === killConditionsUnique[j])) ||
-                              (killConditionsUnique[j][10] == 'down-right' && minRight.some(obj => obj.row === Pawns[killConditionsUnique[j][1]].row && obj.condition === killConditionsUnique[j])))
-                          ) && 
+                          // (
+                          //     ((killConditionsUnique[i][10] == 'up-left' && maxLeft.some(obj => obj.row === Pawns[killConditionsUnique[i][1]].row && obj.condition === killConditionsUnique[i])) ||
+                          //     (killConditionsUnique[i][10] == 'up-right' && maxRight.some(obj => obj.row === Pawns[killConditionsUnique[i][1]].row && obj.condition === killConditionsUnique[i])) ||
+                          //     (killConditionsUnique[i][10] == 'down-left' && minLeft.some(obj => obj.row === Pawns[killConditionsUnique[i][1]].row && obj.condition === killConditionsUnique[i])) ||
+                          //     (killConditionsUnique[i][10] == 'down-right' && minRight.some(obj => obj.row === Pawns[killConditionsUnique[i][1]].row && obj.condition === killConditionsUnique[i])))
+                          // ) &&
+                          // (
+                          //     ((killConditionsUnique[j][10] == 'up-left' && maxLeft.some(obj => obj.row === Pawns[killConditionsUnique[j][1]].row && obj.condition === killConditionsUnique[j])) ||
+                          //     (killConditionsUnique[j][10] == 'up-right' && maxRight.some(obj => obj.row === Pawns[killConditionsUnique[j][1]].row && obj.condition === killConditionsUnique[j])) ||
+                          //     (killConditionsUnique[j][10] == 'down-left' && minLeft.some(obj => obj.row === Pawns[killConditionsUnique[j][1]].row && obj.condition === killConditionsUnique[j])) ||
+                          //     (killConditionsUnique[j][10] == 'down-right' && minRight.some(obj => obj.row === Pawns[killConditionsUnique[j][1]].row && obj.condition === killConditionsUnique[j])))
+                          // ) && 
                           !arraysEqual( 
                               Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
                                 Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1]
