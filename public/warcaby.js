@@ -467,7 +467,7 @@ function setup() {
         pawn.queen = true;
         Pawns.push(pawn);
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([10, 14, 26, 30, 37].includes(j)) {
+      } else if ([10, 14, 26, 30, 28].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
