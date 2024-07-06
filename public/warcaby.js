@@ -1613,8 +1613,8 @@ console.log("Min Right:", minRight);
                 )
               )
             ) { 
-              console.log("i", Pawns[killConditionsUnique[i][1]].row , 'maxLeft', maxLeft, 'maxRight', maxRight, 'minLeft', minLeft, 'minRight', minRight)
-              console.log("j", Pawns[killConditionsUnique[j][1]].row , 'maxLeft', maxLeft, 'maxRight', maxRight, 'minLeft', minLeft, 'minRight', minRight)
+              console.log("i", killConditionsUnique[i][1] , 'maxLeft', maxLeft, 'maxRight', maxRight, 'minLeft', minLeft, 'minRight', minRight)
+              console.log("j", killConditionsUnique[j][1], 'maxLeft', maxLeft, 'maxRight', maxRight, 'minLeft', minLeft, 'minRight', minRight)
               console.log(Pawns[killConditionsUnique[j][1]].row , maxLeft, maxRight, minLeft, minRight)
               console.log(
                 Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
