@@ -50,10 +50,10 @@
   },
   {
     "index": 7,
-    "players": 0,
-    "user1": "",
-    "user2": "",
-    "block": 1
+    "players": 2,
+    "user1": "ff",
+    "user2": "fff",
+    "block": 0
   },
   {
     "index": 8,
@@ -85,9 +85,9 @@
   },
   {
     "index": 12,
-    "players": 2,
-    "user1": "ff",
-    "user2": "fff",
-    "block": 0
+    "players": 0,
+    "user1": "",
+    "user2": "",
+    "block": 1
   }
 ]
