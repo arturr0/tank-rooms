@@ -1187,6 +1187,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
               )
               { 
                 Board[i].check = true;
+                console.log
+                console.log(Board.find(board => board.check))
                 //console.log("check behind killed postions", downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2]);
                 //Board[i].check = true;
                 // let queen = null;
