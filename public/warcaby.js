@@ -468,7 +468,7 @@ function setup() {
         Pawns.push(pawn);
         generateQueensAreas()
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([14, 30, 46, 12, 28].includes(j)) {
+      } else if ([14, 30,46, 12, 28].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1581,7 +1581,7 @@ console.log("Min Right:", minRight);
               killedOptModeArray.push(killConditionsUnique[j]);
               break;
         }
-          
+//o1          
         for (let i = 0; i < killConditionsUnique.length; i++) 
           for (let j = i + 1; j < killConditionsUnique.length; j++) 
             if (
@@ -1613,7 +1613,9 @@ console.log("Min Right:", minRight);
                 )
               )
             ) { 
-              console.log(Pawns[killConditionsUnique[i][1]].row , maxLeft, maxRight, minLeft, minRight)
+              console.log("i", Pawns[killConditionsUnique[i][1]].row , 'maxLeft', maxLeft, 'maxRight', maxRight, 'minLeft', minLeft, 'minRight', minRight)
+              console.log("j", Pawns[killConditionsUnique[j][1]].row , 'maxLeft', maxLeft, 'maxRight', maxRight, 'minLeft', minLeft, 'minRight', minRight)
+              console.log(Pawns[killConditionsUnique[j][1]].row , maxLeft, maxRight, minLeft, minRight)
               console.log(
                 Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
                   Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1]
@@ -1630,7 +1632,7 @@ console.log("Min Right:", minRight);
               Pawns[killConditionsUnique[i][1]].kill1Killed2 = true;
               oneKiller2KilledArray.push(killConditionsUnique[i]);
               oneKiller2KilledArray.push(killConditionsUnique[j]);
-              break;
+              //break;
               
             }
             //break;  
