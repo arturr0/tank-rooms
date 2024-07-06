@@ -1860,6 +1860,8 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && !killersOptMo
     else if (killConditionsUnique.length == 0 && !blockKill) {
         check = false;
         killConditions = [];
+        blockKilledPawn = null;
+        blockKillersPawn = null;
         console.log('check killConditionsUnique.length == 0', check)
     }
     else if ((blockKill && killConditionsUnique.length == 0 && (blockKillersPawn != null || blockKilledPawn != null))) {
