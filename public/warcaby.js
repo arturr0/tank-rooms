@@ -1178,7 +1178,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 )
                 &&
                 
-                Board.some(board =>
+                Board.every(board =>
                   board.free && board.queen &&
                   Pawns[killed].row - board.row == -1 &&
                   Pawns[killed].column - board.column == 1
