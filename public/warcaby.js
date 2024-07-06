@@ -1154,13 +1154,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
               Board[i].row == area[0] &&
               Board[i].column == area[1] 
             )
-            &&
-                
-            Board.some(board =>
-              board.free && board.queen &&
-              Pawns[j].row - board.row == -1 &&
-              Pawns[j].column - board.column == 1
-            )  
+            
 
         ) {
 
@@ -1185,11 +1179,13 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 )
                 &&
                 
-                Board.some(board =>
-                  board.free && board.queen &&
-                  Pawns[killed].row - board.row == -1 &&
-                  Pawns[killed].column - board.column == 1
-                )  
+                // Board.some(board =>
+                //   board.free && board.queen &&
+                //   Pawns[killed].row - board.row == -1 &&
+                //   Pawns[killed].column - board.column == 1
+                // )
+                downLeftArray.every(pawn => Pawns[pawn[1]].row - Board[i].row == -1 &&
+                  Pawns[pawn[1]].column - Board[i].row == 1) 
               )
               )
               { 
