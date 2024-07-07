@@ -1143,7 +1143,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
             Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             Board[i].queen && Pawns[j].row - Board[i].row <= -1 &&
-            Pawns[j].column - Board[i].column >= 1 && Board[i].row > Pawns[j].row &&
+            Pawns[j].column - Board[i].column >= 1 && Board[i].row > Pawns[j].row && Board[i].free &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'down-left' &&
               Pawns[j].row === area[0] &&
@@ -1219,12 +1219,12 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 //let nearest = Math.min(...rows);
                 //console.log("nearest", nearest)
                 // if(checkedBoard == numberOfKilled) {
-                if(free) {
-                  for (let j = 0; j < downLeftArray.length; j++) {
-                    killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
-                    killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-                  }
-                }// }
+                // if(free) {
+                //   for (let j = 0; j < downLeftArray.length; j++) {
+                //     killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
+                //     killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+                //   }
+                // }// }
                 // Board.forEach(board => {
                 //   if (board.check) {
                 //     board.check = false; // Update check to false
