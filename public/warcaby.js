@@ -1473,8 +1473,10 @@ for (let i = 0; i < Board.length; i++) {
                 if (j === 0 || (typeof k !== 'undefined' && k === 0)) {
                     // Splice the current element j (if it's 0)
                     upLeftArray.splice(j, 1);
+                    upLeftArray.splice(k, 1);
                     console.log("occ");
-                    j--; // Adjust j because splice changes the array length and indices
+                    j--;
+                    k--; // Adjust j because splice changes the array length and indices
                 }
             } else {
                 shouldClearArray = false; // Set flag to false if any valid pair is found
