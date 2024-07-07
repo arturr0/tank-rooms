@@ -1947,13 +1947,13 @@ function killUnique(array) {
 //   }
 //   return uniqueKills;
 // }
-function killedUnique(downLeftArray) {
-  let uniqueKilled = new Set();
-  downLeftArray.forEach(item => {
-    uniqueKilled.add(item[1]); // Assuming item[1] is the killed value
-  });
-  return Array.from(uniqueKilled); // Convert Set to array and return
-}
+// function killedUnique(downLeftArray) {
+//   let uniqueKilled = new Set();
+//   downLeftArray.forEach(item => {
+//     uniqueKilled.add(item[1]); // Assuming item[1] is the killed value
+//   });
+//   return Array.from(uniqueKilled); // Convert Set to array and return
+// }
 function queenUnique(array) {
   let uniqueKills = [];
   let itemsFound = {};
@@ -2116,13 +2116,13 @@ function keyPressed() {
         stepKill(killConditionsUnique);    
     }
 }
-function neighboursFilter(kill, array, row, column) {
+function neighboursFilter(kill, array, rowCond, columnCond) {
   let indicesToRemove = [];
   console.log(array);
   for (let i = 0; i < Board.length; i++) {
       
       for (let j = 0; j < array.length; j++) {
-          if (Board[i].row - Pawns[array[j][1]].row == row && Board[i].column - Pawns[array[j][1]].column == column) {
+          if (Board[i].row - Pawns[array[j][1]].row == rowCond && Board[i].column - Pawns[array[j][1]].column == columnCond) {
               // Check if the conditions inside 'some' are met
               for (let k = 0; k < array.length; k++) {
                   if (
@@ -2134,6 +2134,7 @@ function neighboursFilter(kill, array, row, column) {
                   ) {
                       indicesToRemove.push([j, array[j][2]]);
                       indicesToRemove.push([k, array[k][2]]);
+                      console.log("check", array[j][2], array[k][2])
                   }
               }
           }
@@ -2155,7 +2156,7 @@ function neighboursFilter(kill, array, row, column) {
         console.log(array[i]);
       for (let i = 0; i < boardRemoved.length; i++)
           for (let j = 0; j < array.length; j++)
-              if((kill == "up" && array[j][2] < boardRemoved[i]) || (kill == "down" && array[j][2] > boardRemoved[i]))
+              if(array[j][2] < boardRemoved[i])
                   array.splice(j, 1);
       // if (sortedIndicesToRemove.length > 0) {
       //     console.log("occ");
