@@ -468,7 +468,7 @@ function setup() {
         Pawns.push(pawn);
         generateQueensAreas()
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([8,10,19,37].includes(j)) {
+      } else if ([46,37,19].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1389,22 +1389,25 @@ for (let j = 0; j < downLeftArray.length; j++)
   for (let i = 0; i < Board.length; i++) {
     for (let j = upLeftArray.length - 1; j >= 0; j--) {
         if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
-            // Check if the conditions inside 'some' are met
-            const conditionMetIndex = upLeftArray.findIndex(yourPawn => 
-                Pawns[upLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed &&
-                Pawns[yourPawn[1]].live && Pawns[upLeftArray[j][1]].live &&
-                Board[i].column == Pawns[yourPawn[1]].column && Board[i].row == Pawns[yourPawn[1]].row
-            );
+            // Find if the condition is met and get the index
+            const conditionMet = upLeftArray.some((yourPawn, index) => {
+                if (Pawns[upLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed &&
+                    Pawns[yourPawn[1]].live && Pawns[upLeftArray[j][1]].live &&
+                    Board[i].column == Pawns[yourPawn[1]].column && Board[i].row == Pawns[yourPawn[1]].row) {
+                    // Splice the found index if different from j
+                    if (index !== j) {
+                        upLeftArray.splice(index, 1);
+                        console.log("occ yourPawn[1]");
+                    }
+                    return true;
+                }
+                return false;
+            });
 
-            if (conditionMetIndex !== -1) {
+            if (conditionMet) {
                 // Remove the element at index 'j' from upLeftArray
                 upLeftArray.splice(j, 1);
                 console.log("occ");
-                // Remove the element at index 'yourPawn[1]' from upLeftArray if it exists
-                if (conditionMetIndex !== j) { // Avoid double splicing the same element
-                    upLeftArray.splice(conditionMetIndex, 1);
-                    console.log("occ yourPawn[1]");
-                }
             }
         }
     }
