@@ -1235,7 +1235,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
           // }
           break;
         }
-        if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) && Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
+        if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) && 
+            Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             Board[i].queen && Pawns[j].row - Board[i].row >= 1 &&
             Pawns[j].column - Board[i].column >= 1 && Board[i].row < Pawns[j].row &&
@@ -1264,22 +1265,22 @@ function kill(blockKilledPawn, blockKillersPawn) {
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < upLeftArray.length; j++)
               if (Board[i].row - Pawns[upLeftArray[j][1]].row == -1 && Board[i].column - Pawns[upLeftArray[j][1]].column == -1  
+                &&
+                (!upLeftArray.some(yourPawn =>  
+                    Pawns[upLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed
+                    && Pawns[yourPawn[1]].live &&
+                    Board[i].column == Pawns[yourPawn[1]].column && Board[i].row == Pawns[yourPawn[1]].row
+                )
                 &&  
-                    (!Pawns.some(yourPawn => 
-                    Pawns[upLeftArray[j][1]].isRed == yourPawn.isRed
-                    && yourPawn.live &&
-                    Board[i].column == yourPawn.column && Board[i].row == yourPawn.row
-                    )
-                    &&
-                    upLeftArray.every(pawn => 
-                        Pawns[pawn[1]].row - Board[pawn[2]].row == -1 &&
-                        Pawns[pawn[1]].column - Board[pawn[2]].column == -1
-                    )
+                upLeftArray.every(pawn => 
+                    Pawns[pawn[1]].row - Board[pawn[2]].row == -1 &&
+                    Pawns[pawn[1]].column - Board[pawn[2]].column == -1
+                )
                 )
                 )
                {
                 console.log("check behind killed postions", upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2]);
-                //Board[i].check = true;
+                Board[i].check = true;
                 // let queen = null;
                 // let foundQueenNeighbor = upLeftArray.find(queenNeighbor =>
                 //   Pawns[queenNeighbor[0]].row - Pawns[queenNeighbor[1]].row == -1 &&
