@@ -1471,8 +1471,9 @@ for (let j = 0; j < downLeftArray.length; j++)
     free = false;
     //downLeftArray = []
     console.log("occ")
+    downLeftArray = [];
   }
-  else ("free");
+  console.log(downLeftArray);
 //end 
   console.log("after break");
     // //killConditionsUnique = killUnique(killConditions);
