@@ -1474,6 +1474,12 @@ for (let j = 0; j < downLeftArray.length; j++)
     downLeftArray = [];
   }
   console.log(downLeftArray);
+  
+  for (let j = 0; j < downLeftArray.length; j++) {
+    killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
+    killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+    downLeftArray.splice(j, 1);
+  }
 //end 
   console.log("after break");
     // //killConditionsUnique = killUnique(killConditions);
