@@ -1412,7 +1412,7 @@ for (let j = 0; j < downLeftArray.length; j++)
 //         }
 //     }
 // }
-// //always splice
+//always splice
 // for (let i = 0; i < Board.length; i++) {
 //     let indicesToRemove = new Set();
 //     for (let j = 0; j < upLeftArray.length; j++) {
@@ -1448,47 +1448,41 @@ for (let j = 0; j < downLeftArray.length; j++)
 //         console.log("occ");
 //     }
 // }
-let shouldClearArray = true; // Flag to determine if we should clear the array
 
 for (let i = 0; i < Board.length; i++) {
-    for (let j = 0; j < upLeftArray.length; j++) {
-        if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
-            // Check if the conditions inside 'some' are met
-            let foundValidPair = false;
+  let indicesToRemove = new Set();
+  for (let j = 0; j < upLeftArray.length; j++) {
+      if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
+          // Check if the conditions inside 'some' are met
+          for (let k = 0; k < upLeftArray.length; k++) {
+              if (
+                  Pawns[upLeftArray[j][1]].isRed == Pawns[upLeftArray[k][1]].isRed &&
+                  Pawns[upLeftArray[k][1]].live &&
+                  Pawns[upLeftArray[j][1]].live &&
+                  Board[i].column == Pawns[upLeftArray[k][1]].column &&
+                  Board[i].row == Pawns[upLeftArray[k][1]].row &&
+                  upLeftArray[k][2] < upLeftArray[j][2] // Condition to compare upLeftArray[k][2] and upLeftArray[j][2]
+              ) {
+                  indicesToRemove.add(j);
+                  indicesToRemove.add(k);
+              }
+          }
+      }
+  }
 
-            for (let k = 0; k < upLeftArray.length; k++) {
-                if (
-                    Pawns[upLeftArray[j][1]].isRed == Pawns[upLeftArray[k][1]].isRed &&
-                    Pawns[upLeftArray[k][1]].live &&
-                    Pawns[upLeftArray[j][1]].live &&
-                    Board[i].column == Pawns[upLeftArray[k][1]].column &&
-                    Board[i].row == Pawns[upLeftArray[k][1]].row
-                ) {
-                    foundValidPair = true;
-                    break; // Exit inner loop as soon as a valid pair is found
-                }
-            }
+  // Convert set to array and sort in reverse order
+  const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
 
-            if (!foundValidPair) {
-                if (j === 0 || (typeof k !== 'undefined' && k === 0)) {
-                    // Splice the current element j (if it's 0)
-                    upLeftArray.splice(j, 1);
-                    upLeftArray.splice(k, 1);
-                    console.log("occ");
-                    j--;
-                    k--; // Adjust j because splice changes the array length and indices
-                }
-            } else {
-                shouldClearArray = false; // Set flag to false if any valid pair is found
-            }
-        }
-    }
+  // Remove elements at collected indices in reverse order
+  for (let index of sortedIndicesToRemove) {
+      upLeftArray.splice(index, 1);
+  }
+
+  if (sortedIndicesToRemove.length > 0) {
+      console.log("occ");
+  }
 }
 
-if (shouldClearArray) {
-    upLeftArray = [];
-    console.log("cleared");
-}
 
 
       for (let j = 0; j < upLeftArray.length; j++) {
