@@ -1167,28 +1167,28 @@ function kill(blockKilledPawn, blockKillersPawn) {
           //   console.log("push downLeftArray", downLeftArray[i]);
           // }
         
-          for (let i = 0; i < Board.length; i++)
-            for (let j = 0; j < downLeftArray.length; j++)
-              if (Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1 
-                &&
-//                 (!downLeftArray.every(yourPawn =>  
-//                 Pawns[downLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed
-//                 && Pawns[yourPawn[1]].live &&
-//                 Board[i].column == Pawns[yourPawn[1]].column && Board[i].row == Pawns[yourPawn[1]].row
+          // for (let i = 0; i < Board.length; i++)
+          //   for (let j = 0; j < downLeftArray.length; j++)
+              if (//Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1 
+              //   &&
+                (!downLeftArray.some(yourPawn =>  
+                Pawns[downLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed
+                && Pawns[yourPawn[1]].live &&
+                Board[i].column == Pawns[yourPawn[1]].column && Board[i].row == Pawns[yourPawn[1]].row
                 
-//                 )
-//                 &&
+                )
+                &&
                 
                 // Board.some(board =>
                 //   board.free && board.queen &&
                 //   Pawns[killed].row - board.row == -1 &&
                 //   Pawns[killed].column - board.column == 1
                 // )
-                downLeftArray.every(pawn => {console.log("pawn", pawn)} 
-                  // Pawns[pawn[1]].row - Board[pawn[2]].row == -1 &&
-                  // Pawns[pawn[1]].column - Board[pawn[2]].column == 1 &&
-                  // Board[pawn[2]].free
-                
+                downLeftArray.every(pawn => 
+                  Pawns[pawn[1]].row - Board[pawn[2]].row == -1 &&
+                  Pawns[pawn[1]].column - Board[pawn[2]].column == 1 &&
+                  Board[pawn[2]].free
+                )
               )
               )
               { 
