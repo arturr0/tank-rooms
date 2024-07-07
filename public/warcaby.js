@@ -1445,26 +1445,60 @@ for (let i = 0; i < Board.length; i++) {
                   
 
               ) {
+                  // indicesToRemove.add(j);
+                  // indicesToRemove.add(k);
                   indicesToRemove.add(j);
                   indicesToRemove.add(k);
+                  // indicesToRemove.add(upLeftArray[j][2]);
+                  // indicesToRemove.add(upLeftArray[k][2]);
+                  console.log("indicesToRemove", indicesToRemove)
               }
               
               
           }
         }
+        const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
+  console.log('sortedIndicesToRemove', sortedIndicesToRemove)
+  // Make a copy of sortedIndicesToRemove for comparison after splicing
+  const sortedIndicesCopy = [...sortedIndicesToRemove];
+  console.log("sortedIndicesCopy", sortedIndicesCopy)
+  // Remove elements at collected indices in reverse order
+  for (let index of sortedIndicesToRemove) {
+      upLeftArray.splice(index, 1);
+      console.log("spliced index", index)
+  }
+
+  // Check if any remaining subarray's second index is less than spliced subarray's second index
+  for (let j = upLeftArray.length - 1; j >= 0; j--) {
+      let shouldRemove = true;
+      for (let k of sortedIndicesCopy) {
+          if (upLeftArray[j][2] >= k) {
+              shouldRemove = false;
+              break;
+          }
+          //console.log("k", k)
+      }
+      if (shouldRemove) {
+          upLeftArray.splice(j, 1);
+      }
+  }
+
+  if (sortedIndicesToRemove.length > 0) {
+      console.log("occ");
+  }
     }
 
-    // Convert set to array and sort in reverse order
-    const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
+    // // Convert set to array and sort in reverse order
+    // const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
 
-    // Remove elements at collected indices in reverse order
-    for (let index of sortedIndicesToRemove) {
-        upLeftArray.splice(index, 1);
-    }
+    // // Remove elements at collected indices in reverse order
+    // for (let index of sortedIndicesToRemove) {
+    //     upLeftArray.splice(index, 1);
+    // }
 
-    if (sortedIndicesToRemove.length > 0) {
-        console.log("occ");
-    }
+    // if (sortedIndicesToRemove.length > 0) {
+    //     console.log("occ");
+    // }
 }
 
 //works ony when secone block
