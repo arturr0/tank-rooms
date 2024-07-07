@@ -461,14 +461,14 @@ function setup() {
     //f(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, letter, number)
     for (let j = 0; j < Board.length; j++) {
       // if (Board[j].isBlack && Board[j].row < 4) {
-      if ([55].includes(j)) {
+      if ([7].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
         pawn.queen = true;
         Pawns.push(pawn);
         generateQueensAreas()
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([46,37,10].includes(j)) {
+      } else if ([42,21,35].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -2200,7 +2200,7 @@ function neighbourFilter(kill, array, r, c) {
             array.splice(j, 1);  
       for(let i = 0; i < boardRemoved.length; i++)
           for (let j = 0; j < array.length; j++)
-              if((kill = "down" && array[j][2] > boardRemoved[i][1]) || (kill == "up" && array[j][2] < boardRemoved[i][1]))
+              if((kill == "down" && array[j][2] > boardRemoved[i][1]) || (kill == "up" && array[j][2] < boardRemoved[i][1]))
                   array.splice(j, 1);
       // if (sortedIndicesToRemove.length > 0) {
       //     console.log("occ");
