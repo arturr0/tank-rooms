@@ -2141,7 +2141,7 @@ function neighboursFilter(kill, array, rowCond, columnCond) {
       }
 
       // Convert set to array and sort in reverse order
-      const sortedIndicesToRemove = indicesToRemove.sort((a, b) => b - a);
+      //const sortedIndicesToRemove = indicesToRemove.sort((a, b) => b - a);
       let boardRemoved = [];
       for(let i = 0; i < indicesToRemove.length; i++)
           boardRemoved.push(indicesToRemove[i][1])    
