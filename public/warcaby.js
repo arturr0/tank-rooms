@@ -1413,7 +1413,7 @@ for (let j = 0; j < downLeftArray.length; j++)
 //     }
 // }
 for (let i = 0; i < Board.length; i++) {
-    let indicesToRemove = new Set();
+    let indicesToRemove = [];
     for (let j = 0; j < upLeftArray.length; j++) {
         if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
             // Check if the conditions inside 'some' are met
@@ -1425,34 +1425,34 @@ for (let i = 0; i < Board.length; i++) {
                     Board[i].column == Pawns[upLeftArray[k][1]].column &&
                     Board[i].row == Pawns[upLeftArray[k][1]].row
                 ) {
-                    indicesToRemove.add(j, upLeftArray[j][2]);
-                    indicesToRemove.add(k, upLeftArray[k][2]);
+                    indicesToRemove.push([j, upLeftArray[j][2]]);
+                    indicesToRemove.push([k, upLeftArray[k][2]]);
                 }
             }
         }
     }
 
     // Convert set to array and sort in reverse order
-    const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
-    console.log("sortedIndicesToRemove", sortedIndicesToRemove)
+    //const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
+    console.log("indicesToRemove", indicesToRemove[0])
     // Remove elements at collected indices in reverse order
-    for (let index of sortedIndicesToRemove) {
-        console.log('index', index)
-        upLeftArray.splice(index, 1);
-    }
+    // for (let [index] of sortedIndicesToRemove) {
+    //     console.log('index', [index])
+    //     upLeftArray.splice(index, 1);
+    // }
 
-    if (sortedIndicesToRemove.length > 0) {
-        console.log("occ");
-    }
+    // if (sortedIndicesToRemove.length > 0) {
+    //     console.log("occ");
+    // }
 }
 
 
 
-      for (let j = 0; j < upLeftArray.length; j++) {
-        killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
-        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-        upLeftArray.splice(j, 1);
-      }
+    //   for (let j = 0; j < upLeftArray.length; j++) {
+    //     killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
+    //     killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+    //     upLeftArray.splice(j, 1);
+    //   }
     // //killConditionsUnique = killUnique(killConditions);
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////console.log(killConditionsUnique)
   // for (let i = 0; i < killConditionsUnique.length; i++)
