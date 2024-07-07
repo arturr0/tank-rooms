@@ -1496,50 +1496,45 @@ for (let j = 0; j < downLeftArray.length; j++)
 //   }
 // }
 
-// Define the threshold value for comparison
-const thresholdValue = /* provide the value here */;
-
 for (let i = 0; i < Board.length; i++) {
-    let indicesToRemove = new Set();
-    for (let j = 0; j < upLeftArray.length; j++) {
-        if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
-            // Check if the conditions inside 'some' are met
-            for (let k = 0; k < upLeftArray.length; k++) {
-                if (
-                    Pawns[upLeftArray[j][1]].isRed == Pawns[upLeftArray[k][1]].isRed &&
-                    Pawns[upLeftArray[k][1]].live &&
-                    Pawns[upLeftArray[j][1]].live &&
-                    Board[i].column == Pawns[upLeftArray[k][1]].column &&
-                    Board[i].row == Pawns[upLeftArray[k][1]].row 
-                ) {
-                    indicesToRemove.add(j);
-                    indicesToRemove.add(k);
-                }
-                
-            }
-        }
-    }
+  let indicesToRemove = new Set();
+  
+  // Iterate over upLeftArray
+  for (let j = 0; j < upLeftArray.length; j++) {
+      if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
+          // Check conditions inside 'some'
+          for (let k = 0; k < upLeftArray.length; k++) {
+              if (
+                  // Compare the second index of subarrays in upLeftArray
+                  upLeftArray[j][2] < upLeftArray[k][2] &&
+                  
+                  // Ensure other conditions are met
+                  Pawns[upLeftArray[j][1]].isRed == Pawns[upLeftArray[k][1]].isRed &&
+                  Pawns[upLeftArray[k][1]].live &&
+                  Pawns[upLeftArray[j][1]].live &&
+                  Board[i].column == Pawns[upLeftArray[k][1]].column &&
+                  Board[i].row == Pawns[upLeftArray[k][1]].row
+              ) {
+                  indicesToRemove.add(j);
+                  indicesToRemove.add(k);
+              }
+              
+          }
+      }
+  }
 
-    // Convert set to array and sort in reverse order
-    const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
+  // Convert set to array and sort in reverse order
+  const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
 
-    // Remove elements at collected indices in reverse order
-    for (let index of sortedIndicesToRemove) {
-        upLeftArray.splice(index, 1);
-    }
+  // Remove elements at collected indices in reverse order
+  for (let index of sortedIndicesToRemove) {
+      upLeftArray.splice(index, 1);
+  }
 
-    // Additional splicing based on the third index condition
-    for (let j = upLeftArray.length - 1; j >= 0; j--) {
-        if (upLeftArray[j][2] < thresholdValue) {
-            upLeftArray.splice(j, 1);
-        }
-    }
-
-    if (upLeftArray.length !== thresholdValue) {
-        console.log("occ");
-    }
+  if (sortedIndicesToRemove.length > 0) {
+      console.log("occ");
+  }
 }
-
 
       for (let j = 0; j < upLeftArray.length; j++) {
         killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
