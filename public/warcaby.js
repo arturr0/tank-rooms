@@ -1447,8 +1447,8 @@ for (let j = 0; j < downLeftArray.length; j++)
 // }
 
 for (let i = 0; i < Board.length; i++) {
-  let indicesToRemove = new Set();
-  let clearArray = false;
+  let shouldClearArray = false;
+  let firstIndexToKeep = null;
 
   for (let j = 0; j < upLeftArray.length; j++) {
       if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
@@ -1460,34 +1460,32 @@ for (let i = 0; i < Board.length; i++) {
                   Board[i].column == Pawns[upLeftArray[k][1]].column &&
                   Board[i].row == Pawns[upLeftArray[k][1]].row
               ) {
-                  if (upLeftArray[j][2] > someValue && upLeftArray[k][2] > someValue) {
-                      clearArray = true;
+                  // Assuming `yourPawn` is defined and accessible
+                  if (upLeftArray[j][2] > yourPawn[2] && upLeftArray[k][2] > yourPawn[2]) {
+                      shouldClearArray = true;
+                      break;
                   } else {
-                      indicesToRemove.add(j);
-                      indicesToRemove.add(k);
+                      if (firstIndexToKeep === null) {
+                          firstIndexToKeep = j;
+                      }
                   }
               }
           }
+          if (shouldClearArray) break;
       }
   }
 
-  if (clearArray) {
+  if (shouldClearArray) {
       upLeftArray = [];
       console.log("cleared");
+  } else if (firstIndexToKeep !== null) {
+      upLeftArray = [upLeftArray[firstIndexToKeep]];
+      console.log("kept first index");
   } else {
-      // Convert set to array and sort in reverse order
-      const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
-
-      // Remove elements at collected indices in reverse order
-      for (let index of sortedIndicesToRemove) {
-          upLeftArray.splice(index, 1);
-      }
-
-      if (sortedIndicesToRemove.length > 0) {
-          console.log("occ");
-      }
+      console.log("no change");
   }
 }
+
 
 
       for (let j = 0; j < upLeftArray.length; j++) {
