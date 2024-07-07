@@ -1884,6 +1884,7 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && !killersOptMo
         killConditions = [];
         blockKilledPawn = null;
         blockKillersPawn = null;
+        downLeftArray = [];
         console.log('check killConditionsUnique.length == 0', check)
     }
     else if ((blockKill && killConditionsUnique.length == 0 && (blockKillersPawn != null || blockKilledPawn != null))) {
@@ -1893,6 +1894,7 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && !killersOptMo
         blockKillersPawn = null;
         releaseBlock = true;
         killConditions = [];
+        downLeftArray = [];
         console.log('check releaseBlock stepKill else if (blockKill && killConditionsUnique.length == 0 && blockKillersPawn != null)', releaseBlock)
         //////////console.log('blockKill false killers empty killConditionsUnique:', killmode)     
     }
