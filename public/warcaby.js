@@ -468,7 +468,7 @@ function setup() {
         Pawns.push(pawn);
         generateQueensAreas()
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([1,14,28,42].includes(j)) {
+      } else if ([1,14,21,35].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1166,32 +1166,32 @@ function kill(blockKilledPawn, blockKillersPawn) {
           // for (let i = 0; i < downLeftArray.length; i++) {
           //   console.log("push downLeftArray", downLeftArray[i]);
           // }
-        
-          // for (let i = 0; i < Board.length; i++)
+          
+          for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downLeftArray.length; j++)
-              if (//Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1 
-              //   &&
-                (!downLeftArray.every(yourPawn =>  
-                Pawns[downLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed
-                && Pawns[yourPawn[1]].live &&
-                Board[downLeftArray[2]].column == Pawns[yourPawn[1]].column && Board[downLeftArray[2]].row == Pawns[yourPawn[1]].row
-                
-                )
+              if (Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1 
                 &&
+                downLeftArray.some(yourPawn =>  
+                Pawns[downLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed &&
+                //&& Pawns[yourPawn[1]]yourPawn.live &&
+                Board[i].column == Pawns[yourPawn[1]].column && Board[i].row == Pawns[yourPawn[1]].row
                 
-                // Board.some(board =>
-                //   board.free && board.queen &&
-                //   Pawns[killed].row - board.row == -1 &&
-                //   Pawns[killed].column - board.column == 1
-                // )
-                downLeftArray.every(pawn => 
-                  Pawns[pawn[1]].row - Board[pawn[2]].row == -1 &&
-                  Pawns[pawn[1]].column - Board[pawn[2]].column == 1 &&
-                  Board[pawn[2]].free
                 )
               )
-              )
-              { 
+                // &&
+                
+                // // Board.some(board =>
+                // //   board.free && board.queen &&
+                // //   Pawns[killed].row - board.row == -1 &&
+                // //   Pawns[killed].column - board.column == 1
+                // // )
+                // downLeftArray.every(pawn => 
+                //   Pawns[pawn[1]].row - Board[pawn[2]].row == -1 &&
+                //   Pawns[pawn[1]].column - Board[pawn[2]].column == 1
+                // )
+              
+              
+              
                 Board[i].check = true;
                 
                 // let checkedBoard = Board.filter(board => board.check).length;
@@ -1224,8 +1224,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 // let maxLeft = Math.max(...killConditionsUnique.filter(subarray => subarray[10] == 'down-left').map(subarray => Pawns[subarray[1]].row));
                 // console.log(maxLeft)
                 break;
-            }
-            break;
+            
+            
           //killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, true, null]);      
           // for (let j = 0; j < killConditions.length; j++) {
           //   console.log('killConditions', j, killConditions[j])
