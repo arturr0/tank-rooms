@@ -1448,6 +1448,7 @@ for (let j = 0; j < downLeftArray.length; j++)
 //         console.log("occ");
 //     }
 // }
+
 for (let i = 0; i < Board.length; i++) {
   let indicesToRemove = new Set();
   let clearArray = false;
@@ -1466,58 +1467,12 @@ for (let i = 0; i < Board.length; i++) {
                   indicesToRemove.add(j);
                   indicesToRemove.add(k);
               }
-              if (j === 0 || k === 0) {
-                clearArray = true;
-            }
           }
           // Check if either j or k is 0
-          
-      }
-  }
-
-  if (clearArray) {
-      upLeftArray = [];
-      console.log("cleared");
-  } else {
-      // Convert set to array and sort in reverse order
-      const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
-
-      // Remove elements at collected indices in reverse order
-      for (let index of sortedIndicesToRemove) {
-          upLeftArray.splice(index, 1);
-      }
-
-      if (sortedIndicesToRemove.length > 0) {
-          console.log("occ");
-      }
-  }
-}
-
-for (let i = 0; i < Board.length; i++) {
-  let indicesToRemove = new Set();
-  let clearArray = false;
-
-  for (let j = 0; j < upLeftArray.length; j++) {
-      if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
-          for (let k = 0; k < upLeftArray.length; k++) {
-              if (
-                  Pawns[upLeftArray[j][1]].isRed == Pawns[upLeftArray[k][1]].isRed &&
-                  Pawns[upLeftArray[k][1]].live &&
-                  Pawns[upLeftArray[j][1]].live &&
-                  Board[i].column == Pawns[upLeftArray[k][1]].column &&
-                  Board[i].row == Pawns[upLeftArray[k][1]].row
-              ) {
-                  // Here we assume 'someCondition' involves checking a value within upLeftArray or Pawns
-                  if (upLeftArray[j][2] >  someCondition && upLeftArray[k][2] >  someCondition) {
-                      clearArray = true;
-                      break; // break inner loop
-                  } else {
-                      indicesToRemove.add(j);
-                      indicesToRemove.add(k);
-                  }
-              }
+          if (j !== 0 || k !== 0) {
+              clearArray = true;
+              break; // Exit the loop if we need to clear the array
           }
-          if (clearArray) break; // break outer loop
       }
   }
 
