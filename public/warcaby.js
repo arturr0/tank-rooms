@@ -1166,18 +1166,18 @@ function kill(blockKilledPawn, blockKillersPawn) {
           // for (let i = 0; i < downLeftArray.length; i++) {
           //   console.log("push downLeftArray", downLeftArray[i]);
           // }
-          
+        
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downLeftArray.length; j++)
               if (Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1 
                 &&
-                (!downLeftArray.some(yourPawn =>  
-                Pawns[downLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed
-                && Pawns[yourPawn[1]].live &&
-                Board[i].column == Pawns[yourPawn[1]].column && Board[i].row == Pawns[yourPawn[1]].row
+//                 (!downLeftArray.every(yourPawn =>  
+//                 Pawns[downLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed
+//                 && Pawns[yourPawn[1]].live &&
+//                 Board[i].column == Pawns[yourPawn[1]].column && Board[i].row == Pawns[yourPawn[1]].row
                 
-                )
-                &&
+//                 )
+//                 &&
                 
                 // Board.some(board =>
                 //   board.free && board.queen &&
@@ -1188,7 +1188,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                   // Pawns[pawn[1]].row - Board[pawn[2]].row == -1 &&
                   // Pawns[pawn[1]].column - Board[pawn[2]].column == 1 &&
                   // Board[pawn[2]].free
-                )
+                
               )
               )
               { 
