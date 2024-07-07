@@ -468,7 +468,7 @@ function setup() {
         Pawns.push(pawn);
         generateQueensAreas()
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([35,21,14].includes(j)) {
+      } else if ([35,21,42].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1355,8 +1355,8 @@ for (let i = 0; i < Board.length; i++) {
                   Board[i].column == Pawns[downLeftArray[k][1]].column &&
                   Board[i].row == Pawns[downLeftArray[k][1]].row
               ) {
-                  indicesToRemove.push([j, downLeftArray[j][2]]);
-                  indicesToRemove.push([k, downLeftArray[k][2]]);
+                  indicesToRemove.push([downLeftArray[j][1], downLeftArray[j][2]]);
+                  indicesToRemove.push([downLeftArray[k][1], downLeftArray[k][2]]);
                   console.log("ind", downLeftArray[j][1], downLeftArray[k][1])
               }
           }
@@ -1367,16 +1367,20 @@ for (let i = 0; i < Board.length; i++) {
   const sortedIndicesToRemove = indicesToRemove.sort((a, b) => b - a);
   let boardRemoved = [];
   for(let i = 0; i < indicesToRemove.length; i++)
-      boardRemoved.push(indicesToRemove[i][1])    
+      boardRemoved.push([indicesToRemove[i][0],indicesToRemove[i][1]])    
   
   //Remove elements at collected indices in reverse order
-  for (let index of sortedIndicesToRemove) {
+  // for (let index of sortedIndicesToRemove) {
       
-      downLeftArray.splice(index, 1);
-  }
+  //     downLeftArray.splice(index, 1);
+  // }
+  for(let i = 0; i < boardRemoved.length; i++)
+    for(let j = 0; j < downLeftArray.length; j++)
+      if(downLeftArray[j][1] == boardRemoved[i][0])
+        downLeftArray.splice(j, 1);  
   for(let i = 0; i < boardRemoved.length; i++)
       for (let j = 0; j < downLeftArray.length; j++)
-          if(downLeftArray[j][2] > boardRemoved[i])
+          if(downLeftArray[j][2] > boardRemoved[i][1])
               downLeftArray.splice(j, 1);
   // if (sortedIndicesToRemove.length > 0) {
   //     console.log("occ");
