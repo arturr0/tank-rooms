@@ -1184,8 +1184,10 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 //   Pawns[killed].row - board.row == -1 &&
                 //   Pawns[killed].column - board.column == 1
                 // )
-                downLeftArray.every(pawn => Pawns[pawn[1]].row - Board[i].row == -1 &&
-                  Pawns[pawn[1]].column - Board[i].row == 1) 
+                downLeftArray.every(pawn => 
+                  Pawns[pawn[1]].row - Board[board].row == -1 &&
+                  Pawns[pawn[1]].column - Board[board].column == 1
+                )
               )
               )
               { 
@@ -1210,8 +1212,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 //let nearest = Math.min(...rows);
                 //console.log("nearest", nearest)
                 // if(checkedBoard == numberOfKilled) {
-                // killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
-                // killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+                killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
+                killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
                 // }
                 // Board.forEach(board => {
                 //   if (board.check) {
