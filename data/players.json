@@ -128,8 +128,15 @@
   {
     "index": 18,
     "players": 2,
-    "user1": "f",
-    "user2": "ff",
+    "user1": "o",
+    "user2": "oo",
+    "block": 0
+  },
+  {
+    "index": 19,
+    "players": 1,
+    "user1": "",
+    "user2": "kk",
     "block": 0
   }
 ]

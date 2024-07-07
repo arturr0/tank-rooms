@@ -461,14 +461,14 @@ function setup() {
     //f(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, letter, number)
     for (let j = 0; j < Board.length; j++) {
       // if (Board[j].isBlack && Board[j].row < 4) {
-      if ([55].includes(j)) {
+      if ([7].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
         pawn.queen = true;
         Pawns.push(pawn);
         generateQueensAreas()
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([10,19,37].includes(j)) {
+      } else if ([14,28,42].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1343,11 +1343,11 @@ function kill(blockKilledPawn, blockKillersPawn) {
 //   }
 //   console.log(downLeftArray);
   neighboursFilter("down", downLeftArray, -1, 1);
-  // for (let j = 0; j < downLeftArray.length; j++) {
-  //   killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
-  //   killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-  //   downLeftArray.splice(j, 1);
-  // }
+  for (let j = 0; j < downLeftArray.length; j++) {
+    killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
+    killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+    downLeftArray.splice(j, 1);
+  }
 //ul 
   console.log("after break");
   for (let i = 0; i < Board.length; i++) {
@@ -1416,12 +1416,12 @@ function kill(blockKilledPawn, blockKillersPawn) {
 
 
 
-
-      // for (let j = 0; j < upLeftArray.length; j++) {
-      //   killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
-      //   killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-      //   upLeftArray.splice(j, 1);
-      // }
+      neighboursFilter("up", upLeftArray, 1, 1);
+      for (let j = 0; j < upLeftArray.length; j++) {
+        killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
+        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+        upLeftArray.splice(j, 1);
+      }
     // //killConditionsUnique = killUnique(killConditions);
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////console.log(killConditionsUnique)
   // for (let i = 0; i < killConditionsUnique.length; i++)
@@ -2116,10 +2116,11 @@ function keyPressed() {
         stepKill(killConditionsUnique);    
     }
 }
-function neighboursFilter(kill, array, row,column) {
-
+function neighboursFilter(kill, array, row, column) {
+  let indicesToRemove = [];
+  console.log(array);
   for (let i = 0; i < Board.length; i++) {
-      let indicesToRemove = [];
+      
       for (let j = 0; j < array.length; j++) {
           if (Board[i].row - Pawns[array[j][1]].row == row && Board[i].column - Pawns[array[j][1]].column == column) {
               // Check if the conditions inside 'some' are met
@@ -2149,9 +2150,12 @@ function neighboursFilter(kill, array, row,column) {
           
           array.splice(index, 1);
       }
+      console.log("filter");
+      for (let j = 0; j < array.length; j++)
+        console.log(array[i]);
       for (let i = 0; i < boardRemoved.length; i++)
           for (let j = 0; j < array.length; j++)
-              if(array[j][2] < boardRemoved[i])
+              if((kill == "up" && array[j][2] < boardRemoved[i]) || (kill == "down" && array[j][2] > boardRemoved[i]))
                   array.splice(j, 1);
       // if (sortedIndicesToRemove.length > 0) {
       //     console.log("occ");
