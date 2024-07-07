@@ -1166,7 +1166,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           // for (let i = 0; i < downLeftArray.length; i++) {
           //   console.log("push downLeftArray", downLeftArray[i]);
           // }
-          let free = true;
+          
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downLeftArray.length; j++)
               if (Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1 
@@ -1178,14 +1178,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 
                 )
               )
-              //downLeftArray = [];
-              //console.log("occ", downLeftArray)
-              free = false;
-              else {
-                
-                console.log("free", downLeftArray)
-              }
-                // &&
+              console.log("free")  // &&
                 
                 // // Board.some(board =>
                 // //   board.free && board.queen &&
@@ -1196,12 +1189,10 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 //   Pawns[pawn[1]].row - Board[pawn[2]].row == -1 &&
                 //   Pawns[pawn[1]].column - Board[pawn[2]].column == 1
                 // )
-                if (free) {
-                killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
-                killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-              }
               
-                Board[i].check = true;
+              
+              
+                //Board[i].check = true;
                 
                 // let checkedBoard = Board.filter(board => board.check).length;
                 // let numberOfKilled = killedUnique(downLeftArray).length;
@@ -1222,7 +1213,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 //let nearest = Math.min(...rows);
                 //console.log("nearest", nearest)
                 // if(checkedBoard == numberOfKilled) {
-                
+                // killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
+                // killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
                 // }
                 // Board.forEach(board => {
                 //   if (board.check) {
