@@ -1386,24 +1386,30 @@ for (let j = 0; j < downLeftArray.length; j++)
           
       }
   }
-  for (let i = 0; i < Board.length; i++)
-    for (let j = 0; j < upLeftArray.length; j++)
-      if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1 
-        &&
-        upLeftArray.some(yourPawn =>  
-        Pawns[upLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed &&
-        Pawns[yourPawn[1]].live && Pawns[upLeftArray[j][1]] &&
-        Board[i].column == Pawns[yourPawn[1]].column && Board[i].row == Pawns[yourPawn[1]].row
-        
-        )
-      )
-      //console.log("free")  // &&
-      {
-        free = false;
-        //downLeftArray = []
-        console.log("occ")
-        upLeftArray = [];
-      }
+  for (let i = 0; i < Board.length; i++) {
+    for (let j = upLeftArray.length - 1; j >= 0; j--) {
+        if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
+            // Check if the conditions inside 'some' are met
+            const conditionMetIndex = upLeftArray.findIndex(yourPawn => 
+                Pawns[upLeftArray[j][1]].isRed == Pawns[yourPawn[1]].isRed &&
+                Pawns[yourPawn[1]].live && Pawns[upLeftArray[j][1]].live &&
+                Board[i].column == Pawns[yourPawn[1]].column && Board[i].row == Pawns[yourPawn[1]].row
+            );
+
+            if (conditionMetIndex !== -1) {
+                // Remove the element at index 'j' from upLeftArray
+                upLeftArray.splice(j, 1);
+                console.log("occ");
+                // Remove the element at index 'yourPawn[1]' from upLeftArray if it exists
+                if (conditionMetIndex !== j) { // Avoid double splicing the same element
+                    upLeftArray.splice(conditionMetIndex, 1);
+                    console.log("occ yourPawn[1]");
+                }
+            }
+        }
+    }
+}
+
       for (let j = 0; j < upLeftArray.length; j++) {
         killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
