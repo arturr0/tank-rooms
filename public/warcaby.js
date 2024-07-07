@@ -2141,11 +2141,32 @@ function neighboursFilter(kill, array, rowCond, columnCond) {
       }
 
       // Convert set to array and sort in reverse order
-      //const sortedIndicesToRemove = indicesToRemove.sort((a, b) => b - a);
+      // const sortedIndicesToRemove = indicesToRemove.sort((a, b) => b - a);
+      // let boardRemoved = [];
+      // for(let i = 0; i < indicesToRemove.length; i++)
+      //     boardRemoved.push(indicesToRemove[i][1])    
+      // console.log("ind", sortedIndicesToRemove);
+      // //Remove elements at collected indices in reverse order
+      // for (let index of sortedIndicesToRemove) {
+          
+      //     array.splice(index, 1);
+      // }
+      // console.log("filter");
+      // for (let j = 0; j < array.length; j++)
+      //   console.log(array[i]);
+      // for (let i = 0; i < boardRemoved.length; i++)
+      //     for (let j = 0; j < array.length; j++)
+      //         if(array[j][2] < boardRemoved[i])
+      //             array.splice(j, 1);
+      // if (sortedIndicesToRemove.length > 0) {
+      //     console.log("occ");
+      // }
+  }
+  const sortedIndicesToRemove = indicesToRemove.sort((a, b) => b - a);
       let boardRemoved = [];
       for(let i = 0; i < indicesToRemove.length; i++)
           boardRemoved.push(indicesToRemove[i][1])    
-      
+      console.log("ind", sortedIndicesToRemove);
       //Remove elements at collected indices in reverse order
       for (let index of sortedIndicesToRemove) {
           
@@ -2153,13 +2174,9 @@ function neighboursFilter(kill, array, rowCond, columnCond) {
       }
       console.log("filter");
       for (let j = 0; j < array.length; j++)
-        console.log(array[i]);
+        console.log(array[j]);
       for (let i = 0; i < boardRemoved.length; i++)
           for (let j = 0; j < array.length; j++)
               if(array[j][2] < boardRemoved[i])
                   array.splice(j, 1);
-      // if (sortedIndicesToRemove.length > 0) {
-      //     console.log("occ");
-      // }
-  }
 }
