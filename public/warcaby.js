@@ -1448,52 +1448,45 @@ for (let j = 0; j < downLeftArray.length; j++)
 //         console.log("occ");
 //     }
 // }
+let shouldClearArray = true; // Flag to determine if we should clear the array
 
 for (let i = 0; i < Board.length; i++) {
-  let indicesToRemove = new Set();
-  let clearArray = false;
+    for (let j = 0; j < upLeftArray.length; j++) {
+        if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
+            // Check if the conditions inside 'some' are met
+            let foundValidPair = false;
 
-  for (let j = 0; j < upLeftArray.length; j++) {
-      if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
-          // Check if the conditions inside 'some' are met
-          for (let k = 0; k < upLeftArray.length; k++) {
-              if (
-                  Pawns[upLeftArray[j][1]].isRed == Pawns[upLeftArray[k][1]].isRed &&
-                  Pawns[upLeftArray[k][1]].live &&
-                  Pawns[upLeftArray[j][1]].live &&
-                  Board[i].column == Pawns[upLeftArray[k][1]].column &&
-                  Board[i].row == Pawns[upLeftArray[k][1]].row
-              ) {
-                  indicesToRemove.add(j);
-                  indicesToRemove.add(k);
-              }
-          }
-          // Check if either j or k is 0
-          if (j !== 0 || k !== 0) {
-              clearArray = true;
-              break; // Exit the loop if we need to clear the array
-          }
-      }
-  }
+            for (let k = 0; k < upLeftArray.length; k++) {
+                if (
+                    Pawns[upLeftArray[j][1]].isRed == Pawns[upLeftArray[k][1]].isRed &&
+                    Pawns[upLeftArray[k][1]].live &&
+                    Pawns[upLeftArray[j][1]].live &&
+                    Board[i].column == Pawns[upLeftArray[k][1]].column &&
+                    Board[i].row == Pawns[upLeftArray[k][1]].row
+                ) {
+                    foundValidPair = true;
+                    break; // Exit inner loop as soon as a valid pair is found
+                }
+            }
 
-  if (clearArray) {
-      upLeftArray = [];
-      console.log("cleared");
-  } else {
-      // Convert set to array and sort in reverse order
-      const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
-
-      // Remove elements at collected indices in reverse order
-      for (let index of sortedIndicesToRemove) {
-          upLeftArray.splice(index, 1);
-      }
-
-      if (sortedIndicesToRemove.length > 0) {
-          console.log("occ");
-      }
-  }
+            if (!foundValidPair) {
+                if (j === 0 || (typeof k !== 'undefined' && k === 0)) {
+                    // Splice the current element j (if it's 0)
+                    upLeftArray.splice(j, 1);
+                    console.log("occ");
+                    j--; // Adjust j because splice changes the array length and indices
+                }
+            } else {
+                shouldClearArray = false; // Set flag to false if any valid pair is found
+            }
+        }
+    }
 }
 
+if (shouldClearArray) {
+    upLeftArray = [];
+    console.log("cleared");
+}
 
 
       for (let j = 0; j < upLeftArray.length; j++) {
