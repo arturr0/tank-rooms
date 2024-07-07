@@ -468,7 +468,7 @@ function setup() {
         Pawns.push(pawn);
         generateQueensAreas()
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([1,14,28,42].includes(j)) {
+      } else if ([1,14,21,35].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1185,8 +1185,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 //   Pawns[killed].column - board.column == 1
                 // )
                 downLeftArray.every(pawn => 
-                  Pawns[pawn[1]].row - Board[board].row == -1 &&
-                  Pawns[pawn[1]].column - Board[board].column == 1
+                  Pawns[pawn[1]].row - Board[pawn[2]].row == -1 &&
+                  Pawns[pawn[1]].column - Board[pawn[2]].column == 1
                 )
               )
               )
@@ -1212,8 +1212,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
                 //let nearest = Math.min(...rows);
                 //console.log("nearest", nearest)
                 // if(checkedBoard == numberOfKilled) {
-                killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
-                killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+                // killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
+                // killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
                 // }
                 // Board.forEach(board => {
                 //   if (board.check) {
