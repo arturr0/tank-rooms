@@ -1542,6 +1542,9 @@ for (let i = 0; i < Board.length; i++) {
   // Convert set to array and sort in reverse order
   const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
 
+  // Make a copy of sortedIndicesToRemove for comparison after splicing
+  const sortedIndicesCopy = [...sortedIndicesToRemove];
+
   // Remove elements at collected indices in reverse order
   for (let index of sortedIndicesToRemove) {
       upLeftArray.splice(index, 1);
@@ -1550,14 +1553,14 @@ for (let i = 0; i < Board.length; i++) {
   // Check if any remaining subarray's second index is less than spliced subarray's second index
   for (let j = upLeftArray.length - 1; j >= 0; j--) {
       let shouldRemove = true;
-      for (let k of sortedIndicesToRemove) {
-          if (upLeftArray[j][2] >= k) {
-              shouldRemove = false;
-              break;
-          }
+      for (let k of sortedIndicesCopy) {
+          // if (upLeftArray[j][2] >= k) {
+          //     shouldRemove = false;
+          //     break;
+          // }
+          console.log("k", k)
       }
       if (shouldRemove) {
-          console.log("spliced")
           upLeftArray.splice(j, 1);
       }
   }
@@ -1566,6 +1569,7 @@ for (let i = 0; i < Board.length; i++) {
       console.log("occ");
   }
 }
+
 
 
     // //killConditionsUnique = killUnique(killConditions);
