@@ -1167,6 +1167,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           //   console.log("push downLeftArray", downLeftArray[i]);
           // }
           let free;
+          console.log("before some")
           for (let i = 0; i < Board.length; i++)
             for (let j = 0; j < downLeftArray.length; j++)
               if (Board[i].row - Pawns[downLeftArray[j][1]].row == -1 && Board[i].column - Pawns[downLeftArray[j][1]].column == 1 
