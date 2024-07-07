@@ -468,7 +468,7 @@ function setup() {
         Pawns.push(pawn);
         generateQueensAreas()
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([46,37,19].includes(j)) {
+      } else if ([8,10,19,37].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1412,39 +1412,82 @@ for (let j = 0; j < downLeftArray.length; j++)
 //         }
 //     }
 // }
+// //always splice
+// for (let i = 0; i < Board.length; i++) {
+//     let indicesToRemove = new Set();
+//     for (let j = 0; j < upLeftArray.length; j++) {
+//         if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
+//             // Check if the conditions inside 'some' are met
+//             for (let k = 0; k < upLeftArray.length; k++) {
+//                 if (
+//                     Pawns[upLeftArray[j][1]].isRed == Pawns[upLeftArray[k][1]].isRed &&
+//                     Pawns[upLeftArray[k][1]].live &&
+//                     Pawns[upLeftArray[j][1]].live &&
+//                     Board[i].column == Pawns[upLeftArray[k][1]].column &&
+//                     Board[i].row == Pawns[upLeftArray[k][1]].row
+//                 ) {
+//                     indicesToRemove.add(j);
+//                     indicesToRemove.add(k);
+//                 }
+//             }
+//         }
+//     }
+
+//     // Convert set to array and sort in reverse order
+//     const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
+
+//     // Remove elements at collected indices in reverse order
+//     for (let index of sortedIndicesToRemove) {
+//         upLeftArray.splice(index, 1);
+//     }
+
+//     if (sortedIndicesToRemove.length > 0) {
+//         console.log("occ");
+//     }
+// }
+
 for (let i = 0; i < Board.length; i++) {
-    let indicesToRemove = new Set();
-    for (let j = 0; j < upLeftArray.length; j++) {
-        if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
-            // Check if the conditions inside 'some' are met
-            for (let k = 0; k < upLeftArray.length; k++) {
-                if (
-                    Pawns[upLeftArray[j][1]].isRed == Pawns[upLeftArray[k][1]].isRed &&
-                    Pawns[upLeftArray[k][1]].live &&
-                    Pawns[upLeftArray[j][1]].live &&
-                    Board[i].column == Pawns[upLeftArray[k][1]].column &&
-                    Board[i].row == Pawns[upLeftArray[k][1]].row
-                ) {
-                    indicesToRemove.add(j);
-                    indicesToRemove.add(k);
-                }
-            }
-        }
-    }
+  let indicesToRemove = new Set();
+  let clearArray = false;
 
-    // Convert set to array and sort in reverse order
-    const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
+  for (let j = 0; j < upLeftArray.length; j++) {
+      if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
+          for (let k = 0; k < upLeftArray.length; k++) {
+              if (
+                  Pawns[upLeftArray[j][1]].isRed == Pawns[upLeftArray[k][1]].isRed &&
+                  Pawns[upLeftArray[k][1]].live &&
+                  Pawns[upLeftArray[j][1]].live &&
+                  Board[i].column == Pawns[upLeftArray[k][1]].column &&
+                  Board[i].row == Pawns[upLeftArray[k][1]].row
+              ) {
+                  if (upLeftArray[j][2] > someValue && upLeftArray[k][2] > someValue) {
+                      clearArray = true;
+                  } else {
+                      indicesToRemove.add(j);
+                      indicesToRemove.add(k);
+                  }
+              }
+          }
+      }
+  }
 
-    // Remove elements at collected indices in reverse order
-    for (let index of sortedIndicesToRemove) {
-        upLeftArray.splice(index, 1);
-    }
+  if (clearArray) {
+      upLeftArray = [];
+      console.log("cleared");
+  } else {
+      // Convert set to array and sort in reverse order
+      const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
 
-    if (sortedIndicesToRemove.length > 0) {
-        console.log("occ");
-    }
+      // Remove elements at collected indices in reverse order
+      for (let index of sortedIndicesToRemove) {
+          upLeftArray.splice(index, 1);
+      }
+
+      if (sortedIndicesToRemove.length > 0) {
+          console.log("occ");
+      }
+  }
 }
-
 
 
       for (let j = 0; j < upLeftArray.length; j++) {
