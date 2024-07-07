@@ -1415,6 +1415,7 @@ for (let j = 0; j < downLeftArray.length; j++)
 // always splice
 // for (let i = 0; i < Board.length; i++) {
 //     let indicesToRemove = new Set();
+    
 //     for (let j = 0; j < upLeftArray.length; j++) {
 //         if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
 //             // Check if the conditions inside 'some' are met
@@ -1432,7 +1433,24 @@ for (let j = 0; j < downLeftArray.length; j++)
 //                     indicesToRemove.add(k);
 //                 }
                 
+                
 //             }
+//             for (let k = 0; k < upLeftArray.length; k++) {
+//               if (
+//                   Pawns[upLeftArray[j][1]].isRed == Pawns[upLeftArray[k][1]].isRed &&
+//                   Pawns[upLeftArray[k][1]].live &&
+//                   Pawns[upLeftArray[j][1]].live &&
+//                   Board[i].column == Pawns[upLeftArray[k][1]].column &&
+//                   Board[i].row == Pawns[upLeftArray[k][1]].row 
+                  
+
+//               ) {
+//                   indicesToRemove.add(j);
+//                   indicesToRemove.add(k);
+//               }
+              
+              
+//           }
 //         }
 //     }
 
@@ -1505,20 +1523,18 @@ for (let i = 0; i < Board.length; i++) {
           // Check conditions inside 'some'
           for (let k = 0; k < upLeftArray.length; k++) {
               if (
-                  // Compare the second index of subarrays in upLeftArray
-                  upLeftArray[j][2] < upLeftArray[k][2] &&
-                  
-                  // Ensure other conditions are met
                   Pawns[upLeftArray[j][1]].isRed == Pawns[upLeftArray[k][1]].isRed &&
                   Pawns[upLeftArray[k][1]].live &&
                   Pawns[upLeftArray[j][1]].live &&
                   Board[i].column == Pawns[upLeftArray[k][1]].column &&
-                  Board[i].row == Pawns[upLeftArray[k][1]].row
+                  Board[i].row == Pawns[upLeftArray[k][1]].row 
               ) {
+                  // Add j, k, and their corresponding second indices to indicesToRemove
                   indicesToRemove.add(j);
                   indicesToRemove.add(k);
+                  indicesToRemove.add(upLeftArray[j][2]);
+                  indicesToRemove.add(upLeftArray[k][2]);
               }
-              
           }
       }
   }
@@ -1531,16 +1547,27 @@ for (let i = 0; i < Board.length; i++) {
       upLeftArray.splice(index, 1);
   }
 
+  // Check if any remaining subarray's second index is less than spliced subarray's second index
+  for (let j = upLeftArray.length - 1; j >= 0; j--) {
+      let shouldRemove = true;
+      for (let k of sortedIndicesToRemove) {
+          if (upLeftArray[j][2] >= k) {
+              shouldRemove = false;
+              break;
+          }
+      }
+      if (shouldRemove) {
+          console.log("spliced")
+          upLeftArray.splice(j, 1);
+      }
+  }
+
   if (sortedIndicesToRemove.length > 0) {
       console.log("occ");
   }
 }
 
-      for (let j = 0; j < upLeftArray.length; j++) {
-        killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
-        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-        upLeftArray.splice(j, 1);
-      }
+
     // //killConditionsUnique = killUnique(killConditions);
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////console.log(killConditionsUnique)
   // for (let i = 0; i < killConditionsUnique.length; i++)
