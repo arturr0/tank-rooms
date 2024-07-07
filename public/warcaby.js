@@ -468,7 +468,7 @@ function setup() {
         Pawns.push(pawn);
         generateQueensAreas()
       // } else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([46,37,19].includes(j)) {
+      } else if ([8,10,19,37].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1413,31 +1413,31 @@ for (let j = 0; j < downLeftArray.length; j++)
 //     }
 // }
 for (let i = 0; i < Board.length; i++) {
-    let indicesToRemove = new Map(); // Using a Map for clarity
-
+    let indicesToRemove = new Set();
     for (let j = 0; j < upLeftArray.length; j++) {
-        if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && 
-            Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
-            
+        if (Board[i].row - Pawns[upLeftArray[j][1]].row == 1 && Board[i].column - Pawns[upLeftArray[j][1]].column == 1) {
+            // Check if the conditions inside 'some' are met
             for (let k = 0; k < upLeftArray.length; k++) {
-                if (Pawns[upLeftArray[j][1]].isRed == Pawns[upLeftArray[k][1]].isRed &&
+                if (
+                    Pawns[upLeftArray[j][1]].isRed == Pawns[upLeftArray[k][1]].isRed &&
                     Pawns[upLeftArray[k][1]].live &&
                     Pawns[upLeftArray[j][1]].live &&
                     Board[i].column == Pawns[upLeftArray[k][1]].column &&
-                    Board[i].row == Pawns[upLeftArray[k][1]].row) {
-
-                    indicesToRemove.set(j, true); // Mark j for removal
-                    indicesToRemove.set(k, true); // Mark k for removal
+                    Board[i].row == Pawns[upLeftArray[k][1]].row
+                ) {
+                    indicesToRemove.add(j, upLeftArray[j][2]);
+                    indicesToRemove.add(k, upLeftArray[k][2]);
                 }
             }
         }
     }
 
-    // Convert map keys to array and sort based on j in descending order
-    const sortedIndicesToRemove = Array.from(indicesToRemove.keys()).sort((a, b) => b - a);
-
+    // Convert set to array and sort in reverse order
+    const sortedIndicesToRemove = Array.from(indicesToRemove).sort((a, b) => b - a);
+    console.log("sortedIndicesToRemove", sortedIndicesToRemove)
     // Remove elements at collected indices in reverse order
     for (let index of sortedIndicesToRemove) {
+        console.log('index', index)
         upLeftArray.splice(index, 1);
     }
 
@@ -1445,7 +1445,6 @@ for (let i = 0; i < Board.length; i++) {
         console.log("occ");
     }
 }
-
 
 
 
