@@ -469,7 +469,7 @@ function setup() {
         Pawns.push(pawn);
         //generateQueensAreas()
       //} else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([14,35,12,26,39,53].includes(j)) {
+      } else if ([14,35,12,19,30,37].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1337,7 +1337,12 @@ let minRight = [];
 function getUniqueValues(array, index) {
     return [...new Set(array.map(item => item[index]))];
 }
-
+for (let i = 0; i < downLeftArray.length; i++) {
+  console.log("downLeftArray bs", downLeftArray[i])
+}
+for (let i = 0; i < upLeftArray.length; i++) {
+  console.log("upLeftArray bs", upLeftArray[i])
+}
 // Get unique values for index 0
 let uniqueIndex0Values = getUniqueValues(killConditionsUnique, 0);
 
