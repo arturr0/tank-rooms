@@ -1323,7 +1323,7 @@ for (let i = 0; i < Board.length; i++) {
         killConditions.push([downRightArray[j][0], downRightArray[j][1], downRightArray[j][2], Pawns[downRightArray[j][0]].isRed, Greenturn, Pawns[downRightArray[j][0]].rectCenter, Pawns[downRightArray[j][0]].rectCenterY, Pawns[downRightArray[j][1]].rectCenter, Pawns[downRightArray[j][1]].rectCenterY, true, 'down-right', chooseDR]);
         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
         downRightArray.splice(j, 1);
-        break;
+        
       }
       upLeftArray = groupAndSort("up", upLeftArray);
       neighbourFilter("up", upLeftArray, 1, 1);
@@ -1333,7 +1333,7 @@ for (let i = 0; i < Board.length; i++) {
         killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left', chooseUL]);
         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
         upLeftArray.splice(j, 1);
-        break;
+        
       }
       upRightArray = groupAndSort("up", upRightArray);
       neighbourFilter("up", upRightArray, 1, -1);
@@ -1343,7 +1343,7 @@ for (let i = 0; i < Board.length; i++) {
         killConditions.push([upRightArray[j][0], upRightArray[j][1], upRightArray[j][2], Pawns[upRightArray[j][0]].isRed, Greenturn, Pawns[upRightArray[j][0]].rectCenter, Pawns[upRightArray[j][0]].rectCenterY, Pawns[upRightArray[j][1]].rectCenter, Pawns[upRightArray[j][1]].rectCenterY, true, 'up-right', chooseUR]);
         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
         upRightArray.splice(j, 1);
-        break;
+        
       }
       downLeftArray = groupAndSort("down", downLeftArray);
       neighbourFilter("down", downLeftArray, -1, 1);
@@ -1353,7 +1353,7 @@ for (let i = 0; i < Board.length; i++) {
         killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left', chooseDL]);
         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
         downLeftArray.splice(j, 1);
-        break;
+        
       }     
 
 let maxLeft = [];
@@ -1601,7 +1601,7 @@ function killOpt(killmode) {
           console.log(i);
           if (killmode[i][11] == null || killmode[i][11].length == 0) {console.log("break"); break;}
         }
-        else if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && blockKill && ((killmode[i][0] == blockKilledPawn) || (killmode[i][0] == blockKillersPawn)) //&&
+        else if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) /*&& blockKill && ((killmode[i][0] == blockKilledPawn) || (killmode[i][0] == blockKillersPawn)) &&*/
         /*(!killersOptMode && !killedOptMode && !oneKiller2Killed)*/) {
           //console.log('check killOpt 2', killmode[i]);
           killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3]);
