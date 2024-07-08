@@ -1178,12 +1178,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
       }
       
   }
-  downLeftArray = groupAndSort("down", downLeftArray);
-  neighbourFilter("down", downLeftArray, -1, 1);
-  for (let j = 0; j < downLeftArray.length; j++) {
-    killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
-    killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-    //downLeftArray.splice(j, 1);
+  
   }
 //ul 
   console.log("after break");
@@ -1223,13 +1218,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
           
       }
   }
-      upLeftArray = groupAndSort("up", upLeftArray);
-      neighbourFilter("up", upLeftArray, 1, 1);
-      for (let j = 0; j < upLeftArray.length; j++) {
-        killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
-        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-        //upLeftArray.splice(j, 1);
-      }
+      
 //ur
 
 for (let i = 0; i < Board.length; i++) {
@@ -1271,13 +1260,7 @@ for (let i = 0; i < Board.length; i++) {
     //console.log("l",killConditionsUnique.length);
 }
 
-    upRightArray = groupAndSort("up", upRightArray);
-    neighbourFilter("up", upRightArray, 1, -1);
-    for (let j = 0; j < upRightArray.length; j++) {
-      killConditions.push([upRightArray[j][0], upRightArray[j][1], upRightArray[j][2], Pawns[upRightArray[j][0]].isRed, Greenturn, Pawns[upRightArray[j][0]].rectCenter, Pawns[upRightArray[j][0]].rectCenterY, Pawns[upRightArray[j][1]].rectCenter, Pawns[upRightArray[j][1]].rectCenterY, true, 'up-right']);
-      killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-      //upRightArray.splice(j, 1);
-    }
+    
 
 
 //dr      
@@ -1318,15 +1301,7 @@ for (let i = 0; i < Board.length; i++) {
               
           }
       }
-      downRightArray = groupAndSort("down", downRightArray);
-      neighbourFilter("down", downRightArray, -1, -1);
-      for (let j = 0; j < downRightArray.length; j++) {
-        killConditions.push([downRightArray[j][0], downRightArray[j][1], downRightArray[j][2], Pawns[downRightArray[j][0]].isRed, Greenturn, Pawns[downRightArray[j][0]].rectCenter, Pawns[downRightArray[j][0]].rectCenterY, Pawns[downRightArray[j][1]].rectCenter, Pawns[downRightArray[j][1]].rectCenterY, true, 'down-right']);
-        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-        downRightArray.splice(j, 1);
-      }
-    
-
+        
 
 let maxLeft = [];
 let maxRight = [];
@@ -1389,7 +1364,34 @@ console.log("Min Right:", minRight);
     });
     
     
-      
+    downRightArray = groupAndSort("down", downRightArray);
+      neighbourFilter("down", downRightArray, -1, -1);
+      for (let j = 0; j < downRightArray.length; j++) {
+        killConditions.push([downRightArray[j][0], downRightArray[j][1], downRightArray[j][2], Pawns[downRightArray[j][0]].isRed, Greenturn, Pawns[downRightArray[j][0]].rectCenter, Pawns[downRightArray[j][0]].rectCenterY, Pawns[downRightArray[j][1]].rectCenter, Pawns[downRightArray[j][1]].rectCenterY, true, 'down-right']);
+        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+        downRightArray.splice(j, 1);
+      }
+      upLeftArray = groupAndSort("up", upLeftArray);
+      neighbourFilter("up", upLeftArray, 1, 1);
+      for (let j = 0; j < upLeftArray.length; j++) {
+        killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
+        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+        upLeftArray.splice(j, 1);
+      }
+      upRightArray = groupAndSort("up", upRightArray);
+      neighbourFilter("up", upRightArray, 1, -1);
+      for (let j = 0; j < upRightArray.length; j++) {
+        killConditions.push([upRightArray[j][0], upRightArray[j][1], upRightArray[j][2], Pawns[upRightArray[j][0]].isRed, Greenturn, Pawns[upRightArray[j][0]].rectCenter, Pawns[upRightArray[j][0]].rectCenterY, Pawns[upRightArray[j][1]].rectCenter, Pawns[upRightArray[j][1]].rectCenterY, true, 'up-right']);
+        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+        upRightArray.splice(j, 1);
+      }
+      downLeftArray = groupAndSort("down", downLeftArray);
+      neighbourFilter("down", downLeftArray, -1, 1);
+      for (let j = 0; j < downLeftArray.length; j++) {
+        killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
+        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+        downLeftArray.splice(j, 1); 
+      }   
     for (let i = 0; i < killConditionsUnique.length; i++) {
     console.log("killConditionsUnique out", i, killConditionsUnique[i])
   }
@@ -1493,15 +1495,15 @@ for (let i = 0; i < killConditionsUnique.length; i++)
           ((((killConditionsUnique[j][10] == 'up-left' && maxLeft.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0] )) ||
           (killConditionsUnique[j][10] == 'up-right' && maxRight.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0] )) ||
           (killConditionsUnique[j][10] == 'down-left' && minLeft.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0] )) ||
-          (killConditionsUnique[j][10] == 'down-right' && minRight.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0] ))))) 
-          // !arraysEqual( 
-          //   Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
-          //     Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1]
-          //   ).map(killed => killed[2]),
-          //   Pawns[killConditionsUnique[j][0]].queensAreas.filter(area =>
-          //     Pawns[killConditionsUnique[j][1]].row == area[0] && Pawns[killConditionsUnique[j][1]].column == area[1]
-          //   ).map(killed => killed[2])
-          // )
+          (killConditionsUnique[j][10] == 'down-right' && minRight.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0] ))))) && 
+          !arraysEqual( 
+            Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
+              Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1]
+            ).map(killed => killed[2]),
+            Pawns[killConditionsUnique[j][0]].queensAreas.filter(area =>
+              Pawns[killConditionsUnique[j][1]].row == area[0] && Pawns[killConditionsUnique[j][1]].column == area[1]
+            ).map(killed => killed[2])
+          )
         )
       )
     ) { 
@@ -1534,7 +1536,7 @@ for (let i = 0; i < killConditionsUnique.length; i++)
  
 
   
-}
+
   
  
   // for (let i = 0; i < killConditionsUnique.length - 1; i++) 
@@ -1709,26 +1711,26 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && !killersOptMo
         break;  
       }
   //generateQueensAreas(killmode[i][0]);
-  for(k = 0; k < upLeftArray.length; k++)
-    if(upLeftArray[k][0] == killmode[i][0] && upLeftArray[k][1] == killmode[i][1] && upLeftArray[k][2] == killmode[i][2]) {
-      console.log("splice");
-      upLeftArray.splice(k, 1);
-    }
-  for(k = 0; k < downLeftArray.length; k++)
-    if(downLeftArray[k][0] == killmode[i][0] && downLeftArray[k][1] == killmode[i][1] && downLeftArray[k][2] == killmode[i][2]) {
-      console.log("splice");
-      downLeftArray.splice(k, 1);
-    }
-  for(k = 0; k < upRightArray.length; k++)
-    if(upRightArray[k][0] == killmode[i][0] && upRightArray[k][1] == killmode[i][1] && upRightArray[k][2] == killmode[i][2]) {
-      console.log("splice");
-      upRightArray.splice(k, 1);
-    }
-  for(k = 0; k < downRightArray.length; k++)
-    if(downRightArray[k][0] == killmode[i][0] && downRightArray[k][1] == killmode[i][1] && downRightArray[k][2] == killmode[i][2]) {
-      console.log("splice");
-      downRightArray.splice(k, 1);
-    }
+  // for(k = 0; k < upLeftArray.length; k++)
+  //   if(upLeftArray[k][0] == killmode[i][0] && upLeftArray[k][1] == killmode[i][1] && upLeftArray[k][2] == killmode[i][2]) {
+  //     console.log("splice");
+  //     upLeftArray.splice(k, 1);
+  //   }
+  // for(k = 0; k < downLeftArray.length; k++)
+  //   if(downLeftArray[k][0] == killmode[i][0] && downLeftArray[k][1] == killmode[i][1] && downLeftArray[k][2] == killmode[i][2]) {
+  //     console.log("splice");
+  //     downLeftArray.splice(k, 1);
+  //   }
+  // for(k = 0; k < upRightArray.length; k++)
+  //   if(upRightArray[k][0] == killmode[i][0] && upRightArray[k][1] == killmode[i][1] && upRightArray[k][2] == killmode[i][2]) {
+  //     console.log("splice");
+  //     upRightArray.splice(k, 1);
+  //   }
+  // for(k = 0; k < downRightArray.length; k++)
+  //   if(downRightArray[k][0] == killmode[i][0] && downLeftArray[k][1] == killmode[i][1] && downLeftArray[k][2] == killmode[i][2]) {
+  //     console.log("splice");
+  //     downLeftArray.splice(k, 1);
+  //   }
   killmode.splice(i, 1);
   //generateQueensAreas();
   //socket.emit('killed mode', killedOptMode, Pawns, room);
