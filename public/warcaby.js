@@ -1575,8 +1575,8 @@ function killOpt(killmode) {
     //console.log(`killOpt - killer: ${killmode[z][0]} killed: ${killmode[z][1]}`);
   }
   ////console.log('check killOpt 1', killConditionsUnique.length);
-  //console.log(`killOpt: killedOptMode ${killedOptMode} killersOptMode ${killersOptMode} oneKiller2Killed ${oneKiller2Killed} 
-  //blockKill ${blockKill} blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn} releaseBlock ${releaseBlock}`)
+  console.log(`killOpt: killedOptMode ${killedOptMode} killersOptMode ${killersOptMode} oneKiller2Killed ${oneKiller2Killed} 
+  blockKill ${blockKill} blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn} releaseBlock ${releaseBlock}`)
   if (releaseBlock) {
     killmode = [];
     releaseBlock = false;
@@ -1586,24 +1586,24 @@ function killOpt(killmode) {
     if ((!killersOptMode && !killedOptMode && !oneKiller2Killed) &&
         ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && blockKill &&
       ((blockKilledPawn != null && killmode[i][0] != blockKilledPawn) || (blockKillersPawn != null && killmode[i][0] != blockKillersPawn))) 
-      killmode.splice(i, 1)
+      killmode.splice(i, 1);
+    console.log("len", killmode.length)
     for (let i = 0; i < killmode.length; i++)
         if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) &&  
            !blockKill && (!killersOptMode && !killedOptMode && !oneKiller2Killed) && Pawns[killmode[i][1]].live) {
             console.log("cb", killmode[i][11]);
           //console.log('check killOpt condition 1', killmode[i]);
           killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3]);
-          
-          //if (killmode[i][11] == null || killmode[i][11].length == 0) {console.log("break"); break;}
-          break;
+          console.log(i);
+          if (killmode[i][11] == null || killmode[i][11].length == 0) {console.log("break"); break;}
         }
         else if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && blockKill && ((killmode[i][0] == blockKilledPawn) || (killmode[i][0] == blockKillersPawn)) &&
         (!killersOptMode && !killedOptMode && !oneKiller2Killed) && Pawns[killmode[i][1]].live) {
           //console.log('check killOpt 2', killmode[i]);
           killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3]);
           console.log("cb", killmode[i][11]);
-          //if (killmode[i][11] == null || killmode[i][11].length == 0) {console.log("break"); break;}
-          break;
+          console.log(i);
+          if (killmode[i][11] == null || killmode[i][11].length == 0) {console.log("break"); break;}
         }
         ////console.log('check killOpt 2', killConditionsUnique.length);
         
