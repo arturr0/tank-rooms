@@ -1590,7 +1590,7 @@ function killOpt(killmode) {
     console.log("len", killmode.length)
     for (let i = 0; i < killmode.length; i++)
         if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) &&  
-           !blockKill && (!killersOptMode && !killedOptMode && !oneKiller2Killed) && Pawns[killmode[i][1]].live) {
+           !blockKill && (!killersOptMode && !killedOptMode && !oneKiller2Killed)) {
             console.log("cb", killmode[i][11]);
           //console.log('check killOpt condition 1', killmode[i]);
           killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3]);
@@ -1598,7 +1598,7 @@ function killOpt(killmode) {
           if (killmode[i][11] == null || killmode[i][11].length == 0) {console.log("break"); break;}
         }
         else if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && blockKill && ((killmode[i][0] == blockKilledPawn) || (killmode[i][0] == blockKillersPawn)) &&
-        (!killersOptMode && !killedOptMode && !oneKiller2Killed) && Pawns[killmode[i][1]].live) {
+        (!killersOptMode && !killedOptMode && !oneKiller2Killed)) {
           //console.log('check killOpt 2', killmode[i]);
           killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3]);
           console.log("cb", killmode[i][11]);
