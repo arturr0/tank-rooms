@@ -1352,10 +1352,10 @@ let uniqueIndex0Values = getUniqueValues(killConditionsUnique, 0);
 // Iterate through unique index 0 values
 uniqueIndex0Values.forEach(value => {
     // Filter subarrays by index 0 value and condition
-    let filteredUpLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-left').map(subarray => Pawns[subarray[1]].row);
-    let filteredUpRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-right').map(subarray => Pawns[subarray[1]].row);
-    let filteredDownLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-left').map(subarray => Pawns[subarray[1]].row);
-    let filteredDownRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-right').map(subarray => Pawns[subarray[1]].row);
+    let filteredUpLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+    let filteredUpRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+    let filteredDownLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+    let filteredDownRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
 
     // Find max and min values for each condition and push to corresponding arrays
     if (filteredUpLeft.length > 0) maxLeft.push([value, Math.max(...filteredUpLeft)]);
