@@ -1612,6 +1612,7 @@ function killOpt(killmode) {
 function killSwitch(winner, looser, newBoard, player) {
   
   console.log('check killSwitch 1', killConditionsUnique.length);
+  console.log(winner, looser, newBoard);
   //console.log(`killSwitch: killedOptMode ${killedOptMode} killersOptMode ${killersOptMode} oneKiller2Killed ${oneKiller2Killed} 
   //blockKill ${blockKill} blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn} releaseBlock ${releaseBlock}`)
   if ((!killersOptMode && !killedOptMode && !oneKiller2Killed) && Pawns[looser].live) {
