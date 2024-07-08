@@ -1179,7 +1179,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
       
   }
   
-  }
+  
 //ul 
   console.log("after break");
   for (let i = 0; i < Board.length; i++) {
@@ -1537,7 +1537,7 @@ for (let i = 0; i < killConditionsUnique.length; i++)
  
 
   
-
+  }
   
  
   // for (let i = 0; i < killConditionsUnique.length - 1; i++) 
