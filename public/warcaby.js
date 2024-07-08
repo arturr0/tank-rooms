@@ -1301,7 +1301,35 @@ for (let i = 0; i < Board.length; i++) {
               
           }
       }
-        
+      console.log("check array");
+      downRightArray = groupAndSort("down", downRightArray);
+      neighbourFilter("down", downRightArray, -1, -1);
+      for (let j = 0; j < downRightArray.length; j++) {
+        killConditions.push([downRightArray[j][0], downRightArray[j][1], downRightArray[j][2], Pawns[downRightArray[j][0]].isRed, Greenturn, Pawns[downRightArray[j][0]].rectCenter, Pawns[downRightArray[j][0]].rectCenterY, Pawns[downRightArray[j][1]].rectCenter, Pawns[downRightArray[j][1]].rectCenterY, true, 'down-right']);
+        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+        downRightArray.splice(j, 1);
+      }
+      upLeftArray = groupAndSort("up", upLeftArray);
+      neighbourFilter("up", upLeftArray, 1, 1);
+      for (let j = 0; j < upLeftArray.length; j++) {
+        killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
+        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+        upLeftArray.splice(j, 1);
+      }
+      upRightArray = groupAndSort("up", upRightArray);
+      neighbourFilter("up", upRightArray, 1, -1);
+      for (let j = 0; j < upRightArray.length; j++) {
+        killConditions.push([upRightArray[j][0], upRightArray[j][1], upRightArray[j][2], Pawns[upRightArray[j][0]].isRed, Greenturn, Pawns[upRightArray[j][0]].rectCenter, Pawns[upRightArray[j][0]].rectCenterY, Pawns[upRightArray[j][1]].rectCenter, Pawns[upRightArray[j][1]].rectCenterY, true, 'up-right']);
+        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+        upRightArray.splice(j, 1);
+      }
+      downLeftArray = groupAndSort("down", downLeftArray);
+      neighbourFilter("down", downLeftArray, -1, 1);
+      for (let j = 0; j < downLeftArray.length; j++) {
+        killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
+        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+        downLeftArray.splice(j, 1); 
+      }     
 
 let maxLeft = [];
 let maxRight = [];
@@ -1364,34 +1392,7 @@ console.log("Min Right:", minRight);
     });
     
     
-    downRightArray = groupAndSort("down", downRightArray);
-      neighbourFilter("down", downRightArray, -1, -1);
-      for (let j = 0; j < downRightArray.length; j++) {
-        killConditions.push([downRightArray[j][0], downRightArray[j][1], downRightArray[j][2], Pawns[downRightArray[j][0]].isRed, Greenturn, Pawns[downRightArray[j][0]].rectCenter, Pawns[downRightArray[j][0]].rectCenterY, Pawns[downRightArray[j][1]].rectCenter, Pawns[downRightArray[j][1]].rectCenterY, true, 'down-right']);
-        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-        downRightArray.splice(j, 1);
-      }
-      upLeftArray = groupAndSort("up", upLeftArray);
-      neighbourFilter("up", upLeftArray, 1, 1);
-      for (let j = 0; j < upLeftArray.length; j++) {
-        killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
-        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-        upLeftArray.splice(j, 1);
-      }
-      upRightArray = groupAndSort("up", upRightArray);
-      neighbourFilter("up", upRightArray, 1, -1);
-      for (let j = 0; j < upRightArray.length; j++) {
-        killConditions.push([upRightArray[j][0], upRightArray[j][1], upRightArray[j][2], Pawns[upRightArray[j][0]].isRed, Greenturn, Pawns[upRightArray[j][0]].rectCenter, Pawns[upRightArray[j][0]].rectCenterY, Pawns[upRightArray[j][1]].rectCenter, Pawns[upRightArray[j][1]].rectCenterY, true, 'up-right']);
-        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-        upRightArray.splice(j, 1);
-      }
-      downLeftArray = groupAndSort("down", downLeftArray);
-      neighbourFilter("down", downLeftArray, -1, 1);
-      for (let j = 0; j < downLeftArray.length; j++) {
-        killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
-        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-        downLeftArray.splice(j, 1); 
-      }   
+    
     for (let i = 0; i < killConditionsUnique.length; i++) {
     console.log("killConditionsUnique out", i, killConditionsUnique[i])
   }
