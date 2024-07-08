@@ -461,15 +461,15 @@ function setup() {
     //bbb
     //f(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, letter, number)
     for (let j = 0; j < Board.length; j++) {
-      if (Board[j].isBlack && Board[j].row < 4) {
-      //if ([56].includes(j)) {
+      //if (Board[j].isBlack && Board[j].row < 4) {
+      if ([7].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
-        //pawn.queen = true;
+        pawn.queen = true;
         Pawns.push(pawn);
         //generateQueensAreas()
-      } else if (Board[j].isBlack && Board[j].row > 5) {
-      //} else if ([49,35,28].includes(j)) {
+      //} else if (Board[j].isBlack && Board[j].row > 5) {
+      } else if ([14,35,12,26,39,53].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -2075,7 +2075,7 @@ function neighbourFilter(kill, array, r, c) {
   
       // Group the subarrays by the first element
       array.forEach(subarray => {
-          let key = subarray[0];
+          let key = subarray[1];
           if (!groups[key]) {
               groups[key] = [];
               order.push(key);
@@ -2104,14 +2104,5 @@ function neighbourFilter(kill, array, r, c) {
       return sortedArray;
   }
   
-  //let originalArray = array.slice(); // Copy of the original array
   
-  //let sortedArraysDown = groupAndSort("down", array);
-  
-  //console.log("down");
-  //console.log(originalArray);
-  //console.log("\nAscending sort based on the third column, grouped by first element:");
-  //console.log(array);
-  //console.log("\nDescending sort based on the third column, grouped by first element:");
-  //console.log(sortedArraysUp);
   
