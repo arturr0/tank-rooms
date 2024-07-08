@@ -933,7 +933,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
             for (let i = 0; i < killConditions.length; i++) {
               console.log('before push 1', killConditions[i]);
             }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null, null]);
             for (let i = 0; i < killConditions.length; i++) {
               console.log('after push 1', killConditions[i]);
             }
@@ -953,7 +953,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
             for (let i = 0; i < killConditions.length; i++) {
               console.log('before push 1 block', killConditions[i]);
             }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null, null]);
             for (let i = 0; i < killConditions.length; i++) {
               console.log('after push 1 block', killConditions[i]);
             }
@@ -987,7 +987,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
             for (let i = 0; i < killConditions.length; i++) {
               console.log('before push 2', killConditions[i]);
             }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null, null]);
             for (let i = 0; i < killConditions.length; i++) {
               console.log('after push 2', killConditions[i]);
             }
@@ -1005,7 +1005,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
             for (let i = 0; i < killConditions.length; i++) {
               console.log('before push 2 block', killConditions[i]);
             }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null, null]);
             for (let i = 0; i < killConditions.length; i++) {
               console.log('after push 2 block', killConditions[i]);
             }
@@ -1037,7 +1037,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
             for (let i = 0; i < killConditions.length; i++) {
               console.log('before push 3', killConditions[i]);
             }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null, null]);
             for (let i = 0; i < killConditions.length; i++) {
               console.log('after push 3', killConditions[i]);
             }
@@ -1056,7 +1056,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
             for (let i = 0; i < killConditions.length; i++) {
               console.log('before push 3 block', killConditions[i]);
             }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null, null]);
             for (let i = 0; i < killConditions.length; i++) {
               console.log('after push 3 block', killConditions[i]);
             }
@@ -1087,7 +1087,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
             for (let i = 0; i < killConditions.length; i++) {
               console.log('before push 4', killConditions[i]);
             }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null, null]);
             //////////console.log(`kill 4, killer ${k}, killed ${j}`);
             for (let i = 0; i < killConditions.length; i++) {
               console.log('after push 4', killConditions[i]);
@@ -1106,7 +1106,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
             for (let i = 0; i < killConditions.length; i++) {
               console.log('before push 4 block', killConditions[i]);
             }
-            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null]);
+            killConditions.push([k, j, i, Pawns[k].isRed, Greenturn, Pawns[k].rectCenter, Pawns[k].rectCenterY, Pawns[j].rectCenter, Pawns[j].rectCenterY, false, null, null]);
             //////////console.log(`kill 4, killer ${k}, killed ${j}`);
             for (let i = 0; i < killConditions.length; i++) {
               console.log('after push 4 block', killConditions[i]);
@@ -1320,7 +1320,7 @@ for (let i = 0; i < Board.length; i++) {
       let chooseDR = getChooseBoard(downRightArray);
       console.log("chooseDR", chooseDR);
       for (let j = 0; j < downRightArray.length; j++) {
-        killConditions.push([downRightArray[j][0], downRightArray[j][1], downRightArray[j][2], Pawns[downRightArray[j][0]].isRed, Greenturn, Pawns[downRightArray[j][0]].rectCenter, Pawns[downRightArray[j][0]].rectCenterY, Pawns[downRightArray[j][1]].rectCenter, Pawns[downRightArray[j][1]].rectCenterY, true, 'down-right']);
+        killConditions.push([downRightArray[j][0], downRightArray[j][1], downRightArray[j][2], Pawns[downRightArray[j][0]].isRed, Greenturn, Pawns[downRightArray[j][0]].rectCenter, Pawns[downRightArray[j][0]].rectCenterY, Pawns[downRightArray[j][1]].rectCenter, Pawns[downRightArray[j][1]].rectCenterY, true, 'down-right', chooseDR]);
         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
         downRightArray.splice(j, 1);
       }
@@ -1329,7 +1329,7 @@ for (let i = 0; i < Board.length; i++) {
       let chooseUL = getChooseBoard(upLeftArray);
       console.log("chooseUL", chooseUL);
       for (let j = 0; j < upLeftArray.length; j++) {
-        killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
+        killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left', chooseUL]);
         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
         upLeftArray.splice(j, 1);
       }
@@ -1338,7 +1338,7 @@ for (let i = 0; i < Board.length; i++) {
       let chooseUR = getChooseBoard(upRightArray);
       console.log("chooseUR", chooseUR);
       for (let j = 0; j < upRightArray.length; j++) {
-        killConditions.push([upRightArray[j][0], upRightArray[j][1], upRightArray[j][2], Pawns[upRightArray[j][0]].isRed, Greenturn, Pawns[upRightArray[j][0]].rectCenter, Pawns[upRightArray[j][0]].rectCenterY, Pawns[upRightArray[j][1]].rectCenter, Pawns[upRightArray[j][1]].rectCenterY, true, 'up-right']);
+        killConditions.push([upRightArray[j][0], upRightArray[j][1], upRightArray[j][2], Pawns[upRightArray[j][0]].isRed, Greenturn, Pawns[upRightArray[j][0]].rectCenter, Pawns[upRightArray[j][0]].rectCenterY, Pawns[upRightArray[j][1]].rectCenter, Pawns[upRightArray[j][1]].rectCenterY, true, 'up-right', chooseUR]);
         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
         upRightArray.splice(j, 1);
       }
@@ -1347,7 +1347,7 @@ for (let i = 0; i < Board.length; i++) {
       let chooseDL = getChooseBoard(downLeftArray);
       console.log("chooseDL", chooseDL);
       for (let j = 0; j < downLeftArray.length; j++) {
-        killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
+        killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left', chooseDL]);
         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
         downLeftArray.splice(j, 1); 
       }     
@@ -1590,6 +1590,7 @@ function killOpt(killmode) {
     for (let i = 0; i < killmode.length; i++)
         if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) &&  
            !blockKill && (!killersOptMode && !killedOptMode && !oneKiller2Killed) && Pawns[killmode[i][1]].live) {
+            console.log("cb", killmode[i][11]);
           //console.log('check killOpt condition 1', killmode[i]);
           killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3]);
           
@@ -1599,7 +1600,7 @@ function killOpt(killmode) {
         (!killersOptMode && !killedOptMode && !oneKiller2Killed) && Pawns[killmode[i][1]].live) {
           //console.log('check killOpt 2', killmode[i]);
           killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3]);
-          
+          console.log("cb", killmode[i][11]);
           break;
         }
         ////console.log('check killOpt 2', killConditionsUnique.length);
