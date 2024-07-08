@@ -489,8 +489,8 @@ let angleKilled = 0;
 function draw() {
   turn.value(Greenturn);
   let PlayerInfo = select('#player');
-  for (let i = 0; i < Pawns.length; i++)
-    if (Pawns[i].queen) {console.log("queen"); break}
+  // for (let i = 0; i < Pawns.length; i++)
+  //   if (Pawns[i].queen) {console.log("queen"); break}
   if (Player == 2) {
     document.getElementById("player").style.color = "green";
     PlayerInfo.value("PLAYER GREEN");
