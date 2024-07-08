@@ -1666,7 +1666,7 @@ function stepKill(killmode) {
 
 
 for (let i = 0; i < killmode.length; i++)
-if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && !killersOptMode && !killedOptMode && !Pawns[killmode[i][1]].live)   
+if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && !killersOptMode && !killedOptMode && (!oneKiller2Killed || (oneKiller2Killed && step == 0)) && !Pawns[killmode[i][1]].live)   
   //if (Pawns[killmode[i][0]].live && !Pawns[killmode[i][1]].live ) 
 { 
   step++;
@@ -1709,6 +1709,26 @@ if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && !killersOptMo
         break;  
       }
   //generateQueensAreas(killmode[i][0]);
+  for(k = 0; k < upLeftArray.length; k++)
+    if(upLeftArray[k][0] == killmode[i][0] && upLeftArray[k][1] == killmode[i][1] && upLeftArray[k][2] == killmode[i][2]) {
+      console.log("splice");
+      upLeftArray.splice(k, 1);
+    }
+  for(k = 0; k < downLeftArray.length; k++)
+    if(downLeftArray[k][0] == killmode[i][0] && downLeftArray[k][1] == killmode[i][1] && downLeftArray[k][2] == killmode[i][2]) {
+      console.log("splice");
+      downLeftArray.splice(k, 1);
+    }
+  for(k = 0; k < upRightArray.length; k++)
+    if(upRightArray[k][0] == killmode[i][0] && upRightArray[k][1] == killmode[i][1] && upRightArray[k][2] == killmode[i][2]) {
+      console.log("splice");
+      upRightArray.splice(k, 1);
+    }
+  for(k = 0; k < downRightArray.length; k++)
+    if(downRightArray[k][0] == killmode[i][0] && downRightArray[k][1] == killmode[i][1] && downRightArray[k][2] == killmode[i][2]) {
+      console.log("splice");
+      downRightArray.splice(k, 1);
+    }
   killmode.splice(i, 1);
   //generateQueensAreas();
   //socket.emit('killed mode', killedOptMode, Pawns, room);
