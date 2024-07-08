@@ -155,9 +155,9 @@
   },
   {
     "index": 22,
-    "players": 1,
+    "players": 0,
     "user1": "",
-    "user2": "kkk",
-    "block": 0
+    "user2": "",
+    "block": 1
   }
 ]
