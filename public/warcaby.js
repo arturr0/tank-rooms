@@ -1168,7 +1168,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
           //   console.log("push downLeftArray", downLeftArray[i]);
           // }
           let free;
-          console.log("before some")
+          console.log("before some");
+          let choseBoard = [];
           
         }
   
@@ -1304,6 +1305,8 @@ for (let i = 0; i < Board.length; i++) {
       console.log("check array");
       downRightArray = groupAndSort("down", downRightArray);
       neighbourFilter("down", downRightArray, -1, -1);
+      let chooseDR = getChooseBoard(downRightArray);
+      console.log("chooseDR", chooseDR);
       for (let j = 0; j < downRightArray.length; j++) {
         killConditions.push([downRightArray[j][0], downRightArray[j][1], downRightArray[j][2], Pawns[downRightArray[j][0]].isRed, Greenturn, Pawns[downRightArray[j][0]].rectCenter, Pawns[downRightArray[j][0]].rectCenterY, Pawns[downRightArray[j][1]].rectCenter, Pawns[downRightArray[j][1]].rectCenterY, true, 'down-right']);
         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
@@ -1311,6 +1314,8 @@ for (let i = 0; i < Board.length; i++) {
       }
       upLeftArray = groupAndSort("up", upLeftArray);
       neighbourFilter("up", upLeftArray, 1, 1);
+      let chooseUL = getChooseBoard(upLeftArray);
+      console.log("chooseUL", chooseUL);
       for (let j = 0; j < upLeftArray.length; j++) {
         killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left']);
         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
@@ -1318,6 +1323,8 @@ for (let i = 0; i < Board.length; i++) {
       }
       upRightArray = groupAndSort("up", upRightArray);
       neighbourFilter("up", upRightArray, 1, -1);
+      let chooseUR = getChooseBoard(upRightArray);
+      console.log("chooseUR", chooseUR);
       for (let j = 0; j < upRightArray.length; j++) {
         killConditions.push([upRightArray[j][0], upRightArray[j][1], upRightArray[j][2], Pawns[upRightArray[j][0]].isRed, Greenturn, Pawns[upRightArray[j][0]].rectCenter, Pawns[upRightArray[j][0]].rectCenterY, Pawns[upRightArray[j][1]].rectCenter, Pawns[upRightArray[j][1]].rectCenterY, true, 'up-right']);
         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
@@ -1325,6 +1332,8 @@ for (let i = 0; i < Board.length; i++) {
       }
       downLeftArray = groupAndSort("down", downLeftArray);
       neighbourFilter("down", downLeftArray, -1, 1);
+      let chooseDL = getChooseBoard(downLeftArray);
+      console.log("chooseDL", chooseDL);
       for (let j = 0; j < downLeftArray.length; j++) {
         killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left']);
         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
@@ -1369,27 +1378,27 @@ console.log("Max Right:", maxRight);
 console.log("Min Left:", minLeft);
 console.log("Min Right:", minRight);
     
-    killConditionsUnique.sort((a, b) => {
-      const categoryOrder = {
-        'up-left': 1,
-        'up-right': 2,
-        'down-left': 3,
-        'down-right': 4
-      };
+    // killConditionsUnique.sort((a, b) => {
+    //   const categoryOrder = {
+    //     'up-left': 1,
+    //     'up-right': 2,
+    //     'down-left': 3,
+    //     'down-right': 4
+    //   };
     
-      const aCategory = categoryOrder[a[10]] || 0;
-      const bCategory = categoryOrder[b[10]] || 0;
+    //   const aCategory = categoryOrder[a[10]] || 0;
+    //   const bCategory = categoryOrder[b[10]] || 0;
     
-      if (aCategory === bCategory) {
-        if (aCategory === 1 || aCategory === 2) {
-          return b[2] - a[2]; // Descending order for 'up-left' and 'up-right'
-        } else {
-          return a[2] - b[2]; // Ascending order for 'down-left' and 'down-right'
-        }
-      } else {
-        return aCategory - bCategory; // Sort by category order
-      }
-    });
+    //   if (aCategory === bCategory) {
+    //     if (aCategory === 1 || aCategory === 2) {
+    //       return b[2] - a[2]; // Descending order for 'up-left' and 'up-right'
+    //     } else {
+    //       return a[2] - b[2]; // Ascending order for 'down-left' and 'down-right'
+    //     }
+    //   } else {
+    //     return aCategory - bCategory; // Sort by category order
+    //   }
+    // });
     
     
     
@@ -2132,5 +2141,43 @@ function neighbourFilter(kill, array, r, c) {
       return sortedArray;
   }
   
-  
+  function getChooseBoard(arr) {
+    if (arr.length === 0) {
+        console.log("The array is empty.");
+        return [];
+    }
+
+    let map = {};
+
+    // Create a map to count occurrences of (index 0, index 1) pairs
+    for (let i = 0; i < arr.length; i++) {
+        let subarray = arr[i];
+        let key = `${subarray[0]}-${subarray[1]}`;
+
+        if (!map[key]) {
+            map[key] = new Set();
+        }
+
+        map[key].add(subarray[2]);
+    }
+
+    // Collect the unique subarrays where the third index is different
+    let uniqueSet = new Set();
+    for (let key in map) {
+        if (map[key].size > 1) {
+            arr.forEach(subarray => {
+                let subarrayKey = `${subarray[0]}-${subarray[1]}`;
+                if (subarrayKey === key) {
+                    uniqueSet.add(JSON.stringify(subarray));
+                }
+            });
+        }
+    }
+
+    // Convert the set back to an array of subarrays
+    let result = Array.from(uniqueSet).map(item => JSON.parse(item));
+
+    return result;
+}
+
   
