@@ -466,7 +466,7 @@ function setup() {
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
         //pawn.queen = true;
         Pawns.push(pawn);
-        generateQueensAreas()
+        generateQueensAreas();
       } else if (Board[j].isBlack && Board[j].row > 5) {
       //} else if ([49,35,21].includes(j)) {
         Board[j].free = false;
@@ -489,7 +489,8 @@ let angleKilled = 0;
 function draw() {
   turn.value(Greenturn);
   let PlayerInfo = select('#player');
-
+  for (let i = 0; i < Pawns.length; i++)
+    if (Pawns[i].queen) console.log("queen");
   if (Player == 2) {
     document.getElementById("player").style.color = "green";
     PlayerInfo.value("PLAYER GREEN");
