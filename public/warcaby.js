@@ -1177,7 +1177,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
   for (let j = 0; j < downRightArray.length; j++) {
     killConditions.push([downRightArray[j][0], downRightArray[j][1], downRightArray[j][2], Pawns[downRightArray[j][0]].isRed, Greenturn, Pawns[downRightArray[j][0]].rectCenter, Pawns[downRightArray[j][0]].rectCenterY, Pawns[downRightArray[j][1]].rectCenter, Pawns[downRightArray[j][1]].rectCenterY, true, 'down-right']);
     killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-    downLeftArray.splice(j, 1);
+    downRightArray.splice(j, 1);
   }
 //ul 
   console.log("after break");
