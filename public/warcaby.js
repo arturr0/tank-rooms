@@ -2135,9 +2135,9 @@ function neighbourFilter(kill, array, r, c) {
     let groups = {};
     let order = [];
 
-    // Group the subarrays by the first element
+    // Group the subarrays by the first and second elements
     inputArray.forEach(subarray => {
-        let key = subarray[0];
+        let key = `${subarray[0]}-${subarray[1]}`;
         if (!groups[key]) {
             groups[key] = [];
             order.push(key);
