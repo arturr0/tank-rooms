@@ -1164,9 +1164,9 @@ function kill(blockKilledPawn, blockKillersPawn) {
           let killed = j;
           let board = i;
           downLeftArray.push([killer, killed, board]);
-          for(let i = 0; i < downLeftArray.length; i++)
-            if(!Pawns[downLeftArray[i][1]].live)
-                downLeftArray.splice(i, 1);  
+        //   for(let i = 0; i < downLeftArray.length; i++)
+        //     if(!Pawns[downLeftArray[i][1]].live)
+        //         downLeftArray.splice(i, 1);  
           // for (let i = 0; i < downLeftArray.length; i++) {
           //   console.log("push downLeftArray", downLeftArray[i]);
           // }
@@ -1345,11 +1345,14 @@ for (let i = 0; i < Board.length; i++) {
         upRightArray.splice(j, 1);
         
       }
-      console.log("before act", downLeftArray);
+      for(let i = 0; i < downLeftArray.length; i++)
+      console.log("before act", downLeftArray[i]);
       downLeftArray = groupAndSort("down", downLeftArray);
-      console.log("a g", downLeftArray);
+      for(let i = 0; i < downLeftArray.length; i++)
+      console.log("a g", downLeftArray[i]);
       neighbourFilter("down", downLeftArray, -1, 1);
-      console.log("a f", downLeftArray);
+      for(let i = 0; i < downLeftArray.length; i++)
+      console.log("a f", downLeftArray[i]);
       let chooseDL = getChooseBoard(downLeftArray);
       console.log("chooseDL", chooseDL);
       console.log("a b", downLeftArray);
