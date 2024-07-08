@@ -2128,43 +2128,36 @@ function neighbourFilter(kill, array, r, c) {
     }
   }  
     
-  let array = [[2, 3, 6], [3, 7, 9], [2, 6, 8], [3, 1, 2]];
+  //let array = [[2, 3, 6], [3, 7, 9], [2, 6, 8], [3, 1, 2]];
 
   // Function to group by the first element and sort each group
-  function groupAndSort(mode, array) {
-      let groups = {};
-      let order = [];
-  
-      // Group the subarrays by the first element
-      array.forEach(subarray => {
-          let key = subarray[1];
-          if (!groups[key]) {
-              groups[key] = [];
-              order.push(key);
-          }
-          groups[key].push(subarray);
-      });
-  
-      // Sort each group by the third element
-      let sortedGroups = {};
-      if (mode === "down") {
-          order.forEach(key => {
-              sortedGroups[key] = groups[key].slice().sort((a, b) => a[2] - b[2]);
-          });
-      } else {
-          order.forEach(key => {
-              sortedGroups[key] = groups[key].slice().sort((a, b) => b[2] - a[2]);
-          });
-      }
-  
-      // Combine the sorted groups back into an array
-      let sortedArray = [];
-      order.forEach(key => {
-          sortedArray = sortedArray.concat(sortedGroups[key]);
-      });
-  
-      return sortedArray;
-  }
+  function groupAndSort(mode, inputArray) {
+    let groups = {};
+    let order = [];
+
+    // Group the subarrays by the first element
+    inputArray.forEach(subarray => {
+        let key = subarray[0];
+        if (!groups[key]) {
+            groups[key] = [];
+            order.push(key);
+        }
+        groups[key].push(subarray);
+    });
+
+    // Sort each group by the third element
+    order.forEach(key => {
+        groups[key].sort((a, b) => mode === "down" ? a[2] - b[2] : b[2] - a[2]);
+    });
+
+    // Combine the sorted groups back into arrays
+    let sortedArray = [];
+    order.forEach(key => {
+        sortedArray = sortedArray.concat(groups[key]);
+    });
+
+    return sortedArray;
+}
   
   function getChooseBoard(arr) {
     if (arr.length === 0) {
