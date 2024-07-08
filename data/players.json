@@ -120,10 +120,10 @@
   },
   {
     "index": 17,
-    "players": 1,
-    "user1": "ff",
+    "players": 0,
+    "user1": "",
     "user2": "",
-    "block": 0
+    "block": 1
   },
   {
     "index": 18,
@@ -155,9 +155,9 @@
   },
   {
     "index": 22,
-    "players": 1,
+    "players": 2,
     "user1": "f",
-    "user2": "",
+    "user2": "ff",
     "block": 0
   }
 ]

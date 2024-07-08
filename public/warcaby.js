@@ -1345,11 +1345,16 @@ for (let i = 0; i < Board.length; i++) {
         upRightArray.splice(j, 1);
         
       }
+      console.log("before act", downLeftArray);
       downLeftArray = groupAndSort("down", downLeftArray);
+      console.log("a g", downLeftArray);
       neighbourFilter("down", downLeftArray, -1, 1);
+      console.log("a f", downLeftArray);
       let chooseDL = getChooseBoard(downLeftArray);
       console.log("chooseDL", chooseDL);
+      console.log("a b", downLeftArray);
       for (let j = 0; j < downLeftArray.length; j++) {
+        console.log("dl", downLeftArray[j])
         killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left', chooseDL]);
         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
         downLeftArray.splice(j, 1);
