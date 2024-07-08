@@ -1164,6 +1164,9 @@ function kill(blockKilledPawn, blockKillersPawn) {
           let killed = j;
           let board = i;
           downLeftArray.push([killer, killed, board]);
+          for(let i = 0; i < downLeftArray.length; i++)
+            if(!Pawns[downLeftArray[i][1]].live)
+                downLeftArray.splice(i, 1);  
           // for (let i = 0; i < downLeftArray.length; i++) {
           //   console.log("push downLeftArray", downLeftArray[i]);
           // }
@@ -1211,6 +1214,9 @@ function kill(blockKilledPawn, blockKillersPawn) {
           let killed = j;
           let board = i;
           upLeftArray.push([killer, killed, board]);
+          for(let i = 0; i < upLeftArray.length; i++)
+            if(!Pawns[upLeftArray[i][1]].live)
+                upLeftArray.splice(i, 1);    
           // for (let i = 0; i < upLeftArray.length; i++) {
           //   console.log("push upLeftArray", upLeftArray[i]);
           // }
@@ -1250,6 +1256,9 @@ for (let i = 0; i < Board.length; i++) {
         let killed = j;
         let board = i;
         upRightArray.push([killer, killed, board]);
+        for(let i = 0; i < upRightArray.length; i++)
+            if(!Pawns[upRightArray[i][1]].live)
+                upRightArray.splice(i, 1);  
         // for (let i = 0; i < downLeftArray.length; i++) {
         //   console.log("push downLeftArray", downLeftArray[i]);
         // }
@@ -1294,6 +1303,9 @@ for (let i = 0; i < Board.length; i++) {
               let killed = j;
               let board = i;
               downRightArray.push([killer, killed, board]);
+              for(let i = 0; i < downRightArray.length; i++)
+                if(!Pawns[downRightArray[i][1]].live)
+                    downRightArray.splice(i, 1);  
               // for (let i = 0; i < downRightArray.length; i++) {
               //   console.log("push downRightArray", downRightArray[i]);
               // }
