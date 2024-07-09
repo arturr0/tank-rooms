@@ -1680,7 +1680,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   
   current = winner;
  
-  if(chooseBoard == null || chooseBoard.length == 0) kill(blockKilledPawn, blockKillersPawn);
+  kill(blockKilledPawn, blockKillersPawn);
   
   
   }
