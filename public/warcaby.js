@@ -1187,6 +1187,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
   
 //ul 
   console.log("after break");
+
   for (let i = 0; i < Board.length; i++) {
     
     
@@ -1195,8 +1196,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
            Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-            (Pawns[j].row - Board[i].row >= 1) &&
-            (Pawns[j].column - Board[i].column >= 1) && Board[i].row < Pawns[j].row &&
+            (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy - Board[i].row >= 1) &&
+            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy - Board[i].column >= 1) && Board[i].row < Pawns[j].row &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'up-left' &&
               Pawns[j].row === area[0] &&
@@ -2031,8 +2032,8 @@ function generateQueensAreas() {
       ];
       
       for (const direction of directions) {
-        let tempRow = Pawns[i].row;
-        let tempColumn = Pawns[i].column;
+        let tempRow = Pawns[i].row || Pawns[i].rowCopy;
+        let tempColumn = Pawns[i].column || Pawns[i].columnCopy;
 
         for (let j = 0; j < 7; j++) {
           tempRow += direction.row;
