@@ -1357,13 +1357,39 @@ for (let i = 0; i < Board.length; i++) {
       console.log("chooseDL", chooseDL);
       for(let i = 0; i < downLeftArray.length; i++)
       console.log("a b", downLeftArray[i]);
-      for (let j = 0; j < downLeftArray.length; j++) {
-        console.log("dl", downLeftArray[j])
-        killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left', chooseDL]);
-        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-        downLeftArray.splice(j, 1);
+      // for (let j = 0; j < downLeftArray.length; j++) {
+      //   console.log("dl", downLeftArray[j])
+      //   killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left', chooseDL]);
+      //   killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+      //   downLeftArray.splice(j, 1);
         
-      }     
+      // }
+      for (let j = 0; j < downLeftArray.length; j++) {
+        console.log("dl", downLeftArray[j]);
+        killConditions.push([
+            downLeftArray[j][0],
+            downLeftArray[j][1],
+            downLeftArray[j][2],
+            Pawns[downLeftArray[j][0]].isRed,
+            Greenturn,
+            Pawns[downLeftArray[j][0]].rectCenter,
+            Pawns[downLeftArray[j][0]].rectCenterY,
+            Pawns[downLeftArray[j][1]].rectCenter,
+            Pawns[downLeftArray[j][1]].rectCenterY,
+            true,
+            'down-left',
+            chooseDL
+        ]);
+    }
+    
+    // Use a while loop to remove the elements from downLeftArray
+    while (downLeftArray.length > 0) {
+        downLeftArray.splice(0, 1);
+    }
+    
+    // Ensure killConditionsUnique is updated
+    killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+         
 
 let maxLeft = [];
 let maxRight = [];
@@ -1606,14 +1632,14 @@ function killOpt(killmode) {
            /*!blockKill && (!killersOptMode && !killedOptMode && !oneKiller2Killed)*/) {
             console.log("cb", killmode[i][11]);
           //console.log('check killOpt condition 1', killmode[i]);
-          killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3]);
+          killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3], killmode[i][11]);
           console.log(i);
           if (killmode[i][11] == null || killmode[i][11].length == 0) {console.log("break"); break;}
         }
         else if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) /*&& blockKill && ((killmode[i][0] == blockKilledPawn) || (killmode[i][0] == blockKillersPawn)) &&*/
         /*(!killersOptMode && !killedOptMode && !oneKiller2Killed)*/) {
           //console.log('check killOpt 2', killmode[i]);
-          killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3]);
+          killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3], killmode[i][11]);
           console.log("cb", killmode[i][11]);
           console.log(i);
           if (killmode[i][11] == null || killmode[i][11].length == 0) {console.log("break"); break;}
@@ -1622,7 +1648,7 @@ function killOpt(killmode) {
         
 }
 
-function killSwitch(winner, looser, newBoard, player) {
+function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   
   console.log('check killSwitch 1', killConditionsUnique.length);
   console.log(winner, looser, newBoard);
@@ -1654,7 +1680,7 @@ function killSwitch(winner, looser, newBoard, player) {
   
   current = winner;
  
-  kill(blockKilledPawn, blockKillersPawn);
+  if(chooseBoard == null || chooseBoard.length == 0) kill(blockKilledPawn, blockKillersPawn);
   
   
   }
