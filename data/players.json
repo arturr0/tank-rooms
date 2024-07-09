@@ -155,16 +155,16 @@
   },
   {
     "index": 22,
-    "players": 2,
+    "players": 1,
     "user1": "ff",
-    "user2": "kkk",
+    "user2": "",
     "block": 0
   },
   {
     "index": 23,
-    "players": 1,
-    "user1": "k",
-    "user2": "",
+    "players": 2,
+    "user1": "mm",
+    "user2": "mmmm",
     "block": 0
   }
 ]
