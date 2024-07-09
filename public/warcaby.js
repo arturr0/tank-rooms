@@ -1706,7 +1706,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         checkQueen();
         
         //current = winner;
-    
+        generateQueensAreas();
         kill(blockKilledPawn, blockKillersPawn);    
     }
   
