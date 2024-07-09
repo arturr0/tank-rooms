@@ -127,7 +127,7 @@ let message;
 // let pawnLetter;
 // let pawnNumber;
 
-function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, kill1Killed2, letter, number, queensAreas, index) {
+function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, kill1Killed2, letter, number, queensAreas, index, rowCopy, columnCopy) {
     this.rectCenter = rectCenter;
     this.rectCenterY = rectCenterY;
     this.row = row;
@@ -144,7 +144,8 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
     this.targetPos = null;
     this.queensAreas = [];
     this.index = index;
-    
+    this.rowCopy = rowCopy;
+    this.columnCopy = columnCopy;
     this.update = function() {
       if (this.targetPos) {
         let vel = p5.Vector.sub(this.targetPos, this.pos);
@@ -1143,8 +1144,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
             Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-            Board[i].queen && Pawns[j].row - Board[i].row <= -1 &&
-            Pawns[j].column - Board[i].column >= 1 && Board[i].row > Pawns[j].row && Board[i].free &&
+            Board[i].queen && (Pawns[j].row - Board[i].row <= -1 || Pawns[j].rowCopy - Board[i].row <= -1) &&
+            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy - Board[i].column >= 1) && Board[i].row > Pawns[j].row && Board[i].free &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'down-left' &&
               Pawns[j].row === area[0] &&
@@ -1659,7 +1660,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
     if (Board[m].row == Pawns[winner].row && Board[m].column == Pawns[winner].column) Board[m].free = true;
   for (let m = 0; m < Board.length; m++)
     if (Board[m].row == Pawns[looser].row && Board[m].column == Pawns[looser].column) Board[m].free = true;
- 
+  
   let pawnLetter = Pawns[winner].letter;
   let pawnNumber = Pawns[winner].number;
   let pawnLetterLooser = Pawns[looser].letter;
@@ -1684,6 +1685,59 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   
   
   }
+  if ((!killersOptMode && !killedOptMode && !oneKiller2Killed) && killmode.every(array => array[11].length == 0)) {
+    for (let m = 0; m < Board.length; m++)
+      if (Board[m].row == Pawns[winner].row && Board[m].column == Pawns[winner].column) Board[m].free = true;
+    for (let m = 0; m < Board.length; m++)
+      if (Board[m].row == Pawns[looser].row && Board[m].column == Pawns[looser].column) Board[m].free = true;
+    
+    let pawnLetter = Pawns[winner].letter;
+    let pawnNumber = Pawns[winner].number;
+    let pawnLetterLooser = Pawns[looser].letter;
+    let pawnNumberLooser = Pawns[looser].number;
+    let played = Pawns[winner].isRed;
+    message = "kill";
+    if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
+      socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
+    Pawns[looser].live = false;
+   
+    Pawns[winner].row = Board[newBoard].row;
+    Pawns[winner].column = Board[newBoard].column;
+    Pawns[winner].letter = Board[newBoard].letter;
+    Pawns[winner].number = Board[newBoard].number;
+    
+    Board[newBoard].free = false;
+    checkQueen();
+    
+    current = winner;
+   
+    kill(blockKilledPawn, blockKillersPawn);
+    
+    
+    }
+    else if(oneKiller2Killed && chooseBoard.some(array => array[11].length > 0)) {
+        // let pawnLetter = Pawns[winner].letter;
+        // let pawnNumber = Pawns[winner].number;
+        // let pawnLetterLooser = Pawns[looser].letter;
+        // let pawnNumberLooser = Pawns[looser].number;
+        // let played = Pawns[winner].isRed;
+        // message = "kill";
+        // if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
+        // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
+        //Pawns[looser].live = false;
+    
+        Pawns[winner].rowCopy = Board[newBoard].row;
+        Pawns[winner].columnCopy = Board[newBoard].column;
+        // Pawns[winner].letter = Board[newBoard].letter;
+        // Pawns[winner].number = Board[newBoard].number;
+        
+        //Board[newBoard].free = false;
+        checkQueen();
+        
+        //current = winner;
+    
+        kill(blockKilledPawn, blockKillersPawn);    
+    }
   
   ////console.log('check killSwitch 2', killConditionsUnique.length); 
 }
