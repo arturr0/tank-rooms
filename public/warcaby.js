@@ -1655,7 +1655,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   console.log(winner, looser, newBoard);
   //console.log(`killSwitch: killedOptMode ${killedOptMode} killersOptMode ${killersOptMode} oneKiller2Killed ${oneKiller2Killed} 
   //blockKill ${blockKill} blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn} releaseBlock ${releaseBlock}`)
-  if ((!killersOptMode && !killedOptMode && !oneKiller2Killed) || (oneKiller2Killed && chooseBoard.some(array => array[11].length > 0))) {
+  if ((!killersOptMode && !killedOptMode && !oneKiller2Killed) && chooseBoard.every(array => array[11].length == 0)) {
   for (let m = 0; m < Board.length; m++)
     if (Board[m].row == Pawns[winner].row && Board[m].column == Pawns[winner].column) Board[m].free = true;
   for (let m = 0; m < Board.length; m++)
@@ -1685,37 +1685,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   
   
   }
-  if ((!killersOptMode && !killedOptMode && !oneKiller2Killed) && killmode.every(array => array[11].length == 0)) {
-    for (let m = 0; m < Board.length; m++)
-      if (Board[m].row == Pawns[winner].row && Board[m].column == Pawns[winner].column) Board[m].free = true;
-    for (let m = 0; m < Board.length; m++)
-      if (Board[m].row == Pawns[looser].row && Board[m].column == Pawns[looser].column) Board[m].free = true;
-    
-    let pawnLetter = Pawns[winner].letter;
-    let pawnNumber = Pawns[winner].number;
-    let pawnLetterLooser = Pawns[looser].letter;
-    let pawnNumberLooser = Pawns[looser].number;
-    let played = Pawns[winner].isRed;
-    message = "kill";
-    if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
-      socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
-    Pawns[looser].live = false;
-   
-    Pawns[winner].row = Board[newBoard].row;
-    Pawns[winner].column = Board[newBoard].column;
-    Pawns[winner].letter = Board[newBoard].letter;
-    Pawns[winner].number = Board[newBoard].number;
-    
-    Board[newBoard].free = false;
-    checkQueen();
-    
-    current = winner;
-   
-    kill(blockKilledPawn, blockKillersPawn);
-    
-    
-    }
-    else if(oneKiller2Killed && chooseBoard.some(array => array[11].length > 0)) {
+  else if(oneKiller2Killed && chooseBoard.some(array => array[11].length > 0)) {
         // let pawnLetter = Pawns[winner].letter;
         // let pawnNumber = Pawns[winner].number;
         // let pawnLetterLooser = Pawns[looser].letter;
