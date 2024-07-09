@@ -854,11 +854,11 @@ if (killedOptMode) {
     ////////////////////console.log('killConditionsUnique outside for loop', killConditionsUnique);
     for (let i = 0; i < oneKiller2KilledArray.length; i++) {
       console.log("click", oneKiller2KilledArray.length)
-      
+      let clicked = false;
       
       if (((oneKiller2KilledArray[i][3] && !Greenturn && Player == 1) || (!oneKiller2KilledArray[i][3] && Greenturn  && Player == 2)) &&
           X > oneKiller2KilledArray[i][7] - 32 && X < oneKiller2KilledArray[i][7] + 32 && Y > oneKiller2KilledArray[i][8] - 32 && Y < oneKiller2KilledArray[i][8] + 32) {
-            //console.log("click 2 killed");
+            console.log("click 2 killed");
             for (let j = 0; j < killedOptModeArray.length; j++)
               Pawns[killedOptModeArray[j][1]].killed = false;
             for (let j = 0; j < killersOptModeArray.length; j++)
@@ -900,9 +900,10 @@ if (killedOptMode) {
             killOpt(firstKill);
             stepKill(firstKill);
             socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
+            clicked = true;
             break;
         }
-        break;
+          if(clicked) break;
         }
         
         
