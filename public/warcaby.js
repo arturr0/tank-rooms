@@ -470,7 +470,7 @@ function setup() {
         Pawns.push(pawn);
         //generateQueensAreas()
       //} else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([14,42,12,19,37].includes(j)) {
+      } else if ([14,35,12,19,37].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -774,6 +774,7 @@ function mouseClicked() {
             killOpt(firstKill);
             stepKill(firstKill);
             socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
+            break;
         }
         
         }
@@ -837,6 +838,7 @@ if (killedOptMode) {
           killOpt(firstKill);
           stepKill(firstKill);
           socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
+          break;
       }
       
       
@@ -851,7 +853,7 @@ if (killedOptMode) {
     ////////////////////console.log('oneKiller2KilledArray', oneKiller2KilledArray);
     ////////////////////console.log('killConditionsUnique outside for loop', killConditionsUnique);
     for (let i = 0; i < oneKiller2KilledArray.length; i++) {
-      ////////////////////console.log('for oneKiller2KilledArrayMode')
+      console.log("click", oneKiller2KilledArray.length)
       
       
       if (((oneKiller2KilledArray[i][3] && !Greenturn && Player == 1) || (!oneKiller2KilledArray[i][3] && Greenturn  && Player == 2)) &&
@@ -898,11 +900,12 @@ if (killedOptMode) {
             killOpt(firstKill);
             stepKill(firstKill);
             socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
+            break;
         }
         
         }
         
-  
+        
         //return;
       
     }
@@ -1593,6 +1596,7 @@ for (let i = 0; i < killConditionsUnique.length; i++)
       Pawns[killConditionsUnique[i][1]].kill1Killed2 = true;
       oneKiller2KilledArray.push(killConditionsUnique[i]);
       oneKiller2KilledArray.push(killConditionsUnique[j]);
+      oneKiller2KilledArray = queenUnique(oneKiller2KilledArray);
       //break;
       
     }
