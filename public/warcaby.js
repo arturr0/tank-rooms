@@ -1733,7 +1733,8 @@ function stepKill(killmode) {
 
 
 for (let i = 0; i < killmode.length; i++)
-if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && !killersOptMode && !killedOptMode && (!oneKiller2Killed || (oneKiller2Killed && step == 0)) && !Pawns[killmode[i][1]].live)   
+if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && !killersOptMode && !killedOptMode && (!oneKiller2Killed || (oneKiller2Killed && step == 0)) && !Pawns[killmode[i][1]].live &&
+killmode.every(array => array[11].length == 0))   
   //if (Pawns[killmode[i][0]].live && !Pawns[killmode[i][1]].live ) 
 { 
   step++;
