@@ -1741,6 +1741,7 @@ for (let i = 0; i < killConditionsUnique.length; i++)
 let lastMove = false;
 let multiKill = false;
 function killOpt(killmode) {
+  console.log(killmode)
   for (let z = 0; z < killmode.length; z++) {
     //console.log(`killOpt - killer: ${killmode[z][0]} killed: ${killmode[z][1]}`);
   }
@@ -1755,8 +1756,10 @@ function killOpt(killmode) {
   for (let i = 0; i < killmode.length; i++)  
     if ((!killersOptMode && !killedOptMode && !oneKiller2Killed) &&
         ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) && blockKill &&
-      ((blockKilledPawn != null && killmode[i][0] != blockKilledPawn) || (blockKillersPawn != null && killmode[i][0] != blockKillersPawn))) 
+      ((blockKilledPawn != null && killmode[i][0] != blockKilledPawn) || (blockKillersPawn != null && killmode[i][0] != blockKillersPawn))) {
+      console.log("splice");
       killmode.splice(i, 1);
+    }
     console.log("len", killmode.length)
     for (let i = 0; i < killmode.length; i++)
         if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn))// &&  
