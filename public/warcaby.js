@@ -1355,7 +1355,8 @@ for (let i = 0; i < Board.length; i++) {
       console.log("a f", downLeftArray[i]);
       let chooseDL = getChooseBoard(downLeftArray);
       console.log("chooseDL", chooseDL);
-      console.log("a b", downLeftArray);
+      for(let i = 0; i < downLeftArray.length; i++)
+      console.log("a b", downLeftArray[i]);
       for (let j = 0; j < downLeftArray.length; j++) {
         console.log("dl", downLeftArray[j])
         killConditions.push([downLeftArray[j][0], downLeftArray[j][1], downLeftArray[j][2], Pawns[downLeftArray[j][0]].isRed, Greenturn, Pawns[downLeftArray[j][0]].rectCenter, Pawns[downLeftArray[j][0]].rectCenterY, Pawns[downLeftArray[j][1]].rectCenter, Pawns[downLeftArray[j][1]].rectCenterY, true, 'down-left', chooseDL]);
@@ -1370,20 +1371,20 @@ let minLeft = [];
 let minRight = [];
 
 // Function to get unique values in an array
-function getUniqueValues(array, index) {
-    return [...new Set(array.map(item => item[index]))];
-}
-for (let i = 0; i < downLeftArray.length; i++) {
-  console.log("downLeftArray bs", downLeftArray[i])
-}
-for (let i = 0; i < upLeftArray.length; i++) {
-  console.log("upLeftArray bs", upLeftArray[i])
-}
-// Get unique values for index 0
-let uniqueIndex0Values = getUniqueValues(killConditionsUnique, 0);
+// function getUniqueValues(array, index) {
+//     return [...new Set(array.map(item => item[index]))];
+// }
+// for (let i = 0; i < downLeftArray.length; i++) {
+//   console.log("downLeftArray bs", downLeftArray[i])
+// }
+// for (let i = 0; i < upLeftArray.length; i++) {
+//   console.log("upLeftArray bs", upLeftArray[i])
+// }
+// // Get unique values for index 0
+// let uniqueIndex0Values = getUniqueValues(killConditionsUnique, 0);
 
 // Iterate through unique index 0 values
-uniqueIndex0Values.forEach(value => {
+killConditionsUnique.forEach(value => {
     // Filter subarrays by index 0 value and condition
     let filteredUpLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
     let filteredUpRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
@@ -1662,7 +1663,7 @@ function killSwitch(winner, looser, newBoard, player) {
 }
 let step = 0;
 function stepKill(killmode) {
-  ////console.log('check stepKill 1', killConditionsUnique.length); 
+  console.log('check stepKill 1', killConditionsUnique.length); 
   ////////////////////////////////////////////////for (let z = 0; z < killmode.length; z++)////////////////////console.log(`killer: ${killmode[z][0]} killed: ${killmode[z][1]}`);
   for (let z = 0; z < killmode.length; z++) {
     //console.log(`stepKill - killer: ${z} ${killmode[z][0]} killed: ${killmode[z][1]}`);
