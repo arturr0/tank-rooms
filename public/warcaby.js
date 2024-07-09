@@ -771,8 +771,8 @@ function mouseClicked() {
             oneKiller2KilledArray = [];
             //console.log('killersOptMode firstKill', firstKill)
             
-            // killOpt(firstKill);
-            // stepKill(firstKill);
+            killOpt(firstKill);
+            stepKill(firstKill);
             socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
             break;
         }
@@ -939,19 +939,26 @@ if (killedOptMode) {
           for (let k = 0; k < killConditionsUnique.length; k++) {
               console.log('two killed', killConditionsUnique[k]);
           }
-          
+          console.log("end");
           firstKill.push(oneKiller2KilledArray[i]);
+          console.log("end");
           oneKiller2KilledArray = [];
+          console.log("end");
           console.log('oneKiller2Killed', firstKill);
-          
+          console.log("end");
           killedOptModeArray = [];
+          console.log("end");
           killersOptModeArray = [];
+          console.log("end");
           oneKiller2KilledArray = [];
-          
+          console.log("end");
           killOpt(firstKill);
+          console.log("end");
           stepKill(firstKill);
-          socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
+          console.log("end");
+          //socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
           click = true;
+          console.log("end");
           break; // Break out of the outer loop after processing
       }
       if(click) break;
