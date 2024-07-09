@@ -771,8 +771,8 @@ function mouseClicked() {
             oneKiller2KilledArray = [];
             //console.log('killersOptMode firstKill', firstKill)
             
-            killOpt(firstKill);
-            stepKill(firstKill);
+            // killOpt(firstKill);
+            // stepKill(firstKill);
             socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
             break;
         }
@@ -1979,13 +1979,13 @@ killmode.every(array => array[11].length == 0))
         //////////console.log('blockKill false killers other killers:', killmode) 
         //socket.emit('blockKill false', blockKill, blockKilledPawn, releaseBlock, killmode, room);
     }
-    // else if (blockKill) {
-    //     check = true;
-    //     killConditions = [];
-    //     killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+    else if (blockKill) {
+        check = true;
+        killConditions = [];
+        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
 
-    //     console.log('check else if (blockKill)', check)
-    // }
+        console.log('check else if (blockKill)', check)
+    }
     // else {
     //     check = false;
     //     //////////console.log('else', check)
