@@ -2022,7 +2022,7 @@ function generateQueensAreas() {
   for (let i = 0; i < Pawns.length; i++) {
     if (Pawns[i].queen && Pawns[i].live) {
       Pawns[i].queensAreas = [];
-      
+      console.log(Pawns[i].rowCopy, Pawns[i].columnCopy)
       // Define directions for queen movement
       const directions = [
         { row: 1, column: 1, dir: "down-right" },    // Diagonal down-right
