@@ -1133,7 +1133,10 @@ function kill(blockKilledPawn, blockKillersPawn) {
   
 //q
 //dl 
-  generateQueensAreas();
+  if(killConditionsUnique.every(array => array[11].length == 0))
+    generateQueensAreas(false);
+  else
+    generateQueensAreas(true);
   console.log(`blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
   for (let i = 0; i < Board.length; i++) {
     
@@ -2018,7 +2021,7 @@ function checkQueen () {
       Pawns[i].queen = true;
 }
 
-function generateQueensAreas() {
+function generateQueensAreas(check) {
   for (let i = 0; i < Pawns.length; i++) {
     if (Pawns[i].queen && Pawns[i].live) {
       Pawns[i].queensAreas = [];
@@ -2030,10 +2033,18 @@ function generateQueensAreas() {
         { row: -1, column: 1, dir: "up-right" },   // Diagonal up-right
         { row: 1, column: -1, dir: "down-left" }    // Diagonal down-left
       ];
-      
+      let tempRow = Pawns[i].row ?? Pawns[i].rowCopy;
+      let tempColumn = Pawns[i].column ?? Pawns[i].columnCopy;
       for (const direction of directions) {
-        let tempRow = Pawns[i].row ?? Pawns[i].rowCopy;
-        let tempColumn = Pawns[i].column ?? Pawns[i].columnCopy;
+        if(check) {
+            tempRow = Pawns[i].rowCopy;
+            tempColumn = Pawns[i].columnCopy;
+        }
+        else {
+            tempRow = Pawns[i].row;
+            tempColumn = Pawns[i].column;    
+        }
+        removeEventListener
         console.log(tempRow, tempColumn)
         for (let j = 0; j < 7; j++) {
           tempRow += direction.row;
