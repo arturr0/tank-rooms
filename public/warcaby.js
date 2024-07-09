@@ -1654,7 +1654,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   console.log(winner, looser, newBoard);
   //console.log(`killSwitch: killedOptMode ${killedOptMode} killersOptMode ${killersOptMode} oneKiller2Killed ${oneKiller2Killed} 
   //blockKill ${blockKill} blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn} releaseBlock ${releaseBlock}`)
-  if ((!killersOptMode && !killedOptMode && !oneKiller2Killed) && Pawns[looser].live) {
+  if ((!killersOptMode && !killedOptMode && !oneKiller2Killed) && (Pawns[looser].live || chooseBoard.length > 0)) {
   for (let m = 0; m < Board.length; m++)
     if (Board[m].row == Pawns[winner].row && Board[m].column == Pawns[winner].column) Board[m].free = true;
   for (let m = 0; m < Board.length; m++)
