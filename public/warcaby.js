@@ -1632,14 +1632,14 @@ function killOpt(killmode) {
            /*!blockKill && (!killersOptMode && !killedOptMode && !oneKiller2Killed)*/) {
             console.log("cb", killmode[i][11]);
           //console.log('check killOpt condition 1', killmode[i]);
-          killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3], killmode[i][11]);
+          killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3], killmode);
           console.log(i);
           if (killmode[i][11] == null || killmode.every(array => array[11].length == 0)) {console.log("break"); break;}
         }
         else if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) /*&& blockKill && ((killmode[i][0] == blockKilledPawn) || (killmode[i][0] == blockKillersPawn)) &&*/
         /*(!killersOptMode && !killedOptMode && !oneKiller2Killed)*/) {
           //console.log('check killOpt 2', killmode[i]);
-          killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3], killmode[i][11]);
+          killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3], killmode);
           console.log("cb", killmode[i][11]);
           console.log(i);
           if (killmode[i][11] == null || killmode.every(array => array[11].length == 0)) {console.log("break"); break;}
@@ -1654,7 +1654,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   console.log(winner, looser, newBoard);
   //console.log(`killSwitch: killedOptMode ${killedOptMode} killersOptMode ${killersOptMode} oneKiller2Killed ${oneKiller2Killed} 
   //blockKill ${blockKill} blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn} releaseBlock ${releaseBlock}`)
-  if ((!killersOptMode && !killedOptMode && !oneKiller2Killed) && (Pawns[looser].live || chooseBoard.length > 0)) {
+  if ((!killersOptMode && !killedOptMode && !oneKiller2Killed) || (oneKiller2Killed && chooseBoard.some(array => array[11].length > 0))) {
   for (let m = 0; m < Board.length; m++)
     if (Board[m].row == Pawns[winner].row && Board[m].column == Pawns[winner].column) Board[m].free = true;
   for (let m = 0; m < Board.length; m++)
