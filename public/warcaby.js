@@ -902,7 +902,7 @@ if (killedOptMode) {
             socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
             break;
         }
-        
+        break;
         }
         
         
