@@ -906,65 +906,128 @@ if (killedOptMode) {
     //       if(clicked) break;
     //     }
     let click = false;    
-    for (let i = 0; i < oneKiller2KilledArray.length; i++) {
-      console.log(oneKiller2KilledArray[i]);
+  //   for (let i = 0; i < oneKiller2KilledArray.length; i++) {
+  //     console.log(oneKiller2KilledArray[i]);
       
-      if (((oneKiller2KilledArray[i][3] && !Greenturn && Player == 1) || 
-           (!oneKiller2KilledArray[i][3] && Greenturn && Player == 2)) &&
-          X > oneKiller2KilledArray[i][7] - 32 && X < oneKiller2KilledArray[i][7] + 32 && 
-          Y > oneKiller2KilledArray[i][8] - 32 && Y < oneKiller2KilledArray[i][8] + 32) {
+  //     if (((oneKiller2KilledArray[i][3] && !Greenturn && Player == 1) || 
+  //          (!oneKiller2KilledArray[i][3] && Greenturn && Player == 2)) &&
+  //         X > oneKiller2KilledArray[i][7] - 32 && X < oneKiller2KilledArray[i][7] + 32 && 
+  //         Y > oneKiller2KilledArray[i][8] - 32 && Y < oneKiller2KilledArray[i][8] + 32) {
           
-          console.log("click 2 killed");
+  //         console.log("click 2 killed");
           
-          for (let j = 0; j < killedOptModeArray.length; j++)
-              Pawns[killedOptModeArray[j][1]].killed = false;
-          for (let j = 0; j < killersOptModeArray.length; j++)
-              Pawns[killersOptModeArray[j][0]].killer = false;
-          for (let j = 0; j < oneKiller2KilledArray.length; j++)
-              Pawns[oneKiller2KilledArray[j][1]].kill1Killed2 = false;
+  //         for (let j = 0; j < killedOptModeArray.length; j++)
+  //             Pawns[killedOptModeArray[j][1]].killed = false;
+  //         for (let j = 0; j < killersOptModeArray.length; j++)
+  //             Pawns[killersOptModeArray[j][0]].killer = false;
+  //         for (let j = 0; j < oneKiller2KilledArray.length; j++)
+  //             Pawns[oneKiller2KilledArray[j][1]].kill1Killed2 = false;
           
-          blockKilledPawn = oneKiller2KilledArray[i][0];
-          let chosenKilled = oneKiller2KilledArray[i][1];
+  //         blockKilledPawn = oneKiller2KilledArray[i][0];
+  //         let chosenKilled = oneKiller2KilledArray[i][1];
           
-          killConditionsUnique = killConditionsUnique.filter(condition => condition[1] === chosenKilled);
+  //         killConditionsUnique = killConditionsUnique.filter(condition => condition[1] === chosenKilled);
           
-          killedOptMode = false;
-          killersOptMode = false;
-          oneKiller2Killed = false;
-          console.log('1k2k killers killConditionsUnique[0] ', killConditionsUnique[0]);
+  //         killedOptMode = false;
+  //         killersOptMode = false;
+  //         oneKiller2Killed = false;
+  //         console.log('1k2k killers killConditionsUnique[0] ', killConditionsUnique[0]);
           
-          let firstKill = [];
-          killConditions = [];
-          killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-          for (let k = 0; k < killConditionsUnique.length; k++) {
-              console.log('two killed', killConditionsUnique[k]);
-          }
-          console.log("end");
-          firstKill.push(oneKiller2KilledArray[i]);
-          console.log("end");
-          oneKiller2KilledArray = [];
-          console.log("end");
-          console.log('oneKiller2Killed', firstKill);
-          console.log("end");
-          killedOptModeArray = [];
-          console.log("end");
-          killersOptModeArray = [];
-          console.log("end");
-          oneKiller2KilledArray = [];
-          console.log("end");
-          killOpt(firstKill);
-          console.log("end");
-          stepKill(firstKill);
-          console.log("end");
-          //socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
-          click = true;
-          console.log("end");
-          break; // Break out of the outer loop after processing
-      }
-      if(click) break;
-  }
+  //         let firstKill = [];
+  //         killConditions = [];
+  //         killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+  //         for (let k = 0; k < killConditionsUnique.length; k++) {
+  //             console.log('two killed', killConditionsUnique[k]);
+  //         }
+  //         console.log("end");
+  //         firstKill.push(oneKiller2KilledArray[i]);
+  //         console.log("end");
+  //         oneKiller2KilledArray = [];
+  //         console.log("end");
+  //         console.log('oneKiller2Killed', firstKill);
+  //         console.log("end");
+  //         killedOptModeArray = [];
+  //         console.log("end");
+  //         killersOptModeArray = [];
+  //         console.log("end");
+  //         oneKiller2KilledArray = [];
+  //         console.log(firstKill);
+  //         killOpt(firstKill);
+  //         console.log("end");
+  //         stepKill(firstKill);
+  //         console.log("end");
+  //         //socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
+  //         click = true;
+  //         console.log("end");
+  //         break; // Break out of the outer loop after processing
+  //     }
+  //     if(click) break;
+  // }
   
         //return;
+        for (let i = 0; i < oneKiller2KilledArray.length; i++) {
+          console.log(oneKiller2KilledArray[i]);
+          
+          if (((oneKiller2KilledArray[i][3] && !Greenturn && Player == 1) || 
+               (!oneKiller2KilledArray[i][3] && Greenturn && Player == 2)) &&
+              X > oneKiller2KilledArray[i][7] - 32 && X < oneKiller2KilledArray[i][7] + 32 && 
+              Y > oneKiller2KilledArray[i][8] - 32 && Y < oneKiller2KilledArray[i][8] + 32) {
+              
+              console.log("click 2 killed");
+              
+              for (let j = 0; j < killedOptModeArray.length; j++)
+                  Pawns[killedOptModeArray[j][1]].killed = false;
+              for (let j = 0; j < killersOptModeArray.length; j++)
+                  Pawns[killersOptModeArray[j][0]].killer = false;
+              for (let j = 0; j < oneKiller2KilledArray.length; j++)
+                  Pawns[oneKiller2KilledArray[j][1]].kill1Killed2 = false;
+              
+              blockKilledPawn = oneKiller2KilledArray[i][0];
+              let chosenKilled = oneKiller2KilledArray[i][1];
+              
+              killConditionsUnique = killConditionsUnique.filter(condition => condition[1] === chosenKilled);
+              
+              killedOptMode = false;
+              killersOptMode = false;
+              oneKiller2Killed = false;
+              console.log('1k2k killers killConditionsUnique[0] ', killConditionsUnique[0]);
+              
+              let firstKill = [];
+              killConditions = [];
+              killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+              for (let k = 0; k < killConditionsUnique.length; k++) {
+                  console.log('two killed', killConditionsUnique[k]);
+              }
+              console.log("end");
+              firstKill.push(oneKiller2KilledArray[i]);
+              console.log("end");
+              oneKiller2KilledArray = [];
+              console.log("end");
+              console.log('oneKiller2Killed', firstKill);
+              console.log("end");
+              killedOptModeArray = [];
+              console.log("end");
+              killersOptModeArray = [];
+              console.log("end");
+              oneKiller2KilledArray = [];
+              console.log(firstKill);
+              try {
+                  killOpt(firstKill);
+                  console.log("killOpt executed successfully");
+              } catch (error) {
+                  console.error("Error executing killOpt:", error);
+              }
+              console.log("end");
+              stepKill(firstKill);
+              console.log("end");
+              //socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
+              click = true;
+              console.log("end");
+              break; // Break out of the outer loop after processing
+          }
+          if (click) break;
+      }
+      
       
     }
   
