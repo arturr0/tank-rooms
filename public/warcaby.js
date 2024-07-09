@@ -1195,8 +1195,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
            Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-            Board[i].queen && Pawns[j].row - Board[i].row >= 1 &&
-            Pawns[j].column - Board[i].column >= 1 && Board[i].row < Pawns[j].row &&
+            (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy - Board[i].row >= 1) &&
+            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy - Board[i].column >= 1) && Board[i].row < Pawns[j].row &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'up-left' &&
               Pawns[j].row === area[0] &&
@@ -1648,7 +1648,7 @@ function killOpt(killmode) {
         ////console.log('check killOpt 2', killConditionsUnique.length);
         
 }
-
+//ks
 function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   
   console.log('check killSwitch 1', killConditionsUnique.length);
@@ -1685,7 +1685,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   
   
   }
-  else if(oneKiller2Killed && chooseBoard.some(array => array[11].length > 0)) {
+  else if(chooseBoard.some(array => array[11].length > 0)) {
         // let pawnLetter = Pawns[winner].letter;
         // let pawnNumber = Pawns[winner].number;
         // let pawnLetterLooser = Pawns[looser].letter;
