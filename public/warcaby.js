@@ -2032,9 +2032,9 @@ function generateQueensAreas() {
       ];
       
       for (const direction of directions) {
-        let tempRow = Pawns[i].row || Pawns[i].rowCopy;
-        let tempColumn = Pawns[i].column || Pawns[i].columnCopy;
-
+        let tempRow = Pawns[i].row ?? Pawns[i].rowCopy;
+        let tempColumn = Pawns[i].column ?? Pawns[i].columnCopy;
+        console.log(tempRow, tempColumn)
         for (let j = 0; j < 7; j++) {
           tempRow += direction.row;
           tempColumn += direction.column;
