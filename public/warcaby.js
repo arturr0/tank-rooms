@@ -473,14 +473,14 @@ function setup() {
         //generateQueensAreas()
       //} else if (Board[j].isBlack && Board[j].row > 5) {
       }  
-      // if ([3].includes(j)) {
-      //     Board[j].free = false;
-      //     let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
-      //     //pawn.queen = true;
-      //     Pawns.push(pawn);
-      //     //generateQueensAreas()
-      //   //} else if (Board[j].isBlack && Board[j].row > 5) {
-      // } 
+      if ([3].includes(j)) {
+          Board[j].free = false;
+          let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
+          //pawn.queen = true;
+          Pawns.push(pawn);
+          //generateQueensAreas()
+        //} else if (Board[j].isBlack && Board[j].row > 5) {
+      } 
       else if ([10,37,12,21,26,35].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
@@ -1663,6 +1663,7 @@ uniqueIndex0Values.forEach(value => {
     if (filteredUpLeft.length > 0) {
         if (chooseUL.length === 0) {
             maxLeft.push([value, Math.max(...filteredUpLeft)]);
+            maxLeftE.push([value, Math.max(...filteredUpLeft)]);
         } else {
             let secondMax = sortToSecondExtreme(filteredUpLeft);
             let found = false;
@@ -1686,6 +1687,7 @@ uniqueIndex0Values.forEach(value => {
         if (chooseUR.length === 0) {
             console.log(filteredUpRight)
             maxRight.push([value, Math.max(...filteredUpRight)]);
+            maxRightE.push([value, Math.max(...filteredUpRight)]);
         } else {
           console.log(filteredUpRight)
             let secondMax = sortToSecondExtreme(filteredUpRight);
@@ -1706,6 +1708,7 @@ uniqueIndex0Values.forEach(value => {
     if (filteredDownLeft.length > 0) {
         if (chooseDL.length === 0) {
             minLeft.push([value, Math.min(...filteredDownLeft)]);
+            minLeftE.push([value, Math.min(...filteredDownLeft)]);
         } else {
             let secondMin = sortToSecondExtreme(filteredDownLeft);
             let found = false;
@@ -1727,6 +1730,7 @@ uniqueIndex0Values.forEach(value => {
     if (filteredDownRight.length > 0) {
         if (chooseDR.length === 0) {
             minRight.push([value, Math.min(...filteredDownRight)]);
+            minRightE.push([value, Math.min(...filteredDownRight)]);
         } else {
             console.log(filteredDownRight);
             let secondMin = sortToSecondExtreme(filteredDownRight);
@@ -1994,7 +1998,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   console.log("ks out", winner, looser, newBoard);
   //console.log(`killSwitch: killedOptMode ${killedOptMode} killersOptMode ${killersOptMode} oneKiller2Killed ${oneKiller2Killed} 
   //blockKill ${blockKill} blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn} releaseBlock ${releaseBlock}`)
-  if ((!killersOptMode && !killedOptMode && !oneKiller2Killed) && chooseBoard.every(array => array[11].length == 0)) {
+  if ((!killersOptMode && !killedOptMode && !oneKiller2Killed) && chooseBoard.filter(array => array[9] === true).every(array => array[11].length === 0)) {
   for (let m = 0; m < Board.length; m++)
     if (Board[m].row == Pawns[winner].row && Board[m].column == Pawns[winner].column) Board[m].free = true;
   for (let m = 0; m < Board.length; m++)
@@ -2024,7 +2028,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   
   
   }
-  else if(chooseBoard.some(array => array[11].length > 0)) {
+  else if(chooseBoard.filter(array => array[9] === true).some(array => array[11].length > 0)) {
         // let pawnLetter = Pawns[winner].letter;
         // let pawnNumber = Pawns[winner].number;
         // let pawnLetterLooser = Pawns[looser].letter;
