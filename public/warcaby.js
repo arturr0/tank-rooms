@@ -1644,21 +1644,55 @@ uniqueIndex0Values.forEach(value => {
     let filteredDownRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
 
     // Find max and min values for each condition and push to corresponding arrays
+    // if (filteredUpLeft.length > 0) {
+    //     maxLeft.push([value, Math.max(...filteredUpLeft)]);
+    // }
     if (filteredUpLeft.length > 0) {
-        maxLeft.push([value, Math.max(...filteredUpLeft)]);
+        if (chooseUL.length === 0) {
+            maxLeft.push([value, Math.max(...filteredUpLeft)]);
+        } else {
+            let secondMax = sortToSecondExtreme(filteredUpLeft);
+            let found = false;
+            for (let i = 0; i < chooseUL.length; i++) {
+                if (secondMax[0] !== Pawns[chooseUL[i][1]].row) {
+                    maxLeft.push([value, Pawns[chooseUL[i][1]].row]);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                // Handle case where no suitable second minimum was found
+                maxLeft.push([value, Pawns[chooseUL[0][1]].row]);
+            }
+        }
     }
+    // if (filteredUpRight.length > 0) {
+    //     maxRight.push([value, Math.max(...filteredUpRight)]);
+    // }
     if (filteredUpRight.length > 0) {
-        maxRight.push([value, Math.max(...filteredUpRight)]);
+        if (chooseUR.length === 0) {
+            maxRight.push([value, Math.max(...filteredUpRight)]);
+        } else {
+            let secondMax = sortToSecondExtreme(filteredUpRight);
+            let found = false;
+            for (let i = 0; i < chooseUR.length; i++) {
+                if (secondMax[0] !== Pawns[chooseUR[i][1]].row) {
+                    maxRight.push([value, Pawns[chooseUR[i][1]].row]);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                // Handle case where no suitable second minimum was found
+                maxRight.push([value, Pawns[chooseUR[0][1]].row]);
+            }
+        }
     }
     if (filteredDownLeft.length > 0) {
         if (chooseDL.length === 0) {
             minLeft.push([value, Math.min(...filteredDownLeft)]);
-            console.log("first", minLeft);
         } else {
-            console.log("ss b", chooseDL);
             let secondMin = sortToSecondExtreme(filteredDownLeft);
-            console.log("ss a", chooseDL);
-            console.log(secondMin);
             let found = false;
             for (let i = 0; i < chooseDL.length; i++) {
                 if (secondMin[0] !== Pawns[chooseDL[i][1]].row) {
@@ -1668,13 +1702,31 @@ uniqueIndex0Values.forEach(value => {
                 }
             }
             if (!found) {
-                // Handle case where no suitable second minimum was found
+                minLeft.push([value, Pawns[chooseDL[0][1]].row]);
             }
-            console.log("second", minLeft);
         }
     }
+    // if (filteredDownRight.length > 0) {
+    //     minRight.push([value, Math.min(...filteredDownRight)]);
+    // }
     if (filteredDownRight.length > 0) {
-        minRight.push([value, Math.min(...filteredDownRight)]);
+        if (chooseDR.length === 0) {
+            minRight.push([value, Math.min(...filteredDownRight)]);
+        } else {
+            let secondMin = sortToSecondExtreme(filteredDownRight);
+            let found = false;
+            for (let i = 0; i < chooseUR.length; i++) {
+                if (secondMin[0] !== Pawns[chooseDR[i][1]].row) {
+                    minRight.push([value, Pawns[chooseDR[i][1]].row]);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                // Handle case where no suitable second minimum was found
+                minRight.push([value, Pawns[chooseUL[0][1]].row]);
+            }
+        }
     }
 });
 
