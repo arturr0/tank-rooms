@@ -471,7 +471,7 @@ function setup() {
         Pawns.push(pawn);
         //generateQueensAreas()
       //} else if (Board[j].isBlack && Board[j].row > 5) {
-      } else if ([14,35,12,19,37].includes(j)) {
+      } else if ([14,35,12,19,37,49].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1000,11 +1000,6 @@ if (killedOptMode) {
                   console.log('two killed', killConditionsUnique[k]);
               }
               console.log("end");
-              oneKiller2KilledArray[i][11] = [];
-              // chooseDL = [];
-              // chooseDR = [];
-              // chooseUL = [];
-              // chooseUR = [];
               firstKill.push(oneKiller2KilledArray[i]);
               console.log("end");
               oneKiller2KilledArray = [];
