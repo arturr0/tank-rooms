@@ -1596,10 +1596,14 @@ uniqueIndex0Values.forEach(value => {
     // Find max and min values for each condition and push to corresponding arrays
     if (filteredUpLeft.length > 0) maxLeft.push([value, Math.max(...filteredUpLeft)]);
     if (filteredUpRight.length > 0) maxRight.push([value, Math.max(...filteredUpRight)]);
-    
-    if (filteredDownRight.length > 0) minRight.push([value, Math.min(...filteredDownRight)]);
     if (filteredDownLeft.length > 0 && chooseDL.length == 0) minLeft.push([value, Math.min(...filteredDownLeft)]);
-    else if (filteredDownLeft.length > 0 && chooseDL.length == 0) minLeft.push([value, uniqueForSecondExtreme(...filteredDownLeft)[1]]);
+    else if (filteredDownLeft.length > 0 && chooseDL.length > 0) {
+      let [secondMin] = sortToSecondExtreme(filteredDownLeft);
+      if (secondMin !== null) {
+          minLeft.push([value, secondMin]);
+      }
+    }
+    if (filteredDownRight.length > 0) minRight.push([value, Math.min(...filteredDownRight)]);
 });
 
 console.log("Max Left:", maxLeft);
@@ -2179,7 +2183,7 @@ function queenUnique(array) {
   }
   return uniqueKills;
 }
-function uniqueForSecondExtreme(array) {
+function uniqueForSecondExterme(array) {
   let uniqueKills = [];
   let itemsFound = {};
   for (let i = 0; i < array.length; i++) {
@@ -2190,9 +2194,8 @@ function uniqueForSecondExtreme(array) {
       uniqueKills.push(item);
       itemsFound[item] = true;
   }
-  return uniqueKills.sort((a, b) => a - b);
+  return uniqueKills;
 }
-
 
 function mousePressed() {
     if (mouseButton === RIGHT) {
@@ -2466,6 +2469,19 @@ function neighbourFilter(kill, array, r, c) {
     let result = Array.from(uniqueSet).map(item => JSON.parse(item));
 
     return result;
+}
+function sortToSecondExtreme(array) {
+  let uniqueKills = [];
+  let itemsFound = {};
+  for (let i = 0; i < array.length; i++) {
+      let item = array[i];
+      if (itemsFound[item]) {
+          continue;
+      }
+      uniqueKills.push(item);
+      itemsFound[item] = true;
+  }
+  return uniqueKills.sort((a, b) => a - b);
 }
 
   
