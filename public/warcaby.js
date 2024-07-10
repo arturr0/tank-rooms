@@ -1724,7 +1724,7 @@ uniqueIndex0Values.forEach(value => {
             }
             if (!found) {
                 // Handle case where no suitable second minimum was found
-                minRight.push([value, Pawns[chooseUL[0][1]].row]);
+                minRight.push([value, Pawns[chooseDR[0][1]].row]);
             }
         }
     }
