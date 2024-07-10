@@ -1567,91 +1567,92 @@ for (let i = 0; i < Board.length; i++) {
       }
     }        
 
-let maxLeft = [];
-let maxRight = [];
-let minLeft = [];
-let minRight = [];
-
-// Function to get unique values in an array
-function getUniqueValues(array, index) {
-  return [...new Set(array.map(item => item[index]))];
-}
-
-// Helper function to get the second minimum and second maximum values
-function getSecondExtremes(arr) {
-  if (arr.length < 2) {
-      return {
-          secondMin: null,
-          secondMax: null
-      };
-  }
-
-  let sortedArr = [...arr].sort((a, b) => a - b);
-  return {
-      secondMin: sortedArr[1],
-      secondMax: sortedArr[sortedArr.length - 2]
-  };
-}
-
-// Get unique values for index 0
-let uniqueIndex0Values = getUniqueValues(killConditionsUnique, 0);
-
-// Iterate through unique index 0 values
-uniqueIndex0Values.forEach(value => {
-  // Filter subarrays by index 0 value and condition
-  let filteredUpLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
-  let filteredUpRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
-  let filteredDownLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
-  let filteredDownRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
-
-  // Get max and second extremes for filteredUpLeft
-  if (filteredUpLeft.length > 0) {
-      if (chooseUL.length === 0) {
-          maxLeft.push([value, Math.max(...filteredUpLeft)]);
-      } else {
-          let { secondMin, secondMax } = getSecondExtremes(filteredUpLeft);
-          if (secondMin !== null) minLeft.push([value, secondMin]);
-          if (secondMax !== null) maxLeft.push([value, secondMax]);
-      }
-  }
-
-  // Get max and second extremes for filteredUpRight
-  if (filteredUpRight.length > 0) {
-      if (chooseUR.length === 0) {
-          maxRight.push([value, Math.max(...filteredUpRight)]);
-      } else {
-          let { secondMin, secondMax } = getSecondExtremes(filteredUpRight);
-          if (secondMin !== null) minRight.push([value, secondMin]);
-          if (secondMax !== null) maxRight.push([value, secondMax]);
-      }
-  }
-
-  // Get min and second extremes for filteredDownLeft
-  if (filteredDownLeft.length > 0) {
-      if (chooseDL.length === 0) {
-          minLeft.push([value, Math.min(...filteredDownLeft)]);
-      } else {
-          let { secondMin, secondMax } = getSecondExtremes(filteredDownLeft);
-          if (secondMin !== null) minLeft.push([value, secondMin]);
-          if (secondMax !== null) maxLeft.push([value, secondMax]);
-      }
-  }
-
-  // Get min and second extremes for filteredDownRight
-  if (filteredDownRight.length > 0) {
-      if (chooseDR.length === 0) {
-          minRight.push([value, Math.min(...filteredDownRight)]);
-      } else {
-          let { secondMin, secondMax } = getSecondExtremes(filteredDownRight);
-          if (secondMin !== null) minRight.push([value, secondMin]);
-          if (secondMax !== null) maxRight.push([value, secondMax]);
-      }
-  }
-});
-console.log("Max Left:", maxLeft);
-console.log("Max Right:", maxRight);
-console.log("Min Left:", minLeft);
-console.log("Min Right:", minRight);
+    let maxLeft = [];
+    let maxRight = [];
+    let minLeft = [];
+    let minRight = [];
+    
+    // Function to get unique values in an array
+    function getUniqueValues(array, index) {
+        return [...new Set(array.map(item => item[index]))];
+    }
+    
+    // Helper function to get the second minimum and second maximum values
+    function getSecondExtremes(arr) {
+        if (arr.length < 2) {
+            return {
+                secondMin: null,
+                secondMax: null
+            };
+        }
+    
+        let sortedArr = [...arr].sort((a, b) => a - b);
+        console.log(sortedArr)
+        return {
+            secondMin: sortedArr[1],
+            secondMax: sortedArr[sortedArr.length - 2]
+        };
+    }
+    
+    // Get unique values for index 0
+    let uniqueIndex0Values = getUniqueValues(killConditionsUnique, 0);
+    
+    // Iterate through unique index 0 values
+    uniqueIndex0Values.forEach(value => {
+        // Filter subarrays by index 0 value and condition
+        let filteredUpLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+        let filteredUpRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+        let filteredDownLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+        let filteredDownRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+    
+        // Conditions for minLeft
+        if (filteredDownLeft.length > 0) {
+            if (chooseDL.length === 0) {
+                minLeft.push([value, Math.min(...filteredDownLeft)]);
+                console.log("first")
+            } else {
+                let { secondMin } = getSecondExtremes(filteredDownLeft);
+                if (secondMin !== null) minLeft.push([value, secondMin]);
+                console.log("sec")
+            }
+        }
+    
+        // Conditions for minRight
+        if (filteredDownRight.length > 0) {
+            if (chooseDR.length === 0) {
+                minRight.push([value, Math.min(...filteredDownRight)]);
+            } else {
+                let { secondMin } = getSecondExtremes(filteredDownRight);
+                if (secondMin !== null) minRight.push([value, secondMin]);
+            }
+        }
+    
+        // Conditions for maxLeft
+        if (filteredUpLeft.length > 0) {
+            if (chooseUL.length === 0) {
+                maxLeft.push([value, Math.max(...filteredUpLeft)]);
+            } else {
+                let { secondMax } = getSecondExtremes(filteredUpLeft);
+                if (secondMax !== null) maxLeft.push([value, secondMax]);
+                
+            }
+        }
+    
+        // Conditions for maxRight
+        if (filteredUpRight.length > 0) {
+            if (chooseUR.length === 0) {
+                maxRight.push([value, Math.max(...filteredUpRight)]);
+            } else {
+                let { secondMax } = getSecondExtremes(filteredUpRight);
+                if (secondMax !== null) maxRight.push([value, secondMax]);
+            }
+        }
+    });
+    
+    console.log("Max Left:", maxLeft);
+    console.log("Max Right:", maxRight);
+    console.log("Min Left:", minLeft);
+    console.log("Min Right:", minRight);
     
     // killConditionsUnique.sort((a, b) => {
     //   const categoryOrder = {
