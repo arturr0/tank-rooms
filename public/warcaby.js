@@ -1820,19 +1820,19 @@ for (let i = 0; i < killConditionsUnique.length; i++)
         )
       )
     ) { 
-      console.log("i", killConditionsUnique[i][1] , 'maxLeft', maxLeft, 'maxRight', maxRight, 'minLeft', minLeft, 'minRight', minRight)
-      console.log("j", killConditionsUnique[j][1], 'maxLeft', maxLeft, 'maxRight', maxRight, 'minLeft', minLeft, 'minRight', minRight)
-      console.log(Pawns[killConditionsUnique[j][1]].row , maxLeft, maxRight, minLeft, minRight);
-      console.log("j", killConditionsUnique[j][1], Pawns[killConditionsUnique[j][1]].row, killConditionsUnique[j][10], "i", killConditionsUnique[i][1], Pawns[killConditionsUnique[i][1]].row, killConditionsUnique[i][10], "maxl", maxLeft, "maxr", maxRight, "minl", minLeft, "minr", minRight);
-      console.log(
-        Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
-          Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1]
-        ).map(killed => killed[2]),
-        Pawns[killConditionsUnique[j][0]].queensAreas.filter(area =>
-          Pawns[killConditionsUnique[j][1]].row == area[0] && Pawns[killConditionsUnique[j][1]].column == area[1]
-        ).map(killed => killed[2])
-      );
-      console.log(`oneKiller2Killed killer1: ${killConditionsUnique[i][0]} killer2: ${killConditionsUnique[j][0]} killed1: ${killConditionsUnique[i][1]} killed2: ${killConditionsUnique[j][1]}`);
+      // console.log("i", killConditionsUnique[i][1] , 'maxLeft', maxLeft, 'maxRight', maxRight, 'minLeft', minLeft, 'minRight', minRight)
+      // console.log("j", killConditionsUnique[j][1], 'maxLeft', maxLeft, 'maxRight', maxRight, 'minLeft', minLeft, 'minRight', minRight)
+      // console.log(Pawns[killConditionsUnique[j][1]].row , maxLeft, maxRight, minLeft, minRight);
+      // console.log("j", killConditionsUnique[j][1], Pawns[killConditionsUnique[j][1]].row, killConditionsUnique[j][10], "i", killConditionsUnique[i][1], Pawns[killConditionsUnique[i][1]].row, killConditionsUnique[i][10], "maxl", maxLeft, "maxr", maxRight, "minl", minLeft, "minr", minRight);
+      // console.log(
+      //   Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
+      //     Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1]
+      //   ).map(killed => killed[2]),
+      //   Pawns[killConditionsUnique[j][0]].queensAreas.filter(area =>
+      //     Pawns[killConditionsUnique[j][1]].row == area[0] && Pawns[killConditionsUnique[j][1]].column == area[1]
+      //   ).map(killed => killed[2])
+      // );
+      // console.log(`oneKiller2Killed killer1: ${killConditionsUnique[i][0]} killer2: ${killConditionsUnique[j][0]} killed1: ${killConditionsUnique[i][1]} killed2: ${killConditionsUnique[j][1]}`);
       let boardC = "";
       if (chooseDL.length > 0) {
         boardC = "chooseDL";
