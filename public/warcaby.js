@@ -1386,6 +1386,7 @@ for (let i = 0; i < Board.length; i++) {
         let killer = k;
         let killed = j;
         let board = i;
+        console.log(Pawns[j].liveCopy);
         upRightArray.push([killer, killed, board]);
         for(let i = 0; i < upRightArray.length; i++)
             if(!Pawns[upRightArray[i][1]].live)
