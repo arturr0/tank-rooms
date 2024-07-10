@@ -1587,7 +1587,6 @@ for (let i = 0; i < Board.length; i++) {
         }
     
         let sortedArr = [...arr].sort((a, b) => a - b);
-        console.log(sortedArr)
         return {
             secondMin: sortedArr[1],
             secondMax: sortedArr[sortedArr.length - 2]
@@ -1600,20 +1599,18 @@ for (let i = 0; i < Board.length; i++) {
     // Iterate through unique index 0 values
     uniqueIndex0Values.forEach(value => {
         // Filter subarrays by index 0 value and condition
-        let filteredUpLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
-        let filteredUpRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
-        let filteredDownLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
-        let filteredDownRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+        let filteredUpLeft = [...new Set(killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row))];
+        let filteredUpRight = [...new Set(killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row))];
+        let filteredDownLeft = [...new Set(killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row))];
+        let filteredDownRight = [...new Set(killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row))];
     
         // Conditions for minLeft
         if (filteredDownLeft.length > 0) {
             if (chooseDL.length === 0) {
                 minLeft.push([value, Math.min(...filteredDownLeft)]);
-                console.log("first")
             } else {
                 let { secondMin } = getSecondExtremes(filteredDownLeft);
                 if (secondMin !== null) minLeft.push([value, secondMin]);
-                console.log("sec")
             }
         }
     
@@ -1634,7 +1631,6 @@ for (let i = 0; i < Board.length; i++) {
             } else {
                 let { secondMax } = getSecondExtremes(filteredUpLeft);
                 if (secondMax !== null) maxLeft.push([value, secondMax]);
-                
             }
         }
     
@@ -1653,6 +1649,7 @@ for (let i = 0; i < Board.length; i++) {
     console.log("Max Right:", maxRight);
     console.log("Min Left:", minLeft);
     console.log("Min Right:", minRight);
+    
     
     // killConditionsUnique.sort((a, b) => {
     //   const categoryOrder = {
