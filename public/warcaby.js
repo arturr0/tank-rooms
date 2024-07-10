@@ -147,6 +147,7 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
     this.index = index;
     this.rowCopy = rowCopy;
     this.columnCopy = columnCopy;
+    this.liveCopy = true;
     this.update = function() {
       if (this.targetPos) {
         let vel = p5.Vector.sub(this.targetPos, this.pos);
@@ -1270,7 +1271,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
       for (let k = 0; k < Pawns.length; k++) {
         //console.log(` in blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-            Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
+            Pawns[j].isRed != Pawns[k].isRed && (Pawns[j].live && Pawns[j].liveCopy) && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             Board[i].queen && (Pawns[j].row - Board[i].row <= -1 || Pawns[j].rowCopy - Board[i].row <= -1) &&
             (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy - Board[i].column >= 1) && Board[i].row > Pawns[j].row && Board[i].free &&
@@ -1322,7 +1323,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
     for (let j = 0; j < Pawns.length; j++) 
       for (let k = 0; k < Pawns.length; k++) {
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-           Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
+           Pawns[j].isRed != Pawns[k].isRed && Pawns[k].live && (Pawns[j].live && Pawns[j].liveCopy) && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy - Board[i].row >= 1) &&
             (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy - Board[i].column >= 1) && Board[i].row < Pawns[j].row &&
@@ -1363,7 +1364,7 @@ for (let i = 0; i < Board.length; i++) {
     for (let k = 0; k < Pawns.length; k++) {
       //console.log(` in blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
       if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-          Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
+          Pawns[j].isRed != Pawns[k].isRed && (Pawns[j].live && Pawns[j].liveCopy) && Pawns[k].live && Pawns[k].queen &&
         ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
           Board[i].queen && (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy - Board[i].row >= 1) &&
           (Pawns[j].column - Board[i].column <= -1 || Pawns[j].columnCopy - Board[i].column <= -1) && Board[i].row < Pawns[j].row && Board[i].free &&
@@ -1411,7 +1412,7 @@ for (let i = 0; i < Board.length; i++) {
         for (let j = 0; j < Pawns.length; j++) 
           for (let k = 0; k < Pawns.length; k++) {
             if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-               Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
+               Pawns[j].isRed != Pawns[k].isRed && (Pawns[j].live && Pawns[j].liveCopy) && Pawns[k].live && Pawns[k].queen &&
               ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
                 Board[i].queen && (Pawns[j].row - Board[i].row <= -1 || Pawns[j].rowCopy - Board[i].row <= -1) &&
                 (Pawns[j].column - Board[i].column <= -1 || Pawns[j].columnCopy - Board[i].column <= -1) && Board[i].row > Pawns[j].row &&
@@ -1530,46 +1531,46 @@ for (let i = 0; i < Board.length; i++) {
     
     // Ensure killConditionsUnique is updated
     killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-    for (let i = 0; i < chooseDL.length; i++) {
-      // Find index of element that meets the condition
-      const index = killConditionsUnique.findIndex(array => array[1] === chooseDL[i][1] && array[10] === 'up-right');
+    // for (let i = 0; i < chooseDL.length; i++) {
+    //   // Find index of element that meets the condition
+    //   const index = killConditionsUnique.findIndex(array => array[1] === chooseDL[i][1] && array[10] === 'up-right');
       
-      // If the element is found, splice it
-      if (index !== -1) {
-          console.log("splice", killConditionsUnique[index]);
-          killConditionsUnique.splice(index, 1);
-      }
-    }
-    for (let i = 0; i < chooseDR.length; i++) {
-      // Find index of element that meets the condition
-      const index = killConditionsUnique.findIndex(array => array[1] === chooseDL[i][1] && array[10] === 'up-left');
+    //   // If the element is found, splice it
+    //   if (index !== -1) {
+    //       console.log("splice", killConditionsUnique[index]);
+    //       killConditionsUnique.splice(index, 1);
+    //   }
+    // }
+    // for (let i = 0; i < chooseDR.length; i++) {
+    //   // Find index of element that meets the condition
+    //   const index = killConditionsUnique.findIndex(array => array[1] === chooseDL[i][1] && array[10] === 'up-left');
       
-      // If the element is found, splice it
-      if (index !== -1) {
-          console.log("splice", killConditionsUnique[index]);
-          killConditionsUnique.splice(index, 1);
-      }
-    }
-    for (let i = 0; i < chooseUL.length; i++) {
-      // Find index of element that meets the condition
-      const index = killConditionsUnique.findIndex(array => array[1] === chooseDL[i][1] && array[10] === 'down-right');
+    //   // If the element is found, splice it
+    //   if (index !== -1) {
+    //       console.log("splice", killConditionsUnique[index]);
+    //       killConditionsUnique.splice(index, 1);
+    //   }
+    // }
+    // for (let i = 0; i < chooseUL.length; i++) {
+    //   // Find index of element that meets the condition
+    //   const index = killConditionsUnique.findIndex(array => array[1] === chooseDL[i][1] && array[10] === 'down-right');
       
-      // If the element is found, splice it
-      if (index !== -1) {
-          console.log("splice", killConditionsUnique[index]);
-          killConditionsUnique.splice(index, 1);
-      }
-    }
-    for (let i = 0; i < chooseUR.length; i++) {
-      // Find index of element that meets the condition
-      const index = killConditionsUnique.findIndex(array => array[1] === chooseDL[i][1] && array[10] === 'down-left' && array[0] === chooseUR[i][0]);
+    //   // If the element is found, splice it
+    //   if (index !== -1) {
+    //       console.log("splice", killConditionsUnique[index]);
+    //       killConditionsUnique.splice(index, 1);
+    //   }
+    // }
+    // for (let i = 0; i < chooseUR.length; i++) {
+    //   // Find index of element that meets the condition
+    //   const index = killConditionsUnique.findIndex(array => array[1] === chooseDL[i][1] && array[10] === 'down-left' && array[0] === chooseUR[i][0]);
       
-      // If the element is found, splice it
-      if (index !== -1) {
-          console.log("splice", killConditionsUnique[index]);
-          killConditionsUnique.splice(index, 1);
-      }
-    }        
+    //   // If the element is found, splice it
+    //   if (index !== -1) {
+    //       console.log("splice", killConditionsUnique[index]);
+    //       killConditionsUnique.splice(index, 1);
+    //   }
+    // }        
 
 // let maxLeft = [];
 // let maxRight = [];
@@ -1963,7 +1964,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         // message = "kill";
         // if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
         // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
-        //Pawns[looser].live = false;
+        Pawns[looser].liveCopy = false;
         console.log("ks in", winner, looser, newBoard);
         Pawns[winner].rowCopy = Board[newBoard].row;
         Pawns[winner].columnCopy = Board[newBoard].column;
