@@ -2033,62 +2033,30 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   
   
   }
-  // else if(chooseBoard.filter(array => array[9] === true).some(array => array[11].length > 0)) {
-  //       // let pawnLetter = Pawns[winner].letter;
-  //       // let pawnNumber = Pawns[winner].number;
-  //       // let pawnLetterLooser = Pawns[looser].letter;
-  //       // let pawnNumberLooser = Pawns[looser].number;
-  //       // let played = Pawns[winner].isRed;
-  //       // message = "kill";
-  //       // if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
-  //       // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
-  //       for (let i = 0; i < chooseBoard.length; i++)
-  //         Pawns[chooseBoard[i][1]].liveCopy = false;
-  //       console.log("ks in", winner, looser, newBoard);
-  //       Pawns[winner].rowCopy = Board[newBoard].row;
-  //       Pawns[winner].columnCopy = Board[newBoard].column;
-  //       // Pawns[winner].letter = Board[newBoard].letter;
-  //       // Pawns[winner].number = Board[newBoard].number;
-  //       console.log(Pawns[winner].rowCopy, Pawns[winner].columnCopy)
-  //       //Board[newBoard].free = false;
-  //       checkQueen();
+  else if(chooseBoard.filter(array => array[9]).some(array => array[11].length > 0)) {
+        // let pawnLetter = Pawns[winner].letter;
+        // let pawnNumber = Pawns[winner].number;
+        // let pawnLetterLooser = Pawns[looser].letter;
+        // let pawnNumberLooser = Pawns[looser].number;
+        // let played = Pawns[winner].isRed;
+        // message = "kill";
+        // if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
+        // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
+        for (let i = 0; i < chooseBoard.length; i++)
+          Pawns[chooseBoard[i][1]].liveCopy = false;
+        console.log("ks in", winner, looser, newBoard);
+        Pawns[winner].rowCopy = Board[newBoard].row;
+        Pawns[winner].columnCopy = Board[newBoard].column;
+        // Pawns[winner].letter = Board[newBoard].letter;
+        // Pawns[winner].number = Board[newBoard].number;
+        console.log(Pawns[winner].rowCopy, Pawns[winner].columnCopy)
+        //Board[newBoard].free = false;
+        checkQueen();
         
-  //       //current = winner;
-  //       generateQueensAreas(true);
-  //       kill(blockKilledPawn, blockKillersPawn);    
-  //   }
-  let filteredArray = chooseBoard.filter(array => array[9] === true);
-console.log("Filtered array where array[9] is true:", filteredArray);
-
-let hasNonEmptyArray = filteredArray.some(array => array[11].length > 0);
-console.log("Does any filtered array have a non-empty array at index 11?:", hasNonEmptyArray);
-
-// Final condition check
-if (chooseBoard.filter(array => array[9] === true).some(array => array[11].length > 0)) {
-    console.log("Condition met: There is at least one element where array[9] is true and array[11] is non-empty.");
-
-    // Your code logic here
-    for (let i = 0; i < chooseBoard.length; i++) {
-        Pawns[chooseBoard[i][1]].liveCopy = false;
+        //current = winner;
+        generateQueensAreas(true);
+        kill(blockKilledPawn, blockKillersPawn);    
     }
-    console.log("ks in", winner, looser, newBoard);
-    Pawns[winner].rowCopy = Board[newBoard].row;
-    Pawns[winner].columnCopy = Board[newBoard].column;
-    console.log(Pawns[winner].rowCopy, Pawns[winner].columnCopy);
-
-    checkQueen();
-    generateQueensAreas(true);
-    kill(blockKilledPawn, blockKillersPawn);
-} else {
-    console.log("Condition not met: No element with array[9] as true and non-empty array[11].");
-}
-
-// Optional: Debug to ensure condition is not executing for [9] == false
-chooseBoard.forEach(array => {
-    if (array[9] === false && array[11].length > 0) {
-        console.error("Error: Condition executed for array[9] === false and array[11] is non-empty:", array);
-    }
-});
   
   ////console.log('check killSwitch 2', killConditionsUnique.length); 
 }
