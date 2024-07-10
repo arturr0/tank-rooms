@@ -162,9 +162,9 @@
   },
   {
     "index": 23,
-    "players": 0,
-    "user1": "",
+    "players": 1,
+    "user1": "f",
     "user2": "",
-    "block": 1
+    "block": 0
   }
 ]

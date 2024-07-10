@@ -123,7 +123,7 @@ let releaseBlock = false;
 let queenKillConditions = [];
 let uniqueQueenKillConditions = [];
 let chooseBoard = [];
-
+let blockChooseLengh = false;
 let message;
 // let pawnLetter;
 // let pawnNumber;
@@ -1453,30 +1453,38 @@ for (let i = 0; i < Board.length; i++) {
       console.log("chooseDR", chooseDR);
       for (let j = 0; j < downRightArray.length; j++) {
         killConditions.push([downRightArray[j][0], downRightArray[j][1], downRightArray[j][2], Pawns[downRightArray[j][0]].isRed, Greenturn, Pawns[downRightArray[j][0]].rectCenter, Pawns[downRightArray[j][0]].rectCenterY, Pawns[downRightArray[j][1]].rectCenter, Pawns[downRightArray[j][1]].rectCenterY, true, 'down-right', chooseDR]);
-        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-        downRightArray.splice(j, 1);
-        
       }
+      if(chooseDR.length == 0)
+        while (downRightArray.length > 0) {
+          downRightArray.splice(0, 1);
+      }
+      killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
       upLeftArray = groupAndSort("up", upLeftArray);
       neighbourFilter("up", upLeftArray, 1, 1);
       let chooseUL = getChooseBoard(upLeftArray);
       console.log("chooseUL", chooseUL);
       for (let j = 0; j < upLeftArray.length; j++) {
         killConditions.push([upLeftArray[j][0], upLeftArray[j][1], upLeftArray[j][2], Pawns[upLeftArray[j][0]].isRed, Greenturn, Pawns[upLeftArray[j][0]].rectCenter, Pawns[upLeftArray[j][0]].rectCenterY, Pawns[upLeftArray[j][1]].rectCenter, Pawns[upLeftArray[j][1]].rectCenterY, true, 'up-left', chooseUL]);
-        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-        upLeftArray.splice(j, 1);
         
       }
+      if(chooseUL.length == 0)
+        while (upLeftArray.length > 0) {
+          upLeftArray.splice(0, 1);
+      }
+      killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
       upRightArray = groupAndSort("up", upRightArray);
       neighbourFilter("up", upRightArray, 1, -1);
       let chooseUR = getChooseBoard(upRightArray);
       console.log("chooseUR", chooseUR);
       for (let j = 0; j < upRightArray.length; j++) {
         killConditions.push([upRightArray[j][0], upRightArray[j][1], upRightArray[j][2], Pawns[upRightArray[j][0]].isRed, Greenturn, Pawns[upRightArray[j][0]].rectCenter, Pawns[upRightArray[j][0]].rectCenterY, Pawns[upRightArray[j][1]].rectCenter, Pawns[upRightArray[j][1]].rectCenterY, true, 'up-right', chooseUR]);
-        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-        upRightArray.splice(j, 1);
         
       }
+      if(chooseUR.length == 0)
+        while (upRightArray.length > 0) {
+          upRightArray.splice(0, 1);
+      }
+      killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
       for(let i = 0; i < downLeftArray.length; i++)
       console.log("before act", downLeftArray[i]);
       downLeftArray = groupAndSort("down", downLeftArray);
@@ -1515,13 +1523,22 @@ for (let i = 0; i < Board.length; i++) {
     }
     
     // Use a while loop to remove the elements from downLeftArray
-    while (downLeftArray.length > 0) {
-        downLeftArray.splice(0, 1);
-    }
+    if(chooseDL.length == 0)
+      while (downLeftArray.length > 0) {
+          downLeftArray.splice(0, 1);
+      }
     
     // Ensure killConditionsUnique is updated
     killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-         
+    for (let i = 0; i < chooseDL.length; i++) {
+      // Find index of element that meets the condition
+      const index = killConditionsUnique.findIndex(array => array[1] === chooseDL[i][1] && array[10] === 'up-right');
+      
+      // If the element is found, splice it
+      if (index !== -1) {
+          killConditionsUnique.splice(index, 1);
+      }
+  }  
 
 let maxLeft = [];
 let maxRight = [];
