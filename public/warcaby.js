@@ -1596,12 +1596,16 @@ uniqueIndex0Values.forEach(value => {
     // Find max and min values for each condition and push to corresponding arrays
     if (filteredUpLeft.length > 0) maxLeft.push([value, Math.max(...filteredUpLeft)]);
     if (filteredUpRight.length > 0) maxRight.push([value, Math.max(...filteredUpRight)]);
-    if (filteredDownLeft.length > 0 && chooseDL.length == 0) minLeft.push([value, Math.min(...filteredDownLeft)]);
+    if (filteredDownLeft.length > 0 && chooseDL.length == 0) {
+      minLeft.push([value, Math.min(...filteredDownLeft)]);
+      console.log("first", minLeft);
+    }
     else if (filteredDownLeft.length > 0 && chooseDL.length > 0) {
-      let [secondMin] = sortToSecondExtreme(filteredDownLeft);
+      let secondMin = sortToSecondExtreme(filteredDownLeft);
       if (secondMin !== null) {
-          minLeft.push([value, secondMin]);
+          minLeft.push([value, secondMin[1]]);
       }
+      console.log("second", minLeft)
     }
     if (filteredDownRight.length > 0) minRight.push([value, Math.min(...filteredDownRight)]);
 });
