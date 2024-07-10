@@ -1655,7 +1655,10 @@ uniqueIndex0Values.forEach(value => {
     let filteredUpRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
     let filteredDownLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
     let filteredDownRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
-
+    maxLeft.push([value, Math.max(...filteredUpLeft)]);
+    maxRight.push([value, Math.max(...filteredUpRight)]);
+    minLeft.push([value, Math.min(...filteredDownLeft)]);
+    minRight.push([value, Math.min(...filteredDownRight)]);
     // Find max and min values for each condition and push to corresponding arrays
     // if (filteredUpLeft.length > 0) {
     //     maxLeft.push([value, Math.max(...filteredUpLeft)]);
@@ -1665,6 +1668,7 @@ uniqueIndex0Values.forEach(value => {
             maxLeft.push([value, Math.max(...filteredUpLeft)]);
             maxLeftE.push([value, Math.max(...filteredUpLeft)]);
         } else {
+          console.log(filteredUpLeft);
             let secondMax = sortToSecondExtreme(filteredUpLeft);
             let found = false;
             for (let i = 0; i < chooseUL.length; i++) {
@@ -1710,6 +1714,7 @@ uniqueIndex0Values.forEach(value => {
             minLeft.push([value, Math.min(...filteredDownLeft)]);
             minLeftE.push([value, Math.min(...filteredDownLeft)]);
         } else {
+            console.log(filteredDownLeft);
             let secondMin = sortToSecondExtreme(filteredDownLeft);
             let found = false;
             for (let i = 0; i < chooseDL.length; i++) {
