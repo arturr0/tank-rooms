@@ -1668,7 +1668,10 @@ console.log("Min Right:", minRight);
               killedOptModeArray.push(killConditionsUnique[j]);
               break;
         }
-//o1          
+//o1
+for (let i = 0; i < killConditionsUnique.length; i++) 
+  if(chooseDL.length > 0 && killConditionsUnique.filter(array => array[10] == "up-right" && (array[1] == killConditionsUnique[i][1])))
+    console.log("double", killConditionsUnique[i]);       
 for (let i = 0; i < killConditionsUnique.length; i++) 
   for (let j = i + 1; j < killConditionsUnique.length; j++) 
     if (
@@ -1713,7 +1716,16 @@ for (let i = 0; i < killConditionsUnique.length; i++)
         ).map(killed => killed[2])
       );
       console.log(`oneKiller2Killed killer1: ${killConditionsUnique[i][0]} killer2: ${killConditionsUnique[j][0]} killed1: ${killConditionsUnique[i][1]} killed2: ${killConditionsUnique[j][1]}`);
-      
+      let boardC = "";
+      if (chooseDL.length > 0) {
+        boardC = "chooseDL";
+      } else if (chooseDR.length > 0) {
+        boardC = "chooseDR";
+      } else if (chooseUL.length > 0) {
+        boardC = "chooseUL";
+      } else if (chooseUR.length > 0) {
+        boardC = "chooseUR";
+      }
       oneKiller2Killed = true;
       blockKill = true;
       Pawns[killConditionsUnique[j][1]].kill1Killed2 = true;
