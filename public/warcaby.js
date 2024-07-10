@@ -1669,9 +1669,9 @@ console.log("Min Right:", minRight);
               break;
         }
 //o1
-for (let i = 0; i < killConditionsUnique.length; i++) 
-  if(chooseDL.length > 0 && killConditionsUnique.filter(array => array[10] == "up-right" && (array[1] == killConditionsUnique[i][1])))
-    console.log("double", killConditionsUnique[i]);       
+
+  if(chooseDL.length > 0 && killConditionsUnique.some(array => array[10] == 'up-right'))
+    console.log("double");       
 for (let i = 0; i < killConditionsUnique.length; i++) 
   for (let j = i + 1; j < killConditionsUnique.length; j++) 
     if (
