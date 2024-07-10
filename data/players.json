@@ -166,5 +166,12 @@
     "user1": "k",
     "user2": "",
     "block": 1
+  },
+  {
+    "index": 24,
+    "players": 1,
+    "user1": "ffff",
+    "user2": "",
+    "block": 0
   }
 ]

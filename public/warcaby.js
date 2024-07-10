@@ -1565,7 +1565,7 @@ for (let i = 0; i < Board.length; i++) {
       const index = killConditionsUnique.findIndex(array => array[1] === chooseDL[i][1] && array[10] === 'down-left' && array[0] === chooseUR[i][0]);
       
       // If the element is found, splice it
-      if (index !== -1 and ) {
+      if (index !== -1) {
           console.log("splice", killConditionsUnique[index]);
           killConditionsUnique.splice(index, 1);
       }
