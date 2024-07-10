@@ -272,7 +272,7 @@ socket.on('new turn', function(TURN) {
   console.log('new turn condition', killConditions.length);
     //////console.log('new turn unique', killConditionsUnique.length)
   Greenturn = TURN;
-  generateQueensAreas()
+  generateQueensAreas(false);
   kill(blockKilledPawn, blockKillersPawn);
   killOpt(killConditionsUnique);
   stepKill(killConditionsUnique);
@@ -432,7 +432,7 @@ function setup() {
     const myCanvas = createCanvas(576, 576);
     myCanvas.style('border-radius', '15px');
     myCanvas.parent('game');
-    generateQueensAreas();
+    generateQueensAreas(false);
     turn = select('#turn');
     let PlayerInfo = select('#player');
     
@@ -1671,7 +1671,7 @@ console.log("Min Right:", minRight);
 //o1
   console.log(chooseDL.length);
   if(chooseDL.length > 0 && killConditionsUnique.some(array => array[10] == 'up-right'))
-    console.log("double");       
+    console.log("double");     
 for (let i = 0; i < killConditionsUnique.length; i++) 
   for (let j = i + 1; j < killConditionsUnique.length; j++) 
     if (
@@ -1853,7 +1853,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         checkQueen();
         
         //current = winner;
-        generateQueensAreas();
+        generateQueensAreas(true);
         kill(blockKilledPawn, blockKillersPawn);    
     }
   
@@ -2177,8 +2177,8 @@ function generateQueensAreas(check) {
         { row: -1, column: 1, dir: "up-right" },   // Diagonal up-right
         { row: 1, column: -1, dir: "down-left" }    // Diagonal down-left
       ];
-      let tempRow = Pawns[i].row ?? Pawns[i].rowCopy;
-      let tempColumn = Pawns[i].column ?? Pawns[i].columnCopy;
+      let tempRow;
+      let tempColumn;
       for (const direction of directions) {
         if(check) {
             tempRow = Pawns[i].rowCopy;
@@ -2283,7 +2283,7 @@ function arraysEqual(arr1, arr2) {
 function keyPressed() {
     if (key == 't') Greenturn = !Greenturn;
     if (key == 'k') {
-        generateQueensAreas();
+        generateQueensAreas(false);
         checkQueen();
         kill(blockKilledPawn, blockKillersPawn);
         killOpt(killConditionsUnique);
