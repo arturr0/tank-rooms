@@ -1571,7 +1571,7 @@ let maxLeft = [];
 let maxRight = [];
 let minLeft = [];
 let minRight = [];
-
+//mm
 // Function to get unique values in an array
 function getUniqueValues(array, index) {
     return [...new Set(array.map(item => item[index]))];
@@ -1602,9 +1602,11 @@ uniqueIndex0Values.forEach(value => {
     }
     else if (filteredDownLeft.length > 0 && chooseDL.length > 0) {
       let secondMin = sortToSecondExtreme(filteredDownLeft);
-      if (secondMin !== null) {
-          minLeft.push([value, secondMin[1]]);
-      }
+      for(let i = 0; i < secondMin.length; i++)
+        if(secondMin[0] != secondMin[i]) {
+          minLeft.push([value, secondMin[i]]);
+          break;  
+        }
       console.log("second", minLeft)
     }
     if (filteredDownRight.length > 0) minRight.push([value, Math.min(...filteredDownRight)]);
