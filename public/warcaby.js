@@ -1536,6 +1536,7 @@ for (let i = 0; i < Board.length; i++) {
       
       // If the element is found, splice it
       if (index !== -1) {
+          console.log("splice", killConditionsUnique[index]);
           killConditionsUnique.splice(index, 1);
       }
     }
@@ -1545,6 +1546,7 @@ for (let i = 0; i < Board.length; i++) {
       
       // If the element is found, splice it
       if (index !== -1) {
+          console.log("splice", killConditionsUnique[index]);
           killConditionsUnique.splice(index, 1);
       }
     }
@@ -1554,15 +1556,17 @@ for (let i = 0; i < Board.length; i++) {
       
       // If the element is found, splice it
       if (index !== -1) {
+          console.log("splice", killConditionsUnique[index]);
           killConditionsUnique.splice(index, 1);
       }
     }
     for (let i = 0; i < chooseUR.length; i++) {
       // Find index of element that meets the condition
-      const index = killConditionsUnique.findIndex(array => array[1] === chooseDL[i][1] && array[10] === 'down-left');
+      const index = killConditionsUnique.findIndex(array => array[1] === chooseDL[i][1] && array[10] === 'down-left' && array[0] === chooseUR[i][0]);
       
       // If the element is found, splice it
-      if (index !== -1) {
+      if (index !== -1 and ) {
+          console.log("splice", killConditionsUnique[index]);
           killConditionsUnique.splice(index, 1);
       }
     }        
