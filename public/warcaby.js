@@ -473,14 +473,14 @@ function setup() {
         //generateQueensAreas()
       //} else if (Board[j].isBlack && Board[j].row > 5) {
       }  
-      if ([3].includes(j)) {
-          Board[j].free = false;
-          let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
-          //pawn.queen = true;
-          Pawns.push(pawn);
-          //generateQueensAreas()
-        //} else if (Board[j].isBlack && Board[j].row > 5) {
-      } 
+      // if ([3].includes(j)) {
+      //     Board[j].free = false;
+      //     let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
+      //     //pawn.queen = true;
+      //     Pawns.push(pawn);
+      //     //generateQueensAreas()
+      //   //} else if (Board[j].isBlack && Board[j].row > 5) {
+      // } 
       else if ([10,37,12,21,26,35].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
@@ -1684,8 +1684,10 @@ uniqueIndex0Values.forEach(value => {
     // }
     if (filteredUpRight.length > 0) {
         if (chooseUR.length === 0) {
+            console.log(filteredUpRight)
             maxRight.push([value, Math.max(...filteredUpRight)]);
         } else {
+          console.log(filteredUpRight)
             let secondMax = sortToSecondExtreme(filteredUpRight);
             let found = false;
             for (let i = 0; i < chooseUR.length; i++) {
