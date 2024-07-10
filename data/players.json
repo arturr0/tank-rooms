@@ -162,9 +162,9 @@
   },
   {
     "index": 23,
-    "players": 2,
-    "user1": "k",
-    "user2": "ggg",
-    "block": 0
+    "players": 0,
+    "user1": "",
+    "user2": "",
+    "block": 1
   }
 ]
