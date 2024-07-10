@@ -1599,48 +1599,51 @@ for (let i = 0; i < Board.length; i++) {
     // Iterate through unique index 0 values
     uniqueIndex0Values.forEach(value => {
         // Filter subarrays by index 0 value and condition
-        let filteredUpLeft = [...new Set(killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row))];
-        let filteredUpRight = [...new Set(killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row))];
-        let filteredDownLeft = [...new Set(killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row))];
-        let filteredDownRight = [...new Set(killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row))];
+        let filteredUpLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+        let filteredUpRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+        let filteredDownLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+        let filteredDownRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'down-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
     
-        // Conditions for minLeft
-        if (filteredDownLeft.length > 0) {
-            if (chooseDL.length === 0) {
-                minLeft.push([value, Math.min(...filteredDownLeft)]);
-            } else {
-                let { secondMin } = getSecondExtremes(filteredDownLeft);
-                if (secondMin !== null) minLeft.push([value, secondMin]);
-            }
-        }
+        // Ensure unique values
+        filteredUpLeft = [...new Set(filteredUpLeft)];
+        filteredUpRight = [...new Set(filteredUpRight)];
+        filteredDownLeft = [...new Set(filteredDownLeft)];
+        filteredDownRight = [...new Set(filteredDownRight)];
     
-        // Conditions for minRight
-        if (filteredDownRight.length > 0) {
-            if (chooseDR.length === 0) {
-                minRight.push([value, Math.min(...filteredDownRight)]);
-            } else {
-                let { secondMin } = getSecondExtremes(filteredDownRight);
-                if (secondMin !== null) minRight.push([value, secondMin]);
-            }
-        }
-    
-        // Conditions for maxLeft
+        // Find and push extremes based on conditions
         if (filteredUpLeft.length > 0) {
+            let { secondMax } = getSecondExtremes(filteredUpLeft);
             if (chooseUL.length === 0) {
                 maxLeft.push([value, Math.max(...filteredUpLeft)]);
-            } else {
-                let { secondMax } = getSecondExtremes(filteredUpLeft);
-                if (secondMax !== null) maxLeft.push([value, secondMax]);
+            } else if (secondMax !== null) {
+                maxLeft.push([value, secondMax]);
             }
         }
     
-        // Conditions for maxRight
         if (filteredUpRight.length > 0) {
+            let { secondMax } = getSecondExtremes(filteredUpRight);
             if (chooseUR.length === 0) {
                 maxRight.push([value, Math.max(...filteredUpRight)]);
-            } else {
-                let { secondMax } = getSecondExtremes(filteredUpRight);
-                if (secondMax !== null) maxRight.push([value, secondMax]);
+            } else if (secondMax !== null) {
+                maxRight.push([value, secondMax]);
+            }
+        }
+    
+        if (filteredDownLeft.length > 0) {
+            let { secondMin } = getSecondExtremes(filteredDownLeft);
+            if (chooseDL.length === 0) {
+                minLeft.push([value, Math.min(...filteredDownLeft)]);
+            } else if (secondMin !== null) {
+                minLeft.push([value, secondMin]);
+            }
+        }
+    
+        if (filteredDownRight.length > 0) {
+            let { secondMin } = getSecondExtremes(filteredDownRight);
+            if (chooseDR.length === 0) {
+                minRight.push([value, Math.min(...filteredDownRight)]);
+            } else if (secondMin !== null) {
+                minRight.push([value, secondMin]);
             }
         }
     });
@@ -1649,6 +1652,7 @@ for (let i = 0; i < Board.length; i++) {
     console.log("Max Right:", maxRight);
     console.log("Min Left:", minLeft);
     console.log("Min Right:", minRight);
+    
     
     
     // killConditionsUnique.sort((a, b) => {
