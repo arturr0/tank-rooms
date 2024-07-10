@@ -1627,9 +1627,10 @@ let minRight = [];
 function getUniqueValues(array, index) {
     return [...new Set(array.map(item => item[index]))];
 }
-
+console.log(chooseDL);
 // Process each unique value of index 0
 let uniqueIndex0Values = getUniqueValues(killConditionsUnique, 0);
+console.log(killConditionsUnique);
 uniqueIndex0Values.forEach(value => {
     let filteredUpLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
     let filteredUpRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
@@ -1648,8 +1649,10 @@ uniqueIndex0Values.forEach(value => {
             minLeft.push([value, Math.min(...filteredDownLeft)]);
             console.log("first", minLeft);
         } else {
+            console.log("ss b", chooseDL);
             let secondMin = sortToSecondExtreme(filteredDownLeft);
-            console.log(chooseDL);
+            console.log("ss a", chooseDL);
+            console.log(secondMin);
             let found = false;
             for (let i = 0; i < chooseDL.length; i++) {
                 if (secondMin[0] !== Pawns[chooseDL[i][1]].row) {
