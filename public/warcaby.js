@@ -473,14 +473,14 @@ function setup() {
         //generateQueensAreas()
       //} else if (Board[j].isBlack && Board[j].row > 5) {
       }  
-      // if ([3].includes(j)) {
-      //     Board[j].free = false;
-      //     let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
-      //     //pawn.queen = true;
-      //     Pawns.push(pawn);
-      //     //generateQueensAreas()
-      //   //} else if (Board[j].isBlack && Board[j].row > 5) {
-      //} 
+      if ([3].includes(j)) {
+          Board[j].free = false;
+          let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
+          //pawn.queen = true;
+          Pawns.push(pawn);
+          //generateQueensAreas()
+        //} else if (Board[j].isBlack && Board[j].row > 5) {
+      } 
       else if ([10,37,12,21,26,35].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
@@ -1637,6 +1637,10 @@ let maxLeft = [];
 let maxRight = [];
 let minLeft = [];
 let minRight = [];
+let maxLeftE = [];
+let maxRightE = [];
+let minLeftE = [];
+let minRightE = [];
 
 // Function to get unique values in an array
 function getUniqueValues(array, index) {
@@ -1664,14 +1668,14 @@ uniqueIndex0Values.forEach(value => {
             let found = false;
             for (let i = 0; i < chooseUL.length; i++) {
                 if (secondMax[0] !== Pawns[chooseUL[i][1]].row) {
-                    maxLeft.push([value, Pawns[chooseUL[i][1]].row]);
+                    maxLeftE.push([value, Pawns[chooseUL[i][1]].row]);
                     found = true;
                     break;
                 }
             }
             if (!found) {
                 // Handle case where no suitable second minimum was found
-                maxLeft.push([value, Pawns[chooseUL[0][1]].row]);
+                maxLeftE.push([value, Pawns[chooseUL[0][1]].row]);
             }
         }
     }
@@ -1686,14 +1690,14 @@ uniqueIndex0Values.forEach(value => {
             let found = false;
             for (let i = 0; i < chooseUR.length; i++) {
                 if (secondMax[0] !== Pawns[chooseUR[i][1]].row) {
-                    maxRight.push([value, Pawns[chooseUR[i][1]].row]);
+                    maxRightE.push([value, Pawns[chooseUR[i][1]].row]);
                     found = true;
                     break;
                 }
             }
             if (!found) {
                 // Handle case where no suitable second minimum was found
-                maxRight.push([value, Pawns[chooseUR[0][1]].row]);
+                maxRightE.push([value, Pawns[chooseUR[0][1]].row]);
             }
         }
     }
@@ -1705,13 +1709,13 @@ uniqueIndex0Values.forEach(value => {
             let found = false;
             for (let i = 0; i < chooseDL.length; i++) {
                 if (secondMin[0] !== Pawns[chooseDL[i][1]].row) {
-                    minLeft.push([value, Pawns[chooseDL[i][1]].row]);
+                    minLeftE.push([value, Pawns[chooseDL[i][1]].row]);
                     found = true;
                     break;
                 }
             }
             if (!found) {
-                minLeft.push([value, Pawns[chooseDL[0][1]].row]);
+                minLeftE.push([value, Pawns[chooseDL[0][1]].row]);
             }
         }
     }
@@ -1722,18 +1726,19 @@ uniqueIndex0Values.forEach(value => {
         if (chooseDR.length === 0) {
             minRight.push([value, Math.min(...filteredDownRight)]);
         } else {
+            console.log(filteredDownRight);
             let secondMin = sortToSecondExtreme(filteredDownRight);
             let found = false;
-            for (let i = 0; i < chooseUR.length; i++) {
+            for (let i = 0; i < chooseDR.length; i++) {
                 if (secondMin[0] !== Pawns[chooseDR[i][1]].row) {
-                    minRight.push([value, Pawns[chooseDR[i][1]].row]);
+                    minRightE.push([value, Pawns[chooseDR[i][1]].row]);
                     found = true;
                     break;
                 }
             }
             if (!found) {
                 // Handle case where no suitable second minimum was found
-                minRight.push([value, Pawns[chooseDR[0][1]].row]);
+                minRightE.push([value, Pawns[chooseDR[0][1]].row]);
             }
         }
     }
@@ -1856,71 +1861,71 @@ console.log("Min Right:", minRight);
   console.log(chooseDL.length);
   if(chooseDL.length > 0 && killConditionsUnique.some(array => array[10] == 'up-right'))
     console.log("double");     
-for (let i = 0; i < killConditionsUnique.length; i++) 
-  for (let j = i + 1; j < killConditionsUnique.length; j++) 
-    if (
-      killConditionsUnique[i][0] == killConditionsUnique[j][0] &&
-      killConditionsUnique[i][3] == killConditionsUnique[j][3] &&
-      killConditionsUnique[i][1] != killConditionsUnique[j][1] &&
-      Pawns[killConditionsUnique[i][1]].live &&
-      Pawns[killConditionsUnique[j][1]].live &&
-      (
-        !killConditionsUnique[i][9] ||
+  for (let i = 0; i < killConditionsUnique.length; i++) 
+    for (let j = i + 1; j < killConditionsUnique.length; j++) 
+      if (
+        killConditionsUnique[i][0] == killConditionsUnique[j][0] &&
+        killConditionsUnique[i][3] == killConditionsUnique[j][3] &&
+        killConditionsUnique[i][1] != killConditionsUnique[j][1] &&
+        Pawns[killConditionsUnique[i][1]].live &&
+        Pawns[killConditionsUnique[j][1]].live &&
         (
-          killConditionsUnique[i][9] && killConditionsUnique[j][9] && 
-          ((((killConditionsUnique[i][10] == 'up-left' && maxLeft.some(array => array[1] === Pawns[killConditionsUnique[i][1]].row && array[0] == killConditionsUnique[i][0])) ||
-          (killConditionsUnique[i][10] == 'up-right' && maxRight.some(array => array[1] === Pawns[killConditionsUnique[i][1]].row && array[0] == killConditionsUnique[i][0])) ||
-          (killConditionsUnique[i][10] == 'down-left' && minLeft.some(array => array[1] === Pawns[killConditionsUnique[i][1]].row && array[0] == killConditionsUnique[i][0])) ||
-          (killConditionsUnique[i][10] == 'down-right' && minRight.some(array => array[1] === Pawns[killConditionsUnique[i][1]].row && array[0] == killConditionsUnique[i][0]))))) &&
-          ((((killConditionsUnique[j][10] == 'up-left' && maxLeft.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0] )) ||
-          (killConditionsUnique[j][10] == 'up-right' && maxRight.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0] )) ||
-          (killConditionsUnique[j][10] == 'down-left' && minLeft.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0] )) ||
-          (killConditionsUnique[j][10] == 'down-right' && minRight.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0] ))))) && 
-          !arraysEqual( 
-            Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
-              Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1]
-            ).map(killed => killed[2]),
-            Pawns[killConditionsUnique[j][0]].queensAreas.filter(area =>
-              Pawns[killConditionsUnique[j][1]].row == area[0] && Pawns[killConditionsUnique[j][1]].column == area[1]
-            ).map(killed => killed[2])
+          !killConditionsUnique[i][9] ||
+          (
+            killConditionsUnique[i][9] && killConditionsUnique[j][9] && 
+            ((((killConditionsUnique[i][10] == 'up-left' && maxLeftE.some(array => array[1] === Pawns[killConditionsUnique[i][1]].row && array[0] == killConditionsUnique[i][0])) ||
+            (killConditionsUnique[i][10] == 'up-right' && maxRightE.some(array => array[1] === Pawns[killConditionsUnique[i][1]].row && array[0] == killConditionsUnique[i][0])) ||
+            (killConditionsUnique[i][10] == 'down-left' && minLeftE.some(array => array[1] === Pawns[killConditionsUnique[i][1]].row && array[0] == killConditionsUnique[i][0])) ||
+            (killConditionsUnique[i][10] == 'down-right' && minRightE.some(array => array[1] === Pawns[killConditionsUnique[i][1]].row && array[0] == killConditionsUnique[i][0]))))) &&
+            ((((killConditionsUnique[j][10] == 'up-left' && maxLeftE.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0] )) ||
+            (killConditionsUnique[j][10] == 'up-right' && maxRightE.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0] )) ||
+            (killConditionsUnique[j][10] == 'down-left' && minLeftE.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0] )) ||
+            (killConditionsUnique[j][10] == 'down-right' && minRightE.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0] ))))) && 
+            !arraysEqual( 
+              Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
+                Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1]
+              ).map(killed => killed[2]),
+              Pawns[killConditionsUnique[j][0]].queensAreas.filter(area =>
+                Pawns[killConditionsUnique[j][1]].row == area[0] && Pawns[killConditionsUnique[j][1]].column == area[1]
+              ).map(killed => killed[2])
+            )
           )
         )
-      )
-    ) { 
-      // console.log("i", killConditionsUnique[i][1] , 'maxLeft', maxLeft, 'maxRight', maxRight, 'minLeft', minLeft, 'minRight', minRight)
-      // console.log("j", killConditionsUnique[j][1], 'maxLeft', maxLeft, 'maxRight', maxRight, 'minLeft', minLeft, 'minRight', minRight)
-      // console.log(Pawns[killConditionsUnique[j][1]].row , maxLeft, maxRight, minLeft, minRight);
-      // console.log("j", killConditionsUnique[j][1], Pawns[killConditionsUnique[j][1]].row, killConditionsUnique[j][10], "i", killConditionsUnique[i][1], Pawns[killConditionsUnique[i][1]].row, killConditionsUnique[i][10], "maxl", maxLeft, "maxr", maxRight, "minl", minLeft, "minr", minRight);
-      // console.log(
-      //   Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
-      //     Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1]
-      //   ).map(killed => killed[2]),
-      //   Pawns[killConditionsUnique[j][0]].queensAreas.filter(area =>
-      //     Pawns[killConditionsUnique[j][1]].row == area[0] && Pawns[killConditionsUnique[j][1]].column == area[1]
-      //   ).map(killed => killed[2])
-      // );
-      // console.log(`oneKiller2Killed killer1: ${killConditionsUnique[i][0]} killer2: ${killConditionsUnique[j][0]} killed1: ${killConditionsUnique[i][1]} killed2: ${killConditionsUnique[j][1]}`);
-      let boardC = "";
-      if (chooseDL.length > 0) {
-        boardC = "chooseDL";
-      } else if (chooseDR.length > 0) {
-        boardC = "chooseDR";
-      } else if (chooseUL.length > 0) {
-        boardC = "chooseUL";
-      } else if (chooseUR.length > 0) {
-        boardC = "chooseUR";
+      ) { 
+        // console.log("i", killConditionsUnique[i][1] , 'maxLeftE', maxLeftE, 'maxRightE', maxRightE, 'minLeftE', minLeftE, 'minRightE', minRightE)
+        // console.log("j", killConditionsUnique[j][1], 'maxLeftE', maxLeftE, 'maxRightE', maxRightE, 'minLeftE', minLeftE, 'minRightE', minRightE)
+        // console.log(Pawns[killConditionsUnique[j][1]].row , maxLeftE, maxRightE, minLeftE, minRightE);
+        // console.log("j", killConditionsUnique[j][1], Pawns[killConditionsUnique[j][1]].row, killConditionsUnique[j][10], "i", killConditionsUnique[i][1], Pawns[killConditionsUnique[i][1]].row, killConditionsUnique[i][10], "maxl", maxLeftE, "maxr", maxRightE, "minl", minLeftE, "minr", minRightE);
+        // console.log(
+        //   Pawns[killConditionsUnique[i][0]].queensAreas.filter(area =>
+        //     Pawns[killConditionsUnique[i][1]].row == area[0] && Pawns[killConditionsUnique[i][1]].column == area[1]
+        //   ).map(killed => killed[2]),
+        //   Pawns[killConditionsUnique[j][0]].queensAreas.filter(area =>
+        //     Pawns[killConditionsUnique[j][1]].row == area[0] && Pawns[killConditionsUnique[j][1]].column == area[1]
+        //   ).map(killed => killed[2])
+        // );
+        // console.log(`oneKiller2Killed killer1: ${killConditionsUnique[i][0]} killer2: ${killConditionsUnique[j][0]} killed1: ${killConditionsUnique[i][1]} killed2: ${killConditionsUnique[j][1]}`);
+        let boardC = "";
+        if (chooseDL.length > 0) {
+          boardC = "chooseDL";
+        } else if (chooseDR.length > 0) {
+          boardC = "chooseDR";
+        } else if (chooseUL.length > 0) {
+          boardC = "chooseUL";
+        } else if (chooseUR.length > 0) {
+          boardC = "chooseUR";
+        }
+        oneKiller2Killed = true;
+        blockKill = true;
+        Pawns[killConditionsUnique[j][1]].kill1Killed2 = true;
+        Pawns[killConditionsUnique[i][1]].kill1Killed2 = true;
+        oneKiller2KilledArray.push(killConditionsUnique[i]);
+        oneKiller2KilledArray.push(killConditionsUnique[j]);
+        oneKiller2KilledArray = queenUnique(oneKiller2KilledArray);
+        //break;
+        
       }
-      oneKiller2Killed = true;
-      blockKill = true;
-      Pawns[killConditionsUnique[j][1]].kill1Killed2 = true;
-      Pawns[killConditionsUnique[i][1]].kill1Killed2 = true;
-      oneKiller2KilledArray.push(killConditionsUnique[i]);
-      oneKiller2KilledArray.push(killConditionsUnique[j]);
-      oneKiller2KilledArray = queenUnique(oneKiller2KilledArray);
-      //break;
-      
-    }
-            //break;  
+              //break;  
           
           //break;
         
