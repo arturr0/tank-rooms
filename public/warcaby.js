@@ -1000,6 +1000,11 @@ if (killedOptMode) {
                   console.log('two killed', killConditionsUnique[k]);
               }
               console.log("end");
+              oneKiller2KilledArray[i][11] = [];
+              // chooseDL = [];
+              // chooseDR = [];
+              // chooseUL = [];
+              // chooseUR = [];
               firstKill.push(oneKiller2KilledArray[i]);
               console.log("end");
               oneKiller2KilledArray = [];
