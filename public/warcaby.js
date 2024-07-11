@@ -804,6 +804,10 @@ if (killedOptMode) {
     if (((killedOptModeArray[i][3] && !Greenturn && Player == 1) || (!killedOptModeArray[i][3] && Greenturn  && Player == 2)) &&
         X > killedOptModeArray[i][7] - 32 && X < killedOptModeArray[i][7] + 32 && Y > killedOptModeArray[i][8] - 32 && Y < killedOptModeArray[i][8] + 32) {
           //////////////////////////////////////////////////////////console.log("click");
+          if (!maxLeftE.some(array => array[1] == Pawns[killedOptModeArray[j][1]].row) ||
+             !minLeftE.some(array => array[1] == Pawns[killedOptModeArray[j][1]].row) ||
+             !maxRightE.some(array => array[1] == Pawns[killedOptModeArray[j][1]].row) ||
+             !minRightE.some(array => array[1] == Pawns[killedOptModeArray[j][1]].row)) {
           for (let j = 0; j < killedOptModeArray.length; j++)
             Pawns[killedOptModeArray[j][1]].killed = false;
           for (let j = 0; j < killersOptModeArray.length; j++)
@@ -850,6 +854,7 @@ if (killedOptMode) {
           stepKill(firstKill);
           // socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
           break;
+        }
       }
       
       
