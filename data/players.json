@@ -169,9 +169,9 @@
   },
   {
     "index": 24,
-    "players": 0,
-    "user1": "",
+    "players": 1,
+    "user1": "ff",
     "user2": "",
-    "block": 1
+    "block": 0
   }
 ]
