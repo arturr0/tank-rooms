@@ -473,7 +473,7 @@ function setup() {
         //generateQueensAreas()
       //} else if (Board[j].isBlack && Board[j].row > 5) {
       }  
-      if ([5].includes(j)) {
+      if ([3].includes(j)) {
           Board[j].free = false;
           let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
           //pawn.queen = true;
@@ -481,7 +481,7 @@ function setup() {
           //generateQueensAreas()
         //} else if (Board[j].isBlack && Board[j].row > 5) {
       } 
-      else if ([10,37,12,26,35].includes(j)) {
+      else if ([10,37,12,26,35,21].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
