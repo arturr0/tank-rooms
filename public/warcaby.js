@@ -2583,11 +2583,11 @@ function sortToSecondExtreme(array) {
   return uniqueKills.sort((a, b) => a - b);
 }
 
-function generateStringFrom2DArray(array) {
+function generateStringFrom2DArray(array, index) {
   if (array.length === 0) {
       return '';
   }
-  const firstElements = array.map(subArray => subArray[1]);
+  const firstElements = array.map(subArray => subArray[index]);
   return firstElements.join(' or ');
 }
 
@@ -2602,24 +2602,43 @@ function generateStringFromArray(array) {
 
   
 function mouseMoved() {
+  let messageArray = [];
   X = mouseX;
   Y = mouseY;
-  if(killedCollision) {
-      
-    console.log('for killedOptMode');
-    for (let i = 0; i < killerCollisionChoose.length; i++) 
-      if (((!Greenturn && Player == 1) || (Greenturn  && Player == 2)) &&
-      X > killerCollisionChoose[i][5] - 32 && X < killerCollisionChoose[i][5] + 32 && Y > killerCollisionChoose[i][6] - 32 && Y < killerCollisionChoose[i][6] + 32) {
-        console.log(killerCollisionChoose.length);  
-        console.log(killerCollisionChoose[i]);
-      }  
 
+  if (killedCollision) {
+    console.log('for killedOptMode');
+    for (let i = 0; i < killerCollisionChoose.length; i++) {
+      if (((!Greenturn && Player == 1) || (Greenturn && Player == 2)) &&
+        X > killerCollisionChoose[i][5] - 32 && X < killerCollisionChoose[i][5] + 32 &&
+        Y > killerCollisionChoose[i][6] - 32 && Y < killerCollisionChoose[i][6] + 32) {
+        console.log(killerCollisionChoose.length);
+        console.log(killerCollisionChoose[i]);
+      }
     }
-  if (oneKiller2Killed) 
-    for (let i = 0; i < oneKiller2KilledArray.length; i++) 
-            if (((oneKiller2KilledArray[i][3] && !Greenturn && Player == 1) || (!oneKiller2KilledArray[i][3] && Greenturn  && Player == 2)) &&
-            X > oneKiller2KilledArray[i][7] - 32 && X < oneKiller2KilledArray[i][7] + 32 && Y > oneKiller2KilledArray[i][8] - 32 && Y < oneKiller2KilledArray[i][8] + 32) {
-              console.log(oneKiller2KilledArray[i]);
-              
-            } 
+  }
+
+  if (oneKiller2Killed) {
+    for (let i = 0; i < oneKiller2KilledArray.length; i++) {
+      if (((oneKiller2KilledArray[i][3] && !Greenturn && Player == 1) || (!oneKiller2KilledArray[i][3] && Greenturn && Player == 2)) &&
+        X > oneKiller2KilledArray[i][7] - 32 && X < oneKiller2KilledArray[i][7] + 32 &&
+        Y > oneKiller2KilledArray[i][8] - 32 && Y < oneKiller2KilledArray[i][8] + 32) {
+        messageArray.push(oneKiller2KilledArray[i]);
+      }
+    }
+  }
+
+  // Generate message string from messageArray
+  let message = generateStringFrom2DArray(messageArray, 0);
+
+  // Log the final value of message
+  console.log("Final message:", message);
 }
+
+// Helper function to generate string based on 2D array and index
+// function generateStringFrom2DArray(array, index) {
+//   if (array.length === 0) {
+//     return '';
+//   }
+//   return array.map(subArray => subArray[index]).join(' or ');
+// }
