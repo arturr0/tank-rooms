@@ -2583,13 +2583,55 @@ function sortToSecondExtreme(array) {
   return uniqueKills.sort((a, b) => a - b);
 }
 
+// function generateStringFrom2DArray(array, index) {
+//   if (array.length === 0) {
+//       return '';
+//   }
+//   const firstElements = array.map(subArray => subArray[index]);
+//   return firstElements.join(' or ');
+// }
+
+// function generateStringFrom2DArray(array, index) {
+//   if (array.length === 0) {
+//       return '';
+//   }
+
+//   // Extract values at the specified index
+//   const values = array.map(subArray => subArray[index]);
+
+//   // Check for duplicates using Set to ensure uniqueness
+//   const uniqueValues = [...new Set(values)];
+
+//   // If all values are the same, return just one of them
+//   if (uniqueValues.length === 1) {
+//       return uniqueValues[0].toString(); // Convert to string if necessary
+//   } else {
+//       // Otherwise, join values with " or "
+//       return uniqueValues.join(' or ');
+//   }
+// }
+
 function generateStringFrom2DArray(array, index) {
   if (array.length === 0) {
       return '';
   }
-  const firstElements = array.map(subArray => subArray[index]);
-  return firstElements.join(' or ');
+
+  // Extract values at the specified index
+  const values = array.map(subArray => subArray[index]);
+
+  // Check for duplicates using Set to ensure uniqueness
+  const uniqueValues = [...new Set(values)];
+
+  // If all values are the same, return just one of them
+  if (uniqueValues.length === 1) {
+      return `"word ${uniqueValues[0]}"`;
+  } else {
+      // Otherwise, join values with " or " and format as required
+      const formattedValues = uniqueValues.map(value => `"word ${value}"`);
+      return formattedValues.join(' or ');
+  }
 }
+
 
 function generateStringFromArray(array) {
     if (array.length === 0) {
