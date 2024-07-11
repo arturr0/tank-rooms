@@ -2612,24 +2612,24 @@ function sortToSecondExtreme(array) {
 // }
 
 function generateStringFrom2DArray(array, index) {
-  if (array.length === 0) {
-      return '';
-  }
+    if (array.length === 0) {
+        return '';
+    }
 
-  // Extract values at the specified index
-  const values = array.map(subArray => subArray[index]);
+    // Extract values at the specified index
+    const values = array.map(subArray => subArray[index]);
 
-  // Check for duplicates using Set to ensure uniqueness
-  const uniqueValues = [...new Set(values)];
+    // Check for duplicates using Set to ensure uniqueness
+    const uniqueValues = [...new Set(values)];
 
-  // If all values are the same, return just one of them
-  if (uniqueValues.length === 1) {
-      return `"word ${uniqueValues[0]}"`;
-  } else {
-      // Otherwise, join values with " or " and format as required
-      const formattedValues = uniqueValues.map(value => `"word ${value}"`);
-      return formattedValues.join(' or ');
-  }
+    // If all values are the same, return just one of them
+    if (uniqueValues.length === 1) {
+        return `"CAPTURE ${Pawns[uniqueValues[0]].letter}${Pawns[uniqueValues[0]].number} ON ${Pawns[uniqueValues[1]].letter}${Pawns[uniqueValues[1]].number}"`;
+    } else {
+        // Otherwise, join values with " or " and format as required
+        const formattedValues = uniqueValues.map(value => `"word ${value}"`);
+        return formattedValues.join(' or ');
+    }
 }
 
 
