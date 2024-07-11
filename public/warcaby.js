@@ -2728,7 +2728,7 @@ function generateStringFrom2DArray(array, killerIndex, killedIndex) {
   });
 
   // Join all capture messages with " of "
-  return captureMessages.join(' of ');
+  return captureMessages.join(' OR ');
 }
 
 
