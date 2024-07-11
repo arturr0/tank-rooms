@@ -948,7 +948,7 @@ if (killedOptMode) {
                killerCollisionChoose.push(oneKiller2KilledArray[i]);
                break;
               }
-            
+              killerCollisionChoose = uniqueForSecondExterme(killerCollisionChoose);
 
           }
       }
@@ -2608,9 +2608,10 @@ function mouseMoved() {
     console.log('for killedOptMode');
     for (let i = 0; i < killerCollisionChoose.length; i++) 
       if (((!Greenturn && Player == 1) || (Greenturn  && Player == 2)) &&
-      X > killerCollisionChoose[i][5] - 32 && X < killerCollisionChoose[i][5] + 32 && Y > killerCollisionChoose[i][6] - 32 && Y < killerCollisionChoose[i][6] + 32)
-    
-        console.log(killerCollisionChoose[i]);  
+      X > killerCollisionChoose[i][5] - 32 && X < killerCollisionChoose[i][5] + 32 && Y > killerCollisionChoose[i][6] - 32 && Y < killerCollisionChoose[i][6] + 32) {
+        console.log(killerCollisionChoose.length);  
+        console.log(killerCollisionChoose[i]);
+      }  
 
     }
 }
