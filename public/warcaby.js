@@ -111,6 +111,7 @@ let killConditionsUnique = [];
 let killersOptModeArray = [];
 let killedOptModeArray = [];
 let oneKiller2KilledArray = [];
+let killerCollisionChoose = [];
 let killersOptMode = false;
 let killedOpt = [];
 let killedOptMode = false;
@@ -570,9 +571,9 @@ function draw() {
     movingPawn.show();
   }
 
-  if (killersOptMode) {
+  if (/*killersOptMode ||*/killedCollision) {
     for (let i = 0; i < Pawns.length; i++) {
-      if (Pawns[i].killed2) {
+      if (Pawns[i].killer || Pawns[i].killed2) {
         push(); // Save current transformation state
         translate(Pawns[i].rectCenter, Pawns[i].rectCenterY);
         rotate(angleKiller);
@@ -870,8 +871,11 @@ if (killedOptMode) {
     let click = false;    
   
         for (let i = 0; i < oneKiller2KilledArray.length; i++) {
-          console.log(oneKiller2KilledArray[i]);
-          
+          if (((oneKiller2KilledArray[i][3] && !Greenturn && Player == 1) || (!oneKiller2KilledArray[i][3] && Greenturn  && Player == 2)) &&
+          X > oneKiller2KilledArray[i][7] - 32 && X < oneKiller2KilledArray[i][7] + 32 && Y > oneKiller2KilledArray[i][8] - 32 && Y < oneKiller2KilledArray[i][8] + 32) {
+          //console.log(oneKiller2KilledArray[i]);
+            killerCollisionChoose = oneKiller2KilledArray[i];
+          } 
           if (!oneKiller2KilledArray.some(array => array[0] != oneKiller2KilledArray[i][0]) && !Pawns[oneKiller2KilledArray[i][1]].killed) {
               
               console.log("click 2 killed");
@@ -930,7 +934,8 @@ if (killedOptMode) {
           else {
             killedCollision = true;
             for(let i = 0; i < oneKiller2KilledArray.length; i++)
-              Pawns[oneKiller2KilledArray[i][0]].killed2 = true;
+              if(killerCollisionChoose[0] == oneKiller2KilledArray[0])
+               Pawns[oneKiller2KilledArray[i][0]].killed2 = true;
 
           }
       }
