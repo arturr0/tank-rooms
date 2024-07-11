@@ -951,10 +951,10 @@ if (killedOptMode) {
       
     }
     if(killedCollision) {
-      for (let i = 0; i < killerCollisionChoose.length; i++) 
+      
         //////////////////////console.log('for killedOptMode');
-        if (((killerCollisionChoose[i][3] && !Greenturn && Player == 1) || (!killerCollisionChoose[i][3] && Greenturn  && Player == 2)) &&
-            X > killerCollisionChoose[i][7] - 32 && X < killerCollisionChoose[i][7] + 32 && Y > killerCollisionChoose[i][8] - 32 && Y < killerCollisionChoose[i][8] + 32)
+        if (((killerCollisionChoose[3] && !Greenturn && Player == 1) || (!killerCollisionChoose[3] && Greenturn  && Player == 2)) &&
+            X > killerCollisionChoose[7] - 32 && X < killerCollisionChoose[7] + 32 && Y > killerCollisionChoose[8] - 32 && Y < killerCollisionChoose[8] + 32)
             console.log(killerCollisionChoose[i]);  
     }
   
@@ -1675,6 +1675,10 @@ console.log("Max Left:", maxLeft);
 console.log("Max Right:", maxRight);
 console.log("Min Left:", minLeft);
 console.log("Min Right:", minRight);
+console.log("Max LeftE:", maxLeftE);
+console.log("Max RightE:", maxRightE);
+console.log("Min LeftE:", minLeftE);
+console.log("Min RightE:", minRightE);
 
     
     // killConditionsUnique.sort((a, b) => {
