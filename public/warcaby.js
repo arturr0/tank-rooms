@@ -481,7 +481,7 @@ function setup() {
           //generateQueensAreas()
         //} else if (Board[j].isBlack && Board[j].row > 5) {
       } 
-      else if ([10,37,12,26,35,21].includes(j)) {
+      else if ([10,37,12,26,35].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1922,15 +1922,23 @@ console.log("Min Right:", minRight);
             // !minRight.some(array => array[1] == Pawns[killConditionsUnique[j][1]].row) &&
             // !minLeft.some(array => array[1] == Pawns[killConditionsUnique[j][1]].row))) &&
             ((!killConditionsUnique[i][9] && killConditionsUnique[j][9] && 
-            (((killConditionsUnique[j][10] == 'up-left' && maxLeft.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0])) ||
-            (killConditionsUnique[j][10] == 'up-right' && maxRight.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0])) ||
-            (killConditionsUnique[j][10] == 'down-left' && minLeft.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0])) ||
-            (killConditionsUnique[j][10] == 'down-right' && minRight.some(array => array[1] === Pawns[killConditionsUnique[j][1]].row && array[0] == killConditionsUnique[j][0]))))) ||
+                ((!maxLeftE.some(array => array[1] == Pawns[killConditionsUnique[i][1]].row) &&
+                !maxRightE.some(array => array[1] == Pawns[killConditionsUnique[i][1]].row) &&
+                !minRightE.some(array => array[1] == Pawns[killConditionsUnique[i][1]].row) &&
+                !minLeftE.some(array => array[1] == Pawns[killConditionsUnique[i][1]].row)) &&
+                (!maxLeft.some(array => array[1] == Pawns[killConditionsUnique[i][1]].row) &&
+                !maxRight.some(array => array[1] == Pawns[killConditionsUnique[i][1]].row) &&
+                !minRight.some(array => array[1] == Pawns[killConditionsUnique[i][1]].row) &&
+                !minLeft.some(array => array[1] == Pawns[killConditionsUnique[i][1]].row)))) ||
             ((!killConditionsUnique[j][9] && killConditionsUnique[i][9] && 
-                (((killConditionsUnique[i][10] == 'up-left' && maxLeft.some(array => array[1] === Pawns[killConditionsUnique[i][1]].row && array[0] == killConditionsUnique[i][0])) ||
-                (killConditionsUnique[i][10] == 'up-right' && maxRight.some(array => array[1] === Pawns[killConditionsUnique[i][1]].row && array[0] == killConditionsUnique[i][0])) ||
-                (killConditionsUnique[i][10] == 'down-left' && minLeft.some(array => array[1] === Pawns[killConditionsUnique[i][1]].row && array[0] == killConditionsUnique[i][0])) ||
-                (killConditionsUnique[i][10] == 'down-right' && minRight.some(array => array[1] === Pawns[killConditionsUnique[i][1]].row && array[0] == killConditionsUnique[i][0]))))))) ||
+                ((!maxLeftE.some(array => array[1] == Pawns[killConditionsUnique[j][1]].row) &&
+                !maxRightE.some(array => array[1] == Pawns[killConditionsUnique[j][1]].row) &&
+                !minRightE.some(array => array[1] == Pawns[killConditionsUnique[j][1]].row) &&
+                !minLeftE.some(array => array[1] == Pawns[killConditionsUnique[j][1]].row)) &&
+                (!maxLeft.some(array => array[1] == Pawns[killConditionsUnique[j][1]].row) &&
+                !maxRight.some(array => array[1] == Pawns[killConditionsUnique[j][1]].row) &&
+                !minRight.some(array => array[1] == Pawns[killConditionsUnique[j][1]].row) &&
+                !minLeft.some(array => array[1] == Pawns[killConditionsUnique[j][1]].row)))))) ||
             (killConditionsUnique[i][9] && killConditionsUnique[j][9] &&
             (((killConditionsUnique[i][10] == 'up-left' && maxLeft.some(array => array[1] === Pawns[killConditionsUnique[i][1]].row && array[0] == killConditionsUnique[i][0])) ||
             (killConditionsUnique[i][10] == 'up-right' && maxRight.some(array => array[1] === Pawns[killConditionsUnique[i][1]].row && array[0] == killConditionsUnique[i][0])) ||
