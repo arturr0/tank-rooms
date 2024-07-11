@@ -1974,7 +1974,34 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   
   
   }
-  else if (chooseBoard.filter(array => array[11] && array[9] === true && array[11].length > 0)) {
+  // else if(chooseBoard.filter(array => array[11] && array[9] == true && array[11].length > 0)) {
+  //       // let pawnLetter = Pawns[winner].letter;
+  //       // let pawnNumber = Pawns[winner].number;
+  //       // let pawnLetterLooser = Pawns[looser].letter;
+  //       // let pawnNumberLooser = Pawns[looser].number;
+  //       // let played = Pawns[winner].isRed;
+  //       // message = "kill";
+  //       // if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
+  //       // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
+  //       for (let i = 0; i < chooseBoard.length; i++)
+  //         Pawns[chooseBoard[i][1]].liveCopy = false;
+  //       console.log("ks in", winner, looser, newBoard);
+  //       Pawns[winner].rowCopy = Board[newBoard].row;
+  //       Pawns[winner].columnCopy = Board[newBoard].column;
+  //       // Pawns[winner].letter = Board[newBoard].letter;
+  //       // Pawns[winner].number = Board[newBoard].number;
+  //       console.log(Pawns[winner].rowCopy, Pawns[winner].columnCopy)
+  //       //Board[newBoard].free = false;
+  //       checkQueen();
+        
+  //       //current = winner;
+  //       generateQueensAreas(true);
+  //       kill(blockKilledPawn, blockKillersPawn);    
+  //   }
+  else {
+    const index = chooseBoard.findIndex(array => array[11] && array[9] === true && array[11].length > 0);
+    if (index !== -1) {
+        // Array meeting the condition found at index
         // let pawnLetter = Pawns[winner].letter;
         // let pawnNumber = Pawns[winner].number;
         // let pawnLetterLooser = Pawns[looser].letter;
@@ -1983,21 +2010,26 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         // message = "kill";
         // if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
         // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
-        for (let i = 0; i < chooseBoard.length; i++)
-          Pawns[chooseBoard[i][1]].liveCopy = false;
+        // for (let i = 0; i < chooseBoard.length; i++)
+        Pawns[chooseBoard[index][1]].liveCopy = false;
         console.log("ks in", winner, looser, newBoard);
-        Pawns[winner].rowCopy = Board[newBoard].row;
-        Pawns[winner].columnCopy = Board[newBoard].column;
+        Pawns[chooseBoard[index][0]].rowCopy = Board[newBoard].row;
+        Pawns[chooseBoard[index][0]].columnCopy = Board[newBoard].column;
         // Pawns[winner].letter = Board[newBoard].letter;
         // Pawns[winner].number = Board[newBoard].number;
-        console.log(Pawns[winner].rowCopy, Pawns[winner].columnCopy)
-        //Board[newBoard].free = false;
+        console.log(chooseBoard[index][0], chooseBoard[index][1]);
+        // Board[newBoard].free = false;
         checkQueen();
         
-        //current = winner;
+        // current = winner;
         generateQueensAreas(true);
-        kill(blockKilledPawn, blockKillersPawn);    
+        kill(blockKilledPawn, blockKillersPawn);
+
+        // Use the index as needed within this block
+        console.log(`Condition met at index: ${index}`);
     }
+}
+
   
   ////console.log('check killSwitch 2', killConditionsUnique.length); 
 }
