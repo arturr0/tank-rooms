@@ -983,7 +983,7 @@ if (killedOptMode) {
         for (let i = 0; i < oneKiller2KilledArray.length; i++) {
           console.log(oneKiller2KilledArray[i]);
           
-          if (!oneKiller2KilledArray.some(array => array[0] != oneKiller2KilledArray[i][0]) || !Pawns[oneKiller2KilledArray[i][1]].killed) {
+          if (!oneKiller2KilledArray.some(array => array[0] != oneKiller2KilledArray[i][0]) && !Pawns[oneKiller2KilledArray[i][1]].killed) {
               
               console.log("click 2 killed");
               
