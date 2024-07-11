@@ -941,7 +941,7 @@ if (killedOptMode) {
             killedCollision = true;
 
             for(let i = 0; i < oneKiller2KilledArray.length; i++)
-              if(killerCollisionChoose[0] == oneKiller2KilledArray[0])
+              if(killerCollisionChoose[0] == oneKiller2KilledArray[i][0])
                Pawns[oneKiller2KilledArray[i][0]].killed2 = true;
             
 
@@ -1567,10 +1567,10 @@ console.log(chooseDL);
 let uniqueIndex0Values = getUniqueValues(killConditionsUnique, 0);
 console.log(killConditionsUnique);
 uniqueIndex0Values.forEach(value => {
-    let filteredUpLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[9] && subarray[10] === 'up-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
-    let filteredUpRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[9] && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
-    let filteredDownLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[9] && subarray[10] === 'down-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
-    let filteredDownRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[9] && subarray[10] === 'down-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+    let filteredUpLeft = killConditionsUnique.filter(subarray => subarray[0] === value && Pawns[subarray[0]].queen && subarray[9] && subarray[10] === 'up-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+    let filteredUpRight = killConditionsUnique.filter(subarray => subarray[0] === value && Pawns[subarray[0]].queen && subarray[9] && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+    let filteredDownLeft = killConditionsUnique.filter(subarray => subarray[0] === value && Pawns[subarray[0]].queen && subarray[9] && subarray[10] === 'down-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+    let filteredDownRight = killConditionsUnique.filter(subarray => subarray[0] === value && Pawns[subarray[0]].queen && subarray[9] && subarray[10] === 'down-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
     maxLeft.push([value, Math.max(...filteredUpLeft)]);
     maxRight.push([value, Math.max(...filteredUpRight)]);
     minLeft.push([value, Math.min(...filteredDownLeft)]);
