@@ -2577,4 +2577,32 @@ function sortToSecondExtreme(array) {
   return uniqueKills.sort((a, b) => a - b);
 }
 
+function generateStringFrom2DArray(array) {
+  if (array.length === 0) {
+      return '';
+  }
+  const firstElements = array.map(subArray => subArray[1]);
+  return firstElements.join(' or ');
+}
+
+function generateStringFromArray(array) {
+    if (array.length === 0) {
+        return '';
+    }
+    return array.join(' or ');
+}
+
+
+
   
+function mouseMoved() {
+  X = mouseX;
+  Y = mouseY;
+  if(killedCollision) {
+      
+    console.log('for killedOptMode');
+    if (((killerCollisionChoose[3] && !Greenturn && Player == 1) || (!killerCollisionChoose[3] && Greenturn  && Player == 2)) &&
+        X > killerCollisionChoose[7] - 32 && X < killerCollisionChoose[7] + 32 && Y > killerCollisionChoose[8] - 32 && Y < killerCollisionChoose[8] + 32)
+        console.log(killerCollisionChoose);  
+}
+}
