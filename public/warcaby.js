@@ -873,7 +873,7 @@ if (killedOptMode) {
         for (let i = 0; i < oneKiller2KilledArray.length; i++) {
           if (((oneKiller2KilledArray[i][3] && !Greenturn && Player == 1) || (!oneKiller2KilledArray[i][3] && Greenturn  && Player == 2)) &&
           X > oneKiller2KilledArray[i][7] - 32 && X < oneKiller2KilledArray[i][7] + 32 && Y > oneKiller2KilledArray[i][8] - 32 && Y < oneKiller2KilledArray[i][8] + 32) {
-          //console.log(oneKiller2KilledArray[i]);
+          console.log(oneKiller2KilledArray[i]);
             killerCollisionChoose = oneKiller2KilledArray[i];
           } 
           if (!oneKiller2KilledArray.some(array => array[0] != oneKiller2KilledArray[i][0]) && !Pawns[oneKiller2KilledArray[i][1]].killed) {
@@ -932,15 +932,30 @@ if (killedOptMode) {
           }
           //if (click) break;
           else {
+            for (let i = 0; i < killersOptModeArray.length; i++)
+              Pawns[killersOptModeArray[i][0]].killer = false;
+            for (let i = 0; i < killedOptModeArray.length; i++)
+              Pawns[killedOptModeArray[i][1]].killed = false;
+            killersOptMode = false;
+            killedOptMode = false;
             killedCollision = true;
+
             for(let i = 0; i < oneKiller2KilledArray.length; i++)
               if(killerCollisionChoose[0] == oneKiller2KilledArray[0])
                Pawns[oneKiller2KilledArray[i][0]].killed2 = true;
+            
 
           }
       }
       
       
+    }
+    if(killedCollision) {
+      for (let i = 0; i < killerCollisionChoose.length; i++) 
+        //////////////////////console.log('for killedOptMode');
+        if (((killerCollisionChoose[i][3] && !Greenturn && Player == 1) || (!killerCollisionChoose[i][3] && Greenturn  && Player == 2)) &&
+            X > killerCollisionChoose[i][7] - 32 && X < killerCollisionChoose[i][7] + 32 && Y > killerCollisionChoose[i][8] - 32 && Y < killerCollisionChoose[i][8] + 32)
+            console.log(killerCollisionChoose[i]);  
     }
   
 }
