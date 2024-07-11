@@ -747,6 +747,7 @@ function mouseClicked() {
       if (((killersOptModeArray[i][3] && !Greenturn && Player == 1) || (!killersOptModeArray[i][3] && Greenturn  && Player == 2)) &&
           X > killersOptModeArray[i][5] - 32 && X < killersOptModeArray[i][5] + 32 && Y > killersOptModeArray[i][6] - 32 && Y < killersOptModeArray[i][6] + 32) {
             ////////console.log("click");
+            
             for (let j = 0; j < killersOptModeArray.length; j++)
               Pawns[killersOptModeArray[j][0]].killer = false;
             for (let j = 0; j < killedOptModeArray.length; j++)
@@ -804,56 +805,54 @@ if (killedOptMode) {
     if (((killedOptModeArray[i][3] && !Greenturn && Player == 1) || (!killedOptModeArray[i][3] && Greenturn  && Player == 2)) &&
         X > killedOptModeArray[i][7] - 32 && X < killedOptModeArray[i][7] + 32 && Y > killedOptModeArray[i][8] - 32 && Y < killedOptModeArray[i][8] + 32) {
           //////////////////////////////////////////////////////////console.log("click");
-          if (!maxLeftE.some(array => array[1] == Pawns[killedOptModeArray[j][1]].row) ||
-             !minLeftE.some(array => array[1] == Pawns[killedOptModeArray[j][1]].row) ||
-             !maxRightE.some(array => array[1] == Pawns[killedOptModeArray[j][1]].row) ||
-             !minRightE.some(array => array[1] == Pawns[killedOptModeArray[j][1]].row)) {
-          for (let j = 0; j < killedOptModeArray.length; j++)
-            Pawns[killedOptModeArray[j][1]].killed = false;
-          for (let j = 0; j < killersOptModeArray.length; j++)
-            Pawns[killersOptModeArray[j][0]].killer = false;
-          for (let j = 0; j < oneKiller2KilledArray.length; j++)
-            Pawns[oneKiller2KilledArray[j][1]].kill1Killed2 = false;
-          ////////////////////////////////////////////////////////////////////////////////////////////////////////////////console.log(killedOptModeArray[i]);
-          let killedSelected = killedOptModeArray[i][1];
-          blockKilledPawn = killedOptModeArray[i][0];
-          //////////////////////////////////////////////////////////////////////////////console.log(pawnSelected);
-          for (let j = 0; j < killConditionsUnique.length; j++)
-            if (killConditionsUnique[j][1] != killedSelected) {
-              //////////////////////////////////////////////////////////////////////////////console.log(killConditionsUnique[j][0]);
-              killConditionsUnique.splice(j,1); 
-              
-              ////////////console.log(killedOptModeArray[i][0]);
-              //////////console.log('splice killedOptMode');
-              
-            }
-            ////////////////////console.log('killConditionsUnique after splice in killedOptMode', killConditionsUnique)
-          //////////////////////////////////////////////////////////////////////for (let z = 0; z < killConditionsUnique.length; z++)
-            ////////////console.log(killConditionsUnique[z]);
-          killedOptMode = false;
-          killersOptMode = false;
-          oneKiller2Killed = false;
+          if(!Pawns[killedOptModeArray[i][1]].oneKiller2Killed)  {
           
-          //killedOptModeArray = [];
-          let firstKill = [];
-          console.log('killedOptModeArray[i] before push', killedOptModeArray[i]);
-          killConditions = [];
-          killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-          console.log(killConditionsUnique)
-          firstKill.push(killedOptModeArray[i]);
-          //console.log('killedOptMode', firstKill);
-          killedOptModeArray = [];
-          killersOptModeArray = [];
-          oneKiller2KilledArray = [];
-          ////////////////////console.log('killedOptModeArray');
-          ////////////////////console.log('killedOptModeArray[i] after push', killedOptModeArray[i]);
-          ////////////////////console.log('firstKill');
-          ////////////////////console.log(firstKill);
-          
-          killOpt(firstKill);
-          stepKill(firstKill);
-          // socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
-          break;
+            for (let j = 0; j < killedOptModeArray.length; j++)
+              Pawns[killedOptModeArray[j][1]].killed = false;
+            for (let j = 0; j < killersOptModeArray.length; j++)
+              Pawns[killersOptModeArray[j][0]].killer = false;
+            for (let j = 0; j < oneKiller2KilledArray.length; j++)
+              Pawns[oneKiller2KilledArray[j][1]].kill1Killed2 = false;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////console.log(killedOptModeArray[i]);
+            let killedSelected = killedOptModeArray[i][1];
+            blockKilledPawn = killedOptModeArray[i][0];
+            //////////////////////////////////////////////////////////////////////////////console.log(pawnSelected);
+            for (let j = 0; j < killConditionsUnique.length; j++)
+              if (killConditionsUnique[j][1] != killedSelected) {
+                //////////////////////////////////////////////////////////////////////////////console.log(killConditionsUnique[j][0]);
+                killConditionsUnique.splice(j,1); 
+                
+                ////////////console.log(killedOptModeArray[i][0]);
+                //////////console.log('splice killedOptMode');
+                
+              }
+              ////////////////////console.log('killConditionsUnique after splice in killedOptMode', killConditionsUnique)
+            //////////////////////////////////////////////////////////////////////for (let z = 0; z < killConditionsUnique.length; z++)
+              ////////////console.log(killConditionsUnique[z]);
+            killedOptMode = false;
+            killersOptMode = false;
+            oneKiller2Killed = false;
+            
+            //killedOptModeArray = [];
+            let firstKill = [];
+            console.log('killedOptModeArray[i] before push', killedOptModeArray[i]);
+            killConditions = [];
+            killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+            console.log(killConditionsUnique)
+            firstKill.push(killedOptModeArray[i]);
+            //console.log('killedOptMode', firstKill);
+            killedOptModeArray = [];
+            killersOptModeArray = [];
+            oneKiller2KilledArray = [];
+            ////////////////////console.log('killedOptModeArray');
+            ////////////////////console.log('killedOptModeArray[i] after push', killedOptModeArray[i]);
+            ////////////////////console.log('firstKill');
+            ////////////////////console.log(firstKill);
+            
+            killOpt(firstKill);
+            stepKill(firstKill);
+            // socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
+            break;
         }
       }
       
@@ -984,10 +983,7 @@ if (killedOptMode) {
         for (let i = 0; i < oneKiller2KilledArray.length; i++) {
           console.log(oneKiller2KilledArray[i]);
           
-          if (((oneKiller2KilledArray[i][3] && !Greenturn && Player == 1) || 
-               (!oneKiller2KilledArray[i][3] && Greenturn && Player == 2)) &&
-              X > oneKiller2KilledArray[i][7] - 32 && X < oneKiller2KilledArray[i][7] + 32 && 
-              Y > oneKiller2KilledArray[i][8] - 32 && Y < oneKiller2KilledArray[i][8] + 32) {
+          if (!Pawns[oneKiller2KilledArray[i][1]].killed) {
               
               console.log("click 2 killed");
               
