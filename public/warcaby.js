@@ -1772,6 +1772,7 @@ console.log("Min RightE:", minRightE);
         oneKiller2KilledArray.push(killConditionsUnique[i]);
         oneKiller2KilledArray.push(killConditionsUnique[j]);
         oneKiller2KilledArray = queenUnique(oneKiller2KilledArray);
+        console.log(oneKiller2KilledArray);
         //break;
         
       }
@@ -2614,4 +2615,11 @@ function mouseMoved() {
       }  
 
     }
+  if (oneKiller2Killed) 
+    for (let i = 0; i < oneKiller2KilledArray.length; i++) 
+            if (((oneKiller2KilledArray[i][3] && !Greenturn && Player == 1) || (!oneKiller2KilledArray[i][3] && Greenturn  && Player == 2)) &&
+            X > oneKiller2KilledArray[i][7] - 32 && X < oneKiller2KilledArray[i][7] + 32 && Y > oneKiller2KilledArray[i][8] - 32 && Y < oneKiller2KilledArray[i][8] + 32) {
+              console.log(oneKiller2KilledArray[i]);
+              
+            } 
 }
