@@ -2778,27 +2778,48 @@ function generateStringFromArray(array) {
 //   console.log("Final message:", message);
 // }
 
+// function mouseMoved() {
+//   let messageArray = [];
+//   X = mouseX;
+//   Y = mouseY;
+
+//   if (killedCollision) {
+//       console.log('for killedOptMode');
+//       for (let i = 0; i < killerCollisionChoose.length; i++) {
+//           if (((!Greenturn && Player == 1) || (Greenturn && Player == 2)) &&
+//               X > killerCollisionChoose[i][5] - 32 && X < killerCollisionChoose[i][5] + 32 &&
+//               Y > killerCollisionChoose[i][6] - 32 && Y < killerCollisionChoose[i][6] + 32) {
+//               console.log(killerCollisionChoose.length);
+//               console.log(killerCollisionChoose[i]);
+//           }
+//       }
+//   }
+
+//   if (oneKiller2Killed) {
+//       for (let i = 0; i < oneKiller2KilledArray.length; i++) {
+//           if (((oneKiller2KilledArray[i][3] && !Greenturn && Player == 1) || (!oneKiller2KilledArray[i][3] && Greenturn && Player == 2)) &&
+//               X > oneKiller2KilledArray[i][7] - 32 && X < oneKiller2KilledArray[i][7] + 32 &&
+//               Y > oneKiller2KilledArray[i][8] - 32 && Y < oneKiller2KilledArray[i][8] + 32) {
+//               messageArray.push(oneKiller2KilledArray[i]);
+//           }
+//       }
+//   }
+
+//   // Generate message string from messageArray
+//   let message = generateStringFrom2DArray(messageArray, 0, 1);
+
+//   // Log the final value of message
+//   console.log("Final message:", message);
+// }
 function mouseMoved() {
   let messageArray = [];
   X = mouseX;
   Y = mouseY;
 
-  if (killedCollision) {
-      console.log('for killedOptMode');
-      for (let i = 0; i < killerCollisionChoose.length; i++) {
-          if (((!Greenturn && Player == 1) || (Greenturn && Player == 2)) &&
-              X > killerCollisionChoose[i][5] - 32 && X < killerCollisionChoose[i][5] + 32 &&
-              Y > killerCollisionChoose[i][6] - 32 && Y < killerCollisionChoose[i][6] + 32) {
-              console.log(killerCollisionChoose.length);
-              console.log(killerCollisionChoose[i]);
-          }
-      }
-  }
-
+  // Example logic to populate messageArray, adjust as per your actual implementation
   if (oneKiller2Killed) {
       for (let i = 0; i < oneKiller2KilledArray.length; i++) {
-          if (((oneKiller2KilledArray[i][3] && !Greenturn && Player == 1) || (!oneKiller2KilledArray[i][3] && Greenturn && Player == 2)) &&
-              X > oneKiller2KilledArray[i][7] - 32 && X < oneKiller2KilledArray[i][7] + 32 &&
+          if (X > oneKiller2KilledArray[i][7] - 32 && X < oneKiller2KilledArray[i][7] + 32 &&
               Y > oneKiller2KilledArray[i][8] - 32 && Y < oneKiller2KilledArray[i][8] + 32) {
               messageArray.push(oneKiller2KilledArray[i]);
           }
@@ -2808,9 +2829,21 @@ function mouseMoved() {
   // Generate message string from messageArray
   let message = generateStringFrom2DArray(messageArray, 0, 1);
 
-  // Log the final value of message
-  console.log("Final message:", message);
+  // Display message in a div
+  const messageDiv = document.getElementById('messageDiv');
+  if (messageDiv) {
+      if (message) {
+          messageDiv.innerText = message;
+          messageDiv.style.display = 'block';
+          messageDiv.style.left = mouseX + 'px';
+          messageDiv.style.top = mouseY + 'px';
+      } else {
+          messageDiv.style.display = 'none';
+      }
+  }
 }
+
+
 
 
 // Helper function to generate string based on 2D array and index
