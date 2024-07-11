@@ -1999,36 +1999,45 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   //       kill(blockKilledPawn, blockKillersPawn);    
   //   }
   else {
-    const index = chooseBoard.findIndex(array => array[11] && array[9] === true && array[11].length > 0);
-    if (index !== -1) {
-        // Array meeting the condition found at index
-        // let pawnLetter = Pawns[winner].letter;
-        // let pawnNumber = Pawns[winner].number;
-        // let pawnLetterLooser = Pawns[looser].letter;
-        // let pawnNumberLooser = Pawns[looser].number;
-        // let played = Pawns[winner].isRed;
-        // message = "kill";
-        // if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
-        // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
-        // for (let i = 0; i < chooseBoard.length; i++)
-        Pawns[chooseBoard[index][1]].liveCopy = false;
-        console.log("ks in", winner, looser, newBoard);
-        Pawns[chooseBoard[index][0]].rowCopy = Board[newBoard].row;
-        Pawns[chooseBoard[index][0]].columnCopy = Board[newBoard].column;
-        // Pawns[winner].letter = Board[newBoard].letter;
-        // Pawns[winner].number = Board[newBoard].number;
-        console.log(chooseBoard[index][0], chooseBoard[index][1]);
-        // Board[newBoard].free = false;
-        checkQueen();
-        
-        // current = winner;
-        generateQueensAreas(true);
-        kill(blockKilledPawn, blockKillersPawn);
+    const indexes = chooseBoard
+        .map((array, index) => ({ array, index }))
+        .filter(({ array }) => array[11] && array[9] === true && array[11].length > 0)
+        .map(({ index }) => index);
 
-        // Use the index as needed within this block
-        console.log(`Condition met at index: ${index}`);
+    if (indexes.length > 0) {
+        indexes.forEach(index => {
+            // Execute your code for each found index
+            // let pawnLetter = Pawns[winner].letter;
+            // let pawnNumber = Pawns[winner].number;
+            // let pawnLetterLooser = Pawns[looser].letter;
+            // let pawnNumberLooser = Pawns[looser].number;
+            // let played = Pawns[winner].isRed;
+            // message = "kill";
+            // if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
+            // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
+
+            // Your existing logic goes here
+            
+            Pawns[chooseBoard[index][1]].liveCopy = false;
+            console.log("ks in", winner, looser, newBoard);
+            Pawns[chooseBoard[index][0]].rowCopy = Board[newBoard].row;
+            Pawns[chooseBoard[index][0]].columnCopy = Board[newBoard].column;
+            // Pawns[winner].letter = Board[newBoard].letter;
+            // Pawns[winner].number = Board[newBoard].number;
+            console.log(chooseBoard[index][0], chooseBoard[index][1]);
+            // Board[newBoard].free = false;
+            checkQueen();
+
+            // current = winner;
+            generateQueensAreas(true);
+            kill(blockKilledPawn, blockKillersPawn);
+
+            // Log the index that met the condition
+            console.log(`Condition met at index: ${index}`);
+        });
     }
 }
+
 
   
   ////console.log('check killSwitch 2', killConditionsUnique.length); 
