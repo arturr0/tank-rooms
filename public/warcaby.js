@@ -111,6 +111,7 @@ let killConditionsUnique = [];
 let killersOptModeArray = [];
 let killedOptModeArray = [];
 let oneKiller2KilledArray = [];
+let killedCollisionChoose = [];
 let killerCollisionChoose = [];
 let killersOptMode = false;
 let killedOpt = [];
@@ -874,7 +875,7 @@ if (killedOptMode) {
           if (((oneKiller2KilledArray[i][3] && !Greenturn && Player == 1) || (!oneKiller2KilledArray[i][3] && Greenturn  && Player == 2)) &&
           X > oneKiller2KilledArray[i][7] - 32 && X < oneKiller2KilledArray[i][7] + 32 && Y > oneKiller2KilledArray[i][8] - 32 && Y < oneKiller2KilledArray[i][8] + 32) {
           console.log(oneKiller2KilledArray[i]);
-            killerCollisionChoose = oneKiller2KilledArray[i];
+            killedCollisionChoose = oneKiller2KilledArray[i];
           } 
           if (!oneKiller2KilledArray.some(array => array[0] != oneKiller2KilledArray[i][0]) && !Pawns[oneKiller2KilledArray[i][1]].killed) {
               
@@ -932,8 +933,9 @@ if (killedOptMode) {
           }
           //if (click) break;
           else {
-            for (let i = 0; i < killersOptModeArray.length; i++)
+            for (let i = 0; i < killersOptModeArray.length; i++) {
               Pawns[killersOptModeArray[i][0]].killer = false;
+            }
             for (let i = 0; i < killedOptModeArray.length; i++)
               Pawns[killedOptModeArray[i][1]].killed = false;
             killersOptMode = false;
@@ -941,8 +943,11 @@ if (killedOptMode) {
             killedCollision = true;
 
             for(let i = 0; i < oneKiller2KilledArray.length; i++)
-              if(killerCollisionChoose[0] == oneKiller2KilledArray[i][0])
+              if(killedCollisionChoose[0] == oneKiller2KilledArray[i][0] && killedCollisionChoose[1] == oneKiller2KilledArray[i][1]) {
                Pawns[oneKiller2KilledArray[i][0]].killed2 = true;
+               killerCollisionChoose.push(oneKiller2KilledArray[i]);
+               break;
+              }
             
 
           }
@@ -953,9 +958,9 @@ if (killedOptMode) {
     if(killedCollision) {
       
         //////////////////////console.log('for killedOptMode');
-        if (((killerCollisionChoose[3] && !Greenturn && Player == 1) || (!killerCollisionChoose[3] && Greenturn  && Player == 2)) &&
-            X > killerCollisionChoose[7] - 32 && X < killerCollisionChoose[7] + 32 && Y > killerCollisionChoose[8] - 32 && Y < killerCollisionChoose[8] + 32)
-            console.log(killerCollisionChoose);  
+        if (((killedCollisionChoose[3] && !Greenturn && Player == 1) || (!killedCollisionChoose[3] && Greenturn  && Player == 2)) &&
+            X > killedCollisionChoose[7] - 32 && X < killedCollisionChoose[7] + 32 && Y > killedCollisionChoose[8] - 32 && Y < killedCollisionChoose[8] + 32)
+            console.log(killedCollisionChoose);  
     }
   
 }
@@ -2601,8 +2606,11 @@ function mouseMoved() {
   if(killedCollision) {
       
     console.log('for killedOptMode');
-    if (((killerCollisionChoose[3] && !Greenturn && Player == 1) || (!killerCollisionChoose[3] && Greenturn  && Player == 2)) &&
-        X > killerCollisionChoose[7] - 32 && X < killerCollisionChoose[7] + 32 && Y > killerCollisionChoose[8] - 32 && Y < killerCollisionChoose[8] + 32)
-        console.log(killerCollisionChoose);  
-}
+    for (let i = 0; i < killerCollisionChoose.length; i++) 
+      if (((!Greenturn && Player == 1) || (Greenturn  && Player == 2)) &&
+      X > killerCollisionChoose[i][5] - 32 && X < killerCollisionChoose[i][5] + 32 && Y > killerCollisionChoose[i][6] - 32 && Y < killerCollisionChoose[i][6] + 32)
+    
+        console.log(killerCollisionChoose[i]);  
+
+    }
 }
