@@ -1273,7 +1273,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
         ) {
         
           console.log(`up left, k ${k}, j ${j}, i ${i}`);
-          if(Pawns[j].liveCopy.some(array => array[0] == k)) console.log(Pawns[j])
+          if(Pawns[j].liveCopy.some(array => array[0] === k)) console.log(Pawns[j])
           if (Pawns[j].rowCopy == Pawns[j].row && Pawns[j].columnCopy == Pawns[j].column) console.log("dk ul")
           let killer = k;
           let killed = j;
