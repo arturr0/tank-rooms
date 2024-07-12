@@ -2098,8 +2098,8 @@ console.log("Min RightE:", minRightE);
           )
         )
       ) { 
-        console.log("i", killConditionsUnique[i][0], killConditionsUnique[i][1] , 'maxLeftE', maxLeftE, 'maxRightE', maxRightE, 'minLeftE', minLeftE, 'minRightE', minRightE)
-        console.log("j", killConditionsUnique[j][0], killConditionsUnique[j][1], 'maxLeftE', maxLeftE, 'maxRightE', maxRightE, 'minLeftE', minLeftE, 'minRightE', minRightE)
+        //console.log("i", killConditionsUnique[i][0], killConditionsUnique[i][1] , 'maxLeftE', maxLeftE, 'maxRightE', maxRightE, 'minLeftE', minLeftE, 'minRightE', minRightE)
+        //console.log("j", killConditionsUnique[j][0], killConditionsUnique[j][1], 'maxLeftE', maxLeftE, 'maxRightE', maxRightE, 'minLeftE', minLeftE, 'minRightE', minRightE)
         // console.log(Pawns[killConditionsUnique[j][1]].row , maxLeftE, maxRightE, minLeftE, minRightE);
         // console.log("j", killConditionsUnique[j][1], Pawns[killConditionsUnique[j][1]].row, killConditionsUnique[j][10], "i", killConditionsUnique[i][1], Pawns[killConditionsUnique[i][1]].row, killConditionsUnique[i][10], "maxl", maxLeftE, "maxr", maxRightE, "minl", minLeftE, "minr", minRightE);
         // console.log(
