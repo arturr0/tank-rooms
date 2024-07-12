@@ -1991,12 +1991,13 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         // message = "kill";
         // if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
         // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
+        console.log(chooseBoard);
         for (let i = 0; i < chooseBoard.length; i++) {
-          if(chooseBoard[i][9])
-        Pawns[chooseBoard[i][1]].liveCopy.push(chooseBoard[i][1]);
+          //if(chooseBoard[i][9])
+        Pawns[chooseBoard[i][1]].liveCopy.push(chooseBoard[i][0]);
         console.log("ks in", winner, looser, newBoard);
-        Pawns[winner].rowCopy = Board[newBoard].row;
-        Pawns[winner].columnCopy = Board[newBoard].column;
+        Pawns[chooseBoard[i][0]].rowCopy = Board[chooseBoard[i][2]].row;
+        Pawns[chooseBoard[i][0]].columnCopy = Board[chooseBoard[i][2]].column;
         // Pawns[winner].letter = Board[newBoard].letter;
         // Pawns[winner].number = Board[newBoard].number;
         console.log(winner, looser, Pawns[winner].rowCopy, Pawns[winner].columnCopy)
