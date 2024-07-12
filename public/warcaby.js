@@ -1995,8 +1995,8 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
           
           //Pawns[chooseBoard[i][1]].liveCopy.push(chooseBoard[i][0]);
           //console.log("ks in", chooseBoard[i][0],  chooseBoard[i][1], chooseBoard[i][2]);
-          Pawns[chooseBoard[i][0]].rowCopy.push([Board[chooseBoard[i][2]].row, chooseBoard[i][10]]);
-          Pawns[chooseBoard[i][0]].columnCopy.push([Board[chooseBoard[i][2]].column, chooseBoard[i][10]]);
+          Pawns[chooseBoard[i][0]].rowCopy.push([Board[chooseBoard[i][2]].row, chooseBoard[i][10], chooseBoard[i][1]]);
+          Pawns[chooseBoard[i][0]].columnCopy.push([Board[chooseBoard[i][2]].column, chooseBoard[i][10], chooseBoard[i][1]]);
           Pawns[chooseBoard[i][1]].liveCopy.push(chooseBoard[i][0])
 
           // Pawns[winner].letter = Board[newBoard].letter;
