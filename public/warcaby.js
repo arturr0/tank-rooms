@@ -1192,7 +1192,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
   if(killConditionsUnique.filter(array => array[9] === true).every(array => array[11].length === 0))
     generateQueensAreas(false);
   else
-    generateQueensAreas(false);
+    generateQueensAreas(true);
   console.log(`blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
   for (let i = 0; i < Board.length; i++) {
     
@@ -1203,8 +1203,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
             Pawns[j].isRed != Pawns[k].isRed && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) || (Pawns[j].live && Pawns[j].liveCopy.some(array => array == k))) && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-            Board[i].queen && (Pawns[j].row - Board[i].row <= -1 || Pawns[j].rowCopy - Board[i].row <= -1) &&
-            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy - Board[i].column >= 1) && Board[i].row > Pawns[j].row && Board[i].free &&
+            Board[i].queen && (Pawns[j].row - Board[i].row <= -1 || Pawns[j].rowCopy.filter(array => array[1] == 'down-left').map(array => array[0]) - Board[i].row <= -1) &&
+            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy.filter(array => array[1] == 'down-left').map(array => array[0]) - Board[i].column >= 1) && Board[i].row > Pawns[j].row && Board[i].free &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'down-left' &&
               Pawns[j].row === area[0] &&
@@ -1255,8 +1255,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
            Pawns[j].isRed != Pawns[k].isRed && Pawns[k].live && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) || (Pawns[j].live && Pawns[j].liveCopy.some(array => array == k))) && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-            (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy - Board[i].row >= 1) &&
-            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy - Board[i].column >= 1) && Board[i].row < Pawns[j].row &&
+            (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy.filter(array => array[1] == 'up-left').map(array => array[0]) - Board[i].row >= 1) &&
+            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy.filter(array => array[1] == 'up-left').map(array => array[0]) - Board[i].column >= 1) && Board[i].row < Pawns[j].row &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'up-left' &&
               Pawns[j].row === area[0] &&
@@ -1296,8 +1296,8 @@ for (let i = 0; i < Board.length; i++) {
       if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
           Pawns[j].isRed != Pawns[k].isRed && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) || (Pawns[j].live && Pawns[j].liveCopy.some(array => array == k))) && Pawns[k].live && Pawns[k].queen &&
         ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-          Board[i].queen && (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy - Board[i].row >= 1) &&
-          (Pawns[j].column - Board[i].column <= -1 || Pawns[j].columnCopy - Board[i].column <= -1) && Board[i].row < Pawns[j].row && Board[i].free &&
+          Board[i].queen && (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy.filter(array => array[1] == 'up-right').map(array => array[0]) - Board[i].row >= 1) &&
+          (Pawns[j].column - Board[i].column <= -1  || Pawns[j].columnCopy.filter(array => array[1] == 'up-right').map(array => array[0]) - Board[i].column <= -1) && Board[i].row < Pawns[j].row && Board[i].free &&
           Pawns[k].queensAreas.some(area => 
             area[2] === 'up-right' &&
             Pawns[j].row === area[0] &&
@@ -1345,8 +1345,8 @@ for (let i = 0; i < Board.length; i++) {
             if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
                Pawns[j].isRed != Pawns[k].isRed && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) || (Pawns[j].live && Pawns[j].liveCopy.some(array => array == k))) && Pawns[k].live && Pawns[k].queen &&
               ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-                Board[i].queen && (Pawns[j].row - Board[i].row <= -1) &&
-                (Pawns[j].column - Board[i].column <= -1) && Board[i].row > Pawns[j].row &&
+                Board[i].queen && (Pawns[j].row - Board[i].row <= -1 || Pawns[j].rowCopy.filter(array => array[1] == 'down-right').map(array => array[0]) - Board[i].row <= -1) &&
+                (Pawns[j].column - Board[i].column <= -1  || Pawns[j].columnCopy.filter(array => array[1] == 'down-right').map(array => array[0]) - Board[i].row <= -1) && Board[i].row > Pawns[j].row &&
                 Pawns[k].queensAreas.some(area => 
                   area[2] === 'down-right' &&
                   Pawns[j].row === area[0] &&
@@ -1995,8 +1995,9 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
           
           //Pawns[chooseBoard[i][1]].liveCopy.push(chooseBoard[i][0]);
           console.log("ks in", chooseBoard[i][0],  chooseBoard[i][1], chooseBoard[i][2]);
-          //Pawns[winner].rowCopy = Board[newBoard].row;
-          //Pawns[winner].columnCopy = Board[newBoard].column;
+          Pawns[chooseBoard[i][0]].rowCopy.push([Board[chooseBoard[i][2]].row, chooseBoard[i][10]]);
+          Pawns[chooseBoard[i][0]].columnCopy.push([Board[chooseBoard[i][2]].column, chooseBoard[i][10]]);
+          Pawns[chooseBoard[i][1]].liveCopy.push(chooseBoard[i][0])
           // Pawns[winner].letter = Board[newBoard].letter;
           // Pawns[winner].number = Board[newBoard].number;
           //console.log(Pawns[winner].rowCopy, Pawns[winner].columnCopy)
@@ -2345,8 +2346,8 @@ function generateQueensAreas(check) {
       let tempColumn;
       for (const direction of directions) {
         if(check) {
-            tempRow = Pawns[i].rowCopy;
-            tempColumn = Pawns[i].columnCopy;
+            tempRow = Pawns[i].rowCopy.map(array => array[0]);
+            tempColumn = Pawns[i].columnCopy.map(array => array[0]);;
         }
         else {
             tempRow = Pawns[i].row;
