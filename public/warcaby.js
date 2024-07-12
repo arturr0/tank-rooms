@@ -1980,7 +1980,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   
   
   }
-  else if(chooseBoard.filter(array => array[9]).some(array => array[11] && array[11].length > 0)) {
+  else if(chooseBoard.filter(array => array[9]).some(array => array[11] && array[11].length > 0).every(array => winner == array[0] && looser == array[1])) {
         // let pawnLetter = Pawns[winner].letter;
         // let pawnNumber = Pawns[winner].number;
         // let pawnLetterLooser = Pawns[looser].letter;
