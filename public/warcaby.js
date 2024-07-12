@@ -148,8 +148,8 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
     this.targetPos = null;
     this.queensAreas = [];
     this.index = index;
-    this.rowCopy = null;
-    this.columnCopy = null;
+    this.rowCopy = [];
+    this.columnCopy = [];
     this.liveCopy = [];
     this.killed2 = false;
     this.update = function() {
@@ -469,7 +469,7 @@ function setup() {
     //f(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, killed, letter, number)
     for (let j = 0; j < Board.length; j++) {
       //if (Board[j].isBlack && Board[j].row < 4) {
-      if ([58].includes(j)) {
+      if ([1].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
         pawn.queen = true;
@@ -477,7 +477,7 @@ function setup() {
         //generateQueensAreas()
       //} else if (Board[j].isBlack && Board[j].row > 5) {
       }  
-      if ([60].includes(j)) {
+      if ([3].includes(j)) {
           Board[j].free = false;
           let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, true, false, true, false, false, false, Board[j].letter, Board[j].number);
           pawn.queen = true;
@@ -485,7 +485,7 @@ function setup() {
           //generateQueensAreas()
         //} else if (Board[j].isBlack && Board[j].row > 5) {
       } 
-      else if ([49,51,53].includes(j)) {
+      else if ([10,37,12,26,35].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1192,7 +1192,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
   if(killConditionsUnique.filter(array => array[9] === true).every(array => array[11].length === 0))
     generateQueensAreas(false);
   else
-    generateQueensAreas(true);
+    generateQueensAreas(false);
   console.log(`blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
   for (let i = 0; i < Board.length; i++) {
     
