@@ -1203,8 +1203,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
             Pawns[j].isRed != Pawns[k].isRed && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) || (Pawns[j].live && Pawns[j].liveCopy.some(array => array == k))) && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-            Board[i].queen && (Pawns[j].row - Board[i].row <= -1 || Pawns[j].rowCopy.filter(array => array[1] !== 'down-left').map(array => array[0]) - Board[i].row <= -1) &&
-            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy.filter(array => array[1] !== 'down-left').map(array => array[0]) - Board[i].column >= 1) && Board[i].row > Pawns[j].row && Board[i].free &&
+            Board[i].queen && (Pawns[j].row - Board[i].row <= -1 || Pawns[j].rowCopy.filter(array => array[1] == 'down-left').map(array => array[0]) - Board[i].row <= -1) &&
+            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy.filter(array => array[1] == 'down-left').map(array => array[0]) - Board[i].column >= 1) && Board[i].row > Pawns[j].row && Board[i].free &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'down-left' &&
               Pawns[j].row === area[0] &&
@@ -1255,8 +1255,8 @@ function kill(blockKilledPawn, blockKillersPawn) {
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
            Pawns[j].isRed != Pawns[k].isRed && Pawns[k].live && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) || (Pawns[j].live && Pawns[j].liveCopy.some(array => array == k))) && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-            (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy.filter(array => array[1] !== 'up-left').map(array => array[0]) - Board[i].row >= 1) &&
-            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy.filter(array => array[1] !== 'up-left').map(array => array[0]) - Board[i].column >= 1) && Board[i].row < Pawns[j].row &&
+            (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy.filter(array => array[1] == 'up-left').map(array => array[0]) - Board[i].row >= 1) &&
+            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy.filter(array => array[1] == 'up-left').map(array => array[0]) - Board[i].column >= 1) && Board[i].row < Pawns[j].row &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'up-left' &&
               Pawns[j].row === area[0] &&
@@ -1296,8 +1296,8 @@ for (let i = 0; i < Board.length; i++) {
       if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
           Pawns[j].isRed != Pawns[k].isRed && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) || (Pawns[j].live && Pawns[j].liveCopy.some(array => array == k))) && Pawns[k].live && Pawns[k].queen &&
         ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-          Board[i].queen && (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy.filter(array => array[1] !== 'up-right').map(array => array[0]) - Board[i].row >= 1) &&
-          (Pawns[j].column - Board[i].column <= -1  || Pawns[j].columnCopy.filter(array => array[1] !== 'up-right').map(array => array[0]) - Board[i].column <= -1) && Board[i].row < Pawns[j].row && Board[i].free &&
+          Board[i].queen && (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy.filter(array => array[1] == 'up-right').map(array => array[0]) - Board[i].row >= 1) &&
+          (Pawns[j].column - Board[i].column <= -1  || Pawns[j].columnCopy.filter(array => array[1] == 'up-right').map(array => array[0]) - Board[i].column <= -1) && Board[i].row < Pawns[j].row && Board[i].free &&
           Pawns[k].queensAreas.some(area => 
             area[2] === 'up-right' &&
             Pawns[j].row === area[0] &&
@@ -1345,8 +1345,8 @@ for (let i = 0; i < Board.length; i++) {
             if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
                Pawns[j].isRed != Pawns[k].isRed && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) || (Pawns[j].live && Pawns[j].liveCopy.some(array => array == k))) && Pawns[k].live && Pawns[k].queen &&
               ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-                Board[i].queen && (Pawns[j].row - Board[i].row <= -1 || Pawns[j].rowCopy.filter(array => array[1] !== 'down-right').map(array => array[0]) - Board[i].row <= -1) &&
-                (Pawns[j].column - Board[i].column <= -1  || Pawns[j].columnCopy.filter(array => array[1] !== 'down-right').map(array => array[0]) - Board[i].row <= -1) && Board[i].row > Pawns[j].row &&
+                Board[i].queen && (Pawns[j].row - Board[i].row <= -1 || Pawns[j].rowCopy.filter(array => array[1] == 'down-right').map(array => array[0]) - Board[i].row <= -1) &&
+                (Pawns[j].column - Board[i].column <= -1  || Pawns[j].columnCopy.filter(array => array[1] == 'down-right').map(array => array[0]) - Board[i].row <= -1) && Board[i].row > Pawns[j].row &&
                 Pawns[k].queensAreas.some(area => 
                   area[2] === 'down-right' &&
                   Pawns[j].row === area[0] &&
@@ -2001,7 +2001,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
 
           // Pawns[winner].letter = Board[newBoard].letter;
           // Pawns[winner].number = Board[newBoard].number;
-          //console.log(Pawns[winner].rowCopy, Pawns[winner].columnCopy)
+          console.log(Pawns[chooseBoard[i][0]])
           //Board[newBoard].free = false;
           checkQueen();
           
