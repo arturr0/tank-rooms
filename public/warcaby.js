@@ -1192,7 +1192,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
   if(killConditionsUnique.filter(array => array[9] === true).every(array => array[11].length === 0))
     generateQueensAreas(false);
   else
-    generateQueensAreas(true);
+    generateQueensAreas(false);
   console.log(`blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
   for (let i = 0; i < Board.length; i++) {
     
@@ -2006,7 +2006,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
           checkQueen();
           
           //current = winner;
-          generateQueensAreas(true);
+          //generateQueensAreas(true);
           kill(blockKilledPawn, blockKillersPawn);
       }    
     }
