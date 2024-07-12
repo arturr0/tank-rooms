@@ -148,9 +148,9 @@ function Pawn(rectCenter, rectCenterY, row, column, isRed, queen, live, killer, 
     this.targetPos = null;
     this.queensAreas = [];
     this.index = index;
-    this.rowCopy = [];
-    this.columnCopy = [];
-    this.liveCopy = [];
+    this.rowCopy = rowCopy;
+    this.columnCopy = columnCopy;
+    this.liveCopy = true;
     this.killed2 = false;
     this.update = function() {
       if (this.targetPos) {
@@ -1192,7 +1192,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
   if(killConditionsUnique.filter(array => array[9] === true).every(array => array[11].length === 0))
     generateQueensAreas(false);
   else
-    generateQueensAreas(false);
+    generateQueensAreas(true);
   console.log(`blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
   for (let i = 0; i < Board.length; i++) {
     
@@ -1201,10 +1201,10 @@ function kill(blockKilledPawn, blockKillersPawn) {
       for (let k = 0; k < Pawns.length; k++) {
         //console.log(` in blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-            Pawns[j].isRed != Pawns[k].isRed && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) || (Pawns[j].live && Pawns[j].liveCopy.some(array => array == k))) && Pawns[k].live && Pawns[k].queen &&
+            Pawns[j].isRed != Pawns[k].isRed && (Pawns[j].live && Pawns[j].liveCopy) && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-            Board[i].queen && (Pawns[j].row - Board[i].row <= -1 || Pawns[j].rowCopy.filter(array => array[1] == 'down-left').map(array => array[0]) - Board[i].row <= -1) &&
-            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy.filter(array => array[1] == 'down-left').map(array => array[0]) - Board[i].column >= 1) && Board[i].row > Pawns[j].row && Board[i].free &&
+            Board[i].queen && (Pawns[j].row - Board[i].row <= -1 || Pawns[j].rowCopy - Board[i].row <= -1) &&
+            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy - Board[i].column >= 1) && Board[i].row > Pawns[j].row && Board[i].free &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'down-left' &&
               Pawns[j].row === area[0] &&
@@ -1253,10 +1253,10 @@ function kill(blockKilledPawn, blockKillersPawn) {
     for (let j = 0; j < Pawns.length; j++) 
       for (let k = 0; k < Pawns.length; k++) {
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-           Pawns[j].isRed != Pawns[k].isRed && Pawns[k].live && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) || (Pawns[j].live && Pawns[j].liveCopy.some(array => array == k))) && Pawns[k].queen &&
+           Pawns[j].isRed != Pawns[k].isRed && Pawns[k].live && (Pawns[j].live && Pawns[j].liveCopy) && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-            (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy.filter(array => array[1] == 'up-left').map(array => array[0]) - Board[i].row >= 1) &&
-            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy.filter(array => array[1] == 'up-left').map(array => array[0]) - Board[i].column >= 1) && Board[i].row < Pawns[j].row &&
+            (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy - Board[i].row >= 1) &&
+            (Pawns[j].column - Board[i].column >= 1 || Pawns[j].columnCopy - Board[i].column >= 1) && Board[i].row < Pawns[j].row &&
             Pawns[k].queensAreas.some(area => 
               area[2] === 'up-left' &&
               Pawns[j].row === area[0] &&
@@ -1294,10 +1294,10 @@ for (let i = 0; i < Board.length; i++) {
     for (let k = 0; k < Pawns.length; k++) {
       //console.log(` in blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
       if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-          Pawns[j].isRed != Pawns[k].isRed && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) || (Pawns[j].live && Pawns[j].liveCopy.some(array => array == k))) && Pawns[k].live && Pawns[k].queen &&
+          Pawns[j].isRed != Pawns[k].isRed && (Pawns[j].live && Pawns[j].liveCopy) && Pawns[k].live && Pawns[k].queen &&
         ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-          Board[i].queen && (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy.filter(array => array[1] == 'up-right').map(array => array[0]) - Board[i].row >= 1) &&
-          (Pawns[j].column - Board[i].column <= -1  || Pawns[j].columnCopy.filter(array => array[1] == 'up-right').map(array => array[0]) - Board[i].column <= -1) && Board[i].row < Pawns[j].row && Board[i].free &&
+          Board[i].queen && (Pawns[j].row - Board[i].row >= 1 || Pawns[j].rowCopy - Board[i].row >= 1) &&
+          (Pawns[j].column - Board[i].column <= -1 || Pawns[j].columnCopy - Board[i].column <= -1) && Board[i].row < Pawns[j].row && Board[i].free &&
           Pawns[k].queensAreas.some(area => 
             area[2] === 'up-right' &&
             Pawns[j].row === area[0] &&
@@ -1343,10 +1343,10 @@ for (let i = 0; i < Board.length; i++) {
         for (let j = 0; j < Pawns.length; j++) 
           for (let k = 0; k < Pawns.length; k++) {
             if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-               Pawns[j].isRed != Pawns[k].isRed && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) || (Pawns[j].live && Pawns[j].liveCopy.some(array => array == k))) && Pawns[k].live && Pawns[k].queen &&
+               Pawns[j].isRed != Pawns[k].isRed && (Pawns[j].live && Pawns[j].liveCopy) && Pawns[k].live && Pawns[k].queen &&
               ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
-                Board[i].queen && ((Pawns[j].column - Board[i].column <= -1) || (Pawns[j].row - Board[i].row <= -1 || Pawns[j].rowCopy.filter(array => array[1] !== 'down-right' && array[2] !== j).map(array => array[0]) - Board[i].row <= -1)) &&
-                ((Pawns[j].column - Board[i].column <= -1) || (Pawns[j].column - Board[i].column <= -1  || Pawns[j].columnCopy.filter(array => array[1] !== 'down-right'  && array[2] !== j).map(array => array[0]) - Board[i].row <= -1)) && Board[i].row > Pawns[j].row &&
+                Board[i].queen && (Pawns[j].row - Board[i].row <= -1 || Pawns[j].rowCopy - Board[i].row <= -1) &&
+                (Pawns[j].column - Board[i].column <= -1 || Pawns[j].columnCopy - Board[i].column <= -1) && Board[i].row > Pawns[j].row &&
                 Pawns[k].queensAreas.some(area => 
                   area[2] === 'down-right' &&
                   Pawns[j].row === area[0] &&
@@ -1930,8 +1930,8 @@ function killOpt(killmode) {
           //console.log('check killOpt condition 1', killmode[i]);
           killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3], killmode);
           console.log(i);
-          break;
           //if (killmode.filter(array => array[9]).every(array => array[11].length == 0)) {console.log("break"); break;}
+            break;
         }
         else if (((Player == 1 && !Greenturn) || (Player == 2 && Greenturn)) /*&& blockKill && ((killmode[i][0] == blockKilledPawn) || (killmode[i][0] == blockKillersPawn)) &&*/
         /*(!killersOptMode && !killedOptMode && !oneKiller2Killed)*/) {
@@ -1939,8 +1939,8 @@ function killOpt(killmode) {
           killSwitch(killmode[i][0],killmode[i][1],killmode[i][2],killmode[i][3], killmode);
           console.log("cb", killmode[i][11]);
           console.log(i);
-          break;
           //if (killmode[i][11] == null || killmode.every(array => array[11].length == 0)) {console.log("break"); break;}
+            break;
         }
         ////console.log('check killOpt 2', killConditionsUnique.length);
         
@@ -1992,23 +1992,21 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         // if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
         // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
         for (let i = 0; i < chooseBoard.length; i++) {
-          
-          //Pawns[chooseBoard[i][1]].liveCopy.push(chooseBoard[i][0]);
-          //console.log("ks in", chooseBoard[i][0],  chooseBoard[i][1], chooseBoard[i][2]);
-          Pawns[chooseBoard[i][0]].rowCopy.push([Board[chooseBoard[i][2]].row, chooseBoard[i][10], chooseBoard[i][1]]);
-          Pawns[chooseBoard[i][0]].columnCopy.push([Board[chooseBoard[i][2]].column, chooseBoard[i][10], chooseBoard[i][1]]);
-          Pawns[chooseBoard[i][1]].liveCopy.push(chooseBoard[i][0])
-
-          // Pawns[winner].letter = Board[newBoard].letter;
-          // Pawns[winner].number = Board[newBoard].number;
-          console.log(Pawns[chooseBoard[i][0]])
-          //Board[newBoard].free = false;
-          checkQueen();
-          
-          //current = winner;
-          //generateQueensAreas(true);
-          kill(blockKilledPawn, blockKillersPawn);
-      }    
+          if(chooseBoard[i][9])
+          Pawns[chooseBoard[i][1]].liveCopy = false;
+        console.log("ks in", winner, looser, newBoard);
+        Pawns[winner].rowCopy = Board[newBoard].row;
+        Pawns[winner].columnCopy = Board[newBoard].column;
+        // Pawns[winner].letter = Board[newBoard].letter;
+        // Pawns[winner].number = Board[newBoard].number;
+        console.log(winner, looser, Pawns[winner].rowCopy, Pawns[winner].columnCopy)
+        //Board[newBoard].free = false;
+        checkQueen();
+        
+        //current = winner;
+        //generateQueensAreas(true);
+        kill(blockKilledPawn, blockKillersPawn);
+}    
     }
   
   ////console.log('check killSwitch 2', killConditionsUnique.length); 
@@ -2347,8 +2345,8 @@ function generateQueensAreas(check) {
       let tempColumn;
       for (const direction of directions) {
         if(check) {
-            tempRow = Pawns[i].rowCopy.map(array => array[0]);
-            tempColumn = Pawns[i].columnCopy.map(array => array[0]);;
+            tempRow = Pawns[i].rowCopy;
+            tempColumn = Pawns[i].columnCopy;
         }
         else {
             tempRow = Pawns[i].row;
