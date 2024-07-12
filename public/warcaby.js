@@ -1201,7 +1201,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
       for (let k = 0; k < Pawns.length; k++) {
         //console.log(` in blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-            Pawns[j].isRed != Pawns[k].isRed && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) && (Pawns[j].live && !Pawns[j].liveCopy.some(array => array[0] == k))) && Pawns[k].live && Pawns[k].queen &&
+            Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && !Pawns[j].liveCopy.some(array => array[0] == k) && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             Board[i].queen && (Pawns[j].row - Board[i].row <= -1) &&
             (Pawns[j].column - Board[i].column >= 1) && Board[i].row > Pawns[j].row && Board[i].free &&
@@ -1220,6 +1220,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
         ) {
 
           console.log(`down left, k ${k}, j ${j}, i ${i}`);
+          
           if (Pawns[j].rowCopy == Pawns[j].row && Pawns[j].columnCopy == Pawns[j].column) console.log("dk dl")
           let killer = k;
           let killed = j;
@@ -1254,7 +1255,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
     for (let j = 0; j < Pawns.length; j++) 
       for (let k = 0; k < Pawns.length; k++) {
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-           Pawns[j].isRed != Pawns[k].isRed && Pawns[k].live && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) && (Pawns[j].live && !Pawns[j].liveCopy.some(array => array[0] == k))) && Pawns[k].queen &&
+           Pawns[j].isRed != Pawns[k].isRed && Pawns[k].live && Pawns[j].live && !Pawns[j].liveCopy.some(array => array[0] == k) && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             (Pawns[j].row - Board[i].row >= 1) &&
             (Pawns[j].column - Board[i].column >= 1) && Board[i].row < Pawns[j].row &&
@@ -1272,6 +1273,7 @@ function kill(blockKilledPawn, blockKillersPawn) {
         ) {
         
           console.log(`up left, k ${k}, j ${j}, i ${i}`);
+          if(Pawns[j].liveCopy.some(array => array[0] == k)) console.log(Pawns[j])
           if (Pawns[j].rowCopy == Pawns[j].row && Pawns[j].columnCopy == Pawns[j].column) console.log("dk ul")
           let killer = k;
           let killed = j;
@@ -1296,7 +1298,7 @@ for (let i = 0; i < Board.length; i++) {
     for (let k = 0; k < Pawns.length; k++) {
       //console.log(` in blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
       if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-          Pawns[j].isRed != Pawns[k].isRed && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) && (Pawns[j].live && !Pawns[j].liveCopy.some(array => array[0] == k))) && Pawns[k].live && Pawns[k].queen &&
+          Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && !Pawns[j].liveCopy.some(array => array[0] == k) && Pawns[k].live && Pawns[k].queen &&
         ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
           Board[i].queen && (Pawns[j].row - Board[i].row >= 1) &&
           (Pawns[j].column - Board[i].column <= -1) && Board[i].row < Pawns[j].row && Board[i].free &&
@@ -1346,7 +1348,7 @@ for (let i = 0; i < Board.length; i++) {
         for (let j = 0; j < Pawns.length; j++) 
           for (let k = 0; k < Pawns.length; k++) {
             if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-               Pawns[j].isRed != Pawns[k].isRed && ((Pawns[j].live && Pawns[j].liveCopy.length == 0) && (Pawns[j].live && !Pawns[j].liveCopy.some(array => array[0] == k))) && Pawns[k].live && Pawns[k].queen &&
+               Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && !Pawns[j].liveCopy.some(array => array[0] == k) && Pawns[k].live && Pawns[k].queen &&
               ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
                 Board[i].queen && (Pawns[j].row - Board[i].row <= -1) &&
                 (Pawns[j].column - Board[i].column <= -1) && Board[i].row > Pawns[j].row &&
