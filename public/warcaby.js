@@ -1276,7 +1276,13 @@ function kill(blockKilledPawn, blockKillersPawn) {
           console.log(Pawns[j].liveCopy);
           for (let x = 0; x < Pawns[j].liveCopy.length; x++)
             console.log(Pawns[j].liveCopy[x]);
-          
+          if (Pawns[j].liveCopy) {
+            for (let x = 0; x < Pawns[j].liveCopy.length; x++) {
+                console.log(Pawns[j].liveCopy[x]);
+            }
+        } else {
+            console.log('Pawns[j].liveCopy is empty or undefined.');
+        }
           if(!Pawns[j].liveCopy.every(array => array[0] == k)) console.log(Pawns[j])
           if (Pawns[j].rowCopy == Pawns[j].row && Pawns[j].columnCopy == Pawns[j].column) console.log("dk ul")
           let killer = k;
