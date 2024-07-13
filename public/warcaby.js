@@ -2952,54 +2952,102 @@ function keyPressed() {
     }
 }
 
-function neighbourFilter(kill, array, r, c) {
+// function neighbourFilter(kill, array, r, c) {
 
-  for (let i = 0; i < Board.length; i++) {
-      let indicesToRemove = [];
-      for (let j = 0; j < array.length; j++) {
-          if (Board[i].row - Pawns[array[j][1]].row == r && Board[i].column - Pawns[array[j][1]].column == c) {
-              // Check if the conditions inside 'some' are met
-              for (let k = 0; k < array.length; k++) {
-                  if (
-                      Pawns[array[j][1]].isRed == Pawns[array[k][1]].isRed &&
-                      Pawns[array[k][1]].live &&
-                      Pawns[array[j][1]].live &&
-                      Board[i].column == Pawns[array[k][1]].column &&
-                      Board[i].row == Pawns[array[k][1]].row
-                  ) {
-                      indicesToRemove.push([array[j][1], array[j][2]]);
-                      indicesToRemove.push([array[k][1], array[k][2]]);
-                      console.log("ind", array[j][1], array[k][1])
-                  }
-              }
-          }
-      }
+//   for (let i = 0; i < Board.length; i++) {
+//       let indicesToRemove = [];
+//       for (let j = 0; j < array.length; j++) {
+//           if (Board[i].row - Pawns[array[j][1]].row == r && Board[i].column - Pawns[array[j][1]].column == c) {
+//               // Check if the conditions inside 'some' are met
+//               for (let k = 0; k < array.length; k++) {
+//                   if (
+//                       Pawns[array[j][1]].isRed == Pawns[array[k][1]].isRed &&
+//                       Pawns[array[k][1]].live &&
+//                       Pawns[array[j][1]].live &&
+//                       Board[i].column == Pawns[array[k][1]].column &&
+//                       Board[i].row == Pawns[array[k][1]].row
+//                   ) {
+//                       indicesToRemove.push([array[j][1], array[j][2]]);
+//                       indicesToRemove.push([array[k][1], array[k][2]]);
+//                       console.log("ind", array[j][1], array[k][1])
+//                   }
+//               }
+//           }
+//       }
     
-      // Convert set to array and sort in reverse order
-      const sortedIndicesToRemove = indicesToRemove.sort((a, b) => b - a);
-      let boardRemoved = [];
-      for(let i = 0; i < indicesToRemove.length; i++)
-          boardRemoved.push([indicesToRemove[i][0],indicesToRemove[i][1]])    
+//       // Convert set to array and sort in reverse order
+//       const sortedIndicesToRemove = indicesToRemove.sort((a, b) => b - a);
+//       let boardRemoved = [];
+//       for(let i = 0; i < indicesToRemove.length; i++)
+//           boardRemoved.push([indicesToRemove[i][0],indicesToRemove[i][1]])    
       
-      //Remove elements at collected indices in reverse order
-      // for (let index of sortedIndicesToRemove) {
+//       //Remove elements at collected indices in reverse order
+//       // for (let index of sortedIndicesToRemove) {
           
-      //     array.splice(index, 1);
-      // }
-      for(let i = 0; i < boardRemoved.length; i++)
-        for(let j = 0; j < array.length; j++)
-          if(array[j][1] == boardRemoved[i][0])
-            array.splice(j, 1);  
-      for(let i = 0; i < boardRemoved.length; i++)
-          for (let j = 0; j < array.length; j++)
-              if((kill == "down" && array[j][2] >= boardRemoved[i][1]) || (kill == "up" && array[j][2] <= boardRemoved[i][1]))
-                  array.splice(j, 1);
-      // if (sortedIndicesToRemove.length > 0) {
-      //     console.log("occ");
-      // }
-    }
-  }  
+//       //     array.splice(index, 1);
+//       // }
+//       for(let i = 0; i < boardRemoved.length; i++)
+//         for(let j = 0; j < array.length; j++)
+//           if(array[j][1] == boardRemoved[i][0])
+//             array.splice(j, 1);  
+//       for(let i = 0; i < boardRemoved.length; i++)
+//           for (let j = 0; j < array.length; j++)
+//               if((kill == "down" && array[j][2] >= boardRemoved[i][1]) || (kill == "up" && array[j][2] <= boardRemoved[i][1]))
+//                   array.splice(j, 1);
+//       // if (sortedIndicesToRemove.length > 0) {
+//       //     console.log("occ");
+//       // }
+//     }
+//   }  
     
+
+function neighbourFilter(kill, array, r, c) {
+    for (let i = 0; i < Board.length; i++) {
+        let indicesToRemove = [];
+        for (let j = 0; j < array.length; j++) {
+            if (Board[i].row - Pawns[array[j][1]].row === r && Board[i].column - Pawns[array[j][1]].column === c) {
+                // Check if the conditions inside 'some' are met
+                for (let k = 0; k < array.length; k++) {
+                    if (
+                        Pawns[array[j][1]].isRed === Pawns[array[k][1]].isRed &&
+                        Pawns[array[k][1]].live &&
+                        Pawns[array[j][1]].live &&
+                        Board[i].column === Pawns[array[k][1]].column &&
+                        Board[i].row === Pawns[array[k][1]].row
+                    ) {
+                        indicesToRemove.push([array[j][1], array[j][2]]);
+                        indicesToRemove.push([array[k][1], array[k][2]]);
+                        console.log("ind", array[j][1], array[k][1]);
+                    }
+                }
+            }
+        }
+        
+        // Convert set to array and sort in reverse order
+        const sortedIndicesToRemove = indicesToRemove.sort((a, b) => b - a);
+        let boardRemoved = [];
+        for (let i = 0; i < indicesToRemove.length; i++)
+            boardRemoved.push([indicesToRemove[i][0], indicesToRemove[i][1]]);
+        
+        // Remove elements at collected indices in reverse order
+        for (let i = 0; i < boardRemoved.length; i++)
+            for (let j = 0; j < array.length; j++)
+                if (array[j][1] === boardRemoved[i][0]) {
+                    console.log("sp1", array)
+                    array.splice(j, 1);
+                    
+                }
+                
+        for (let i = 0; i < boardRemoved.length; i++)
+            for (let j = 0; j < array.length; j++)
+                if ((kill === "down" && array[j][2] >= boardRemoved[i][1]) || (kill === "up" && array[j][2] <= boardRemoved[i][1])) {
+                    console.log("sp2", array)
+                    array.splice(j, 1);
+
+                }
+    }
+    return array;
+}
   //let array = [[2, 3, 6], [3, 7, 9], [2, 6, 8], [3, 1, 2]];
 
   // Function to group by the first element and sort each group
