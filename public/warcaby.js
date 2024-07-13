@@ -278,7 +278,7 @@ socket.on('new turn', function(TURN) {
     //////console.log('new turn unique', killConditionsUnique.length)
   Greenturn = TURN;
   generateQueensAreas(false);
-  kill(blockKilledPawn, blockKillersPawn);
+  kill(blockKilledPawn, blockKillersPawn, false);
   killOpt(killConditionsUnique);
   stepKill(killConditionsUnique);
 
@@ -975,7 +975,7 @@ let upLeftArray = [];
 let downRightArray = [];
 let upRightArray = [];
 //fk
-function kill(blockKilledPawn, blockKillersPawn) {
+function kill(blockKilledPawn, blockKillersPawn, mode) {
 
   
   console.log("start kill");
@@ -1745,140 +1745,142 @@ let uniqueIndex0Values = getUniqueValues(killConditionsUnique, 0);
 // let uniqueIndex0Values = getUniqueValues(killConditionsUnique, 0);
 // console.log(killConditionsUnique);
 
-uniqueIndex0Values.forEach(value => {
-    let filteredUpLeft = killConditionsUnique
-        .filter((subarray, index) =>
-            subarray[0] === value &&
-            subarray[1] == killConditionsUnique[index][1] &&
-            Pawns[subarray[0]].queen &&
-            subarray[9] &&
-            subarray[10] === 'up-left' &&
-            Pawns[subarray[1]].live
-        )
-        .map(subarray => Pawns[subarray[1]].row);
+// uniqueIndex0Values.forEach(value => {
+//     let filteredUpLeft = killConditionsUnique
+//         .filter((subarray, index) =>
+//             subarray[0] === value &&
+//             subarray[1] == killConditionsUnique[index][1] &&
+//             Pawns[subarray[0]].queen &&
+//             subarray[9] &&
+//             subarray[10] === 'up-left' &&
+//             Pawns[subarray[1]].live
+//         )
+//         .map(subarray => Pawns[subarray[1]].row);
     
-    let filteredUpRight = killConditionsUnique
-        .filter((subarray, index) =>
-            subarray[0] === value &&
-            subarray[1] == killConditionsUnique[index][1] &&
-            Pawns[subarray[0]].queen &&
-            subarray[9] &&
-            subarray[10] === 'up-right' &&
-            Pawns[subarray[1]].live
-        )
-        .map(subarray => Pawns[subarray[1]].row);
+//     let filteredUpRight = killConditionsUnique
+//         .filter((subarray, index) =>
+//             subarray[0] === value &&
+//             subarray[1] == killConditionsUnique[index][1] &&
+//             Pawns[subarray[0]].queen &&
+//             subarray[9] &&
+//             subarray[10] === 'up-right' &&
+//             Pawns[subarray[1]].live
+//         )
+//         .map(subarray => Pawns[subarray[1]].row);
     
-    let filteredDownLeft = killConditionsUnique
-        .filter((subarray, index) =>
-            subarray[0] === value &&
-            subarray[1] == killConditionsUnique[index][1] &&
-            Pawns[subarray[0]].queen &&
-            subarray[9] &&
-            subarray[10] === 'down-left' &&
-            Pawns[subarray[1]].live
-        )
-        .map(subarray => Pawns[subarray[1]].row);
+//     let filteredDownLeft = killConditionsUnique
+//         .filter((subarray, index) =>
+//             subarray[0] === value &&
+//             subarray[1] == killConditionsUnique[index][1] &&
+//             Pawns[subarray[0]].queen &&
+//             subarray[9] &&
+//             subarray[10] === 'down-left' &&
+//             Pawns[subarray[1]].live
+//         )
+//         .map(subarray => Pawns[subarray[1]].row);
     
-    let filteredDownRight = killConditionsUnique
-        .filter((subarray, index) =>
-            subarray[0] === value &&
-            subarray[1] == killConditionsUnique[index][1] &&
-            Pawns[subarray[0]].queen &&
-            subarray[9] &&
-            subarray[10] === 'down-right' &&
-            Pawns[subarray[1]].live
-        )
-        .map(subarray => Pawns[subarray[1]].row);
+//     let filteredDownRight = killConditionsUnique
+//         .filter((subarray, index) =>
+//             subarray[0] === value &&
+//             subarray[1] == killConditionsUnique[index][1] &&
+//             Pawns[subarray[0]].queen &&
+//             subarray[9] &&
+//             subarray[10] === 'down-right' &&
+//             Pawns[subarray[1]].live
+//         )
+//         .map(subarray => Pawns[subarray[1]].row);
 
-    if (filteredUpLeft.length > 0) {
-        maxLeft.push([value, Math.max(...filteredUpLeft), filteredUpLeft[1]]);
-    }
-    if (filteredUpRight.length > 0) {
-        maxRight.push([value, Math.max(...filteredUpRight), filteredUpRight[1]]);
-    }
-    if (filteredDownLeft.length > 0) {
-        minLeft.push([value, Math.min(...filteredDownLeft),filteredDownLeft[1]]);
-    }
-    if (filteredDownRight.length > 0) {
-        minRight.push([value, Math.min(...filteredDownRight), filteredDownRight[1]]);
-    }
+//     if (filteredUpLeft.length > 0) {
+//         maxLeft.push([value, Math.max(...filteredUpLeft), filteredUpLeft[1]]);
+//     }
+//     if (filteredUpRight.length > 0) {
+//         maxRight.push([value, Math.max(...filteredUpRight), filteredUpRight[1]]);
+//     }
+//     if (filteredDownLeft.length > 0) {
+//         minLeft.push([value, Math.min(...filteredDownLeft),filteredDownLeft[1]]);
+//     }
+//     if (filteredDownRight.length > 0) {
+//         minRight.push([value, Math.min(...filteredDownRight), filteredDownRight[1]]);
+//     }
 
-    if (filteredUpLeft.length > 0) {
-        if (chooseUL.length === 0) {
-            maxLeftE.push([value, Math.max(...filteredUpLeft), filteredUpLeft[1]]);
-        } else {
-            let secondMax = sortToSecondExtreme(filteredUpLeft);
-            let found = false;
-            for (let i = 0; i < chooseUL.length; i++) {
-                if (secondMax[0] !== Pawns[chooseUL[i][1]].row) {
-                    maxLeftE.push([value, Pawns[chooseUL[i][1]].row], filteredUpLeft[1]);
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                maxLeftE.push([value, Pawns[chooseUL[0][1]].row, filteredUpLeft[1]]);
-            }
-        }
-    }
+//     if (filteredUpLeft.length > 0) {
+//         if (chooseUL.length === 0) {
+//             maxLeftE.push([value, Math.max(...filteredUpLeft), filteredUpLeft[1]]);
+//         } else {
+//             let secondMax = sortToSecondExtreme(filteredUpLeft);
+//             let found = false;
+//             for (let i = 0; i < chooseUL.length; i++) {
+//                 if (secondMax[0] !== Pawns[chooseUL[i][1]].row) {
+//                     maxLeftE.push([value, Pawns[chooseUL[i][1]].row], filteredUpLeft[1]);
+//                     found = true;
+//                     break;
+//                 }
+//             }
+//             if (!found) {
+//                 maxLeftE.push([value, Pawns[chooseUL[0][1]].row, filteredUpLeft[1]]);
+//             }
+//         }
+//     }
 
-    if (filteredUpRight.length > 0) {
-        if (chooseUR.length === 0) {
-            maxRightE.push([value, Math.max(...filteredUpRight), filteredUpRight[1]]);
-        } else {
-            let secondMax = sortToSecondExtreme(filteredUpRight);
-            let found = false;
-            for (let i = 0; i < chooseUR.length; i++) {
-                if (secondMax[0] !== Pawns[chooseUR[i][1]].row) {
-                    maxRightE.push([value, Pawns[chooseUR[i][1]].row, filteredUpRight[1]]);
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                maxRightE.push([value, Pawns[chooseUR[0][1]].row, filteredUpRight[1]]);
-            }
-        }
-    }
+//     if (filteredUpRight.length > 0) {
+//         if (chooseUR.length === 0) {
+//             maxRightE.push([value, Math.max(...filteredUpRight), filteredUpRight[1]]);
+//         } else {
+//             let secondMax = sortToSecondExtreme(filteredUpRight);
+//             let found = false;
+//             for (let i = 0; i < chooseUR.length; i++) {
+//                 if (secondMax[0] !== Pawns[chooseUR[i][1]].row) {
+//                     maxRightE.push([value, Pawns[chooseUR[i][1]].row, filteredUpRight[1]]);
+//                     found = true;
+//                     break;
+//                 }
+//             }
+//             if (!found) {
+//                 maxRightE.push([value, Pawns[chooseUR[0][1]].row, filteredUpRight[1]]);
+//             }
+//         }
+//     }
 
-    if (filteredDownLeft.length > 0) {
-        if (chooseDL.length === 0) {
-            minLeftE.push([value, Math.min(...filteredDownLeft), filteredDownLeft[1]]);
-        } else {
-            let secondMin = sortToSecondExtreme(filteredDownLeft);
-            let found = false;
-            for (let i = 0; i < chooseDL.length; i++) {
-                if (secondMin[0] !== Pawns[chooseDL[i][1]].row) {
-                    minLeftE.push([value, Pawns[chooseDL[i][1]].row, filteredDownLeft[1]]);
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                minLeftE.push([value, Pawns[chooseDL[0][1]].row, filteredDownLeft[1]]);
-            }
-        }
-    }
+//     if (filteredDownLeft.length > 0) {
+//         if (chooseDL.length === 0) {
+//             minLeftE.push([value, Math.min(...filteredDownLeft), filteredDownLeft[1]]);
+//         } else {
+//             let secondMin = sortToSecondExtreme(filteredDownLeft);
+//             let found = false;
+//             for (let i = 0; i < chooseDL.length; i++) {
+//                 if (secondMin[0] !== Pawns[chooseDL[i][1]].row) {
+//                     minLeftE.push([value, Pawns[chooseDL[i][1]].row, filteredDownLeft[1]]);
+//                     found = true;
+//                     break;
+//                 }
+//             }
+//             if (!found) {
+//                 minLeftE.push([value, Pawns[chooseDL[0][1]].row, filteredDownLeft[1]]);
+//             }
+//         }
+//     }
 
-    if (filteredDownRight.length > 0) {
-        if (chooseDR.length === 0) {
-            minRightE.push([value, Math.min(...filteredDownRight), filteredDownRight[1]]);
-        } else {
-            let secondMin = sortToSecondExtreme(filteredDownRight);
-            let found = false;
-            for (let i = 0; i < chooseDR.length; i++) {
-                if (secondMin[0] !== Pawns[chooseDR[i][1]].row) {
-                    minRightE.push([value, Pawns[chooseDR[i][1]].row, filteredDownRight[1]]);
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                minRightE.push([value, Pawns[chooseDR[0][1]].row, filteredDownRight[1]]);
-            }
-        }
-    }
-});
+//     if (filteredDownRight.length > 0) {
+//         if (chooseDR.length === 0) {
+//             minRightE.push([value, Math.min(...filteredDownRight), filteredDownRight[1]]);
+//         } else {
+//             let secondMin = sortToSecondExtreme(filteredDownRight);
+//             let found = false;
+//             for (let i = 0; i < chooseDR.length; i++) {
+//                 if (secondMin[0] !== Pawns[chooseDR[i][1]].row) {
+//                     minRightE.push([value, Pawns[chooseDR[i][1]].row, filteredDownRight[1]]);
+//                     found = true;
+//                     break;
+//                 }
+//             }
+//             if (!found) {
+//                 minRightE.push([value, Pawns[chooseDR[0][1]].row, filteredDownRight[1]]);
+//             }
+//         }
+//     }
+// });
+
+
 
 // function getUniquePairs(array) {
 //     const pairs = new Set(array.map(item => `${item[0]}|${item[1]}`));
@@ -2048,6 +2050,110 @@ console.log(chooseDL);
 // console.log(maxLeft, maxRight, minLeft, minRight);
 // console.log(maxLeftE, maxRightE, minLeftE, minRightE);
 
+uniqueIndex0Values.forEach(value => {
+  let filteredUpLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[9] && subarray[10] === 'up-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+  let filteredUpRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[9] && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+  let filteredDownLeft = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[9] && subarray[10] === 'down-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+  let filteredDownRight = killConditionsUnique.filter(subarray => subarray[0] === value && subarray[9] && subarray[10] === 'down-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+  maxLeft.push([value, Math.max(...filteredUpLeft)]);
+  maxRight.push([value, Math.max(...filteredUpRight)]);
+  minLeft.push([value, Math.min(...filteredDownLeft)]);
+  minRight.push([value, Math.min(...filteredDownRight)]);
+  // Find max and min values for each condition and push to corresponding arrays
+  // if (filteredUpLeft.length > 0) {
+  //     maxLeft.push([value, Math.max(...filteredUpLeft)]);
+  // }
+  if (filteredUpLeft.length > 0) {
+      if (chooseUL.length === 0) {
+          maxLeft.push([value, Math.max(...filteredUpLeft)]);
+          maxLeftE.push([value, Math.max(...filteredUpLeft)]);
+      } else {
+        console.log(filteredUpLeft);
+          let secondMax = sortToSecondExtreme(filteredUpLeft, false);
+          let found = false;
+          for (let i = 0; i < chooseUL.length; i++) {
+              if (secondMax[0] !== Pawns[chooseUL[i][1]].row) {
+                  maxLeftE.push([value, Pawns[chooseUL[i][1]].row]);
+                  found = true;
+                  break;
+              }
+          }
+          if (!found) {
+              // Handle case where no suitable second minimum was found
+              maxLeftE.push([value, Pawns[chooseUL[0][1]].row]);
+          }
+      }
+  }
+  // if (filteredUpRight.length > 0) {
+  //     maxRight.push([value, Math.max(...filteredUpRight)]);
+  // }
+  if (filteredUpRight.length > 0) {
+      if (chooseUR.length === 0) {
+          console.log(filteredUpRight)
+          maxRight.push([value, Math.max(...filteredUpRight)]);
+          maxRightE.push([value, Math.max(...filteredUpRight)]);
+      } else {
+        console.log(filteredUpRight)
+          let secondMax = sortToSecondExtreme(filteredUpRight, false);
+          let found = false;
+          for (let i = 0; i < chooseUR.length; i++) {
+              if (secondMax[0] !== Pawns[chooseUR[i][1]].row) {
+                  maxRightE.push([value, Pawns[chooseUR[i][1]].row]);
+                  found = true;
+                  break;
+              }
+          }
+          if (!found) {
+              // Handle case where no suitable second minimum was found
+              maxRightE.push([value, Pawns[chooseUR[0][1]].row]);
+          }
+      }
+  }
+  if (filteredDownLeft.length > 0) {
+      if (chooseDL.length === 0) {
+          minLeft.push([value, Math.min(...filteredDownLeft)]);
+          minLeftE.push([value, Math.min(...filteredDownLeft)]);
+      } else {
+          console.log(filteredDownLeft);
+          let secondMin = sortToSecondExtreme(filteredDownLeft, true);
+          let found = false;
+          for (let i = 0; i < chooseDL.length; i++) {
+              if (secondMin[0] !== Pawns[chooseDL[i][1]].row) {
+                  minLeftE.push([value, Pawns[chooseDL[i][1]].row]);
+                  found = true;
+                  break;
+              }
+          }
+          if (!found) {
+              minLeftE.push([value, Pawns[chooseDL[0][1]].row]);
+          }
+      }
+  }
+  // if (filteredDownRight.length > 0) {
+  //     minRight.push([value, Math.min(...filteredDownRight)]);
+  // }
+  if (filteredDownRight.length > 0) {
+      if (chooseDR.length === 0) {
+          minRight.push([value, Math.min(...filteredDownRight)]);
+          minRightE.push([value, Math.min(...filteredDownRight)]);
+      } else {
+          console.log(filteredDownRight);
+          let secondMin = sortToSecondExtreme(filteredDownRight, true);
+          let found = false;
+          for (let i = 0; i < chooseDR.length; i++) {
+              if (secondMin[0] !== Pawns[chooseDR[i][1]].row) {
+                  minRightE.push([value, Pawns[chooseDR[i][1]].row]);
+                  found = true;
+                  break;
+              }
+          }
+          if (!found) {
+              // Handle case where no suitable second minimum was found
+              minRightE.push([value, Pawns[chooseDR[0][1]].row]);
+          }
+      }
+  }
+});
 
 console.log("Max Left:", maxLeft);
 console.log("Max Right:", maxRight);
@@ -2351,7 +2457,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   
   current = winner;
  
-  kill(blockKilledPawn, blockKillersPawn);
+  kill(blockKilledPawn, blockKillersPawn, false);
   
   
   }
@@ -2379,7 +2485,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         
         //current = winner;
         //generateQueensAreas(true);
-        kill(blockKilledPawn, blockKillersPawn);
+        kill(blockKilledPawn, blockKillersPawn, true);
       }    
     }
   
@@ -2823,7 +2929,7 @@ function keyPressed() {
     if (key == 'k') {
         generateQueensAreas(false);
         checkQueen();
-        kill(blockKilledPawn, blockKillersPawn);
+        kill(blockKilledPawn, blockKillersPawn, false);
         killOpt(killConditionsUnique);
         stepKill(killConditionsUnique);    
     }
@@ -2946,18 +3052,35 @@ function neighbourFilter(kill, array, r, c) {
 
     return result;
 }
-function sortToSecondExtreme(array) {
+// function sortToSecondExtreme(array) {
+//   let uniqueKills = [];
+//   let itemsFound = {};
+//   for (let i = 0; i < array.length; i++) {
+//       let item = array[i];
+//       if (itemsFound[item]) {
+//           continue;
+//       }
+//       uniqueKills.push(item);
+//       itemsFound[item] = true;
+//   }
+//   return uniqueKills.sort((a, b) => a - b);
+// }
+
+function sortToSecondExtreme(array, mode) {
   let uniqueKills = [];
   let itemsFound = {};
+  
+  // Filter out duplicates
   for (let i = 0; i < array.length; i++) {
       let item = array[i];
-      if (itemsFound[item]) {
-          continue;
+      if (!itemsFound[item]) {
+          uniqueKills.push(item);
+          itemsFound[item] = true;
       }
-      uniqueKills.push(item);
-      itemsFound[item] = true;
   }
-  return uniqueKills.sort((a, b) => a - b);
+  
+  // Sort the array based on the mode
+  return uniqueKills.sort((a, b) => mode ? a - b : b - a);
 }
 
 // function generateStringFrom2DArray(array, index) {
