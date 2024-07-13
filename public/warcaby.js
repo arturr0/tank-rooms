@@ -1396,14 +1396,14 @@ for (let i = 0; i < Board.length; i++) {
       }
 
       //fq
-      console.log(downRightArray);
+      for (let j = 0; j < downRightArray.length; j++) console.log(downRightArray[j]);
       downRightArray = groupAndSort("down", downRightArray);
-      console.log(downRightArray);
+      for (let j = 0; j < downRightArray.length; j++) console.log(downRightArray[j]);
       neighbourFilter("down", downRightArray, -1, -1);
-      console.log(downRightArray);
+      for (let j = 0; j < downRightArray.length; j++) console.log(downRightArray[j]);
       let chooseDR = getChooseBoard(downRightArray);
-      console.log(downRightArray);
-      console.log("chooseDR", chooseDR);
+      for (let j = 0; j < downRightArray.length; j++) console.log(downRightArray[j]);
+      for (let j = 0; j < chooseDR.length; j++)console.log("chooseDR", chooseDR[j]);
       for (let j = 0; j < downRightArray.length; j++) {
         killConditions.push([downRightArray[j][0], downRightArray[j][1], downRightArray[j][2], Pawns[downRightArray[j][0]].isRed, Greenturn, Pawns[downRightArray[j][0]].rectCenter, Pawns[downRightArray[j][0]].rectCenterY, Pawns[downRightArray[j][1]].rectCenter, Pawns[downRightArray[j][1]].rectCenterY, true, 'down-right', chooseDR]);
       }
