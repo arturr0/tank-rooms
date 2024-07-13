@@ -2360,8 +2360,8 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         // if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
         // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
         console.log(chooseBoard);
-        for (let i = 0; i < chooseBoard.length; i++) {
-          //if(chooseBoard[i][9])
+      for (let i = 0; i < chooseBoard.length; i++) 
+        if(!Pawns[chooseBoard[i][1]].liveCopy.some(array => array[0] === chooseBoard[i][0])) {
         Pawns[chooseBoard[i][1]].liveCopy.push([chooseBoard[i][0], chooseBoard[i][10]]);
         console.log("ks in", winner, looser, newBoard);
         Pawns[chooseBoard[i][0]].rowCopy = Board[chooseBoard[i][2]].row;
@@ -2375,7 +2375,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         //current = winner;
         //generateQueensAreas(true);
         kill(blockKilledPawn, blockKillersPawn);
-}    
+      }    
     }
   
   ////console.log('check killSwitch 2', killConditionsUnique.length); 
