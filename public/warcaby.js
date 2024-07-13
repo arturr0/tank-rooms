@@ -128,10 +128,7 @@ let uniqueQueenKillConditions = [];
 let chooseBoard = [];
 let blockChooseLengh = false;
 let message;
-let chooseDL = [];
-let chooseDR = [];
-let chooseUL = [];
-let chooseUR = []
+
 // let pawnLetter;
 // let pawnNumber;
 
@@ -980,14 +977,19 @@ let multipleKillCond = false;
 let previousPlayer = null;
 let killCntr = 0;
 
-let downLeftArray = [];
-let upLeftArray = [];
-let downRightArray = [];
-let upRightArray = [];
+
 //fk
 function kill(blockKilledPawn, blockKillersPawn, mode) {
 
-  
+    let chooseDL = [];
+    let chooseDR = [];
+    let chooseUL = [];
+    let chooseUR = [];
+
+    let downLeftArray = [];
+    let upLeftArray = [];
+    let downRightArray = [];
+    let upRightArray = [];
   console.log("start dra1 kill", mode);
   console.log(killConditions); 
   for (let j = 0; j < Pawns.length; j++) {
@@ -2487,8 +2489,8 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         // if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
         // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
         console.log(chooseBoard);
-      for (let i = 0; i < chooseBoard.length; i++) { 
-        //if(!Pawns[chooseBoard[i][1]].liveCopy.some(array => array[0] === chooseBoard[i][0])) {
+      for (let i = 0; i < chooseBoard.length; i++)  
+        if(!Pawns[chooseBoard[i][1]].liveCopy.some(array => array[0] === chooseBoard[i][0])) {
         Pawns[chooseBoard[i][1]].liveCopy.push([chooseBoard[i][0], chooseBoard[i][10]]);
         console.log("ks in", winner, looser, newBoard);
         Pawns[chooseBoard[i][0]].rowCopy = Board[chooseBoard[i][2]].row;
@@ -3046,6 +3048,7 @@ function neighbourFilter(kill, array, r, c) {
 
                 }
     }
+    
     return array;
 }
   //let array = [[2, 3, 6], [3, 7, 9], [2, 6, 8], [3, 1, 2]];
