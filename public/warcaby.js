@@ -846,7 +846,7 @@ if (killedOptMode) {
             console.log('killedOptModeArray[i] before push', killedOptModeArray[i]);
             // killConditions = [];
             // killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-            console.log(killConditionsUnique)
+            for(let i = 0; i < killConditionsUnique.length; i++) console.log(killConditionsUnique[i])
             firstKill.push(killedOptModeArray[i]);
             //console.log('killedOptMode', firstKill);
             killedOptModeArray = [];
