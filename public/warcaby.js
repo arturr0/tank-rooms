@@ -988,7 +988,7 @@ let upRightArray = [];
 function kill(blockKilledPawn, blockKillersPawn, mode) {
 
   
-  console.log("start dra kill");
+  console.log("start dra kill", mode);
   console.log(killConditions); 
   for (let j = 0; j < Pawns.length; j++) {
     for (let k = 0; k < Pawns.length; k++) {
