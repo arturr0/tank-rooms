@@ -852,7 +852,7 @@ if (killedOptMode) {
             ////////////////////console.log('killedOptModeArray[i] after push', killedOptModeArray[i]);
             ////////////////////console.log('firstKill');
             ////////////////////console.log(firstKill);
-            
+            if(chooseDL.length > 0 || chooseDR.length > 0 || chooseUL.length > 0 || chooseUR.length > 0) {kill(blockKilledPawn, blockKillersPawn, true); killOpt(killConditionsUnique);}
             killOpt(firstKill);
             stepKill(firstKill);
             // socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
