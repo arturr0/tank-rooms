@@ -813,8 +813,10 @@ if (killedOptMode) {
     if (((killedOptModeArray[i][3] && !Greenturn && Player == 1) || (!killedOptModeArray[i][3] && Greenturn  && Player == 2)) &&
         X > killedOptModeArray[i][7] - 32 && X < killedOptModeArray[i][7] + 32 && Y > killedOptModeArray[i][8] - 32 && Y < killedOptModeArray[i][8] + 32) {
           //////////////////////////////////////////////////////////console.log("click");
+          for(let i = 0; i < killConditionsUnique.length; i++) console.log(killConditionsUnique[i])
+          if(chooseDL.length > 0 || chooseDR.length > 0 || chooseUL.length > 0 || chooseUR.length > 0) {console.log("click"); killOpt(killConditionsUnique);}
           if(!Pawns[killedOptModeArray[i][1]].oneKiller2Killed)  {
-          
+            
             for (let j = 0; j < killedOptModeArray.length; j++)
               Pawns[killedOptModeArray[j][1]].killed = false;
             for (let j = 0; j < killersOptModeArray.length; j++)
@@ -834,6 +836,8 @@ if (killedOptMode) {
                 console.log('splice killedOptMode');
                 
               }
+              //if(chooseDL.length > 0 || chooseDR.length > 0 || chooseUL.length > 0 || chooseUR.length > 0) {console.log("click"); killOpt(killConditionsUnique);}
+              
               ////////////////////console.log('killConditionsUnique after splice in killedOptMode', killConditionsUnique)
             //////////////////////////////////////////////////////////////////////for (let z = 0; z < killConditionsUnique.length; z++)
               ////////////console.log(killConditionsUnique[z]);
@@ -846,7 +850,7 @@ if (killedOptMode) {
             console.log('killedOptModeArray[i] before push', killedOptModeArray[i]);
             // killConditions = [];
             // killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-            for(let i = 0; i < killConditionsUnique.length; i++) console.log(killConditionsUnique[i])
+            
             firstKill.push(killedOptModeArray[i]);
             //console.log('killedOptMode', firstKill);
             killedOptModeArray = [];
@@ -856,7 +860,7 @@ if (killedOptMode) {
             ////////////////////console.log('killedOptModeArray[i] after push', killedOptModeArray[i]);
             ////////////////////console.log('firstKill');
             ////////////////////console.log(firstKill);
-            if(chooseDL.length > 0 || chooseDR.length > 0 || chooseUL.length > 0 || chooseUR.length > 0) {console.log("click"); killOpt(killConditionsUnique);}
+            
             //killOpt(firstKill);
             //stepKill(firstKill);
             // socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
@@ -905,8 +909,8 @@ if (killedOptMode) {
               console.log('1k2k killers killConditionsUnique[0] ', killConditionsUnique[0]);
               
               let firstKill = [];
-              killConditions = [];
-              killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+              // killConditions = [];
+              // killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
               for (let k = 0; k < killConditionsUnique.length; k++) {
                   console.log('two killed', killConditionsUnique[k]);
               }
