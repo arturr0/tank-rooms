@@ -3033,15 +3033,15 @@ function neighbourFilter(kill, array, r, c) {
         for (let i = 0; i < boardRemoved.length; i++)
             for (let j = 0; j < array.length; j++)
                 if (array[j][1] === boardRemoved[i][0]) {
-                    console.log("sp1", array)
+                    console.log("sp1", array[j])
                     array.splice(j, 1);
                     
                 }
                 
         for (let i = 0; i < boardRemoved.length; i++)
             for (let j = 0; j < array.length; j++)
-                if ((kill === "down" && array[j][2] >= boardRemoved[i][1]) || (kill === "up" && array[j][2] <= boardRemoved[i][1])) {
-                    console.log("sp2", array)
+                if (array[j][1] == boardRemoved[0] && (kill === "down" && array[j][2] >= boardRemoved[i][1]) || (kill === "up" && array[j][2] <= boardRemoved[i][1])) {
+                    console.log("sp2", array[j])
                     array.splice(j, 1);
 
                 }
