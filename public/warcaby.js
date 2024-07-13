@@ -1424,7 +1424,7 @@ for (let i = 0; i < Board.length; i++) {
       }
       killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
       upLeftArray = groupAndSort("up", upLeftArray);
-      neighbourFilter("up", upLeftArray, 1, 1);
+      upLeftArray = neighbourFilter("up", upLeftArray, 1, 1);
       chooseUL = getChooseBoard(upLeftArray);
       console.log("chooseUL", chooseUL);
       for (let j = 0; j < upLeftArray.length; j++) {
@@ -1437,7 +1437,7 @@ for (let i = 0; i < Board.length; i++) {
       }
       killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
       upRightArray = groupAndSort("up", upRightArray);
-      neighbourFilter("up", upRightArray, 1, -1);
+      upRightArray = neighbourFilter("up", upRightArray, 1, -1);
       chooseUR = getChooseBoard(upRightArray);
       console.log("chooseUR", chooseUR);
       for (let j = 0; j < upRightArray.length; j++) {
@@ -1454,7 +1454,7 @@ for (let i = 0; i < Board.length; i++) {
       downLeftArray = groupAndSort("down", downLeftArray);
       for(let i = 0; i < downLeftArray.length; i++)
       console.log("a g", downLeftArray[i]);
-      neighbourFilter("down", downLeftArray, -1, 1);
+      downLeftArray = neighbourFilter("down", downLeftArray, -1, 1);
       for(let i = 0; i < downLeftArray.length; i++)
       console.log("a f", downLeftArray[i]);
       chooseDL = getChooseBoard(downLeftArray);
