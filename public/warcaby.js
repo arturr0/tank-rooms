@@ -988,7 +988,7 @@ let upRightArray = [];
 function kill(blockKilledPawn, blockKillersPawn, mode) {
 
   
-  console.log("start dra kill", mode);
+  console.log("start dra1 kill", mode);
   console.log(killConditions); 
   for (let j = 0; j < Pawns.length; j++) {
     for (let k = 0; k < Pawns.length; k++) {
@@ -1406,14 +1406,13 @@ for (let i = 0; i < Board.length; i++) {
       }
 
       //fq
-      for (let j = 0; j < downRightArray.length; j++) console.log("dra bs", downRightArray[j]);
+      for (let j = 0; j < downRightArray.length; j++) console.log("dra1 bs", downRightArray[j]);
       downRightArray = groupAndSort("down", downRightArray);
-      for (let j = 0; j < downRightArray.length; j++) console.log("dra as", downRightArray[j]);
+      for (let j = 0; j < downRightArray.length; j++) console.log("dra1 as", downRightArray[j]);
+      downRightArray = neighbourFilter("down", downRightArray, -1, -1);
+      for (let j = 0; j < downRightArray.length; j++) console.log("dra1 an",downRightArray[j]);
       chooseDR = getChooseBoard(downRightArray);
-      neighbourFilter("down", downRightArray, -1, -1);
-      for (let j = 0; j < downRightArray.length; j++) console.log("dra an",downRightArray[j]);
-      // chooseDR = getChooseBoard(downRightArray);
-      for (let j = 0; j < downRightArray.length; j++) console.log("dra a getchooseb", downRightArray[j]);
+      for (let j = 0; j < downRightArray.length; j++) console.log("dra1 a getchooseb", downRightArray[j]);
       for (let j = 0; j < chooseDR.length; j++)console.log("dra chooseDR", chooseDR[j]);
       for (let j = 0; j < downRightArray.length; j++) {
         killConditions.push([downRightArray[j][0], downRightArray[j][1], downRightArray[j][2], Pawns[downRightArray[j][0]].isRed, Greenturn, Pawns[downRightArray[j][0]].rectCenter, Pawns[downRightArray[j][0]].rectCenterY, Pawns[downRightArray[j][1]].rectCenter, Pawns[downRightArray[j][1]].rectCenterY, true, 'down-right', chooseDR]);
@@ -1438,9 +1437,8 @@ for (let i = 0; i < Board.length; i++) {
       }
       killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
       upRightArray = groupAndSort("up", upRightArray);
-      chooseUR = getChooseBoard(upRightArray);
       neighbourFilter("up", upRightArray, 1, -1);
-      // chooseUR = getChooseBoard(upRightArray);
+      chooseUR = getChooseBoard(upRightArray);
       console.log("chooseUR", chooseUR);
       for (let j = 0; j < upRightArray.length; j++) {
         killConditions.push([upRightArray[j][0], upRightArray[j][1], upRightArray[j][2], Pawns[upRightArray[j][0]].isRed, Greenturn, Pawns[upRightArray[j][0]].rectCenter, Pawns[upRightArray[j][0]].rectCenterY, Pawns[upRightArray[j][1]].rectCenter, Pawns[upRightArray[j][1]].rectCenterY, true, 'up-right', chooseUR]);
@@ -1456,11 +1454,10 @@ for (let i = 0; i < Board.length; i++) {
       downLeftArray = groupAndSort("down", downLeftArray);
       for(let i = 0; i < downLeftArray.length; i++)
       console.log("a g", downLeftArray[i]);
-      chooseDL = getChooseBoard(downLeftArray);
       neighbourFilter("down", downLeftArray, -1, 1);
       for(let i = 0; i < downLeftArray.length; i++)
       console.log("a f", downLeftArray[i]);
-      // chooseDL = getChooseBoard(downLeftArray);
+      chooseDL = getChooseBoard(downLeftArray);
       console.log("chooseDL", chooseDL);
       for(let i = 0; i < downLeftArray.length; i++)
       console.log("a b", downLeftArray[i]);
