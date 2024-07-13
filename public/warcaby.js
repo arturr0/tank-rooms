@@ -3031,44 +3031,87 @@ function neighbourFilter(kill, array, r, c) {
     return sortedArray;
 }
   
-  function getChooseBoard(arr) {
-    if (arr.length === 0) {
-        console.log("The array is empty.");
-        return [];
-    }
+//   function getChooseBoard(arr) {
+//     if (arr.length === 0) {
+//         console.log("The array is empty.");
+//         return [];
+//     }
 
-    let map = {};
+//     let map = {};
 
-    // Create a map to count occurrences of (index 0, index 1) pairs
-    for (let i = 0; i < arr.length; i++) {
-        let subarray = arr[i];
-        let key = `${subarray[0]}-${subarray[1]}`;
+//     // Create a map to count occurrences of (index 0, index 1) pairs
+//     for (let i = 0; i < arr.length; i++) {
+//         let subarray = arr[i];
+//         let key = `${subarray[0]}-${subarray[1]}`;
 
-        if (!map[key]) {
-            map[key] = new Set();
-        }
+//         if (!map[key]) {
+//             map[key] = new Set();
+//         }
 
-        map[key].add(subarray[2]);
-    }
+//         map[key].add(subarray[2]);
+//     }
 
-    // Collect the unique subarrays where the third index is different
-    let uniqueSet = new Set();
-    for (let key in map) {
-        if (map[key].size > 1) {
-            arr.forEach(subarray => {
-                let subarrayKey = `${subarray[0]}-${subarray[1]}`;
-                if (subarrayKey === key) {
-                    uniqueSet.add(JSON.stringify(subarray));
-                }
-            });
-        }
-    }
+//     // Collect the unique subarrays where the third index is different
+//     let uniqueSet = new Set();
+//     for (let key in map) {
+//         if (map[key].size > 1) {
+//             arr.forEach(subarray => {
+//                 let subarrayKey = `${subarray[0]}-${subarray[1]}`;
+//                 if (subarrayKey === key) {
+//                     uniqueSet.add(JSON.stringify(subarray));
+//                 }
+//             });
+//         }
+//     }
 
-    // Convert the set back to an array of subarrays
-    let result = Array.from(uniqueSet).map(item => JSON.parse(item));
+//     // Convert the set back to an array of subarrays
+//     let result = Array.from(uniqueSet).map(item => JSON.parse(item));
 
-    return result;
+//     return result;
+// }
+function getChooseBoard(arr) {
+  if (arr.length === 0) {
+      console.log("The array is empty.");
+      return [];
+  }
+
+  let map = {};
+
+  // Create a map to count occurrences of (index 0, index 1) pairs
+  for (let i = 0; i < arr.length; i++) {
+      let subarray = arr[i];
+      let key = `${subarray[0]}-${subarray[1]}`;
+
+      if (!map[key]) {
+          map[key] = new Set();
+      }
+
+      map[key].add(subarray[2]);
+  }
+
+  // Collect the unique subarrays where the third index is different
+  let uniqueSet = new Set();
+  for (let key in map) {
+      if (map[key].size > 1) {
+          arr.forEach(subarray => {
+              let subarrayKey = `${subarray[0]}-${subarray[1]}`;
+              if (subarrayKey === key) {
+                  uniqueSet.add(JSON.stringify(subarray));
+              }
+          });
+      }
+  }
+
+  // Convert the set back to an array of subarrays
+  let result = Array.from(uniqueSet).map(item => JSON.parse(item));
+
+  return result;
 }
+
+// Example usage:
+console.log(getChooseBoard([[0, 1, 2], [0, 1, 3], [1, 2, 2], [2, 3, 4], [2, 3, 5]]));
+// Output: [ [ 0, 1, 2 ], [ 0, 1, 3 ], [ 2, 3, 4 ], [ 2, 3, 5 ] ]
+
 // function sortToSecondExtreme(array) {
 //   let uniqueKills = [];
 //   let itemsFound = {};
