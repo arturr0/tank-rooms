@@ -2717,9 +2717,10 @@ killmode.every(array => array[11].length == 0))
     }
     else if (blockKill) {
         check = true;
-        killConditions = [];
-        killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
-
+        if(!(chooseDL.length > 0 || chooseDR.length > 0 || chooseUL.length > 0 || chooseUR.length > 0)) {
+          killConditions = [];
+          killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+        }
         console.log('check else if (blockKill)', check)
     }
     // else {
