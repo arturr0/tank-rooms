@@ -1791,90 +1791,90 @@ uniqueIndex0Values.forEach(value => {
         .map(subarray => Pawns[subarray[1]].row);
 
     if (filteredUpLeft.length > 0) {
-        maxLeft.push([value, Math.max(...filteredUpLeft)]);
+        maxLeft.push([value, Math.max(...filteredUpLeft), filteredUpLeft[1]]);
     }
     if (filteredUpRight.length > 0) {
-        maxRight.push([value, Math.max(...filteredUpRight)]);
+        maxRight.push([value, Math.max(...filteredUpRight), filteredUpRight[1]]);
     }
     if (filteredDownLeft.length > 0) {
-        minLeft.push([value, Math.min(...filteredDownLeft)]);
+        minLeft.push([value, Math.min(...filteredDownLeft),filteredDownLeft[1]]);
     }
     if (filteredDownRight.length > 0) {
-        minRight.push([value, Math.min(...filteredDownRight)]);
+        minRight.push([value, Math.min(...filteredDownRight), filteredDownRight[1]]);
     }
 
     if (filteredUpLeft.length > 0) {
         if (chooseUL.length === 0) {
-            maxLeftE.push([value, Math.max(...filteredUpLeft)]);
+            maxLeftE.push([value, Math.max(...filteredUpLeft), filteredUpLeft[1]]);
         } else {
             let secondMax = sortToSecondExtreme(filteredUpLeft);
             let found = false;
             for (let i = 0; i < chooseUL.length; i++) {
                 if (secondMax[0] !== Pawns[chooseUL[i][1]].row) {
-                    maxLeftE.push([value, Pawns[chooseUL[i][1]].row]);
+                    maxLeftE.push([value, Pawns[chooseUL[i][1]].row], filteredUpLeft[1]);
                     found = true;
                     break;
                 }
             }
             if (!found) {
-                maxLeftE.push([value, Pawns[chooseUL[0][1]].row]);
+                maxLeftE.push([value, Pawns[chooseUL[0][1]].row, filteredUpLeft[1]]);
             }
         }
     }
 
     if (filteredUpRight.length > 0) {
         if (chooseUR.length === 0) {
-            maxRightE.push([value, Math.max(...filteredUpRight)]);
+            maxRightE.push([value, Math.max(...filteredUpRight), filteredUpRight[1]]);
         } else {
             let secondMax = sortToSecondExtreme(filteredUpRight);
             let found = false;
             for (let i = 0; i < chooseUR.length; i++) {
                 if (secondMax[0] !== Pawns[chooseUR[i][1]].row) {
-                    maxRightE.push([value, Pawns[chooseUR[i][1]].row]);
+                    maxRightE.push([value, Pawns[chooseUR[i][1]].row, filteredUpRight[1]]);
                     found = true;
                     break;
                 }
             }
             if (!found) {
-                maxRightE.push([value, Pawns[chooseUR[0][1]].row]);
+                maxRightE.push([value, Pawns[chooseUR[0][1]].row, filteredUpRight[1]]);
             }
         }
     }
 
     if (filteredDownLeft.length > 0) {
         if (chooseDL.length === 0) {
-            minLeftE.push([value, Math.min(...filteredDownLeft)]);
+            minLeftE.push([value, Math.min(...filteredDownLeft), filteredDownLeft[1]]);
         } else {
             let secondMin = sortToSecondExtreme(filteredDownLeft);
             let found = false;
             for (let i = 0; i < chooseDL.length; i++) {
                 if (secondMin[0] !== Pawns[chooseDL[i][1]].row) {
-                    minLeftE.push([value, Pawns[chooseDL[i][1]].row]);
+                    minLeftE.push([value, Pawns[chooseDL[i][1]].row, filteredDownLeft[1]]);
                     found = true;
                     break;
                 }
             }
             if (!found) {
-                minLeftE.push([value, Pawns[chooseDL[0][1]].row]);
+                minLeftE.push([value, Pawns[chooseDL[0][1]].row, filteredDownLeft[1]]);
             }
         }
     }
 
     if (filteredDownRight.length > 0) {
         if (chooseDR.length === 0) {
-            minRightE.push([value, Math.min(...filteredDownRight)]);
+            minRightE.push([value, Math.min(...filteredDownRight), filteredDownRight[1]]);
         } else {
             let secondMin = sortToSecondExtreme(filteredDownRight);
             let found = false;
             for (let i = 0; i < chooseDR.length; i++) {
                 if (secondMin[0] !== Pawns[chooseDR[i][1]].row) {
-                    minRightE.push([value, Pawns[chooseDR[i][1]].row]);
+                    minRightE.push([value, Pawns[chooseDR[i][1]].row, filteredDownRight[1]]);
                     found = true;
                     break;
                 }
             }
             if (!found) {
-                minRightE.push([value, Pawns[chooseDR[0][1]].row]);
+                minRightE.push([value, Pawns[chooseDR[0][1]].row, filteredDownRight[1]]);
             }
         }
     }
