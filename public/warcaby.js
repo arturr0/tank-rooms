@@ -826,12 +826,12 @@ if (killedOptMode) {
             blockKilledPawn = killedOptModeArray[i][0];
             //////////////////////////////////////////////////////////////////////////////console.log(pawnSelected);
             for (let j = 0; j < killConditionsUnique.length; j++)
-              if (killConditionsUnique[j][1] != killedSelected) {
+              if (killConditionsUnique[j][1] != killedSelected && !(chooseDL.length > 0 || chooseDR.length > 0 || chooseUL.length > 0 || chooseUR.length > 0)) {
                 //////////////////////////////////////////////////////////////////////////////console.log(killConditionsUnique[j][0]);
                 killConditionsUnique.splice(j,1); 
                 
                 ////////////console.log(killedOptModeArray[i][0]);
-                //////////console.log('splice killedOptMode');
+                console.log('splice killedOptMode');
                 
               }
               ////////////////////console.log('killConditionsUnique after splice in killedOptMode', killConditionsUnique)
@@ -844,8 +844,8 @@ if (killedOptMode) {
             //killedOptModeArray = [];
             let firstKill = [];
             console.log('killedOptModeArray[i] before push', killedOptModeArray[i]);
-            killConditions = [];
-            killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
+            // killConditions = [];
+            // killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
             console.log(killConditionsUnique)
             firstKill.push(killedOptModeArray[i]);
             //console.log('killedOptMode', firstKill);
@@ -856,10 +856,12 @@ if (killedOptMode) {
             ////////////////////console.log('killedOptModeArray[i] after push', killedOptModeArray[i]);
             ////////////////////console.log('firstKill');
             ////////////////////console.log(firstKill);
-            if(chooseDL.length > 0 || chooseDR.length > 0 || chooseUL.length > 0 || chooseUR.length > 0) {killOpt(killConditionsUnique);}
-            killOpt(firstKill);
-            stepKill(firstKill);
+            if(chooseDL.length > 0 || chooseDR.length > 0 || chooseUL.length > 0 || chooseUR.length > 0) {console.log("click"); killOpt(killConditionsUnique);}
+            //killOpt(firstKill);
+            //stepKill(firstKill);
             // socket.emit('multikill', killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room);
+            // killConditions = [];
+            // killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
             break;
         }
       }
