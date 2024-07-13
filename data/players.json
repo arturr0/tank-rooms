@@ -204,9 +204,9 @@
   },
   {
     "index": 29,
-    "players": 1,
-    "user1": "f",
+    "players": 0,
+    "user1": "",
     "user2": "",
-    "block": 0
+    "block": 1
   }
 ]
