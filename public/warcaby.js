@@ -1382,8 +1382,10 @@ for (let i = 0; i < Board.length; i++) {
               let board = i;
               downRightArray.push([killer, killed, board]);
               for(let i = 0; i < downRightArray.length; i++)
-                if(!Pawns[downRightArray[i][1]].live)
-                    downRightArray.splice(i, 1);  
+                if(!Pawns[downRightArray[i][1]].live) {
+                    downRightArray.splice(i, 1);
+                    console.log("splice");
+                }  
               // for (let i = 0; i < downRightArray.length; i++) {
               //   console.log("push downRightArray", downRightArray[i]);
               // }
@@ -1396,6 +1398,7 @@ for (let i = 0; i < Board.length; i++) {
       //fq
       console.log(downRightArray);
       downRightArray = groupAndSort("down", downRightArray);
+      console.log(downRightArray);
       neighbourFilter("down", downRightArray, -1, -1);
       console.log(downRightArray);
       let chooseDR = getChooseBoard(downRightArray);
@@ -1406,6 +1409,7 @@ for (let i = 0; i < Board.length; i++) {
       }
       if(chooseDR.length == 0)
         while (downRightArray.length > 0) {
+          console.log("dr splice");
           downRightArray.splice(0, 1);
       }
       killConditionsUnique = JSON.parse(JSON.stringify(killUnique(killConditions)));
