@@ -1583,28 +1583,6 @@ const result = {
 };
 
 // Check each direction and map the subarrays correctly
-// let filteredUpLeft = killConditionsUnique
-//   .filter(subarray => subarray[9] && subarray[10] === 'up-left' && Pawns[subarray[1]].live)
-//   .map(subarray => [subarray[0], subarray[1], subarray[2], Pawns[subarray[1]].row]);
-
-// let filteredUpRight = killConditionsUnique
-//   .filter(subarray => subarray[9] && subarray[10] === 'up-right' && Pawns[subarray[1]].live)
-//   .map(subarray => [subarray[0], subarray[1], subarray[2], Pawns[subarray[1]].row]);
-
-// let filteredDownLeft = killConditionsUnique
-//   .filter(subarray => subarray[9] && subarray[10] === 'down-left' && Pawns[subarray[1]].live)
-//   .map(subarray => [subarray[0], subarray[1], subarray[2], Pawns[subarray[1]].row]);
-
-// let filteredDownRight = killConditionsUnique
-//   .filter(subarray => subarray[9] && subarray[10] === 'down-right' && Pawns[subarray[1]].live)
-//   .map(subarray => [subarray[0], subarray[1], subarray[2], Pawns[subarray[1]].row]);
-
-// result.upLeft.push(...filteredUpLeft);
-// result.upRight.push(...filteredUpRight);
-// result.downLeft.push(...filteredDownLeft);
-// result.downRight.push(...filteredDownRight);
-
-// Existing code snippet with filtered data added to result arrays
 let filteredUpLeft = killConditionsUnique
   .filter(subarray => subarray[9] && subarray[10] === 'up-left' && Pawns[subarray[1]].live)
   .map(subarray => [subarray[0], subarray[1], subarray[2], Pawns[subarray[1]].row]);
@@ -1625,20 +1603,6 @@ result.upLeft.push(...filteredUpLeft);
 result.upRight.push(...filteredUpRight);
 result.downLeft.push(...filteredDownLeft);
 result.downRight.push(...filteredDownRight);
-
-// Finding min of index 4 for downLeft and downRight
-const minIndex4DownLeft = Math.min(...result.downLeft.map(subarray => subarray[3]));
-const minIndex4DownRight = Math.min(...result.downRight.map(subarray => subarray[3]));
-
-// Finding max of index 4 for upLeft and upRight
-const maxIndex4UpLeft = Math.max(...result.upLeft.map(subarray => subarray[3]));
-const maxIndex4UpRight = Math.max(...result.upRight.map(subarray => subarray[3]));
-
-console.log('Min of index 4 in downLeft:', minIndex4DownLeft);
-console.log('Min of index 4 in downRight:', minIndex4DownRight);
-console.log('Max of index 4 in upLeft:', maxIndex4UpLeft);
-console.log('Max of index 4 in upRight:', maxIndex4UpRight);
-
 
 console.log('Up Left:', result.upLeft);
 console.log('Up Right:', result.upRight);
