@@ -2072,7 +2072,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
         console.log(chooseBoard);
       for (let i = 0; i < chooseBoard.length; i++)  
-        if(!Pawns[chooseBoard[i][1]].liveCopy.some(array => array[0] === chooseBoard[i][0])) {
+        if(Pawns[chooseBoard[i][1]].liveCopy.length == 0 || !Pawns[chooseBoard[i][1]].liveCopy.some(array => array[0] === chooseBoard[i][0])) {
         Pawns[chooseBoard[i][1]].liveCopy.push([chooseBoard[i][0], chooseBoard[i][10]]);
         console.log("ks in", winner, looser, newBoard);
         Pawns[chooseBoard[i][0]].rowCopy = Board[chooseBoard[i][2]].row;
@@ -2080,6 +2080,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         // Pawns[winner].letter = Board[newBoard].letter;
         // Pawns[winner].number = Board[newBoard].number;
         console.log(winner, looser, Pawns[winner].rowCopy, Pawns[winner].columnCopy)
+        console.log([chooseBoard[i][0]], [chooseBoard[i][1]])
         //Board[newBoard].free = false;
         checkQueen();
         
