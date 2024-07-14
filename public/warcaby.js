@@ -1574,11 +1574,11 @@ console.log(chooseDL);
 // console.log(maxLeft, maxRight, minLeft, minRight);
 // console.log(maxLeftE, maxRightE, minLeftE, minRightE);
 
-uniqueIndex0Values.forEach(value => {
-  let filteredUpLeft = killConditionsUnique.filter(subarray => !mode && subarray[0] === value  && subarray[9] && subarray[10] === 'up-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
-  let filteredUpRight = killConditionsUnique.filter(subarray => !mode && subarray[0] === value  && subarray[9] && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
-  let filteredDownLeft = killConditionsUnique.filter(subarray => !mode && subarray[0] === value  && subarray[9] && subarray[10] === 'down-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
-  let filteredDownRight = killConditionsUnique.filter(subarray => !mode && subarray[0] === value  && subarray[9] && subarray[10] === 'down-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+killConditionsUnique.forEach(value => {
+  let filteredUpLeft = killConditionsUnique.filter(subarray =>subarray[0] === value  && subarray[9] && subarray[10] === 'up-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+  let filteredUpRight = killConditionsUnique.filter(subarray =>subarray[0] === value  && subarray[9] && subarray[10] === 'up-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+  let filteredDownLeft = killConditionsUnique.filter(subarray =>subarray[0] === value  && subarray[9] && subarray[10] === 'down-left' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
+  let filteredDownRight = killConditionsUnique.filter(subarray =>subarray[0] === value  && subarray[9] && subarray[10] === 'down-right' && Pawns[subarray[1]].live).map(subarray => Pawns[subarray[1]].row);
   maxLeft.push([value, Math.max(...filteredUpLeft), mode]);
   maxRight.push([value, Math.max(...filteredUpRight), mode]);
   minLeft.push([value, Math.min(...filteredDownLeft)], mode);
