@@ -2074,10 +2074,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
       for (let i = 0; i < chooseBoard.length; i++)  
         if(Pawns[chooseBoard[i][1]].liveCopy.length == 0 || 
         !Pawns[chooseBoard[i][1]].liveCopy.some(array => array[0] === chooseBoard[i][0] &&
-        ((array[1] == "down-left" && chooseBoard[i][10] == "up-right") ||
-        (array[1] == "down-right" && chooseBoard[i][10] == "up-left") ||
-        (array[1] == "up-left" && chooseBoard[i][10] == "down-right") ||
-        (array[1] == "up-right" && chooseBoard[i][10] == "down-left"))
+        array[1] != chooseBoard[i][10]
         )) {
         Pawns[chooseBoard[i][1]].liveCopy.push([chooseBoard[i][0], chooseBoard[i][10]]);
         console.log("ks in", winner, looser, newBoard);
