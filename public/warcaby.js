@@ -1220,7 +1220,7 @@ function kill(blockKilledPawn, blockKillersPawn, mode) {
       for (let k = 0; k < Pawns.length; k++) {
         //console.log(` in blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-            Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && !Pawns[j].liveCopy.some(array => array[0] == k) && Pawns[k].live && Pawns[k].queen &&
+            Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             Board[i].queen && (Pawns[j].row - Board[i].row <= -1) &&
             (Pawns[j].column - Board[i].column >= 1) && Board[i].row > Pawns[j].row && Board[i].free &&
@@ -1274,7 +1274,7 @@ function kill(blockKilledPawn, blockKillersPawn, mode) {
     for (let j = 0; j < Pawns.length; j++) 
       for (let k = 0; k < Pawns.length; k++) {
         if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-           Pawns[j].isRed != Pawns[k].isRed && Pawns[k].live && Pawns[j].live && !Pawns[j].liveCopy.some(array => array[0] == k) && Pawns[k].queen &&
+           Pawns[j].isRed != Pawns[k].isRed && Pawns[k].live && Pawns[j].live && Pawns[k].queen &&
           ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
             (Pawns[j].row - Board[i].row >= 1) &&
             (Pawns[j].column - Board[i].column >= 1) && Board[i].row < Pawns[j].row &&
@@ -1327,7 +1327,7 @@ for (let i = 0; i < Board.length; i++) {
     for (let k = 0; k < Pawns.length; k++) {
       //console.log(` in blockKilledPawn ${blockKilledPawn} blockKillersPawn ${blockKillersPawn}`);
       if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-          Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && !Pawns[j].liveCopy.some(array => array[0] == k) && Pawns[k].live && Pawns[k].queen &&
+          Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
         ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
           Board[i].queen && (Pawns[j].row - Board[i].row >= 1) &&
           (Pawns[j].column - Board[i].column <= -1) && Board[i].row < Pawns[j].row && Board[i].free &&
@@ -1377,7 +1377,7 @@ for (let i = 0; i < Board.length; i++) {
         for (let j = 0; j < Pawns.length; j++) 
           for (let k = 0; k < Pawns.length; k++) {
             if (((blockKilledPawn === null && blockKillersPawn === null) || (blockKilledPawn === k || blockKillersPawn === k)) &&
-               Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && !Pawns[j].liveCopy.some(array => array[0] == k) && Pawns[k].live && Pawns[k].queen &&
+               Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && Pawns[k].queen &&
               ((Player == 1 && Greenturn == false && Pawns[j].isRed == false) || (Player == 2 && Greenturn == true && Pawns[j].isRed == true)) &&
                 Board[i].queen && (Pawns[j].row - Board[i].row <= -1) &&
                 (Pawns[j].column - Board[i].column <= -1) && Board[i].row > Pawns[j].row &&
@@ -2115,7 +2115,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         // Pawns[winner].letter = Board[newBoard].letter;
         // Pawns[winner].number = Board[newBoard].number;
         console.log(winner, looser, Pawns[winner].rowCopy, Pawns[winner].columnCopy)
-        console.log("ck ks", chooseBoard[i][0], chooseBoard[i][1], Pawns[chooseBoard[i][1]].liveCopy)
+        console.log("ck ks", chooseBoard[i][0], chooseBoard[i][1], chooseBoard[i][2], Pawns[chooseBoard[i][1]].liveCopy)
         //Board[newBoard].free = false;
         checkQueen();
         
