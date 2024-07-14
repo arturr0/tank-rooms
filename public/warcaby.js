@@ -1585,19 +1585,19 @@ const result = {
 // Check each direction and map the subarrays correctly
 // let filteredUpLeft = killConditionsUnique
 //   .filter(subarray => subarray[9] && subarray[10] === 'up-left' && Pawns[subarray[1]].live)
-//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10],  Pawns[subarray[1]].row]);
+//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10], subarray[10] , Pawns[subarray[1]].row]);
 
 // let filteredUpRight = killConditionsUnique
 //   .filter(subarray => subarray[9] && subarray[10] === 'up-right' && Pawns[subarray[1]].live)
-//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10],  Pawns[subarray[1]].row]);
+//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10], subarray[10] , Pawns[subarray[1]].row]);
 
 // let filteredDownLeft = killConditionsUnique
 //   .filter(subarray => subarray[9] && subarray[10] === 'down-left' && Pawns[subarray[1]].live)
-//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10],  Pawns[subarray[1]].row]);
+//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10], subarray[10] , Pawns[subarray[1]].row]);
 
 // let filteredDownRight = killConditionsUnique
 //   .filter(subarray => subarray[9] && subarray[10] === 'down-right' && Pawns[subarray[1]].live)
-//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10],  Pawns[subarray[1]].row]);
+//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10], subarray[10] , Pawns[subarray[1]].row]);
 
 // result.upLeft.push(...filteredUpLeft);
 // result.upRight.push(...filteredUpRight);
@@ -1655,33 +1655,33 @@ function findMinMaxValues(killConditions) {
 const minMaxValues = findMinMaxValues(killConditionsUnique);
 console.log(minMaxValues);
 
-console.log('Up Left:', result.upLeft);
-console.log('Up Right:', result.upRight);
-console.log('Down Left:', result.downLeft);
-console.log('Down Right:', result.downRight);
+// console.log('Up Left:', result.upLeft);
+// console.log('Up Right:', result.upRight);
+// console.log('Down Left:', result.downLeft);
+// console.log('Down Right:', result.downRight);
   
-  console.log("filter UL", filteredUpLeft)
-  console.log("filter UR", filteredUpRight)
-  console.log("filter DL", filteredDownLeft)
-  console.log("filter DR", filteredDownRight)
+//   console.log("filter UL", filteredUpLeft)
+//   console.log("filter UR", filteredUpRight)
+//   console.log("filter DL", filteredDownLeft)
+//   console.log("filter DR", filteredDownRight)
 
-  maxLeft.push([Math.max(...filteredUpLeft), mode]);
-  maxRight.push([Math.max(...filteredUpRight), mode]);
-  minLeft.push([Math.min(...filteredDownLeft)], mode);
-  minRight.push([Math.min(...filteredDownRight), mode]);
+//   maxLeft.push([Math.max(...filteredUpLeft), mode]);
+//   maxRight.push([Math.max(...filteredUpRight), mode]);
+//   minLeft.push([Math.min(...filteredDownLeft)], mode);
+//   minRight.push([Math.min(...filteredDownRight), mode]);
   
       
     
 
 
-console.log("Max Left:", maxLeft);
-console.log("Max Right:", maxRight);
-console.log("Min Left:", minLeft);
-console.log("Min Right:", minRight);
-console.log("Max LeftE:", maxLeftE);
-console.log("Max RightE:", maxRightE);
-console.log("Min LeftE:", minLeftE);
-console.log("Min RightE:", minRightE);
+// console.log("Max Left:", maxLeft);
+// console.log("Max Right:", maxRight);
+// console.log("Min Left:", minLeft);
+// console.log("Min Right:", minRight);
+// console.log("Max LeftE:", maxLeftE);
+// console.log("Max RightE:", maxRightE);
+// console.log("Min LeftE:", minLeftE);
+// console.log("Min RightE:", minRightE);
 
     
     
