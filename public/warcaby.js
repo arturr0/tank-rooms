@@ -2018,8 +2018,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard, mode) {
         
         //current = winner;
         //generateQueensAreas(true);
-        if(!mode) kill(blockKilledPawn, blockKillersPawn, true);
-        else kill(blockKilledPawn, blockKillersPawn, false); 
+        kill(blockKilledPawn, blockKillersPawn, true);
       }    
     }
   
