@@ -2107,7 +2107,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
       }
         // console.log(blockDobleKill.map(array => array[0]))
       for (let i = 0; i < chooseBoard.length; i++)  
-        if(!blockDobleKill.some(array => array[2] == chooseBoard[i][2])) {
+        if(!blockDobleKill.some(array => array[0] == chooseBoard[i][0] && array[2] == chooseBoard[i][2])) {
         Pawns[chooseBoard[i][1]].liveCopy.push([chooseBoard[i][0], chooseBoard[i][10]]);
         console.log("ks in", winner, looser, newBoard);
         Pawns[chooseBoard[i][0]].rowCopy = Board[chooseBoard[i][2]].row;
