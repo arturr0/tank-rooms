@@ -998,7 +998,7 @@ function kill(blockKilledPawn, blockKillersPawn, mode) {
 
     
   console.log(" ck start dra1 kill", mode);
-  for (let j = 0; j < killConditionsUnique.length; j++) console.log("ck", killConditionsUnique[j]); 
+  for (let j = 0; j < killConditionsUnique.length; j++) console.log("ck kcu", killConditionsUnique[j]); 
   for (let j = 0; j < Pawns.length; j++) {
     for (let k = 0; k < Pawns.length; k++) {
       if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && !Pawns[k].queen &&
@@ -2103,7 +2103,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         if(chooseBoard[i][0] == blockDobleKill[0][0] && chooseBoard[i][1] == blockDobleKill[0][1] && chooseBoard[i][10] == blockDobleKill[0][10])
             blockDobleKill.push(chooseBoard[i]);
       for (let i = 0; i < blockDobleKill.length; i++) {
-        console.log("ck", blockDobleKill[i]);
+        console.log("ck db", blockDobleKill[i]);
       }
         // console.log(blockDobleKill.map(array => array[0]))
       for (let i = 0; i < chooseBoard.length; i++)  
@@ -2115,7 +2115,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         // Pawns[winner].letter = Board[newBoard].letter;
         // Pawns[winner].number = Board[newBoard].number;
         console.log(winner, looser, Pawns[winner].rowCopy, Pawns[winner].columnCopy)
-        console.log("ck", chooseBoard[i][0], chooseBoard[i][1], Pawns[chooseBoard[i][1]].liveCopy)
+        console.log("ck ks", chooseBoard[i][0], chooseBoard[i][1], Pawns[chooseBoard[i][1]].liveCopy)
         //Board[newBoard].free = false;
         checkQueen();
         
