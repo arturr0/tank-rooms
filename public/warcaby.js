@@ -486,7 +486,7 @@ function setup() {
           //generateQueensAreas()
         //} else if (Board[j].isBlack && Board[j].row > 5) {
       } 
-      else if ([10,37,12,26,35].includes(j)) {
+      else if ([10,44,12,26,35].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1712,40 +1712,48 @@ console.log(chooseDL);
 //   if (minRightValue !== null) minRight.push([value, minRightValue, mode]);
 // });
 
-killConditionsUnique.forEach((subarray) => {
-  const value = subarray[0];  // Unique value from the first element of subarray
+// Helper function to find max and min
+function findMaxAndMin(values) {
+  return {
+      max: values.length > 0 ? Math.max(...values) : null,
+      min: values.length > 0 ? Math.min(...values) : null
+  };
+}
+
+// Iterate over unique value combinations of s[0] and s[10]
+const uniqueCombinations = new Set(killConditionsUnique.map(subarray => `${subarray[0]}-${subarray[10]}`));
+
+uniqueCombinations.forEach(combination => {
+  const [value, direction] = combination.split('-');
+
+  const filteredUpLeft = killConditionsUnique.filter(
+      s => s[0] == value && s[10] === 'up-left' && s[2] !== value && s[9] && Pawns[s[1]].live
+  ).map(s => Pawns[s[1]].row);
+
+  const filteredUpRight = killConditionsUnique.filter(
+      s => s[0] == value && s[10] === 'up-right' && s[2] !== value && s[9] && Pawns[s[1]].live
+  ).map(s => Pawns[s[1]].row);
+
+  const filteredDownLeft = killConditionsUnique.filter(
+      s => s[0] == value && s[10] === 'down-left' && s[2] !== value && s[9] && Pawns[s[1]].live
+  ).map(s => Pawns[s[1]].row);
+
+  const filteredDownRight = killConditionsUnique.filter(
+      s => s[0] == value && s[10] === 'down-right' && s[2] !== value && s[9] && Pawns[s[1]].live
+  ).map(s => Pawns[s[1]].row);
+
+  const maxAndMinUpLeft = findMaxAndMin(filteredUpLeft);
+  const maxAndMinUpRight = findMaxAndMin(filteredUpRight);
+  const maxAndMinDownLeft = findMaxAndMin(filteredDownLeft);
+  const maxAndMinDownRight = findMaxAndMin(filteredDownRight);
+
   const mode = 'some mode';  // Replace with actual mode logic if necessary
 
-  // Filter and map the relevant rows, considering s[2]
-  let filteredUpLeft = killConditionsUnique.filter(
-      (s) => s[0] === value && s[2] !== subarray[2] && s[9] && s[10] === 'up-left' && Pawns[s[1]].live
-  ).map((s) => Pawns[s[1]].row);
-
-  let filteredUpRight = killConditionsUnique.filter(
-      (s) => s[0] === value && s[2] !== subarray[2] && s[9] && s[10] === 'up-right' && Pawns[s[1]].live
-  ).map((s) => Pawns[s[1]].row);
-
-  let filteredDownLeft = killConditionsUnique.filter(
-      (s) => s[0] === value && s[2] !== subarray[2] && s[9] && s[10] === 'down-left' && Pawns[s[1]].live
-  ).map((s) => Pawns[s[1]].row);
-
-  let filteredDownRight = killConditionsUnique.filter(
-      (s) => s[0] === value && s[2] !== subarray[2] && s[9] && s[10] === 'down-right' && Pawns[s[1]].live
-  ).map((s) => Pawns[s[1]].row);
-
-  // Compute max and min for each direction, handling empty arrays
-  let maxLeftValue = filteredUpLeft.length > 0 ? Math.max(...filteredUpLeft) : null;
-  let maxRightValue = filteredUpRight.length > 0 ? Math.max(...filteredUpRight) : null;
-  let minLeftValue = filteredDownLeft.length > 0 ? Math.min(...filteredDownLeft) : null;
-  let minRightValue = filteredDownRight.length > 0 ? Math.min(...filteredDownRight) : null;
-
-  // Add the results to the respective arrays
-  if (maxLeftValue !== null) maxLeft.push([value, maxLeftValue, mode]);
-  if (maxRightValue !== null) maxRight.push([value, maxRightValue, mode]);
-  if (minLeftValue !== null) minLeft.push([value, minLeftValue, mode]);
-  if (minRightValue !== null) minRight.push([value, minRightValue, mode]);
+  if (maxAndMinUpLeft.max !== null) maxLeft.push([value, maxAndMinUpLeft.max, mode]);
+  if (maxAndMinUpRight.max !== null) maxRight.push([value, maxAndMinUpRight.max, mode]);
+  if (maxAndMinDownLeft.min !== null) minLeft.push([value, maxAndMinDownLeft.min, mode]);
+  if (maxAndMinDownRight.min !== null) minRight.push([value, maxAndMinDownRight.min, mode]);
 });
-
 
 
 console.log("Max Left:", maxLeft);
