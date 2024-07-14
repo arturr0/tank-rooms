@@ -486,7 +486,7 @@ function setup() {
           //generateQueensAreas()
         //} else if (Board[j].isBlack && Board[j].row > 5) {
       } 
-      else if ([10,37,12,26,35,49].includes(j)) {
+      else if ([10,37,12,26,35].includes(j)) {
         Board[j].free = false;
         let pawn = new Pawn(Board[j].rectCenter, (Board[j].row * 64 - 32) + 32, Board[j].row, Board[j].column, false, false, true, false, false, false, Board[j].letter, Board[j].number);
         Pawns.push(pawn);
@@ -1604,6 +1604,58 @@ const result = {
 // result.downLeft.push(...filteredDownLeft);
 // result.downRight.push(...filteredDownRight);
 
+// function findMinMaxValues(killConditions) {
+//   const result = {
+//       upLeft: {},
+//       upRight: {},
+//       downLeft: {},
+//       downRight: {}
+//   };
+
+//   // Iterate over each direction
+//   ['up-left', 'up-right', 'down-left', 'down-right'].forEach(direction => {
+//       // Filter data for current direction
+//       const filteredData = killConditions.filter(subarray => subarray[9] && subarray[10] === direction && Pawns[subarray[1]].live)
+//           .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10], Pawns[subarray[1]].row]);
+
+//       // Initialize min and max objects for current direction
+//       const minValues = {};
+//       const maxValues = {};
+
+//       // Find min and max values for each index 2
+//       filteredData.forEach(subarray => {
+//           const index2 = subarray[1];
+//           const rowValue = subarray[4];
+//           const killer = subarray[0]
+
+//           if (!(index2 in minValues) || rowValue < minValues[index2]) {
+//               minValues[index2] = rowValue;
+//           }
+
+//           if (!(index2 in maxValues) || rowValue > maxValues[index2]) {
+//               maxValues[index2] = rowValue;
+//           }
+//       });
+
+//       // Assign min and max values to result based on direction
+//       if (direction === 'up-left') {
+//           result.upLeft = maxValues;
+//       } else if (direction === 'up-right') {
+//           result.upRight = maxValues;
+//       } else if (direction === 'down-left') {
+//           result.downLeft = minValues;
+//       } else if (direction === 'down-right') {
+//           result.downRight = minValues;
+//       }
+//   });
+
+//   return result;
+// }
+
+// // Usage
+// const minMaxValues = findMinMaxValues(killConditionsUnique);
+// console.log(minMaxValues);
+
 function findMinMaxValues(killConditions) {
   const result = {
       upLeft: {},
@@ -1624,15 +1676,18 @@ function findMinMaxValues(killConditions) {
 
       // Find min and max values for each index 2
       filteredData.forEach(subarray => {
+          const killer = subarray[0];
           const index2 = subarray[2];
           const rowValue = subarray[4];
 
-          if (!(index2 in minValues) || rowValue < minValues[index2]) {
-              minValues[index2] = rowValue;
+          // For minValues, track the minimum row value and corresponding killer
+          if (!(index2 in minValues) || rowValue < minValues[index2].value) {
+              minValues[index2] = { value: rowValue, killer };
           }
 
-          if (!(index2 in maxValues) || rowValue > maxValues[index2]) {
-              maxValues[index2] = rowValue;
+          // For maxValues, track the maximum row value and corresponding killer
+          if (!(index2 in maxValues) || rowValue > maxValues[index2].value) {
+              maxValues[index2] = { value: rowValue, killer };
           }
       });
 
@@ -1651,7 +1706,6 @@ function findMinMaxValues(killConditions) {
   return result;
 }
 
-// Usage
 const minMaxValues = findMinMaxValues(killConditionsUnique);
 console.log(minMaxValues);
 
