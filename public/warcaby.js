@@ -997,8 +997,8 @@ let chooseUR = [];
 function kill(blockKilledPawn, blockKillersPawn, mode) {
 
     
-  console.log("start dra1 kill", mode);
-  console.log(killConditions); 
+  console.log(" ck start dra1 kill", mode);
+  for (let j = 0; j < killConditionsUnique.length; j++) console.log("ck", killConditionsUnique[j]); 
   for (let j = 0; j < Pawns.length; j++) {
     for (let k = 0; k < Pawns.length; k++) {
       if (Pawns[j].isRed != Pawns[k].isRed && Pawns[j].live && Pawns[k].live && !Pawns[k].queen &&
@@ -2062,18 +2062,11 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
   
   }
   else if(chooseBoard.filter(array => array[9]).some(array => array[11] && array[11].length > 0)) {
-        // let pawnLetter = Pawns[winner].letter;
-        // let pawnNumber = Pawns[winner].number;
-        // let pawnLetterLooser = Pawns[looser].letter;
-        // let pawnNumberLooser = Pawns[looser].number;
-        // let played = Pawns[winner].isRed;
-        // message = "kill";
-        // if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
-        // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
+        
         console.log(chooseBoard);
         const lastSubarrays = {};
 
-// Iterate through the array
+
         chooseBoard.forEach(subarray => {
             const key = `${subarray[0]}-${subarray[10]}`; // Key for first and fourth elements
             const subkey = subarray[1]; // Key for second element
@@ -2109,7 +2102,9 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
       for (let i = 0; i < chooseBoard.length; i++)
         if(chooseBoard[i][0] == blockDobleKill[0][0] && chooseBoard[i][1] == blockDobleKill[0][1] && chooseBoard[i][10] == blockDobleKill[0][10])
             blockDobleKill.push(chooseBoard[i]);
-        console.log(blockDobleKill);
+      for (let i = 0; i < blockDobleKill.length; i++) {
+        console.log("ck", blockDobleKill[i]);
+      }
         // console.log(blockDobleKill.map(array => array[0]))
       for (let i = 0; i < chooseBoard.length; i++)  
         if(!blockDobleKill.some(array => array[0] == chooseBoard[i][0] && array[1] == chooseBoard[i][1])) {
@@ -2120,7 +2115,7 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         // Pawns[winner].letter = Board[newBoard].letter;
         // Pawns[winner].number = Board[newBoard].number;
         console.log(winner, looser, Pawns[winner].rowCopy, Pawns[winner].columnCopy)
-        console.log(chooseBoard[i][0], chooseBoard[i][1], Pawns[chooseBoard[i][1]].liveCopy)
+        console.log("ck", chooseBoard[i][0], chooseBoard[i][1], Pawns[chooseBoard[i][1]].liveCopy)
         //Board[newBoard].free = false;
         checkQueen();
         
