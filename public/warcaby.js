@@ -1582,29 +1582,42 @@ const result = {
   downRight: []
 };
 
-killConditionsUnique.forEach(subarray => {
-  if (subarray[9] && Pawns[subarray[1]].live) {
-      const pawnRow = Pawns[subarray[1]].row;
-      const key0 = subarray[0];
-      const key1 = subarray[1];
-      const key2 = subarray[2];
+// Check each direction and map the subarrays correctly
+let filteredUpLeft = killConditionsUnique
+  .filter(subarray => subarray[9] && subarray[10] === 'up-left' && Pawns[subarray[1]].live)
+  .map(subarray => [subarray[0], subarray[1], subarray[2], Pawns[subarray[1]].row]);
 
-      if (subarray[10] === 'up-left') {
-          result.upLeft.push({ key0, key1, key2, row: pawnRow });
-      } else if (subarray[10] === 'up-right') {
-          result.upRight.push({ key0, key1, key2, row: pawnRow });
-      } else if (subarray[10] === 'down-left') {
-          result.downLeft.push({ key0, key1, key2, row: pawnRow });
-      } else if (subarray[10] === 'down-right') {
-          result.downRight.push({ key0, key1, key2, row: pawnRow });
-      }
-  }
-});
+let filteredUpRight = killConditionsUnique
+  .filter(subarray => subarray[9] && subarray[10] === 'up-right' && Pawns[subarray[1]].live)
+  .map(subarray => [subarray[0], subarray[1], subarray[2], Pawns[subarray[1]].row]);
+
+let filteredDownLeft = killConditionsUnique
+  .filter(subarray => subarray[9] && subarray[10] === 'down-left' && Pawns[subarray[1]].live)
+  .map(subarray => [subarray[0], subarray[1], subarray[2], Pawns[subarray[1]].row]);
+
+let filteredDownRight = killConditionsUnique
+  .filter(subarray => subarray[9] && subarray[10] === 'down-right' && Pawns[subarray[1]].live)
+  .map(subarray => [subarray[0], subarray[1], subarray[2], Pawns[subarray[1]].row]);
+
+result.upLeft.push(...filteredUpLeft);
+result.upRight.push(...filteredUpRight);
+result.downLeft.push(...filteredDownLeft);
+result.downRight.push(...filteredDownRight);
 
 console.log('Up Left:', result.upLeft);
 console.log('Up Right:', result.upRight);
 console.log('Down Left:', result.downLeft);
 console.log('Down Right:', result.downRight);
+  
+  console.log("filter UL", filteredUpLeft)
+  console.log("filter UR", filteredUpRight)
+  console.log("filter DL", filteredDownLeft)
+  console.log("filter DR", filteredDownRight)
+  
+  maxLeft.push([Math.max(...filteredUpLeft), mode]);
+  maxRight.push([Math.max(...filteredUpRight), mode]);
+  minLeft.push([Math.min(...filteredDownLeft)], mode);
+  minRight.push([Math.min(...filteredDownRight), mode]);
   
       
     
