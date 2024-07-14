@@ -2103,14 +2103,16 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
             subarrayList.sort((a, b) => a[1] - b[1]); // Sort by second index
             blockDobleKill.push(subarrayList[subarrayList.length - 1]);
         });
-
+      for (let i = 0; i < chooseBoard.length; i++) {
+        console.log(chooseBoard[i]);
+      }
       for (let i = 0; i < chooseBoard.length; i++)
         if(chooseBoard[i][0] == blockDobleKill[0][0] && chooseBoard[i][1] == blockDobleKill[0][1] && chooseBoard[i][10] == blockDobleKill[0][10])
             blockDobleKill.push(chooseBoard[i]);
         console.log(blockDobleKill);
+        // console.log(blockDobleKill.map(array => array[0]))
       for (let i = 0; i < chooseBoard.length; i++)  
-        if(Pawns[chooseBoard[i][1]].liveCopy.length == 0 || 
-        !Pawns[chooseBoard[i][1]].liveCopy.filter(array => array[1] != chooseBoard[i][10]).some(array => array[0] == chooseBoard[i][0])) {
+        if(!blockDobleKill.some(array => array[0] == chooseBoard[i][0] && array[1] == chooseBoard[i][1])) {
         Pawns[chooseBoard[i][1]].liveCopy.push([chooseBoard[i][0], chooseBoard[i][10]]);
         console.log("ks in", winner, looser, newBoard);
         Pawns[chooseBoard[i][0]].rowCopy = Board[chooseBoard[i][2]].row;
