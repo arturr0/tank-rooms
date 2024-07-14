@@ -2071,6 +2071,43 @@ function killSwitch(winner, looser, newBoard, player, chooseBoard) {
         // if ((Player == 1 && !Greenturn) || (Player == 2 && Greenturn) && Pawns[looser].live)
         // socket.emit('message kill', message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room);
         console.log(chooseBoard);
+        const lastSubarrays = {};
+
+// Iterate through the array
+        chooseBoard.forEach(subarray => {
+            const key = `${subarray[0]}-${subarray[10]}`; // Key for first and fourth elements
+            const subkey = subarray[1]; // Key for second element
+            if (!lastSubarrays[key]) {
+                lastSubarrays[key] = {};
+            }
+            lastSubarrays[key][subkey] = subarray;
+        });
+
+        // Filter and collect the last subarrays
+        const filteredSubarrays = {};
+        Object.entries(lastSubarrays).forEach(([key, subarrayGroup]) => {
+            if (Object.keys(subarrayGroup).length > 1) {
+                Object.values(subarrayGroup).forEach(subarray => {
+                    const firstIndex = subarray[0];
+                    if (!filteredSubarrays[firstIndex]) {
+                        filteredSubarrays[firstIndex] = [];
+                    }
+                    filteredSubarrays[firstIndex].push(subarray);
+                });
+            }
+        });
+
+        // Get the last subarrays with the same first index
+        let blockDobleKill = [];
+        Object.values(filteredSubarrays).forEach(subarrayList => {
+            subarrayList.sort((a, b) => a[1] - b[1]); // Sort by second index
+            blockDobleKill.push(subarrayList[subarrayList.length - 1]);
+        });
+
+      for (let i = 0; i < chooseBoard.length; i++)
+        if(chooseBoard[i][0] == blockDobleKill[0][0] && chooseBoard[i][1] == blockDobleKill[0][1] && chooseBoard[i][10] == blockDobleKill[0][10])
+            blockDobleKill.push(chooseBoard[i]);
+        console.log(blockDobleKill);
       for (let i = 0; i < chooseBoard.length; i++)  
         if(Pawns[chooseBoard[i][1]].liveCopy.length == 0 || 
         !Pawns[chooseBoard[i][1]].liveCopy.filter(array => array[1] != chooseBoard[i][10]).some(array => array[0] == chooseBoard[i][0])) {
