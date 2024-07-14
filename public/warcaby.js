@@ -1585,19 +1585,19 @@ const result = {
 // Check each direction and map the subarrays correctly
 // let filteredUpLeft = killConditionsUnique
 //   .filter(subarray => subarray[9] && subarray[10] === 'up-left' && Pawns[subarray[1]].live)
-//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10], subarray[10] , Pawns[subarray[1]].row]);
+//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10],  Pawns[subarray[1]].row]);
 
 // let filteredUpRight = killConditionsUnique
 //   .filter(subarray => subarray[9] && subarray[10] === 'up-right' && Pawns[subarray[1]].live)
-//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10], subarray[10] , Pawns[subarray[1]].row]);
+//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10],  Pawns[subarray[1]].row]);
 
 // let filteredDownLeft = killConditionsUnique
 //   .filter(subarray => subarray[9] && subarray[10] === 'down-left' && Pawns[subarray[1]].live)
-//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10], subarray[10] , Pawns[subarray[1]].row]);
+//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10],  Pawns[subarray[1]].row]);
 
 // let filteredDownRight = killConditionsUnique
 //   .filter(subarray => subarray[9] && subarray[10] === 'down-right' && Pawns[subarray[1]].live)
-//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10], subarray[10] , Pawns[subarray[1]].row]);
+//   .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10],  Pawns[subarray[1]].row]);
 
 // result.upLeft.push(...filteredUpLeft);
 // result.upRight.push(...filteredUpRight);
@@ -1612,54 +1612,41 @@ function findMinMaxValues(killConditions) {
       downRight: {}
   };
 
-  // Filtered data for each direction
-  let filteredUpLeft = killConditions.filter(subarray => subarray[4] && subarray[10] === 'up-left')
-      .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[5], Pawns[subarray[1]].row]);
+  // Iterate over each direction
+  ['up-left', 'up-right', 'down-left', 'down-right'].forEach(direction => {
+      // Filter data for current direction
+      const filteredData = killConditions.filter(subarray => subarray[9] && subarray[10] === direction && Pawns[subarray[1]].live)
+          .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[10], Pawns[subarray[1]].row]);
 
-  let filteredUpRight = killConditions.filter(subarray => subarray[4] && subarray[10] === 'up-right')
-      .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[5], Pawns[subarray[1]].row]);
+      // Initialize min and max objects for current direction
+      const minValues = {};
+      const maxValues = {};
 
-  let filteredDownLeft = killConditions.filter(subarray => subarray[4] && subarray[10] === 'down-left')
-      .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[5], Pawns[subarray[1]].row]);
-
-  let filteredDownRight = killConditions.filter(subarray => subarray[4] && subarray[10] === 'down-right')
-      .map(subarray => [subarray[0], subarray[1], subarray[2], subarray[5], Pawns[subarray[1]].row]);
-
-  // Function to find min value for down-left and down-right
-  function findMinForDown(filteredData) {
-      const minDown = {};
+      // Find min and max values for each index 2
       filteredData.forEach(subarray => {
-          const index2 = subarray[1];
-          const value = subarray[4];
-          if (subarray[3] === 'down-left' || subarray[3] === 'down-right') {
-              if (!minDown[index2] || value < minDown[index2]) {
-                  minDown[index2] = value;
-              }
+          const index2 = subarray[2];
+          const rowValue = subarray[4];
+
+          if (!(index2 in minValues) || rowValue < minValues[index2]) {
+              minValues[index2] = rowValue;
+          }
+
+          if (!(index2 in maxValues) || rowValue > maxValues[index2]) {
+              maxValues[index2] = rowValue;
           }
       });
-      return minDown;
-  }
 
-  // Function to find max value for up-left and up-right
-  function findMaxForUp(filteredData) {
-      const maxUp = {};
-      filteredData.forEach(subarray => {
-          const index2 = subarray[1];
-          const value = subarray[4];
-          if (subarray[3] === 'up-left' || subarray[3] === 'up-right') {
-              if (!maxUp[index2] || value > maxUp[index2]) {
-                  maxUp[index2] = value;
-              }
-          }
-      });
-      return maxUp;
-  }
-
-  // Calculate results
-  result.downLeft = findMinForDown(filteredDownLeft);
-  result.downRight = findMinForDown(filteredDownRight);
-  result.upLeft = findMaxForUp(filteredUpLeft);
-  result.upRight = findMaxForUp(filteredUpRight);
+      // Assign min and max values to result based on direction
+      if (direction === 'up-left') {
+          result.upLeft = maxValues;
+      } else if (direction === 'up-right') {
+          result.upRight = maxValues;
+      } else if (direction === 'down-left') {
+          result.downLeft = minValues;
+      } else if (direction === 'down-right') {
+          result.downRight = minValues;
+      }
+  });
 
   return result;
 }
