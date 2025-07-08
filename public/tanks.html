@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tank AI Trainer with Explosions</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+    #lossChartContainer {
+      position: absolute; top: 10px; left: 10px;
+      width: 300px; height: 150px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px; border-radius: 8px;
+      z-index: 10;
+    }
+    #lossChart { width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <div id="lossChartContainer"><canvas id="lossChart"></canvas></div>
+  <script>
+    let tank1 = {}, tank2 = {};
+    let projectile = null;
+    let groundHeight = 40;
+    let wheelRadius = 20;
+    let gravity = 0.2;
+    let airFriction = 0.01;
+    let wind = 0.05;
+
+    let mdl = {};
+    let learningRate = 0.001;
+    let trainingStep = 0;
+    let lossHistory = [];
+    let angleIndex = 0;
+    let angleStep;
+    let isShooting = false;
+
+    let predictedLandingX = null;
+    let actualLandingX = null;
+
+    let lossChart;
+    let chartData = {
+      labels: [],
+      datasets: [{
+        label: 'Loss',
+        data: [],
+        borderColor: 'rgba(255, 99, 132, 1)',
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        tension: 0.1
+      }]
+    };
+
+    let player = 2;
+    let explosionBodies = [];
+    let engine, world;
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      angleStep = PI / 180;
+      mdl = { weights: [random(-1, 1), random(-1, 1)], bias: random(-1, 1) };
+
+      engine = Matter.Engine.create();
+      world = engine.world;
+      Matter.Engine.run(engine);
+
+      createTank(tank1, width / 3, height - groundHeight - wheelRadius);
+      createTank(tank2, 2 * width / 3, height - groundHeight - wheelRadius);
+
+      const ctx = document.getElementById('lossChart').getContext('2d');
+      lossChart = new Chart(ctx, {
+        type: 'line',
+        data: chartData,
+        options: {
+          responsive: true, animation: false,
+          scales: {
+            x: { title: { display: true, text: 'Step' } },
+            y: { title: { display: true, text: 'Loss' }, min: 0 }
+          }
+        }
+      });
+
+      frameRate(30);
+    }
+
+    function createTank(tank, x, y) {
+      tank.barrelAngle = 0;
+      tank.wheelL = { x: x - 40, y, r: wheelRadius };
+      tank.wheelR = { x: x + 40, y, r: wheelRadius };
+      tank.frame = { x, y: y - 20, w: 100, h: 20 };
+      tank.tower = { x, y: y - 40, w: 40, h: 20 };
+      tank.barrel = { x1: x, y1: y - 40, x2: x + 30, y2: y - 50 };
+    }
+
+    function draw() {
+      background(230);
+      drawTank(tank1);
+      drawTank(tank2);
+      fill(100);
+      rectMode(CENTER);
+      rect(width / 2, height - groundHeight / 2, width, groundHeight);
+
+      if (isShooting && projectile) {
+        simulateProjectile();
+      } else {
+        for (let i = 0; i < 5; i++) {
+          train();
+        }
+      }
+
+      if (predictedLandingX !== null) {
+        fill(255, 0, 0);
+        ellipse(predictedLandingX, height - groundHeight, 10);
+      }
+
+      if (actualLandingX !== null) {
+        fill(0, 255, 0);
+        ellipse(actualLandingX, height - groundHeight, 10);
+      }
+
+      // Draw explosions
+      drawExplosions();
+    }
+
+    function drawTank(tank) {
+      let len = 40;
+      tank.barrel.x1 = tank.tower.x;
+      tank.barrel.y1 = tank.tower.y;
+      tank.barrel.x2 = tank.tower.x + cos(tank.barrelAngle) * len;
+      tank.barrel.y2 = tank.tower.y + sin(tank.barrelAngle) * len;
+
+      fill(70);
+      ellipse(tank.wheelL.x, tank.wheelL.y, tank.wheelL.r * 2);
+      ellipse(tank.wheelR.x, tank.wheelR.y, tank.wheelR.r * 2);
+      fill(50);
+      rectMode(CENTER);
+      rect(tank.frame.x, tank.frame.y, tank.frame.w, tank.frame.h);
+      fill(100);
+      rect(tank.tower.x, tank.tower.y, tank.tower.w, tank.tower.h);
+      stroke(0);
+      strokeWeight(4);
+      line(tank.barrel.x1, tank.barrel.y1, tank.barrel.x2, tank.barrel.y2);
+    }
+
+    function train() {
+      if (angleIndex >= 360) angleIndex = 0;
+      let angle = angleIndex * angleStep;
+      angleIndex++;
+
+      let shooter = player === 1 ? tank1 : tank2;
+      let target = player === 1 ? tank2 : tank1;
+
+      shooter.barrelAngle = angle;
+      let landingX = simulateLanding(angle);
+      actualLandingX = landingX;
+
+      let error = landingX - target.tower.x;
+      let predictedError = mdl.weights[0] * angle + mdl.weights[1] * wind + mdl.bias;
+      let diff = predictedError - error;
+      let loss = diff * diff;
+
+      mdl.weights[0] -= learningRate * 2 * diff * angle;
+      mdl.weights[1] -= learningRate * 2 * diff * wind;
+      mdl.bias -= learningRate * 2 * diff;
+
+      trainingStep++;
+      if (trainingStep % 5 === 0) {
+        chartData.labels.push(trainingStep);
+        chartData.datasets[0].data.push(loss);
+        if (chartData.labels.length > 100) {
+          chartData.labels.shift();
+          chartData.datasets[0].data.shift();
+        }
+        lossChart.update();
+      }
+
+      let dir = target.tower.x > shooter.tower.x ? 1 : -1;
+      if (
+        abs(error) < 20 &&
+        !isShooting &&
+        dir * (landingX - shooter.tower.x) > 50
+      ) {
+        shooter.barrelAngle = angle;
+        fire(angle);
+        isShooting = true;
+        predictedLandingX = landingX;
+      }
+    }
+
+    function fire(angle) {
+      let speed = 10;
+      let len = 40;
+      let shooter = player === 1 ? tank1 : tank2;
+
+      projectile = {
+        x: shooter.tower.x + cos(angle) * len,
+        y: shooter.tower.y + sin(angle) * len,
+        velocityX: cos(angle) * speed,
+        velocityY: sin(angle) * speed,
+        barrelAngle: angle
+      };
+    }
+
+    function simulateProjectile() {
+      fill(255, 0, 0);
+      ellipse(projectile.x, projectile.y, 10);
+
+      projectile.velocityX += -airFriction * projectile.velocityX + wind;
+      projectile.velocityY += -airFriction * projectile.velocityY + gravity;
+
+      projectile.x += projectile.velocityX;
+      projectile.y += projectile.velocityY;
+
+      if (projectile.y >= height - groundHeight) {
+        let target = player === 1 ? tank2 : tank1;
+        let dx = abs(projectile.x - target.tower.x);
+        updateModel(projectile.barrelAngle, wind, dx);
+        triggerExplosion(player === 1 ? tank2 : tank1);
+        isShooting = false;
+        projectile = null;
+      }
+    }
+
+    function simulateLanding(angle) {
+      let shooter = player === 1 ? tank1 : tank2;
+      let x = shooter.tower.x + cos(angle) * 40;
+      let y = shooter.tower.y + sin(angle) * 40;
+      let vx = cos(angle) * 10;
+      let vy = sin(angle) * 10;
+
+      while (y < height - groundHeight) {
+        vx += (-airFriction * vx + wind);
+        vy += (-airFriction * vy + gravity);
+        x += vx;
+        y += vy;
+      }
+      return x;
+    }
+
+    function updateModel(angle, wind, error) {
+      let predicted = mdl.weights[0] * angle + mdl.weights[1] * wind + mdl.bias;
+      let diff = predicted - error;
+      mdl.weights[0] -= learningRate * 2 * diff * angle;
+      mdl.weights[1] -= learningRate * 2 * diff * wind;
+      mdl.bias -= learningRate * 2 * diff;
+    }
+
+    function triggerExplosion(tank) {
+      tank.exploded = true;
+
+      tank.frame = Matter.Bodies.rectangle(tank.frame.x, tank.frame.y, tank.frame.w, tank.frame.h);
+      tank.tower = Matter.Bodies.rectangle(tank.tower.x, tank.tower.y, tank.tower.w, tank.tower.h);
+      tank.wheelL = Matter.Bodies.circle(tank.wheelL.x, tank.wheelL.y, tank.wheelL.r);
+      tank.wheelR = Matter.Bodies.circle(tank.wheelR.x, tank.wheelR.y, tank.wheelR.r);
+
+      let parts = [tank.frame, tank.tower, tank.wheelL, tank.wheelR];
+      for (let part of parts) {
+        Matter.World.add(world, part);
+        Matter.Body.setStatic(part, false);
+        Matter.Body.applyForce(part, part.position, Matter.Vector.create(random(-0.02, 0.02), random(-0.02, -0.01)));
+        Matter.Body.setAngularVelocity(part, random(-0.2, 0.2));
+        explosionBodies.push(part);
+      }
+    }
+
+    function drawExplosions() {
+      for (let body of explosionBodies) {
+        drawBody(body);
+      }
+    }
+
+    function drawBody(body) {
+      push();
+      translate(body.position.x, body.position.y);
+      rotate(body.angle);
+      fill(100);
+      if (body.circleRadius) {
+        ellipse(0, 0, body.circleRadius * 2);
+      } else {
+        let w = body.bounds.max.x - body.bounds.min.x;
+        let h = body.bounds.max.y - body.bounds.min.y;
+        rectMode(CENTER);
+        rect(0, 0, w, h);
+      }
+      pop();
+    }
+  </script>
+</body>
+</html>
