@@ -334,5 +334,12 @@
     "user1": "b",
     "user2": "bbb",
     "block": 0
+  },
+  {
+    "index": 48,
+    "players": 0,
+    "user1": "",
+    "user2": "",
+    "block": 1
   }
 ]
