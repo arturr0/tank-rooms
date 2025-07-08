@@ -150,7 +150,7 @@ router.post('/submit', (req, res) => {
                     server.user1 = inputText;
                     server.players++;
                     player = 1;
-                    server.block = 0; // Allow user2 to connect
+                    //server.block = 0; // Allow user2 to connect
                     console.log(`User1 connected: ${inputText}`);
                 } else if (server.user2 === "" && server.block == 0) {
                     server.user2 = inputText;

@@ -1,10 +1,34 @@
 const socket = io();
-console.log(socket);
+socket.on('connect', () => {
+    console.log('Connected to /warcaby namespace');
+
+    // Retrieve the stored server data from local storage
+    const serverData = JSON.parse(localStorage.getItem('serverData'));
+    console.log(serverData);
+
+    if (serverData) {
+        Player = serverData.player;
+        playerName = serverData.inputText;
+        console.log(Player);
+        console.log(playerName);
+
+        // Emit the joinServer event with the retrieved data
+        socket.emit('joinServer', {
+            inputText: serverData.inputText,
+            index: serverData.index,
+            players: serverData.players,
+            player: serverData.player // Send player information
+        });
+
+        // Optionally, clear the data from local storage if it is no longer needed
+        localStorage.removeItem('serverData');
+    }
+});
 let connected = false;
 let room = null;
 let observedAngle;
 let sentAngle = { value: 0 };
-
+let active = true;
 // Game variables
 let tank1 = {}, tank2 = {};
 let projectiles = new Map();
@@ -18,9 +42,9 @@ let explosionBodies = [];
 let explosionParticles = [];
 let pendingExplosions = [];
 let engine, world;
-let speed = 17;
+let speed = 19;
 // Neural network variables
-let learningRate = 0.001;
+let learningRate = 0.01;
 let trainingStep = 0;
 let lossHistory = [];
 let isShooting = false;
@@ -31,7 +55,7 @@ let countdown = 3;
 let lastShotTime = 0;
 let shotCooldown = 2000;
 let minSamplesBeforeShooting = 100;
-let distanceError = 5;
+let distanceError = 10;
 // Visualization variables
 let lastNetworkState = {
     inputs: [0],
@@ -73,60 +97,17 @@ let mdl = {
     momentumB2: [],
     momentumB3: 0
 };
-socket.on('connect', () => {
-    console.log('Connected to /warcaby namespace');
-
-    // Retrieve the stored server data from local storage
-    const serverData = JSON.parse(localStorage.getItem('serverData'));
-    console.log(serverData);
-
-    if (serverData) {
-        Player = serverData.player;
-        playerName = serverData.inputText;
-        console.log(Player);
-        console.log(playerName);
-
-        // Emit the joinServer event with the retrieved data
-        socket.emit('joinServer', {
-            inputText: serverData.inputText,
-            index: serverData.index,
-            players: serverData.players,
-            player: serverData.player // Send player information
-        });
-
-        // Optionally, clear the data from local storage if it is no longer needed
-        localStorage.removeItem('serverData');
-    }
-});
-
-socket.on('joinedRoom', (ROOM) => {
-    console.log(`Joined room: ${ROOM}`);
-    room = ROOM;
-    console.log(room);
-    let roomInfo = document.querySelector('#room');
-    console.log(room);
-    roomInfo.value = room;
-    document.dispatchEvent(new Event('socketConnected'));
-});
-
-socket.on('error', (message) => {
-    console.error(message);
-    alert(message); // Show the error message to the user
-});
-socket.on('joinedRoom', (ROOM) => {
-    //////////////////////////////////////////////////console.log(`Joined room: ${ROOM}`);
-    room = ROOM;
-    ////////////////////////////////////////////////console.log(room);
-    let roomInfo = select('#room');
-    //////////////////////////////////////////////console.log(room)
-    roomInfo.value(room);
-    document.dispatchEvent(new Event('socketConnected'));
-});
 
 // Socket event handlers
 socket.on('youArePlayer', (data) => {
     player = data;
     ////console.log("You are player", player);
+});
+socket.on('inactiveGame', () => {
+    active = false;
+});
+socket.on('activeGame', () => {
+    active = true;
 });
 
 socket.on('playerMoved', (data) => {
@@ -144,9 +125,8 @@ let lTowerImg;
 //   rCaterpillarImg = loadImage('assets/wheels.png');
 // }
 socket.on('roomMessage', (data) => {
-    console.log("roomMessage");
     room = data.room;
-    wind = 0.0;
+    wind = data.wind;
     connected = true;
     rCaterpillarImg = loadImage('assets/wheels3.png');
     rTowerImg = loadImage('assets/tower.png');
@@ -464,7 +444,7 @@ function resetGameState() {
 }
 
 function draw() {
-    if (!gameStarted) {
+    if (!gameStarted || !active) {
         // Still allow neural network visualization during countdown
         //drawNeuralNetwork();
         return;
@@ -509,7 +489,7 @@ function draw() {
         ellipse(actualLandingX, height - groundHeight, 10);
     }
     fill(0);
-    ellipse(910, 300, 5);
+    //ellipse(910, 300, 5);
     // Process explosions
     processExplosions();
     drawExplosionEffects();
@@ -1423,3 +1403,27 @@ function handleNumber() {
     // Validate if it's a number
 
 }
+
+window.addEventListener('blur', () => {
+    //console.log('Window not focused');
+    //active = false;
+    socket.emit('userInactive', room);
+});
+
+window.addEventListener('focus', () => {
+    //console.log('Window focused');
+    //active = true;
+    socket.emit('userActive', room);
+});
+
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+        //console.log('Tab is inactive');
+        //active = false;
+        socket.emit('userInactive', room);
+    } else {
+        //console.log('Tab is active');
+        //active = true;
+        socket.emit('userActive', room);
+    }
+});

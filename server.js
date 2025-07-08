@@ -106,7 +106,7 @@ io.on('connection', (socket) => {
 
                             // If both players joined, start the game
                             if (roomData.players === 2) {
-                                const wind = 0.3/*(Math.random() * 0.05) - 0.025;*/
+                                const wind = (Math.random() * 0.05) - 0.025;
                                 io.to(ROOM).emit('roomMessage', { room: ROOM, wind: wind });
                             }
                         }
@@ -234,7 +234,7 @@ io.on('connection', (socket) => {
                                 }
 
                                 if (socket.id === users[i][2] && jsonData[socket.serverIndex].players == 0)
-                                    jsonData[users[i][0]].block = 1;
+                                    jsonData[users[i][0]].block = 0;
                             }
 
                             fs.writeFile(jsonFilePath, JSON.stringify(jsonData, null, 2), (writeErr) => {
