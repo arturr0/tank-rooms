@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     let find = false;
     let currentScrollIndex = 0;
     let scroll = false;
@@ -8,14 +8,14 @@ $(document).ready(function() {
     // Function to highlight rows where players === 1
     function highlightUserRow(jsonData) {
         if (scroll) rowsToScroll = [];
-        $('#serversTable tbody tr').each(function(index) {
+        $('#serversTable tbody tr').each(function (index) {
             const $row = $(this);
             const serverIndex = $row.find('.button_spin').data('index');
 
             // Check if player at current index in jsonData has players === 1
             if ((jsonData[serverIndex] && jsonData[serverIndex].players === 1 && playerName == "") ||
-                (jsonData[serverIndex] && jsonData[serverIndex].players === 1 && 
-                (jsonData[serverIndex].user1 == playerName || jsonData[serverIndex].user2 == playerName)
+                (jsonData[serverIndex] && jsonData[serverIndex].players === 1 &&
+                    (jsonData[serverIndex].user1 == playerName || jsonData[serverIndex].user2 == playerName)
                 )) {
                 $row.find('.join').addClass('green-border');
                 if (scroll) rowsToScroll.push($row); // Collect row element with green border
@@ -51,9 +51,9 @@ $(document).ready(function() {
     }
 
     // Event handler for creating a server
-    $('#createServer').on('click', function() {
+    $('#createServer').on('click', function () {
         $.post('/create-server')
-            .done(function(data) {
+            .done(function (data) {
                 $('tbody').append(`
                     <tr id="server-${data.index}">
                         <td class="server">SERVER ${data.index + 1}</td>
@@ -71,7 +71,7 @@ $(document).ready(function() {
                     scrollTop: $tableContainer[0].scrollHeight
                 }, 500);
             })
-            .fail(function(error) {
+            .fail(function (error) {
                 console.error('Error:', error);
             });
     });
@@ -79,7 +79,7 @@ $(document).ready(function() {
     // Function to update the server list
     function updateServerList() {
         $.get('/servers-data')
-            .done(function(jsonData) {
+            .done(function (jsonData) {
                 var scrollPos = $(window).scrollTop();
                 $('#serversTable tbody').empty();
 
@@ -112,14 +112,14 @@ $(document).ready(function() {
                 attachJoinHandlers();
                 $('#table-container').css('visibility', 'visible');
             })
-            .fail(function(error) {
+            .fail(function (error) {
                 console.error('Error updating server list:', error);
             });
     }
 
     // Function to attach join handlers to join buttons
     function attachJoinHandlers() {
-        $('.join').off('click').on('click', function(event) {
+        $('.join').off('click').on('click', function (event) {
             event.preventDefault();
             const inputText = $('#yourName').val().trim();
             if (!inputText) {
@@ -134,7 +134,7 @@ $(document).ready(function() {
             const serverIndex = serverJoin.data('index');
 
             $.get('/servers-data')
-                .done(function(jsonData) {
+                .done(function (jsonData) {
                     const latestServerData = jsonData[serverIndex];
 
                     if (latestServerData.user1 === inputText || latestServerData.user2 === inputText) {
@@ -145,31 +145,31 @@ $(document).ready(function() {
 
                     if (latestServerData.user1 === "") {
                         $.post('/submit', { inputText: inputText, index: serverIndex })
-                            .done(function(data) {
+                            .done(function (data) {
                                 localStorage.setItem('serverData', JSON.stringify({
                                     inputText: inputText,
                                     index: serverIndex,
                                     players: data.players,
                                     player: 1
                                 }));
-                                window.location.href = '/warcaby';
+                                window.location.href = '/combat';
                             })
-                            .fail(function(error) {
+                            .fail(function (error) {
                                 console.error('Error:', error);
                                 $joinButton.prop('disabled', false);
                             });
                     } else if (latestServerData.user2 === "" && latestServerData.block === 0) {
                         $.post('/submit', { inputText: inputText, index: serverIndex })
-                            .done(function(data) {
+                            .done(function (data) {
                                 localStorage.setItem('serverData', JSON.stringify({
                                     inputText: inputText,
                                     index: serverIndex,
                                     players: data.players,
                                     player: 2
                                 }));
-                                window.location.href = '/warcaby';
+                                window.location.href = '/combat';
                             })
-                            .fail(function(error) {
+                            .fail(function (error) {
                                 console.error('Error:', error);
                                 $joinButton.prop('disabled', false);
                             });
@@ -182,7 +182,7 @@ $(document).ready(function() {
                         $spinIcon.addClass('animate-spin');
                     }
                 })
-                .fail(function(error) {
+                .fail(function (error) {
                     console.error('Error fetching latest server data:', error);
                     $joinButton.prop('disabled', false);
                 });
@@ -193,28 +193,28 @@ $(document).ready(function() {
     updateServerList();
 
     // Click handler for finding players and highlighting rows
-    $(document).on('click', '#find_players', function() {
+    $(document).on('click', '#find_players', function () {
         $.get('/find')
-            .done(function(jsonData) {
+            .done(function (jsonData) {
                 find = true;
                 scroll = true;
                 highlightUserRow(jsonData);
                 if (rowsToScroll.length > 0) scrollToNextRow(); // Scroll to the first row immediately
             })
-            .fail(function(error) {
+            .fail(function (error) {
                 console.error('Error fetching player data:', error);
             });
     });
-    
-    
+
+
     const findPlayersButton = document.getElementById('find_players');
     findPlayersButton.addEventListener('click', () => {
-      
-      const playersNameInput = document.getElementById('playersName');
-      playerName = playersNameInput.value.trim();;
-      console.log(`Player's name input: ${playerName}`);
+
+        const playersNameInput = document.getElementById('playersName');
+        playerName = playersNameInput.value.trim();;
+        console.log(`Player's name input: ${playerName}`);
     });
-  
+
 
     // Regularly update server list
     setInterval(updateServerList, 5000);

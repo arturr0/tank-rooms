@@ -341,5 +341,19 @@
     "user1": "",
     "user2": "",
     "block": 1
+  },
+  {
+    "index": 49,
+    "players": 0,
+    "user1": "",
+    "user2": ",,,",
+    "block": 0
+  },
+  {
+    "index": 50,
+    "players": 2,
+    "user1": ",",
+    "user2": ",,,,",
+    "block": 0
   }
 ]

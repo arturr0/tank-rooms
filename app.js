@@ -6,7 +6,7 @@ const flash = require('connect-flash');
 const routes = require('./routes/index');
 const cors = require('cors');
 const fs = require('fs');
-const subpageRouter1 = require('./routes/warcaby'); // Import the subpage router
+const subpageRouter1 = require('./routes/combat'); // Import the subpage router
 // const subpageRouter2 = require('./routes/mechanics');
 // const subpageRouter3 = require('./routes/games');
 
@@ -14,7 +14,7 @@ const app = express();
 
 app.use(cors()); // Prevents CORS error
 
-app.get('/api', function(req, res) {
+app.get('/api', function (req, res) {
     if (req.url === '/favicon.ico') {
         res.end();
     }
@@ -58,8 +58,8 @@ app.use(flash());
 
 app.use('/', routes); // Use the main router
 
-// Middleware to check referer for /warcaby and handle refresh
-app.use('/warcaby', (req, res, next) => {
+// Middleware to check referer for /combat and handle refresh
+app.use('/combat', (req, res, next) => {
     const referer = req.get('referer');
     if (!referer || !referer.includes('/')) {
         return res.redirect('/');
@@ -67,12 +67,12 @@ app.use('/warcaby', (req, res, next) => {
     next();
 });
 
-app.use('/warcaby', subpageRouter1);
+app.use('/combat', subpageRouter1);
 // app.use('/mechanics', subpageRouter2);
 // app.use('/games', subpageRouter3);
 
-app.get('/warcaby', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'warcaby.html'));
+app.get('/combat', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'combat.html'));
 });
 
 module.exports = app;
