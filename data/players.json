@@ -152,5 +152,19 @@
     "user1": "'''''",
     "user2": "",
     "block": 0
+  },
+  {
+    "index": 22,
+    "players": -1,
+    "user1": "",
+    "user2": "",
+    "block": 0
+  },
+  {
+    "index": 23,
+    "players": 1,
+    "user1": "lll",
+    "user2": "llllll",
+    "block": 0
   }
 ]

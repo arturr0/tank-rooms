@@ -8,29 +8,24 @@ const port = process.env.PORT || 3000;
 const server = http.createServer(app);
 const lockFile = require('lockfile');
 const io = socketIo(server);
+
 app.use('/public', express.static(path.join(__dirname, "public")));
-// Namespace for /warcaby
-const warcabyNamespace = io.of('/warcaby');
+
+// Game constants
+const width = 1000;
+const height = 500;
+const groundHeight = 40;
+
+// Track rooms data
+const rooms = new Map(); // roomName -> { players: number, activeProjectiles: Map }
 
 // Define the path to your JSON file
 const jsonFilePath = path.join(__dirname, 'data', 'players.json');
 const lockFilePath = path.join(__dirname, 'data', 'players.lock');
 const users = [];
-let BOARD;
-let PAWNS;
-let TURN;
-let CHECK;
-let PLAY;
-let KILL;
-let KILLER_MODE;
-let KILLED2;
-let KILLED_MODE;
-let PLAYERS = [];
 
-//io.sockets.emit('new state', BOARD, PAWNS, TURN, PLAY, CHECK, KILL);
-//io.to(USERS[0][1]).emit('chat', MESS, USER)
 io.on('connection', (socket) => {
-    console.log('We have a new client in /warcaby: ' + socket.id);
+    console.log('We have a new client: ' + socket.id);
 
     // Track the server the client joined
     socket.on('joinServer', (data) => {
@@ -39,6 +34,17 @@ io.on('connection', (socket) => {
         const ROOM = `room_${data.index}`;
         socket.serverIndex = data.index;
         console.log("j");
+
+        // Initialize room if it doesn't exist
+        if (!rooms.has(ROOM)) {
+            rooms.set(ROOM, {
+                players: 0,
+                activeProjectiles: new Map()
+            });
+        }
+
+        const roomData = rooms.get(ROOM);
+
         lockFile.lock(lockFilePath, { wait: 5000 }, (lockErr) => {
             if (lockErr) {
                 console.error('Error acquiring lock:', lockErr);
@@ -91,13 +97,18 @@ io.on('connection', (socket) => {
                         if (writeErr) {
                             console.error('Error writing to JSON file:', writeErr);
                         } else {
-                            //socket.serverIndex = data.index; // Store the server index in the socket object
                             users.push([data.index, data.inputText, socket.id, data.player]);
                             socket.join(ROOM);
-                            //////////////console.log(`Socket ${socket.id} joined room ${ROOM}`);
-                            //warcabyNamespace.to(ROOM).emit('joinedRoom', ROOM);
-                            const wind = (Math.random() * 0.05) - 0.025;
-                            io.to(ROOM).emit('roomMessage', { room: ROOM, wind: wind });
+
+                            // Track player in room
+                            roomData.players++;
+                            socket.emit('youArePlayer', data.player);
+
+                            // If both players joined, start the game
+                            if (roomData.players === 2) {
+                                const wind = 0.3/*(Math.random() * 0.05) - 0.025;*/
+                                io.to(ROOM).emit('roomMessage', { room: ROOM, wind: wind });
+                            }
                         }
 
                         lockFile.unlock(lockFilePath, (unlockErr) => {
@@ -117,146 +128,79 @@ io.on('connection', (socket) => {
                 }
             });
         });
-    })
-    socket.on('send2', (message, room) => {
-        const MESS = message;
-        warcabyNamespace.to(room).emit('send to room', MESS);
-    });
-    socket.on('send1', (message, room) => {
-        const MESS = message;
-
-        socket.broadcast.to(room).emit('send to opponent', MESS);
-    });
-    socket.on('turn', function (Greenturn, check, room) {
-        if (!check) TURN = !Greenturn;
-        else TURN = Greenturn;
-        //console.log('TURN', TURN);
-        //console.log('check', check);
-        warcabyNamespace.to(room).emit('new turn', TURN);
-    });
-    socket.on('state', function (Board, serializedPawns, Greenturn, check, current, room) {
-
-        BOARD = Board;
-        PAWNS = serializedPawns;
-        ////////////console.log(check);
-        // if (!check) TURN = !Greenturn;
-        // else TURN = Greenturn;
-        //TURN = !Greenturn;
-        //CHECK = check;
-        PLAY = current;
-        //KILL = killConditionsUnique;
-        ////////////////console.log("state " + TURN);
-        socket.broadcast.to(room).emit('new state', BOARD, PAWNS, PLAY);
-
     });
 
-    socket.on('move', function (targetPos, room, animatedPawn) {
-        // Constructing the new position object
-        let newPos = {
-            x: targetPos.x,
-            y: targetPos.y,
-            oldX: targetPos.oldX,
-            oldY: targetPos.oldY
-            // Include looserIndex if needed, for example:
-            // looserIndex: targetPos.looserIndex 
-        };
-        let PAWN = animatedPawn
-
-        // Broadcasting 'animate' event to all clients in the specified room
-        socket.broadcast.to(room).emit('animate', newPos, PAWN);
+    // Handle player updates
+    socket.on('playerUpdate', (data) => {
+        if (socket.serverIndex !== undefined) {
+            const ROOM = `room_${socket.serverIndex}`;
+            // Broadcast target angle, not current angle
+            socket.to(ROOM).emit('playerMoved', {
+                player: data.player,
+                angle: data.angle,
+                timestamp: Date.now()
+            });
+        }
     });
 
-    socket.on('multikill', function (killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room) {
-        KILLER_MODE = killersOptMode;
-        KILLED_MODE = killedOptMode;
-        KILLED2 = oneKiller2Killed;
-        PAWNS = Pawns;
-        warcabyNamespace.to(room).emit('update multikill', KILLER_MODE, KILLED_MODE, KILLED2, PAWNS);
+    // Handle projectile firing
+    socket.on('projectileFired', (data) => {
+        if (socket.serverIndex !== undefined) {
+            const ROOM = `room_${socket.serverIndex}`;
+            const roomData = rooms.get(ROOM);
+
+            if (roomData) {
+                const projectileId = `${socket.id}-${Date.now()}`;
+                const projectileData = {
+                    ...data,
+                    id: projectileId,
+                    timestamp: Date.now()
+                };
+                roomData.activeProjectiles.set(projectileId, projectileData);
+                socket.to(ROOM).emit('enemyProjectile', projectileData);
+            }
+        }
     });
-    //   socket.on('killedOptMode mode', function(killersOptMode, killedOptMode, oneKiller2Killed, Pawns, room) {
-    //     KILLER_MODE = killersOptMode;
-    //     KILLED_MODE = killedOptMode;
-    //     KILLED2 = oneKiller2Killed;
-    //     PAWNS = Pawns;
-    //     warcabyNamespace.to(room).emit('update killedOptMode mode', KILLER_MODE, KILLED_MODE, KILLED2, PAWNS);  
-    //   });
-    //   socket.on('oneKiller2Killed mode mode', function(oneKiller2Killed, Pawns, room) {
-    //     KILLED2 = oneKiller2Killed;
-    //     PAWNS = Pawns;
-    //     warcabyNamespace.to(room).emit('update kille1killed2 mode', KILLED2, PAWNS);  
-    //   });
 
-    socket.on('complete', function (Player, room) {
-        PLAYERS.push([Player, room]);
-        ////console.log('complete', Player, room);
-        for (let i = 0; i < PLAYERS.length; i++) {
-            for (let j = i + 1; j < PLAYERS.length; j++) {
-                if (((PLAYERS[i][0] == 1 && PLAYERS[j][0] == 2) || (PLAYERS[i][0] == 2 && PLAYERS[j][0] == 1)) &&
-                    PLAYERS[i][1] == room && PLAYERS[j][1] == room) {
+    // Handle player hit
+    socket.on('playerHit', (data) => {
+        if (socket.serverIndex !== undefined) {
+            const ROOM = `room_${socket.serverIndex}`;
+            const roomData = rooms.get(ROOM);
 
-                    warcabyNamespace.to(PLAYERS[j][1]).emit('both completed');
+            if (roomData) {
+                // Broadcast hit to both players with projectile info
+                io.to(ROOM).emit('enemyHit', {
+                    player: data.player,
+                    projectileId: data.projectileId,
+                    hitPosition: data.hitPosition,
+                    receivedEffect: data.effect
+                });
 
-                    console.log('condition');
-                    console.log(PLAYERS[i]);
-                    console.log(PLAYERS[j]);
-
-                    // Splice the higher index first
-                    PLAYERS.splice(j, 1);
-                    PLAYERS.splice(i, 1);
-
-                    //////////console.log('before //////////console PLAYERS');
-                    //////////console.log(PLAYERS);
-                    //////////console.log('after //////////console PLAYERS');
-
-                    // Decrement the index to adjust for the removed element
-                    i--;
-                    break; // Break to restart the outer loop since the array has changed
+                // Remove the projectile if it hit a tank
+                if (data.projectileId) {
+                    roomData.activeProjectiles.delete(data.projectileId);
                 }
             }
         }
-        console.log(PLAYERS);
-
     });
-    socket.on('message kill', function (message, played, pawnLetter, pawnNumber, pawnLetterLooser, pawnNumberLooser, room) {
-        let MES = message;
-        let PLAYED = played;
-
-        let LETTER = pawnLetter;
-        let NUMBER = pawnNumber;
-        let LETTER_LOOSER = pawnLetterLooser;
-        let NUMBER_LOOSER = pawnNumberLooser;
-        warcabyNamespace.to(room).emit('update message kill', MES, PLAYED, LETTER, NUMBER, LETTER_LOOSER, NUMBER_LOOSER);
-    });
-    socket.on('blockKill false', function (blockKill, blockKillPawn, releaseBlock, killmode, room) {
-        let BLOCK_KILL = blockKill;
-        let BLOCK_KILL_PAWN = blockKillPawn;
-        let RELEASE_BLOCK = releaseBlock;
-        let KILL_MODE = killmode;
-
-        socket.broadcast.to(room).emit('update blockKill false', BLOCK_KILL, BLOCK_KILL_PAWN, RELEASE_BLOCK, KILL_MODE);
-    });
-    socket.on('message move', function (message, played, pawnLetter, pawnNumber, boardLetter, boardNumber, room) {
-        let MES = message;
-        let PLAYED = played;
-
-        let LETTER = pawnLetter;
-        let NUMBER = pawnNumber;
-        let LETTER_BOARD = boardLetter;
-        let NUMBER_BOARD = boardNumber;
-        warcabyNamespace.to(room).emit('update message move', MES, PLAYED, LETTER, NUMBER, LETTER_BOARD, NUMBER_BOARD);
-    });
-    socket.on('send message', function (inputValString, room, Player) {
-        let MESS = inputValString;
-        let SENDER = Player;
-        //////////////console.log("chat");
-        socket.broadcast.to(room).emit('chat', MESS, SENDER);
-
-    });
-
 
     // Handle client disconnection
     socket.on('disconnect', () => {
         if (socket.serverIndex !== undefined) {
+            const ROOM = `room_${socket.serverIndex}`;
+            const roomData = rooms.get(ROOM);
+
+            if (roomData) {
+                roomData.players = Math.max(0, roomData.players - 1);
+                roomData.activeProjectiles.clear();
+
+                // Reset game if a player disconnects
+                if (roomData.players < 2) {
+                    io.to(ROOM).emit('resetGame');
+                }
+            }
+
             lockFile.lock(lockFilePath, { wait: 5000 }, (lockErr) => {
                 if (lockErr) {
                     console.error('Error acquiring lock:', lockErr);
@@ -291,7 +235,6 @@ io.on('connection', (socket) => {
 
                                 if (socket.id === users[i][2] && jsonData[socket.serverIndex].players == 0)
                                     jsonData[users[i][0]].block = 1;
-
                             }
 
                             fs.writeFile(jsonFilePath, JSON.stringify(jsonData, null, 2), (writeErr) => {
@@ -306,7 +249,6 @@ io.on('connection', (socket) => {
                                         console.error('Error releasing lock:', unlockErr);
                                     }
                                 });
-
                             });
                         } else {
                             lockFile.unlock(lockFilePath, (unlockErr) => {
@@ -329,6 +271,18 @@ io.on('connection', (socket) => {
     });
 });
 
+// Cleanup old projectiles for all rooms
+setInterval(() => {
+    const now = Date.now();
+    rooms.forEach((roomData, roomName) => {
+        for (const [id, proj] of roomData.activeProjectiles) {
+            if (now - proj.timestamp > 10000) { // 10 second timeout
+                roomData.activeProjectiles.delete(id);
+            }
+        }
+    });
+}, 1000);
+
 server.listen(port, () => {
-    //////////////console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });
