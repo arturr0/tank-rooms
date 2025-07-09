@@ -24,6 +24,7 @@ socket.on('connect', () => {
         localStorage.removeItem('serverData');
     }
 });
+let gameOver = false;
 let connected = false;
 let room = null;
 let observedAngle;
@@ -655,7 +656,10 @@ function checkProjectileHit(proj, tank) {
         //updateLifeBar(tank);
 
         if (tank.lifePoints >= 2) return 'hit';
-        else return 'destroyed';
+        else {
+            gameOver = true;
+            return 'destroyed';
+        }
     }
 
 
@@ -829,7 +833,8 @@ function attemptShot() {
     predictedLanding = simulateLanding(inputs[0], shooter) + predictedError;
 
     // Only shoot if prediction is reasonably close
-    if (abs(predictedError) < distanceError && trainingStep > 100 && lossHistory[lossHistory.length - 1] < 0.01) {
+    if (abs(predictedError) < distanceError &&
+        trainingStep > 100 && lossHistory[lossHistory.length - 1] < 0.01) {
         fire(currentAngle);
 
         predictedLandingX = predictedLanding;
@@ -839,7 +844,7 @@ function attemptShot() {
 }
 
 function fire(angle) {
-
+    if (tank1.lifePoints == 0 || tank2.lifePoints == 0) return;
     let len = 40;
     //let shooter = player === 1 ? tank1 : tank2;
 
