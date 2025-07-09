@@ -104,6 +104,8 @@ let mdl = {
     momentumB3: 0
 };
 socket.on('opponentLeft', (data) => {
+    gameStarted = false;
+
     // Clear any running countdown
     if (countdownInterval) {
         clearInterval(countdownInterval);
@@ -113,12 +115,8 @@ socket.on('opponentLeft', (data) => {
     // Reset countdown display
     const countdownElement = document.getElementById('countdown');
     countdownElement.style.display = 'none';
-    gameStarted = false;
-    countdown = 3;
-    //active = true;
+
     console.log(wind, data);
-
-
 });
 // Socket event handlers
 socket.on('youArePlayer', (data) => {
@@ -207,6 +205,11 @@ socket.on('resetGame', () => {
         clearInterval(countdownInterval);
         countdownInterval = null;
     }
+    trainingStep = 0;
+    tank1.lifePoints = 10;
+    tank2.lifePoints = 10;
+    updateLifeBar(tank1);
+    updateLifeBar(tank2);
     resetGameState();
 });
 
@@ -437,17 +440,12 @@ function createTank(tank, x, y) {
 }
 
 function resetGameState() {
-    // Clear any running countdown
-    if (countdownInterval) {
-        clearInterval(countdownInterval);
-        countdownInterval = null;
-    }
-
-    // Hide countdown display
-    const countdownElement = document.getElementById('countdown');
-    countdownElement.style.display = 'none';
     tank1.exploded = false;
     tank2.exploded = false;
+    tank1.lifePoints = 10;
+    tank2.lifePoints = 10;
+    updateLifeBar(tank1);
+    updateLifeBar(tank2);
     explosionBodies = [];
     explosionParticles = [];
     projectiles.clear();

@@ -30,8 +30,9 @@ html {
 }
 
 section {
-  text-shadow: 2px 2px 4px rgba(255, 255, 2, 0.7);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
   font-size: 18px;
+  color: white;
 }
 
 @font-face {
