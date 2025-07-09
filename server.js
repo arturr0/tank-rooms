@@ -191,16 +191,33 @@ io.on('connection', (socket) => {
             const ROOM = `room_${socket.serverIndex}`;
             const roomData = rooms.get(ROOM);
 
+            // Notify remaining player about disconnection
+            socket.to(ROOM).emit('opponentLeft', {
+                message: 'Your opponent has disconnected.',
+                type: 'disconnect',
+                wind: roomData?.currentWind || 0  // Send current wind if available
+            });
+
             if (roomData) {
+                // Decrement player count
                 roomData.players = Math.max(0, roomData.players - 1);
+
+                // Clear all projectiles
                 roomData.activeProjectiles.clear();
 
-                // Reset game if a player disconnects
+                // Reset game state if not enough players
                 if (roomData.players < 2) {
+                    roomData.gameStarted = false;
                     io.to(ROOM).emit('resetGame');
+                }
+
+                // Remove room if empty
+                if (roomData.players === 0) {
+                    rooms.delete(ROOM);
                 }
             }
 
+            // Update server data in JSON file
             lockFile.lock(lockFilePath, { wait: 5000 }, (lockErr) => {
                 if (lockErr) {
                     console.error('Error acquiring lock:', lockErr);
@@ -211,58 +228,60 @@ io.on('connection', (socket) => {
                     if (err) {
                         console.error('Error reading JSON file:', err);
                         lockFile.unlock(lockFilePath, (unlockErr) => {
-                            if (unlockErr) {
-                                console.error('Error releasing lock:', unlockErr);
-                            }
+                            if (unlockErr) console.error('Error releasing lock:', unlockErr);
                         });
                         return;
                     }
 
                     try {
                         let jsonData = JSON.parse(fileData);
+                        const serverIndex = socket.serverIndex;
 
-                        if (jsonData[socket.serverIndex]) {
-                            jsonData[socket.serverIndex].players = Math.max(0, jsonData[socket.serverIndex].players - 1);
-                            console.log(jsonData[socket.serverIndex].players);
+                        if (jsonData[serverIndex]) {
+                            // Update player count
+                            jsonData[serverIndex].players = Math.max(0, jsonData[serverIndex].players - 1);
+
+                            // Clear player data
                             for (let i = 0; i < users.length; i++) {
-                                if (socket.id === users[i][2] && jsonData[users[i][0]].user1 === users[i][1]) {
-                                    jsonData[users[i][0]].user1 = '';
-                                    jsonData[users[i][0]].players--;
-                                } else if (socket.id === users[i][2] && jsonData[users[i][0]].user2 === users[i][1]) {
-                                    jsonData[users[i][0]].user2 = '';
-                                    jsonData[users[i][0]].players--;
-                                }
+                                if (socket.id === users[i][2]) {
+                                    if (jsonData[users[i][0]].user1 === users[i][1]) {
+                                        jsonData[users[i][0]].user1 = '';
+                                    } else if (jsonData[users[i][0]].user2 === users[i][1]) {
+                                        jsonData[users[i][0]].user2 = '';
+                                    }
 
-                                if (socket.id === users[i][2] && jsonData[socket.serverIndex].players == 0)
-                                    jsonData[users[i][0]].block = 0;
+                                    // Unblock server if empty
+                                    if (jsonData[serverIndex].players === 0) {
+                                        jsonData[users[i][0]].block = 0;
+                                    }
+
+                                    // Remove user from tracking
+                                    users.splice(i, 1);
+                                    break;
+                                }
                             }
 
+                            // Write updated data
                             fs.writeFile(jsonFilePath, JSON.stringify(jsonData, null, 2), (writeErr) => {
                                 if (writeErr) {
                                     console.error('Error writing to JSON file:', writeErr);
                                 } else {
-                                    console.log('JSON file updated successfully after disconnection');
+                                    console.log(`Player disconnected from room ${ROOM}. Updated server data.`);
                                 }
 
                                 lockFile.unlock(lockFilePath, (unlockErr) => {
-                                    if (unlockErr) {
-                                        console.error('Error releasing lock:', unlockErr);
-                                    }
+                                    if (unlockErr) console.error('Error releasing lock:', unlockErr);
                                 });
                             });
                         } else {
                             lockFile.unlock(lockFilePath, (unlockErr) => {
-                                if (unlockErr) {
-                                    console.error('Error releasing lock:', unlockErr);
-                                }
+                                if (unlockErr) console.error('Error releasing lock:', unlockErr);
                             });
                         }
                     } catch (err) {
                         console.error('Error parsing JSON data:', err);
                         lockFile.unlock(lockFilePath, (unlockErr) => {
-                            if (unlockErr) {
-                                console.error('Error releasing lock:', unlockErr);
-                            }
+                            if (unlockErr) console.error('Error releasing lock:', unlockErr);
                         });
                     }
                 });

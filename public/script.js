@@ -24,6 +24,10 @@ socket.on('connect', () => {
         localStorage.removeItem('serverData');
     }
 });
+
+
+
+
 let gameOver = false;
 let connected = false;
 let room = null;
@@ -37,7 +41,7 @@ let groundHeight = 40;
 let wheelRadius = 20;
 let gravity = 0.3;
 let airFriction = 0.01;
-let wind;
+let wind = 0;
 let player = null;
 let explosionBodies = [];
 let explosionParticles = [];
@@ -98,7 +102,13 @@ let mdl = {
     momentumB2: [],
     momentumB3: 0
 };
+socket.on('opponentLeft', (data) => {
+    //gameStarted = true;
+    //active = true;
+    console.log(wind, data);
 
+
+});
 // Socket event handlers
 socket.on('youArePlayer', (data) => {
     player = data;
@@ -126,6 +136,7 @@ let lTowerImg;
 //   rCaterpillarImg = loadImage('assets/wheels.png');
 // }
 socket.on('roomMessage', (data) => {
+    console.log("mess");
     room = data.room;
     wind = data.wind;
     connected = true;
@@ -181,7 +192,7 @@ socket.on('enemyHit', (data) => {
 });
 
 socket.on('resetGame', () => {
-    resetGameState();
+    //resetGameState();
 });
 
 // Countdown function
@@ -415,20 +426,46 @@ function resetGameState() {
 
     // Reset neural network
     const inputRange = Math.sqrt(1 / mdl.inputSize);
-    const hiddenRange = Math.sqrt(1 / mdl.hiddenSize);
+    const hidden1Range = Math.sqrt(1 / mdl.hidden1Size);
+    const hidden2Range = Math.sqrt(1 / mdl.hidden2Size);
 
-    mdl.W1 = Array.from({ length: mdl.hiddenSize }, () =>
+    // Initialize weights and biases for first hidden layer
+    mdl.W1 = Array.from({ length: mdl.hidden1Size }, () =>
         Array.from({ length: mdl.inputSize }, () => random(-inputRange, inputRange)));
-    mdl.B1 = Array.from({ length: mdl.hiddenSize }, () => random(-inputRange, inputRange));
-    mdl.W2 = Array.from({ length: mdl.hiddenSize }, () => random(-hiddenRange, hiddenRange));
-    mdl.B2 = random(-hiddenRange, hiddenRange);
+    mdl.B1 = Array.from({ length: mdl.hidden1Size }, () => random(-inputRange, inputRange));
 
-    // Reset momentum
-    mdl.momentumW1 = Array.from({ length: mdl.hiddenSize }, () =>
+    // Initialize weights and biases for second hidden layer
+    mdl.W2 = Array.from({ length: mdl.hidden2Size }, () =>
+        Array.from({ length: mdl.hidden1Size }, () => random(-hidden1Range, hidden1Range)));
+    mdl.B2 = Array.from({ length: mdl.hidden2Size }, () => random(-hidden1Range, hidden1Range));
+
+    // Initialize weights and biases for output layer
+    mdl.W3 = Array.from({ length: mdl.hidden2Size }, () => random(-hidden2Range, hidden2Range));
+    mdl.B3 = random(-hidden2Range, hidden2Range);
+
+    // Initialize momentum terms
+    mdl.momentumW1 = Array.from({ length: mdl.hidden1Size }, () =>
         Array.from({ length: mdl.inputSize }, () => 0));
-    mdl.momentumW2 = Array.from({ length: mdl.hiddenSize }, () => 0);
-    mdl.momentumB1 = Array.from({ length: mdl.hiddenSize }, () => 0);
-    mdl.momentumB2 = 0;
+    mdl.momentumW2 = Array.from({ length: mdl.hidden2Size }, () =>
+        Array.from({ length: mdl.hidden1Size }, () => 0));
+    mdl.momentumW3 = Array.from({ length: mdl.hidden2Size }, () => 0);
+    mdl.momentumB1 = Array.from({ length: mdl.hidden1Size }, () => 0);
+    mdl.momentumB2 = Array.from({ length: mdl.hidden2Size }, () => 0);
+    mdl.momentumB3 = 0;
+
+    // Update lastNetworkState
+    lastNetworkState = {
+        inputs: [0],
+        hidden1: Array(mdl.hidden1Size).fill(0),
+        hidden2: Array(mdl.hidden2Size).fill(0),
+        output: 0,
+        weights: {
+            inputToHidden1: mdl.W1,
+            hidden1ToHidden2: mdl.W2,
+            hidden2ToOutput: mdl.W3
+        }
+    };
+
 
     // Reset tank positions and angles
     createTank(tank1, width / 3, height - groundHeight - wheelRadius);
@@ -475,7 +512,7 @@ function draw() {
     rect(width / 2, height - groundHeight / 2, width, groundHeight);
 
     // Draw wind indicator
-    drawWindIndicator();
+    //drawWindIndicator();
 
     // Update and draw projectiles
     updateProjectiles();
@@ -621,7 +658,7 @@ function updateOutputPanel(predicted, actual) {
 }
 
 function drawWindIndicator() {
-    const windStrength = abs(wind) * 1000;
+    //const windStrength = abs(wind) * 1000;
     const windDirection = wind > 0 ? 1 : -1;
 
     fill(0);
@@ -816,7 +853,7 @@ function attemptShot() {
     //let shooter = player === 1 ? tank1 : tank2;
     //let target = player === 1 ? tank2 : tank1;
     const distance = abs(shooter.tower.x - target.tower.x);
-    const normalizedWind = wind + 1;
+    //const normalizedWind = wind + 1;
     const normalizedDistance = distance / width;
 
     // Get current angle from neural network prediction
@@ -881,10 +918,10 @@ function simulateLanding(angle, shooter) {
     let vx = cos(angle) * speed;
     let vy = sin(angle) * speed;
 
-    const windEffect = wind;
+    //const windEffect = wind;
 
     while (y < height - groundHeight) {
-        vx += (-airFriction * vx + windEffect);
+        vx += (-airFriction * vx + wind);
         vy += (-airFriction * vy + gravity);
         x += vx;
         y += vy;
