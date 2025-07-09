@@ -103,7 +103,8 @@ let mdl = {
     momentumB3: 0
 };
 socket.on('opponentLeft', (data) => {
-    //gameStarted = true;
+    gameStarted = false;
+    countdown = 3;
     //active = true;
     console.log(wind, data);
 
@@ -192,7 +193,7 @@ socket.on('enemyHit', (data) => {
 });
 
 socket.on('resetGame', () => {
-    //resetGameState();
+    resetGameState();
 });
 
 // Countdown function
@@ -421,7 +422,7 @@ function resetGameState() {
     projectiles.clear();
     pendingExplosions = [];
     isShooting = false;
-    gameStarted = false;
+    //gameStarted = false;
     countdown = 3;
 
     // Reset neural network
@@ -478,11 +479,11 @@ function resetGameState() {
     lossChart.update();
 
     // Start new countdown
-    startCountdown();
+    //startCountdown();
 }
 
 function draw() {
-    if (!gameStarted || !active) {
+    if (!gameStarted) {
         // Still allow neural network visualization during countdown
         //drawNeuralNetwork();
         return;
