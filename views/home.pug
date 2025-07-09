@@ -15,7 +15,7 @@ html(lang="en")
                 #table-container
                     table#serversTable
                         thead
-                            tr(style="height: 55px;")
+                            tr.head(style="height: 55px;")
                                 th(style="width: 150px;")
                                     span Server
                                 th(style="width: 80px;")
@@ -24,6 +24,7 @@ html(lang="en")
                                     span Player 1
                                 th(style="width: 150px;")
                                     span Player 2
+
                         tbody
                     footer#footer
                         div#name_Server
@@ -33,10 +34,6 @@ html(lang="en")
                             button#find_players.button(role="button") Find Players
                             input#playersName(type="text" placeholder="Clear to find any player")
             .wrapper
-                a.arrow__btn.left-arrow(href='#section1')
-                    i.icon-up-open
-                a.arrow__btn.right-arrow(href='#section1')
-                    i.icon-down-open
                 .content
                     section#section1
                         .item

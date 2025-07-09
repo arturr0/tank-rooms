@@ -26,6 +26,7 @@ body {
 #InputContainer {
     display: flex;
     /* width: 25%; */
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 #InputContainer input {

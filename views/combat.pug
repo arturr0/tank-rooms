@@ -1,78 +1,78 @@
 doctype html
 html
-  head
-    title Synchronized Tank Battle with NN Visualization
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js')
-    script(src='https://cdn.jsdelivr.net/npm/chart.js')
-    script(src='/socket.io/socket.io.js')
-    link(rel='stylesheet' href='/public/css/tanks.css')
-    script.
-      if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
-        // Redirect to the home page if the page was reloaded
-        window.location.href = '/';
-      } else {
-        // Store a flag in sessionStorage to indicate a valid visit
-        sessionStorage.setItem('serverData', 'true');
-      }
+	head
+		title Synchronized Tank Battle with NN Visualization
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js')
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js')
+		script(src='https://cdn.jsdelivr.net/npm/chart.js')
+		script(src='/socket.io/socket.io.js')
+		link(rel='stylesheet' href='/public/css/tanks.css')
+		script.
+			if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+				// Redirect to the home page if the page was reloaded
+				window.location.href = '/';
+			} else {
+				// Store a flag in sessionStorage to indicate a valid visit
+				sessionStorage.setItem('serverData', 'true');
+			}
 
-  body
-    #main
-      #appInfo
-        #inputApp
-          #InputContainer
-            .parameter-control
-              label(for="LR") Learning Rate (0.001-0.1):
-              input#LR(type='number' min='0.001' max='0.1' step='0.001' value='0.01' title="Controls how quickly the AI learns from each shot")
-              span.help-text Higher values learn faster but may overshoot
-            
-            .parameter-control
-              label(for="DE") Max Distance Error (pixels):
-              input#DE(type='number' min='1' max='50' value='10' title="Maximum allowed error before firing")
-              span.help-text Lower values = more precise but slower shooting
-            
-            button.param-button(onclick='handleNumber()') Apply Parameters
+	body
+		#main
+			#appInfo
+				#inputApp
+					#InputContainer
+						.parameter-control
+							label(for="LR") Learning Rate (0.001-0.1):
+							input#LR(type='number' min='0.001' max='0.1' step='0.001' value='0.01' title="Controls how quickly the AI learns from each shot")
+							span.help-text Higher values learn faster but may overshoot
+						
+						.parameter-control
+							label(for="DE") Max Distance Error (pixels):
+							input#DE(type='number' min='1' max='50' value='10' title="Maximum allowed error before firing")
+							span.help-text Lower values = more precise but slower shooting
+						
+						button.param-button(onclick='handleNumber()') Apply Parameters
 
-          #app
-            #info
-              canvas#lossChart
-              #infoPanel
-              #outputPanel
-            .life-containerL
-              #lifeBarL.life-barL
-            .life-containerR
-              #lifeBarR.life-barR
-        #nnVisualization
-    #countdown
-    script(src='script.js')
+					#app
+						#info
+							canvas#lossChart
+							#infoPanel
+							#outputPanel
+						.life-containerL
+							#lifeBarL.life-barL
+						.life-containerR
+							#lifeBarR.life-barR
+				#nnVisualization
+		#countdown
+		script(src='script.js')
 
-    style.
-      .parameter-control {
-        padding: 10px;
-        background: rgba(0,0,0,0.1);
-        border-radius: 5px;
-      }
-      .parameter-control label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-      .parameter-control input {
-        padding: 5px;
-        width: 100px;
-      }
-      .help-text {
-        display: block;
-        font-size: 1em;
-        margin-top: 5px;
-      }
-      .param-button {
-        background: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-      .param-button:hover {
-        background: #45a049;
-      }
+		style.
+			.parameter-control {
+				padding: 10px;
+				background: rgba(0,0,0,0.1);
+				border-radius: 5px;
+			}
+			.parameter-control label {
+				display: block;
+				font-weight: bold;
+				margin-bottom: 5px;
+			}
+			.parameter-control input {
+				padding: 5px;
+				width: 100px;
+			}
+			.help-text {
+				display: block;
+				font-size: 1em;
+				margin-top: 5px;
+			}
+			.param-button {
+				background: #4CAF50;
+				color: white;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+			.param-button:hover {
+				background: #45a049;
+			}

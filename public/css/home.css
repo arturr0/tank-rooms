@@ -198,9 +198,12 @@ footer {
   /* Ensure footer is above the overlay */
 }
 
-tr {
+tr:not(.head) {
   opacity: 0.8;
 }
+
+
+
 
 footer::before {
   content: '';

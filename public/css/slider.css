@@ -59,10 +59,10 @@ html {
   margin-right: auto;
 }
 
-.wrapper section .item:hover {
+/* .wrapper section .item:hover {
 
   transform: scale(1.2);
-}
+} */
 
 .wrapper section .item .heading {
   position: absolute;
