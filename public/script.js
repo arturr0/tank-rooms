@@ -57,6 +57,7 @@ let predictedLandingX = null;
 let actualLandingX = null;
 let gameStarted = false;
 let countdown = 3;
+let countdownInterval = null; // Add this with your other variables
 let lastShotTime = 0;
 let shotCooldown = 2000;
 let minSamplesBeforeShooting = 100;
@@ -103,6 +104,15 @@ let mdl = {
     momentumB3: 0
 };
 socket.on('opponentLeft', (data) => {
+    // Clear any running countdown
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+
+    // Reset countdown display
+    const countdownElement = document.getElementById('countdown');
+    countdownElement.style.display = 'none';
     gameStarted = false;
     countdown = 3;
     //active = true;
@@ -193,20 +203,32 @@ socket.on('enemyHit', (data) => {
 });
 
 socket.on('resetGame', () => {
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
     resetGameState();
 });
 
 // Countdown function
 function startCountdown() {
+    // Clear any existing countdown
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+    }
+
+    countdown = 3; // Reset to 3
     const countdownElement = document.getElementById('countdown');
     countdownElement.style.display = 'block';
+    countdownElement.textContent = countdown; // Show initial value immediately
 
-    const countdownInterval = setInterval(() => {
+    countdownInterval = setInterval(() => {
         countdownElement.textContent = countdown;
         countdown--;
 
         if (countdown < 0) {
             clearInterval(countdownInterval);
+            countdownInterval = null;
             countdownElement.style.display = 'none';
             gameStarted = true;
         }
@@ -415,6 +437,15 @@ function createTank(tank, x, y) {
 }
 
 function resetGameState() {
+    // Clear any running countdown
+    if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+    }
+
+    // Hide countdown display
+    const countdownElement = document.getElementById('countdown');
+    countdownElement.style.display = 'none';
     tank1.exploded = false;
     tank2.exploded = false;
     explosionBodies = [];
