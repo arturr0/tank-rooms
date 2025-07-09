@@ -206,12 +206,51 @@ socket.on('resetGame', () => {
         countdownInterval = null;
     }
     trainingStep = 0;
+
+    // Reset life points
     tank1.lifePoints = 10;
     tank2.lifePoints = 10;
-    updateLifeBar(tank1);
-    updateLifeBar(tank2);
+
+    // Force a visual reset of life bars
+    setTimeout(() => {
+        // First set to 100% to force a change
+        document.getElementById("lifeBarL").style.setProperty("--mask-width", "100%");
+        document.getElementById("lifeBarR").style.setProperty("--mask-width", "100%");
+
+        // Then set to correct value after a small delay
+        setTimeout(() => {
+            resetLifeBar(tank1);
+            resetLifeBar(tank2);
+        }, 50);
+    }, 50);
+
     resetGameState();
 });
+
+function resetLifeBar(tank) {
+    if (!tank) return;
+
+    const lifeBar = tank.position === -1
+        ? document.getElementById("lifeBarL")
+        : document.getElementById("lifeBarR");
+
+    if (!lifeBar) return;
+
+    // Calculate new mask width (0% = full health)
+    const maskWidth = 100 - (tank.lifePoints * 10);
+
+    // Force a DOM reflow before updating
+    void lifeBar.offsetHeight;
+
+    // Update the mask width
+    lifeBar.style.setProperty("--mask-width", `${maskWidth}%`);
+
+    // For better browser compatibility, also update directly
+    const mask = lifeBar.querySelector('.mask');
+    if (mask) {
+        mask.style.width = `${maskWidth}%`;
+    }
+}
 
 // Countdown function
 function startCountdown() {
@@ -734,6 +773,7 @@ function checkProjectileHit(proj, tank) {
 }
 
 function updateLifeBar(tankHit) {
+    console.log(tankHit);
     tankHit.lifePoints = Math.max(0, tankHit.lifePoints - 1);
 
     const lifeBar =
