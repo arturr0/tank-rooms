@@ -224,7 +224,7 @@ footer::before {
   overflow: auto;
   visibility: hidden;
   /*   margin: 20px; */
-  width: 60vw;
+  width: 55vw;
   margin-top: 20px;
   margin-bottom: 20px;
 }
